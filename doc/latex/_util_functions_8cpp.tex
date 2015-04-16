@@ -1,0 +1,76 @@
+\hypertarget{_util_functions_8cpp}{\section{Util/\+Util\+Functions.cpp File Reference}
+\label{_util_functions_8cpp}\index{Util/\+Util\+Functions.\+cpp@{Util/\+Util\+Functions.\+cpp}}
+}
+{\ttfamily \#include \char`\"{}../header/\+Util\+Functions.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../header/\+Cel\+Shading.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$osg\+Text/\+Text$>$}\\*
+{\ttfamily \#include $<$osg/\+Polygon\+Mode$>$}\\*
+{\ttfamily \#include $<$osg/\+Light\+Source$>$}\\*
+{\ttfamily \#include $<$osg/\+Blend\+Func$>$}\\*
+{\ttfamily \#include $<$osg/\+Compute\+Bounds\+Visitor$>$}\\*
+{\ttfamily \#include $<$osg/\+Point$>$}\\*
+{\ttfamily \#include $<$osg/\+Point\+Sprite$>$}\\*
+{\ttfamily \#include $<$osg\+Particle/\+Particle\+System$>$}\\*
+{\ttfamily \#include $<$osg\+Particle/\+Particle\+System\+Updater$>$}\\*
+{\ttfamily \#include $<$osg\+Particle/\+Particle$>$}\\*
+{\ttfamily \#include $<$osg\+Particle/\+Modular\+Emitter$>$}\\*
+{\ttfamily \#include $<$osg\+Particle/\+Modular\+Program$>$}\\*
+{\ttfamily \#include $<$osg\+Particle/\+Random\+Rate\+Counter$>$}\\*
+{\ttfamily \#include $<$osg\+Particle/\+Multi\+Segment\+Placer$>$}\\*
+{\ttfamily \#include $<$osg\+Particle/\+Radial\+Shooter$>$}\\*
+{\ttfamily \#include $<$osg\+Particle/\+Fluid\+Friction\+Operator$>$}\\*
+{\ttfamily \#include $<$osg\+Particle/\+Accel\+Operator$>$}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacebrtr}{brtr}
+\begin{DoxyCompactList}\small\item\em Namespace for the whole Brain\+Train Project. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Camera $>$ \hyperlink{namespacebrtr_aa7a89c381be095a7eb1e248d2e6c0e23}{brtr\+::create\+R\+T\+T\+Camera} (osg\+::\+Camera\+::\+Buffer\+Component buffer, osg\+::\+Texture $\ast$tex, bool is\+Absolute=false)
+\begin{DoxyCompactList}\small\item\em creates a R\+T\+T\+Cam \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geode $>$ \hyperlink{namespacebrtr_a32cfc96621681baabc76c52af5d6a347}{brtr\+::create\+Screen\+Quad} (float width, float height, float scale=1.\+0f)
+\begin{DoxyCompactList}\small\item\em creates a texture-\/ready screen quad for postprocessing \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Camera $>$ \hyperlink{namespacebrtr_a62da4f109238c45882dd64d7a7e97a1d}{brtr\+::create\+H\+U\+D\+Camera} (double left, double right, double bottom, double top)
+\begin{DoxyCompactList}\small\item\em creates a H\+U\+D-\/\+Cam with a 2\+D-\/orthogonal projection matrix \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{brtr\+::create\+Rectangle} (double length, double width, int lsteps, int wsteps)
+\begin{DoxyCompactList}\small\item\em Creates a Rectangle with T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+T\+R\+I\+P\+S. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{brtr\+::create\+Rectangle\+With\+Texcoords} (double length, double width, int lsteps, int wsteps)
+\begin{DoxyCompactList}\small\item\em Creates a Rectangle with T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+T\+R\+I\+P\+S. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{namespacebrtr_a83d3e627c9dc247459610aa9fec23d7b}{brtr\+::create\+Body\+Of\+Rotation} (double height, int hsteps, int rsteps, const Body\+Of\+Rotation\+Function \&function)
+\begin{DoxyCompactList}\small\item\em Creates a body of rotation. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+Text\+::\+Text $>$ \hyperlink{namespacebrtr_a4431de1c1fa2c1d42c4fb57c38aaa3ce}{brtr\+::create\+Text} (const osg\+::\+Vec3 \&pos, const std\+::string \&content, float size)
+\begin{DoxyCompactList}\small\item\em creates a (arial) text object for use with a hud camera \end{DoxyCompactList}\item 
+ref\+\_\+ptr$<$ Light\+Source $>$ \hyperlink{namespacebrtr_a73a88e86934887bd8750e4bbc0766b1f}{brtr\+::create\+Light} (const Vec3 \&pos, int light\+Num, int point, double spot\+Cutoff, double spot\+Exponent)
+\item 
+osg\+::ref\+\_\+ptr\\*
+$<$ osg\+::\+Position\+Attitude\+Transform $>$ \hyperlink{namespacebrtr_a887d7975f37c4334b70e2196735b6678}{brtr\+::wrap\+In\+Position\+Attitude\+Transform} (osg\+::\+Node $\ast$src\+Node, const osg\+::\+Vec3d \&pos)
+\begin{DoxyCompactList}\small\item\em Return the given Node in a Position\+Attitude\+Transform with a given position. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Group $>$ \hyperlink{namespacebrtr_ae7f155c263aec9663a02763ed0bb882b}{brtr\+::create\+Cuboid} (const double length, const double width, const double height, const double factor=6)
+\begin{DoxyCompactList}\small\item\em Creates a Cubiod with T\+R\+I\+A\+N\+G\+L\+E\+\_\+\+S\+T\+R\+I\+P\+S using the create\+Rectangle function. \end{DoxyCompactList}\item 
+void \hyperlink{namespacebrtr_a0ecf5882dba499332dc5c6f3c2e819b1}{brtr\+::create\+Rendering\+Pipeline} (unsigned int width, unsigned int height, osg\+::\+Node \&root\+For\+Toon, osg\+Viewer\+::\+Viewer \&viewer, Rendering\+Pipeline \&pipe, Vec3f \&fog\+Color)
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{namespacebrtr_a16fa8982307a039c08ab56912bab94b9}{brtr\+::create\+Beer\+Bottle} ()
+\begin{DoxyCompactList}\small\item\em Creates a Beer\+Bottle with Material with the help of the \hyperlink{structbrtr_1_1_body_of_rotation_function}{Body\+Of\+Rotation\+Function}. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{namespacebrtr_a614d8d6b8bcc6c4e7f7ffb24ca48eb4c}{brtr\+::create\+Real\+Bottle} ()
+\begin{DoxyCompactList}\small\item\em Creates a Bottle with Material with the help of the \hyperlink{structbrtr_1_1_body_of_rotation_function}{Body\+Of\+Rotation\+Function}. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{namespacebrtr_ab4f3c063f7a8fa6cc33a8cb52b036d27}{brtr\+::create\+Vase} ()
+\begin{DoxyCompactList}\small\item\em Creates a vase with Material with the help of the \hyperlink{structbrtr_1_1_body_of_rotation_function}{Body\+Of\+Rotation\+Function}. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{namespacebrtr_a4ccd9746e37278e47832da270dc00fb3}{brtr\+::create\+Stalk} ()
+\begin{DoxyCompactList}\small\item\em Creates a stalk with Material with the help of the \hyperlink{structbrtr_1_1_body_of_rotation_function}{Body\+Of\+Rotation\+Function}. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{namespacebrtr_a51b3741c30ca1b6282b9693055ddc060}{brtr\+::create\+Bud} ()
+\begin{DoxyCompactList}\small\item\em Creates a bud with Material with the help of the \hyperlink{structbrtr_1_1_body_of_rotation_function}{Body\+Of\+Rotation\+Function}. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{namespacebrtr_a118d4013732dea1a161b6d225df6dc2e}{brtr\+::create\+Chess\+Figure} ()
+\begin{DoxyCompactList}\small\item\em Creates a \char`\"{}\+Chess\+Figure\char`\"{} with Material with the help of the \hyperlink{structbrtr_1_1_body_of_rotation_function}{Body\+Of\+Rotation\+Function}. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geode $>$ \hyperlink{namespacebrtr_a31c533ae635c528c761cc83e34e91b2f}{brtr\+::create\+Crosshair} (unsigned int width, unsigned int height)
+\begin{DoxyCompactList}\small\item\em creates a crosshair in the middle of the screen \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr\\*
+$<$ osg\+::\+Position\+Attitude\+Transform $>$ \hyperlink{namespacebrtr_a05625aff9337331ae351d283f79f0f1e}{brtr\+::create\+Vase\+With\+Flower} ()
+\begin{DoxyCompactList}\small\item\em combines the stalk, bud and vase in a postition\+Attitudetransform \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Material $>$ \hyperlink{namespacebrtr_a7b54dcabf5846ea963221e59b38b0a79}{brtr\+::create\+Simple\+Material} (osg\+::\+Material\+::\+Face face, const osg\+::\+Vec4 \&diffuse, const osg\+::\+Vec4 \&ambient, const osg\+::\+Vec4 \&specular, const double shininess)
+\begin{DoxyCompactList}\small\item\em creates a simple material \end{DoxyCompactList}\item 
+osg\+::\+Vec3 \hyperlink{namespacebrtr_acdb44124f5beeb960792c874499276db}{brtr\+::get\+Dimension\+Of\+Node} (Node $\ast$source)
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Texture2\+D $>$ \hyperlink{namespacebrtr_aea7b3b188858f0bce09f2450a749f497}{brtr\+::create\+Toon\+Tex} (std\+::string toon\+Tex)
+\begin{DoxyCompactList}\small\item\em creates a Texture2\+D object with the given toon\+Tex \end{DoxyCompactList}\end{DoxyCompactItemize}

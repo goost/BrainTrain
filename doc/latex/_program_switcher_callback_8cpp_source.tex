@@ -1,0 +1,39 @@
+\hypertarget{_program_switcher_callback_8cpp_source}{\section{Program\+Switcher\+Callback.\+cpp}
+\label{_program_switcher_callback_8cpp_source}\index{Callbacks/\+Program\+Switcher\+Callback.\+cpp@{Callbacks/\+Program\+Switcher\+Callback.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include <osg/NodeCallback>}
+00002 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00003 \textcolor{preprocessor}{#include "../header/ProgramSwitcherCallback.h"}
+00004 
+00005 \textcolor{keyword}{namespace }brtr \{
+00006   
+00007 
+\hypertarget{_program_switcher_callback_8cpp_source_l00008}{}\hyperlink{classbrtr_1_1_program_switcher_callback_a36a59e70c5db59a00f2d7fd7fbf9e505}{00008}     \hyperlink{classbrtr_1_1_program_switcher_callback_a36a59e70c5db59a00f2d7fd7fbf9e505}{ProgramSwitcherCallback::ProgramSwitcherCallback}(
+      osg::Node* postprocessCam, osg::Camera* hudCam, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height, std::vector<osg::ref\_ptr<osg::Program>> 
+      programs):
+00009         \hyperlink{classbrtr_1_1_base_interaction_callback}{BaseInteractionCallback}(postprocessCam,hudCam,width,height),
+00010         \_programs(programs),
+00011         \_curProg(0)\{\}
+00012 
+\hypertarget{_program_switcher_callback_8cpp_source_l00013}{}\hyperlink{classbrtr_1_1_program_switcher_callback_a2202619d98a432578c8ed7342b957638}{00013}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_program_switcher_callback_a2202619d98a432578c8ed7342b957638}{ProgramSwitcherCallback::setText}() \{
+00014         \hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\_text}->setText(\textcolor{stringliteral}{"You feel a mysterious power\(\backslash\)nfrom this strange device.\(\backslash\)nA click will change
+       the world..."});
+00015     \}
+00016 
+\hypertarget{_program_switcher_callback_8cpp_source_l00017}{}\hyperlink{classbrtr_1_1_program_switcher_callback_a06dd3fc2b09d3138e67599d8d56db62a}{00017}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_program_switcher_callback_a06dd3fc2b09d3138e67599d8d56db62a}{ProgramSwitcherCallback::interact}(osg::Node*, osg::NodeVisitor*) 
+      \{
+00018         \hyperlink{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}{\_done} = \textcolor{keyword}{true};
+00019         \hyperlink{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{\_attachTo}->getOrCreateStateSet()->removeAttribute(\hyperlink{classbrtr_1_1_program_switcher_callback_a9cbcf4d65f6ee468bb20d16b9e795e49}{\_programs}[
+      \hyperlink{classbrtr_1_1_program_switcher_callback_a06ee6d68fe703e6a88960219b019f1bd}{\_curProg}]);
+00020         \_curProg++;
+00021         \_curProg = \_curProg % \hyperlink{classbrtr_1_1_program_switcher_callback_a9cbcf4d65f6ee468bb20d16b9e795e49}{\_programs}.size();
+00022         \hyperlink{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{\_attachTo}->getOrCreateStateSet()->setAttributeAndModes(
+      \hyperlink{classbrtr_1_1_program_switcher_callback_a9cbcf4d65f6ee468bb20d16b9e795e49}{\_programs}[\_curProg], osg::StateAttribute::OVERRIDE | osg::StateAttribute::ON);
+00023     \}
+00024 
+00025 
+00026 
+00027 \}
+\end{DoxyCode}

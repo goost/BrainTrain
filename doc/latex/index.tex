@@ -1,0 +1,52 @@
+For english readers\+:~\newline
+ This O\+S\+G-\/\+Demo was done as part of the computer graphics I 2014 lecture of the University of Applied Sciences and Arts Hanover. This page is a short description of the project which was a requirement for passing the lecture.~\newline
+ Everything written here can either also be read in the source documentation or experienced by oneself by trying out this project (look for the hidden room!)~\newline
+ Everything here uses the G\+N\+U Public License. Use as you want, but give us credit =)!~\newline
+ ~\newline
+ Das Projekt \char`\"{}\+Brain\+Train\char`\"{} wurde im Rahmen der Vorlesung C\+G1 an der H\+S Hannover im Sommersemester 2014 erstellt.~\newline
+ Beteiligt waren hierbei\+: Jonathan Spielvogel, Marcel Felix, Gleb Ostrowski, Phillip Sauer und Sebastian Huettermann.\hypertarget{index_Die}{}\section{Szene}\label{index_Die}
+Ziel war es eine alte, unfertige, verfallene U-\/\+Bahn-\/\+Station zu entwerfen, in der der \char`\"{}\+Spieler\char`\"{} sich im First-\/\+Person-\/\+Shooter-\/\+Stil frei bewegen kann. Der Spieler startet am Kopf eines kleinen Niederganges, bestehend aus Treppe mit Gelaender und Rolltreppe. Direkt hinter der Startposition des Spielers befindet sich ein \char`\"{}geheimer Raum\char`\"{} (hier kann durch die Wand gelaufen werden). Der untere Teil besteht aus einem einzelnen, geschwungenen Bahnsteig (mit einem Gleis). Auf dem Bahnsteig selber befinden sich diverse Modelle, z.\+B\+: Kisten, ein altes Tickethaeuschen mit einer Folie darueber, Oelfaesser mit einer sowjetischen Flagge darueber, einem Fliesenspiegel und viele mehr. Es gibt also viel zu entdecken!
+
+Nicht in Blender wurde hierbei folgendes erstellt\+:
+\begin{DoxyItemize}
+\item Die Sitzbaenke wurden in O\+S\+G modelliert, materialisiert und texturiert
+\item Die Bierflaschen sowie die Vase und Blume (auf dem Tickethaeuschen) und Figuren im geheimen Raum wurden als Rotationskoerper realisiert.
+\begin{DoxyItemize}
+\item Die Bierflaschen wurdem zudem mit einem Partikelsystem aus Blender (zufaellig) im Raum verteilt. Die primaere Farbgebung (der \char`\"{}\+Cartoon Effekt\char`\"{} inklusive Cel Shading und Nebel) wurde hierbei ueber eigene Shader implementiert. Zudem verfuegt der Spieler ueber ein \char`\"{}\+Waffen\+H\+U\+D\char`\"{}, das eine der weiteren Kamera darstellt.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{index_Animationen}{}\section{Animationen}\label{index_Animationen}
+Mehrere Dinge sind animiert\+: Zum einen faehrt in regelmaessigen Abstaenden ein Zug das Gleis entlang. Diese Animation wurde als Animation Path in O\+S\+G realisiert. Und zum anderen weht die grosse, haengende Flagge \char`\"{}im Wind\char`\"{}. Diese Animation wurde ueber den Shader realisiert. Ebenso ueber die Shader sind die Animationen der Figuren im geheimen Raum realisiert.\hypertarget{index_Interaktive}{}\section{Elemente}\label{index_Interaktive}
+In der gesamten Szene kann mit einigen Elementen interagiert werden\+:
+\begin{DoxyItemize}
+\item Am rechten Ende des Bahnhofs kann von einer Kiste eine \char`\"{}kaputte Portalgun\char`\"{} mittels Links-\/\+Klick aufgehoben werden. Sobald der Spieler mehr als eine Waffe traegt kann diese mittels Scrollen des Mausrades gewechselt werden.
+\item Einige (drei) der herumliegenden Bierflaschen koennen getrunken werden. Hierzu muss der Spieler sich im geduckten Modus der Flasche naehern und kann diese -\/ sofern der entsprechende Texthinweis erscheint -\/ mit einem Links-\/\+Klick trinken. Hierbei handelt es sich um einen sehr starken Alkohol, der zwar schnell wirkt, seine Wirkung aber auch schnell wieder verliert.
+\begin{DoxyItemize}
+\item Aus Sicherheitsgruenden darf leider nicht verraten werden, um welche Flaschen es sich handelt.
+\end{DoxyItemize}
+\item Im Geheimraum am oberen Ende der Treppe stehen einige farbige Figuren. Naehert sich der Spieler diesen, so kann er mit einem Links-\/\+Klick u.\+a. Shader-\/\+Farben wechseln. Probieren Sie es aus!
+\end{DoxyItemize}\hypertarget{index_Die}{}\section{Szene}\label{index_Die}
+Die Bewegung in der Szene erfolgt im gewohnten F\+P\+S Stil. Hierbei ist sowohl eine Kollisionserkennung als auch eine \char`\"{}\+Clamp to Ground\char`\"{} Funktionalitaet implementiert (so dass der Spieler auf dem Boden laeuft). Die Tastaturbelegung ist hierbei die folgende\+:
+\begin{DoxyItemize}
+\item {\bfseries W} Bewegung Vorwaerts, {\bfseries S} Bewegung Rueckwaerts, {\bfseries A} Nach links bewegen (nicht drehen), {\bfseries D} Nach rechts bewegen (nicht drehen)
+\item {\bfseries Maus\+:} Umschauen
+\item {\bfseries Mausklick} links zur Interaktion (es erscheint immer ein Text der Interaktion \char`\"{}ankuendigt\char`\"{})
+\item {\bfseries Leerstaste\+:} Springen, {\bfseries L-\/\+Shift}\+: Sprinten, {\bfseries L-\/\+Strg}\+: Gehen (langsamer gehen), {\bfseries X\+:} Ducken (um z.\+B. an Bierflaschen heranzukommen)
+\item {\bfseries Mausrad} {\bfseries scrollen\+:} Wechseln der Waffe (sofern mehr als eine getragen wird) Mit der Taste {\bfseries F} kann in den Flugmodus gewechselt werden. In diesem ist die Kollisionserkennung nicht mehr aktiv. Zu der o.\+g. Steuerung kommt Folgendes hinzu\+:
+\item {\bfseries Q} senkrecht nach unten fliegen, {\bfseries E} senkrecht nach oben fliegen
+\end{DoxyItemize}
+
+Weiteres\+:
+\begin{DoxyItemize}
+\item {\bfseries C} aktiviert/deaktiviert den Polygon-\/\+Modus
+\item {\bfseries L-\/\+Shift} {\bfseries +} {\bfseries 1} wechselt durch die Shader-\/\+Modi, die normalerweise im Geheimraum umgeschaltet werden koennen
+\end{DoxyItemize}\hypertarget{index_Quellenverzeichnis}{}\section{Quellenverzeichnis}\label{index_Quellenverzeichnis}
+Sofern nicht anders dokumentiert (z.\+B. im Quellcode), handelt es sich bei allen Entwicklungen um Eigenentwicklungen. Insbesondere sind saemtliche Modelle Eigenentwicklungen.~\newline
+ Texturen kommen hierbei geschlossen von~\newline
+ \href{http://www.cgtextures.com/}{\tt http\+://www.\+cgtextures.\+com/} ~\newline
+ Ausnahmen sind hierbei\+:~\newline
+ U\+D\+S\+S\+R Flagge (auf den alten Oelfaessern liegend)~\newline
+ \href{http://freestock.ca/soviet_union_ussr_grunge_flag_sjpg1191.jpg}{\tt http\+://freestock.\+ca/soviet\+\_\+union\+\_\+ussr\+\_\+grunge\+\_\+flag\+\_\+sjpg1191.\+jpg} ~\newline
+ Zuletzt geprueft/gesehen\+: 19.\+06.\+2014~\newline
+ Flagge mit Einhorn (in der Ecke haengend)~\newline
+ \href{http://wallpoper.com/images/00/24/35/71/communism-soviet_00243571.jpg}{\tt http\+://wallpoper.\+com/images/00/24/35/71/communism-\/soviet\+\_\+00243571.\+jpg} ~\newline
+ Zuletzt geprueft/gesehen\+: 19.\+06.\+2014~\newline

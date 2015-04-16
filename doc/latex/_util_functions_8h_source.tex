@@ -1,0 +1,96 @@
+\hypertarget{_util_functions_8h_source}{\section{Util\+Functions.\+h}
+\label{_util_functions_8h_source}\index{header/\+Util\+Functions.\+h@{header/\+Util\+Functions.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 
+00003 \textcolor{preprocessor}{#include <osg/Camera>}
+00004 \textcolor{preprocessor}{#include <osg/Geometry>}
+00005 \textcolor{preprocessor}{#include <osg/MatrixTransform>}
+00006 \textcolor{preprocessor}{#include <osg/Texture2D>}
+00007 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00008 \textcolor{preprocessor}{#include <osg/PositionAttitudeTransform>}
+00009 \textcolor{preprocessor}{#include <osgText/Text>}
+00010 \textcolor{preprocessor}{#include <osgDB/ReadFile>}
+00011 \textcolor{preprocessor}{#include <osg/Shader>}
+00012 \textcolor{preprocessor}{#include <osg/Material>}
+00013 \textcolor{preprocessor}{#include <osgParticle/ParticleSystem>}
+\hypertarget{_util_functions_8h_source_l00014}{}\hyperlink{_util_functions_8h_a525335710b53cb064ca56b936120431e}{00014} \textcolor{preprocessor}{#define \_USE\_MATH\_DEFINES}
+00015 \textcolor{preprocessor}{#include <cmath>} 
+00016 \textcolor{preprocessor}{#include <functional>}
+00017 
+00026 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_util_functions_8h_source_l00027}{}\hyperlink{namespacebrtr_af79a815819e2ef65ea9cd43dc9d43679}{00027}     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \hyperlink{namespacebrtr_af79a815819e2ef65ea9cd43dc9d43679}{collisionMask} = 0x1;      
+\hypertarget{_util_functions_8h_source_l00028}{}\hyperlink{namespacebrtr_a2060f4d70c0e3bc7e2e35f82e279a40d}{00028}     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \hyperlink{namespacebrtr_a2060f4d70c0e3bc7e2e35f82e279a40d}{interactionMask} = 0x2;
+\hypertarget{_util_functions_8h_source_l00029}{}\hyperlink{namespacebrtr_a21ab851f18c0c85fa006766034833a4f}{00029}     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \hyperlink{namespacebrtr_a21ab851f18c0c85fa006766034833a4f}{interactionAndCollisionMask} = 
+      \hyperlink{namespacebrtr_af79a815819e2ef65ea9cd43dc9d43679}{collisionMask} | \hyperlink{namespacebrtr_a2060f4d70c0e3bc7e2e35f82e279a40d}{interactionMask};
+\hypertarget{_util_functions_8h_source_l00030}{}\hyperlink{namespacebrtr_a5a7668dd62a6cbf00234c926a109fbef}{00030}     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \hyperlink{namespacebrtr_a5a7668dd62a6cbf00234c926a109fbef}{fakeWallMask} = 0x4;
+00031 
+00032 
+\hypertarget{_util_functions_8h_source_l00040}{}\hyperlink{structbrtr_1_1_body_of_rotation_function}{00040}     \textcolor{keyword}{struct  }\hyperlink{structbrtr_1_1_body_of_rotation_function}{BodyOfRotationFunction} \{
+\hypertarget{_util_functions_8h_source_l00041}{}\hyperlink{structbrtr_1_1_body_of_rotation_function_a5fda598eb0a63696b059e3a27c01142b}{00041}         std::function<double(double)> \hyperlink{structbrtr_1_1_body_of_rotation_function_a5fda598eb0a63696b059e3a27c01142b}{func};     
+\hypertarget{_util_functions_8h_source_l00042}{}\hyperlink{structbrtr_1_1_body_of_rotation_function_a46667ab72bfeddc305bf31fa359c8699}{00042}         \textcolor{keywordtype}{double} \hyperlink{structbrtr_1_1_body_of_rotation_function_a46667ab72bfeddc305bf31fa359c8699}{end};                                 
+\hypertarget{_util_functions_8h_source_l00043}{}\hyperlink{structbrtr_1_1_body_of_rotation_function_ad7df29eaeb2504928488691196cc06eb}{00043}         \textcolor{keyword}{const} \hyperlink{structbrtr_1_1_body_of_rotation_function}{BodyOfRotationFunction}* \hyperlink{structbrtr_1_1_body_of_rotation_function_ad7df29eaeb2504928488691196cc06eb}{nextFunc}; 
+\hypertarget{_util_functions_8h_source_l00044}{}\hyperlink{structbrtr_1_1_body_of_rotation_function_a22861c378686dabe1c35c90a0a8dcf46}{00044}         \textcolor{keywordtype}{double} \hyperlink{structbrtr_1_1_body_of_rotation_function_a22861c378686dabe1c35c90a0a8dcf46}{derivation}(\textcolor{keywordtype}{double} x)\textcolor{keyword}{ const }\{
+00045             \textcolor{keywordtype}{double} h = 1e-10; \textcolor{comment}{//very small}
+00046             \textcolor{keywordflow}{return} (\hyperlink{structbrtr_1_1_body_of_rotation_function_a5fda598eb0a63696b059e3a27c01142b}{func}(x + h) - \hyperlink{structbrtr_1_1_body_of_rotation_function_a5fda598eb0a63696b059e3a27c01142b}{func}(x)) / h;
+00047         \};
+00048     \};
+00049 
+\hypertarget{_util_functions_8h_source_l00056}{}\hyperlink{structbrtr_1_1_rendering_pipeline}{00056}     \textcolor{keyword}{struct }\hyperlink{structbrtr_1_1_rendering_pipeline}{RenderingPipeline} \{
+\hypertarget{_util_functions_8h_source_l00057}{}\hyperlink{structbrtr_1_1_rendering_pipeline_ae945030321a6b44f00266954c8c50bf3}{00057}         osg::ref\_ptr<osg::Camera> \hyperlink{structbrtr_1_1_rendering_pipeline_ae945030321a6b44f00266954c8c50bf3}{pass\_0\_color};             
+\hypertarget{_util_functions_8h_source_l00058}{}\hyperlink{structbrtr_1_1_rendering_pipeline_a18752632c1b557d283e523ebbc0443a0}{00058}         osg::ref\_ptr<osg::Camera> \hyperlink{structbrtr_1_1_rendering_pipeline_a18752632c1b557d283e523ebbc0443a0}{pass\_0\_depth};             
+\hypertarget{_util_functions_8h_source_l00059}{}\hyperlink{structbrtr_1_1_rendering_pipeline_aea2228e41f1e5c6db5d616c05ecc27fd}{00059}         osg::ref\_ptr<osg::Camera> \hyperlink{structbrtr_1_1_rendering_pipeline_aea2228e41f1e5c6db5d616c05ecc27fd}{pass\_PostProcess};         
+\hypertarget{_util_functions_8h_source_l00060}{}\hyperlink{structbrtr_1_1_rendering_pipeline_afe773fb98986d39ef23a4edf3634af10}{00060}         std::vector<osg::ref\_ptr<osg::Program>> \hyperlink{structbrtr_1_1_rendering_pipeline_afe773fb98986d39ef23a4edf3634af10}{programs};   
+00061     \};
+00062 
+00075     \textcolor{keyword}{extern} \textcolor{keywordtype}{void} \hyperlink{namespacebrtr_adcf0546a392221be3958ec96f99887f0}{createRenderingPipeline}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} height, 
+      osg::Node& rootForToon, osgViewer::Viewer &viewer, \hyperlink{structbrtr_1_1_rendering_pipeline}{RenderingPipeline}& pipe, osg::Vec3f& 
+      fogColor);
+00076     
+00087     \textcolor{keyword}{extern} osg::ref\_ptr<osg::LightSource> \hyperlink{namespacebrtr_ad772c6dbc0a2cabd40a284676c124a97}{createLight}(\textcolor{keyword}{const} osg::Vec3 &pos, \textcolor{keywordtype}{int} lightNum, \textcolor{keywordtype}{int} 
+      point = 1, \textcolor{keywordtype}{double} spotCutoff = 180, \textcolor{keywordtype}{double} spotExponent = 0);
+00098     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Camera> \hyperlink{namespacebrtr_aa7a89c381be095a7eb1e248d2e6c0e23}{createRTTCamera}(osg::Camera::BufferComponent buffer, 
+      osg::Texture* tex, \textcolor{keywordtype}{bool} isAbsolute = \textcolor{keyword}{false});
+00109     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Geode> \hyperlink{namespacebrtr_a32cfc96621681baabc76c52af5d6a347}{createScreenQuad}(\textcolor{keywordtype}{float} width, \textcolor{keywordtype}{float} height, \textcolor{keywordtype}{float} scale
+       = 1.0f);
+00121     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Camera> \hyperlink{namespacebrtr_a62da4f109238c45882dd64d7a7e97a1d}{createHUDCamera}(\textcolor{keywordtype}{double} left, \textcolor{keywordtype}{double} right, \textcolor{keywordtype}{double} 
+      bottom, \textcolor{keywordtype}{double} top);
+00132     \textcolor{keyword}{extern} osg::ref\_ptr<osgText::Text> \hyperlink{namespacebrtr_a4431de1c1fa2c1d42c4fb57c38aaa3ce}{createText}(\textcolor{keyword}{const} osg::Vec3& pos, \textcolor{keyword}{const} std::string& 
+      content, \textcolor{keywordtype}{float} size);
+00145     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a83d3e627c9dc247459610aa9fec23d7b}{createBodyOfRotation}(\textcolor{keywordtype}{double} height, \textcolor{keywordtype}{int} hsteps, \textcolor{keywordtype}{
+      int} rsteps, \textcolor{keyword}{const} \hyperlink{structbrtr_1_1_body_of_rotation_function}{BodyOfRotationFunction}& \textcolor{keyword}{function});
+00157     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{createRectangle}(\textcolor{keywordtype}{double} length, \textcolor{keywordtype}{double} width, \textcolor{keywordtype}{int} 
+      lsteps, \textcolor{keywordtype}{int} wsteps);
+00158 
+00171     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{createRectangleWithTexcoords}(\textcolor{keywordtype}{double} 
+      length, \textcolor{keywordtype}{double} width, \textcolor{keywordtype}{int} lsteps, \textcolor{keywordtype}{int} wsteps);
+00172 
+00184     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Group> \hyperlink{namespacebrtr_ae7f155c263aec9663a02763ed0bb882b}{createCuboid}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} length, \textcolor{keyword}{const} \textcolor{keywordtype}{double} width, \textcolor{keyword}{const}
+       \textcolor{keywordtype}{double} height, \textcolor{keyword}{const} \textcolor{keywordtype}{double} factor = 6);
+00185     
+00193     \textcolor{keyword}{extern} osg::ref\_ptr<osg::PositionAttitudeTransform> 
+      \hyperlink{namespacebrtr_a887d7975f37c4334b70e2196735b6678}{wrapInPositionAttitudeTransform}(osg::Node * srcNode, \textcolor{keyword}{const} osg::Vec3d& pos);
+00194 
+00199     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a16fa8982307a039c08ab56912bab94b9}{createBeerBottle}();
+00207     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a614d8d6b8bcc6c4e7f7ffb24ca48eb4c}{createRealBottle}();
+00215     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_ab4f3c063f7a8fa6cc33a8cb52b036d27}{createVase}();
+00223     \textcolor{keyword}{extern}  osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a4ccd9746e37278e47832da270dc00fb3}{createStalk}();
+00231     \textcolor{keyword}{extern}  osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a51b3741c30ca1b6282b9693055ddc060}{createBud}();
+00239     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a118d4013732dea1a161b6d225df6dc2e}{createChessFigure}();
+00240 
+00246     \textcolor{keyword}{extern} osg::ref\_ptr<osg::PositionAttitudeTransform> \hyperlink{namespacebrtr_a05625aff9337331ae351d283f79f0f1e}{createVaseWithFlower}();
+00247 
+00255     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Geode> \hyperlink{namespacebrtr_a31c533ae635c528c761cc83e34e91b2f}{createCrosshair}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} height)
+      ;
+00262     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Texture2D> \hyperlink{namespacebrtr_aea7b3b188858f0bce09f2450a749f497}{createToonTex}(std::string toonTex);
+00263 
+00275     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Material> \hyperlink{namespacebrtr_a7b54dcabf5846ea963221e59b38b0a79}{createSimpleMaterial}(osg::Material::Face face, \textcolor{keyword}{
+      const} osg::Vec4& diffuse, \textcolor{keyword}{const} osg::Vec4& ambient, \textcolor{keyword}{const} osg::Vec4& specular, \textcolor{keyword}{const} \textcolor{keywordtype}{double} shininess);
+00276     
+00277     
+00284     \textcolor{keyword}{extern} osg::Vec3 \hyperlink{namespacebrtr_a24ba7c5d07ad50afb09990116dd3556d}{getDimensionOfNode}(osg::Node * source);
+00285 \}
+00286 
+\end{DoxyCode}

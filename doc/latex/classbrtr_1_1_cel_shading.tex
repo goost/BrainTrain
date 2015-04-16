@@ -1,0 +1,185 @@
+\hypertarget{classbrtr_1_1_cel_shading}{\section{brtr\+:\+:Cel\+Shading Class Reference}
+\label{classbrtr_1_1_cel_shading}\index{brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}}
+}
+
+
+Cel\+Sading Effect, every child of this node will get the effect.  
+
+
+
+
+{\ttfamily \#include $<$Cel\+Shading.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Cel\+Shading\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbrtr_1_1_cel_shading}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_cel_shading_ae497a14c2c379b608643d8f39d156b52}{Cel\+Shading} (bool second\+Pass=true, std\+::string vert\+Source=\char`\"{}cel\+Shader.\+vert\char`\"{})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classbrtr_1_1_cel_shading_affb65fcbb6ffe405f60b840c52cdc26c}{Cel\+Shading} (const \hyperlink{classbrtr_1_1_cel_shading}{Cel\+Shading} \&copy, const osg\+::\+Copy\+Op \&copyop=osg\+::\+Copy\+Op\+::\+S\+H\+A\+L\+L\+O\+W\+\_\+\+C\+O\+P\+Y)
+\item 
+\hyperlink{classbrtr_1_1_cel_shading_a02ab424cf06935b9560b5c39d733d02c}{M\+E\+T\+A\+\_\+\+Effect} (null, \hyperlink{classbrtr_1_1_cel_shading}{Cel\+Shading},\char`\"{}Cel\+Shading\char`\"{},\char`\"{}This effect implements a technique called 'Cel-\/Shading' to produce a \char`\"{}\char`\"{}cartoon-\/style (non photorealistic) rendering. Two passes are required\+: \char`\"{}\char`\"{}the first one draws solid surfaces, the second one draws the outlines. \char`\"{}\char`\"{}Vertices Shader, Toon Texture pass can be customize upon creating.\char`\"{},\char`\"{}Marco Jez; O\+G\+L\+S\+L port by Mike Weiblen, adaptions by Gleb Ostrowski \char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classbrtr_1_1_cel_shading_ab6148e389081719d56d2971cc8924841}{$\sim$\+Cel\+Shading} ()
+\item 
+bool \hyperlink{classbrtr_1_1_cel_shading_a28212bb66f29ff8cf1169625b598b93b}{define\+\_\+techniques} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Material $>$ \hyperlink{classbrtr_1_1_cel_shading_ae67a870d7a985694fb0d3290f0163f84}{\+\_\+material}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Line\+Width $>$ \hyperlink{classbrtr_1_1_cel_shading_ae1e0a4de3ca638da0fe0a3b3aa018f07}{\+\_\+line\+Width}
+\item 
+bool \hyperlink{classbrtr_1_1_cel_shading_a15226eda13f5a3deaee3260414f664bf}{\+\_\+second\+Pass}
+\item 
+std\+::string \hyperlink{classbrtr_1_1_cel_shading_a6c9ea02f1a90b0ba711394c4ff716081}{\+\_\+vert\+Source}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Cel\+Sading Effect, every child of this node will get the effect. 
+
+This effect implements a technique called 'Cel-\/\+Shading' to produce a cartoon-\/style (non photorealistic) rendering.~\newline
+ Two passes are required\+:~\newline
+ the first one draws solid surfaces, the second one draws the outlines. \begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyPrecond}{Precondition}
+In Texture Layer 1 (stateset) must be the Toon\+Texture set 
+\end{DoxyPrecond}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_cel_shading_8h_source_l00018}{18} of file \hyperlink{_cel_shading_8h_source}{Cel\+Shading.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_cel_shading_ae497a14c2c379b608643d8f39d156b52}{\index{brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}!Cel\+Shading@{Cel\+Shading}}
+\index{Cel\+Shading@{Cel\+Shading}!brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}}
+\subsubsection[{Cel\+Shading}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Cel\+Shading\+::\+Cel\+Shading (
+\begin{DoxyParamCaption}
+\item[{bool}]{second\+Pass = {\ttfamily true}, }
+\item[{std\+::string}]{vert\+Source = {\ttfamily \char`\"{}celShader.vert\char`\"{}}}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_cel_shading_ae497a14c2c379b608643d8f39d156b52}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em second\+Pass} & if false, no outlines are being drawn \\
+\hline
+{\em vert\+Source} & one can set explicitly the vertex shader \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_cel_shading_8cpp_source_l00097}{97} of file \hyperlink{_cel_shading_8cpp_source}{Cel\+Shading.\+cpp}.
+
+\hypertarget{classbrtr_1_1_cel_shading_affb65fcbb6ffe405f60b840c52cdc26c}{\index{brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}!Cel\+Shading@{Cel\+Shading}}
+\index{Cel\+Shading@{Cel\+Shading}!brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}}
+\subsubsection[{Cel\+Shading}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Cel\+Shading\+::\+Cel\+Shading (
+\begin{DoxyParamCaption}
+\item[{const {\bf Cel\+Shading} \&}]{copy, }
+\item[{const osg\+::\+Copy\+Op \&}]{copyop = {\ttfamily osg\+:\+:CopyOp\+:\+:SHALLOW\+\_\+COPY}}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_cel_shading_affb65fcbb6ffe405f60b840c52cdc26c}
+
+
+Definition at line \hyperlink{_cel_shading_8cpp_source_l00104}{104} of file \hyperlink{_cel_shading_8cpp_source}{Cel\+Shading.\+cpp}.
+
+\hypertarget{classbrtr_1_1_cel_shading_ab6148e389081719d56d2971cc8924841}{\index{brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}!````~Cel\+Shading@{$\sim$\+Cel\+Shading}}
+\index{````~Cel\+Shading@{$\sim$\+Cel\+Shading}!brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}}
+\subsubsection[{$\sim$\+Cel\+Shading}]{\setlength{\rightskip}{0pt plus 5cm}virtual brtr\+::\+Cel\+Shading\+::$\sim$\+Cel\+Shading (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classbrtr_1_1_cel_shading_ab6148e389081719d56d2971cc8924841}
+
+
+Definition at line \hyperlink{_cel_shading_8h_source_l00043}{43} of file \hyperlink{_cel_shading_8h_source}{Cel\+Shading.\+h}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_cel_shading_a28212bb66f29ff8cf1169625b598b93b}{\index{brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}!define\+\_\+techniques@{define\+\_\+techniques}}
+\index{define\+\_\+techniques@{define\+\_\+techniques}!brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}}
+\subsubsection[{define\+\_\+techniques}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Cel\+Shading\+::define\+\_\+techniques (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classbrtr_1_1_cel_shading_a28212bb66f29ff8cf1169625b598b93b}
+
+
+Definition at line \hyperlink{_cel_shading_8cpp_source_l00110}{110} of file \hyperlink{_cel_shading_8cpp_source}{Cel\+Shading.\+cpp}.
+
+\hypertarget{classbrtr_1_1_cel_shading_a02ab424cf06935b9560b5c39d733d02c}{\index{brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}!M\+E\+T\+A\+\_\+\+Effect@{M\+E\+T\+A\+\_\+\+Effect}}
+\index{M\+E\+T\+A\+\_\+\+Effect@{M\+E\+T\+A\+\_\+\+Effect}!brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}}
+\subsubsection[{M\+E\+T\+A\+\_\+\+Effect}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Cel\+Shading\+::\+M\+E\+T\+A\+\_\+\+Effect (
+\begin{DoxyParamCaption}
+\item[{null}]{, }
+\item[{{\bf Cel\+Shading}}]{, }
+\item[{\char`\"{}Cel\+Shading\char`\"{}}]{, }
+\item[{\char`\"{}This effect implements a technique called 'Cel-\/Shading' to produce a \char`\"{}\char`\"{}cartoon-\/style (non photorealistic) rendering. Two passes are required\+: \char`\"{}\char`\"{}the first one draws solid}]{surfaces, }
+\item[{the second one draws the outlines.\char`\"{}\char`\"{}Vertices}]{Shader, }
+\item[{Toon Texture pass can be customize upon creating.\char`\"{}}]{, }
+\item[{\char`\"{}Marco Jez; O\+G\+L\+S\+L port by Mike}]{Weiblen, }
+\item[{adaptions by Gleb Ostrowski\char`\"{}}]{}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_cel_shading_a02ab424cf06935b9560b5c39d733d02c}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_cel_shading_ae1e0a4de3ca638da0fe0a3b3aa018f07}{\index{brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}!\+\_\+line\+Width@{\+\_\+line\+Width}}
+\index{\+\_\+line\+Width@{\+\_\+line\+Width}!brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}}
+\subsubsection[{\+\_\+line\+Width}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Line\+Width$>$ brtr\+::\+Cel\+Shading\+::\+\_\+line\+Width\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_cel_shading_ae1e0a4de3ca638da0fe0a3b3aa018f07}
+
+
+Definition at line \hyperlink{_cel_shading_8h_source_l00049}{49} of file \hyperlink{_cel_shading_8h_source}{Cel\+Shading.\+h}.
+
+\hypertarget{classbrtr_1_1_cel_shading_ae67a870d7a985694fb0d3290f0163f84}{\index{brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}!\+\_\+material@{\+\_\+material}}
+\index{\+\_\+material@{\+\_\+material}!brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}}
+\subsubsection[{\+\_\+material}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Material$>$ brtr\+::\+Cel\+Shading\+::\+\_\+material\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_cel_shading_ae67a870d7a985694fb0d3290f0163f84}
+
+
+Definition at line \hyperlink{_cel_shading_8h_source_l00048}{48} of file \hyperlink{_cel_shading_8h_source}{Cel\+Shading.\+h}.
+
+\hypertarget{classbrtr_1_1_cel_shading_a15226eda13f5a3deaee3260414f664bf}{\index{brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}!\+\_\+second\+Pass@{\+\_\+second\+Pass}}
+\index{\+\_\+second\+Pass@{\+\_\+second\+Pass}!brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}}
+\subsubsection[{\+\_\+second\+Pass}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Cel\+Shading\+::\+\_\+second\+Pass\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_cel_shading_a15226eda13f5a3deaee3260414f664bf}
+
+
+Definition at line \hyperlink{_cel_shading_8h_source_l00050}{50} of file \hyperlink{_cel_shading_8h_source}{Cel\+Shading.\+h}.
+
+\hypertarget{classbrtr_1_1_cel_shading_a6c9ea02f1a90b0ba711394c4ff716081}{\index{brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}!\+\_\+vert\+Source@{\+\_\+vert\+Source}}
+\index{\+\_\+vert\+Source@{\+\_\+vert\+Source}!brtr\+::\+Cel\+Shading@{brtr\+::\+Cel\+Shading}}
+\subsubsection[{\+\_\+vert\+Source}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string brtr\+::\+Cel\+Shading\+::\+\_\+vert\+Source\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_cel_shading_a6c9ea02f1a90b0ba711394c4ff716081}
+
+
+Definition at line \hyperlink{_cel_shading_8h_source_l00051}{51} of file \hyperlink{_cel_shading_8h_source}{Cel\+Shading.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_cel_shading_8h}{Cel\+Shading.\+h}\item 
+Shader/\hyperlink{_cel_shading_8cpp}{Cel\+Shading.\+cpp}\end{DoxyCompactItemize}

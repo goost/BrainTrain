@@ -1,0 +1,241 @@
+\hypertarget{classbrtr_1_1_base_interaction_callback}{\section{brtr\+:\+:Base\+Interaction\+Callback Class Reference}
+\label{classbrtr_1_1_base_interaction_callback}\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+}
+
+
+This is the Template\+Class for Interaction\+Callbacks.  
+
+
+
+
+{\ttfamily \#include $<$Base\+Interaction\+Callback.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Base\+Interaction\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.802575cm]{classbrtr_1_1_base_interaction_callback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_base_interaction_callback_afc863306967933e0ebef5f7322fab06e}{Base\+Interaction\+Callback} (osg\+::\+Node $\ast$attach\+To, osg\+::\+Camera $\ast$hud\+Cam, int width, int height)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classbrtr_1_1_base_interaction_callback_ab2cf0f22fcc9e79ecda29a547edb5084}{operator()} (osg\+::\+Node $\ast$node, osg\+::\+Node\+Visitor $\ast$nv)
+\item 
+virtual void \hyperlink{classbrtr_1_1_base_interaction_callback_a0fe57e329f044e21d49041c861435ad8}{set\+Text} ()=0
+\begin{DoxyCompactList}\small\item\em sets the text on screen. Subclasses must override to set its own (info)text \end{DoxyCompactList}\item 
+void \hyperlink{classbrtr_1_1_base_interaction_callback_ad74fe9ac5d86c7f23d18614d5abb1003}{clear\+Text} ()
+\item 
+void \hyperlink{classbrtr_1_1_base_interaction_callback_a95ede7c8aa0dc1e067ae64615ecb23db}{reactivate} ()
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Node $>$ \hyperlink{classbrtr_1_1_base_interaction_callback_aafca24ccde1cf21f4132f65a83e0b2bc}{get\+Node} () const 
+\item 
+void \hyperlink{classbrtr_1_1_base_interaction_callback_a420a1977c954850dbe66a189908cde80}{set\+Node} (osg\+::ref\+\_\+ptr$<$ osg\+::\+Node $>$ val)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classbrtr_1_1_base_interaction_callback_a3ed50c9c1725f932e0b78c90ba24e1ed}{interact} (osg\+::\+Node $\ast$, osg\+::\+Node\+Visitor $\ast$)=0
+\begin{DoxyCompactList}\small\item\em the interaction logic must be implemented be the children in this method \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Node $>$ \hyperlink{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{\+\_\+attach\+To}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Camera $>$ \hyperlink{classbrtr_1_1_base_interaction_callback_a0bca3b64724235e08740be94fe4acc8d}{\+\_\+hud\+Cam}
+\item 
+bool \hyperlink{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}{\+\_\+done}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+Text\+::\+Text $>$ \hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\+\_\+text}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This is the Template\+Class for Interaction\+Callbacks. 
+
+Interaction\+Callbacks are set as an User\+Object in an User\+Data\+Container of a Geometry.~\newline
+ Furthermore, the right Node\+Mask (\hyperlink{namespacebrtr_a2060f4d70c0e3bc7e2e35f82e279a40d}{brtr\+::interaction\+Mask}) must be set. ~\newline
+ Every subclass must override the \hyperlink{classbrtr_1_1_base_interaction_callback_a0fe57e329f044e21d49041c861435ad8}{set\+Text()} and \hyperlink{classbrtr_1_1_base_interaction_callback_a3ed50c9c1725f932e0b78c90ba24e1ed}{interact()} method. ~\newline
+ After the child is finished with its work, it must set the done-\/flag to the value true ~\newline
+ The client must check if there is a valid Geometry with a valid Interaction\+Callback and call ~\newline
+ the set\+Text Method to set the text on screen. If the user interacts (e.\+g by clicking a mouse button) ~\newline
+ the client must attach the callback to the node with \hyperlink{classbrtr_1_1_base_interaction_callback_aafca24ccde1cf21f4132f65a83e0b2bc}{get\+Node()}-\/$>$add\+Update\+Callback(), if its not already attached. ~\newline
+ In this case the client must call \hyperlink{classbrtr_1_1_base_interaction_callback_a95ede7c8aa0dc1e067ae64615ecb23db}{reactivate()} to reactivate the callback. (which basicly sets the done flag back to false) ~\newline
+ \hyperlink{classbrtr_1_1_base_interaction_callback_ad74fe9ac5d86c7f23d18614d5abb1003}{clear\+Text()} should be called, if the clients wants to remove the message from the screen (e.\+g. if the player no longer looks at the geometry).
+
+\begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8h_source_l00024}{24} of file \hyperlink{_base_interaction_callback_8h_source}{Base\+Interaction\+Callback.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_base_interaction_callback_afc863306967933e0ebef5f7322fab06e}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!Base\+Interaction\+Callback@{Base\+Interaction\+Callback}}
+\index{Base\+Interaction\+Callback@{Base\+Interaction\+Callback}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{Base\+Interaction\+Callback}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Base\+Interaction\+Callback\+::\+Base\+Interaction\+Callback (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{attach\+To, }
+\item[{osg\+::\+Camera $\ast$}]{hud\+Cam, }
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_base_interaction_callback_afc863306967933e0ebef5f7322fab06e}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em attach\+To} & the node the Callback will be attached to upon interaction \\
+\hline
+{\em hud\+Cam} & the H\+U\+D\+Cam, where the text will appear \\
+\hline
+{\em width} & screen\+Width \\
+\hline
+{\em height} & screen\+Height \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8cpp_source_l00006}{6} of file \hyperlink{_base_interaction_callback_8cpp_source}{Base\+Interaction\+Callback.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_base_interaction_callback_ad74fe9ac5d86c7f23d18614d5abb1003}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!clear\+Text@{clear\+Text}}
+\index{clear\+Text@{clear\+Text}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{clear\+Text}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Base\+Interaction\+Callback\+::clear\+Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_base_interaction_callback_ad74fe9ac5d86c7f23d18614d5abb1003}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8cpp_source_l00031}{31} of file \hyperlink{_base_interaction_callback_8cpp_source}{Base\+Interaction\+Callback.\+cpp}.
+
+\hypertarget{classbrtr_1_1_base_interaction_callback_aafca24ccde1cf21f4132f65a83e0b2bc}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!get\+Node@{get\+Node}}
+\index{get\+Node@{get\+Node}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{get\+Node}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$ osg\+::\+Node $>$ brtr\+::\+Base\+Interaction\+Callback\+::get\+Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classbrtr_1_1_base_interaction_callback_aafca24ccde1cf21f4132f65a83e0b2bc}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8cpp_source_l00027}{27} of file \hyperlink{_base_interaction_callback_8cpp_source}{Base\+Interaction\+Callback.\+cpp}.
+
+\hypertarget{classbrtr_1_1_base_interaction_callback_a3ed50c9c1725f932e0b78c90ba24e1ed}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!interact@{interact}}
+\index{interact@{interact}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{interact}]{\setlength{\rightskip}{0pt plus 5cm}virtual void brtr\+::\+Base\+Interaction\+Callback\+::interact (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{, }
+\item[{osg\+::\+Node\+Visitor $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{classbrtr_1_1_base_interaction_callback_a3ed50c9c1725f932e0b78c90ba24e1ed}
+
+
+the interaction logic must be implemented be the children in this method 
+
+
+
+Implemented in \hyperlink{classbrtr_1_1_program_switcher_callback_a06dd3fc2b09d3138e67599d8d56db62a}{brtr\+::\+Program\+Switcher\+Callback}, \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a97047bc2817ddfecc2c1531d22e289fd}{brtr\+::\+Toon\+Tex\+Switcher\+Callback}, \hyperlink{classbrtr_1_1_drunken_interaction_callback_a86e4062f00a33768f752c1c5fa50c291}{brtr\+::\+Drunken\+Interaction\+Callback}, and \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_a9b6571b0295f7e12425b57ff0262dbd4}{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}.
+
+\hypertarget{classbrtr_1_1_base_interaction_callback_ab2cf0f22fcc9e79ecda29a547edb5084}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!operator()@{operator()}}
+\index{operator()@{operator()}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Base\+Interaction\+Callback\+::operator() (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{node, }
+\item[{osg\+::\+Node\+Visitor $\ast$}]{nv}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classbrtr_1_1_base_interaction_callback_ab2cf0f22fcc9e79ecda29a547edb5084}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8cpp_source_l00016}{16} of file \hyperlink{_base_interaction_callback_8cpp_source}{Base\+Interaction\+Callback.\+cpp}.
+
+\hypertarget{classbrtr_1_1_base_interaction_callback_a95ede7c8aa0dc1e067ae64615ecb23db}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!reactivate@{reactivate}}
+\index{reactivate@{reactivate}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{reactivate}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Base\+Interaction\+Callback\+::reactivate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_base_interaction_callback_a95ede7c8aa0dc1e067ae64615ecb23db}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8cpp_source_l00035}{35} of file \hyperlink{_base_interaction_callback_8cpp_source}{Base\+Interaction\+Callback.\+cpp}.
+
+\hypertarget{classbrtr_1_1_base_interaction_callback_a420a1977c954850dbe66a189908cde80}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!set\+Node@{set\+Node}}
+\index{set\+Node@{set\+Node}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{set\+Node}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Base\+Interaction\+Callback\+::set\+Node (
+\begin{DoxyParamCaption}
+\item[{osg\+::ref\+\_\+ptr$<$ osg\+::\+Node $>$}]{val}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_base_interaction_callback_a420a1977c954850dbe66a189908cde80}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8cpp_source_l00023}{23} of file \hyperlink{_base_interaction_callback_8cpp_source}{Base\+Interaction\+Callback.\+cpp}.
+
+\hypertarget{classbrtr_1_1_base_interaction_callback_a0fe57e329f044e21d49041c861435ad8}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!set\+Text@{set\+Text}}
+\index{set\+Text@{set\+Text}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{set\+Text}]{\setlength{\rightskip}{0pt plus 5cm}virtual void brtr\+::\+Base\+Interaction\+Callback\+::set\+Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classbrtr_1_1_base_interaction_callback_a0fe57e329f044e21d49041c861435ad8}
+
+
+sets the text on screen. Subclasses must override to set its own (info)text 
+
+
+
+Implemented in \hyperlink{classbrtr_1_1_program_switcher_callback_a2202619d98a432578c8ed7342b957638}{brtr\+::\+Program\+Switcher\+Callback}, \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_aad13301231829b5c28f14910d4d44355}{brtr\+::\+Toon\+Tex\+Switcher\+Callback}, \hyperlink{classbrtr_1_1_drunken_interaction_callback_a71b86fc410bf2965ca998eff1350cfaf}{brtr\+::\+Drunken\+Interaction\+Callback}, and \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_aa0db50622c7ae1cd25f8554c916137db}{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!\+\_\+attach\+To@{\+\_\+attach\+To}}
+\index{\+\_\+attach\+To@{\+\_\+attach\+To}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{\+\_\+attach\+To}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Node$>$ brtr\+::\+Base\+Interaction\+Callback\+::\+\_\+attach\+To\hspace{0.3cm}{\ttfamily [protected]}}}\label{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8h_source_l00051}{51} of file \hyperlink{_base_interaction_callback_8h_source}{Base\+Interaction\+Callback.\+h}.
+
+\hypertarget{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!\+\_\+done@{\+\_\+done}}
+\index{\+\_\+done@{\+\_\+done}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{\+\_\+done}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Base\+Interaction\+Callback\+::\+\_\+done\hspace{0.3cm}{\ttfamily [protected]}}}\label{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8h_source_l00053}{53} of file \hyperlink{_base_interaction_callback_8h_source}{Base\+Interaction\+Callback.\+h}.
+
+\hypertarget{classbrtr_1_1_base_interaction_callback_a0bca3b64724235e08740be94fe4acc8d}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!\+\_\+hud\+Cam@{\+\_\+hud\+Cam}}
+\index{\+\_\+hud\+Cam@{\+\_\+hud\+Cam}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{\+\_\+hud\+Cam}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Camera$>$ brtr\+::\+Base\+Interaction\+Callback\+::\+\_\+hud\+Cam\hspace{0.3cm}{\ttfamily [protected]}}}\label{classbrtr_1_1_base_interaction_callback_a0bca3b64724235e08740be94fe4acc8d}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8h_source_l00052}{52} of file \hyperlink{_base_interaction_callback_8h_source}{Base\+Interaction\+Callback.\+h}.
+
+\hypertarget{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\index{brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}!\+\_\+text@{\+\_\+text}}
+\index{\+\_\+text@{\+\_\+text}!brtr\+::\+Base\+Interaction\+Callback@{brtr\+::\+Base\+Interaction\+Callback}}
+\subsubsection[{\+\_\+text}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+Text\+::\+Text$>$ brtr\+::\+Base\+Interaction\+Callback\+::\+\_\+text\hspace{0.3cm}{\ttfamily [protected]}}}\label{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}
+
+
+Definition at line \hyperlink{_base_interaction_callback_8h_source_l00054}{54} of file \hyperlink{_base_interaction_callback_8h_source}{Base\+Interaction\+Callback.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_base_interaction_callback_8h}{Base\+Interaction\+Callback.\+h}\item 
+Callbacks/\hyperlink{_base_interaction_callback_8cpp}{Base\+Interaction\+Callback.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,167 @@
+\hypertarget{classbrtr_1_1_toon_tex_switcher_callback}{\section{brtr\+:\+:Toon\+Tex\+Switcher\+Callback Class Reference}
+\label{classbrtr_1_1_toon_tex_switcher_callback}\index{brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}}
+}
+
+
+Callback for switching the Toon\+Textures.  
+
+
+
+
+{\ttfamily \#include $<$Toon\+Tex\+Switcher\+Callback.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Toon\+Tex\+Switcher\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classbrtr_1_1_toon_tex_switcher_callback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_toon_tex_switcher_callback_ae117afe5056c885a625a850e1d0fbae7}{Toon\+Tex\+Switcher\+Callback} (osg\+::\+Node $\ast$scenedata, osg\+::\+Camera $\ast$hud\+Cam, int width, int height, std\+::vector$<$ osg\+::ref\+\_\+ptr$<$ osg\+::\+Texture2\+D $>$$>$ toon\+Texs)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_aad13301231829b5c28f14910d4d44355}{set\+Text} ()
+\begin{DoxyCompactList}\small\item\em sets the text on screen. Subclasses must override to set its own (info)text \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a97047bc2817ddfecc2c1531d22e289fd}{interact} (osg\+::\+Node $\ast$node, osg\+::\+Node\+Visitor $\ast$)
+\begin{DoxyCompactList}\small\item\em each interact sets the next texture \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a58030dcd246f0f2c168965ca087cfa17}{\+\_\+cur\+Tex}
+\item 
+std\+::vector$<$ osg\+::ref\+\_\+ptr\\*
+$<$ osg\+::\+Texture2\+D $>$ $>$ \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a96cbd2a83f9ed21efde9d086c34e6d5e}{\+\_\+toon\+Texs}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Callback for switching the Toon\+Textures. 
+
+Every click the next texture in the vector is choosen scenedata is the node which stateset holds the textures \begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_toon_tex_switcher_callback_8h_source_l00017}{17} of file \hyperlink{_toon_tex_switcher_callback_8h_source}{Toon\+Tex\+Switcher\+Callback.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_toon_tex_switcher_callback_ae117afe5056c885a625a850e1d0fbae7}{\index{brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}!Toon\+Tex\+Switcher\+Callback@{Toon\+Tex\+Switcher\+Callback}}
+\index{Toon\+Tex\+Switcher\+Callback@{Toon\+Tex\+Switcher\+Callback}!brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}}
+\subsubsection[{Toon\+Tex\+Switcher\+Callback}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Toon\+Tex\+Switcher\+Callback\+::\+Toon\+Tex\+Switcher\+Callback (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{scenedata, }
+\item[{osg\+::\+Camera $\ast$}]{hud\+Cam, }
+\item[{int}]{width, }
+\item[{int}]{height, }
+\item[{std\+::vector$<$ osg\+::ref\+\_\+ptr$<$ osg\+::\+Texture2\+D $>$$>$}]{toon\+Texs}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_toon_tex_switcher_callback_ae117afe5056c885a625a850e1d0fbae7}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scenedata} & node which stateset contains the Toon\+Textures \\
+\hline
+{\em hud\+Cam} & \\
+\hline
+{\em width} & screen\+Width \\
+\hline
+{\em height} & screen\+Height \\
+\hline
+{\em toon\+Texs} & vector with Toon\+Textures \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_toon_tex_switcher_callback_8cpp_source_l00009}{9} of file \hyperlink{_toon_tex_switcher_callback_8cpp_source}{Toon\+Tex\+Switcher\+Callback.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_toon_tex_switcher_callback_a97047bc2817ddfecc2c1531d22e289fd}{\index{brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}!interact@{interact}}
+\index{interact@{interact}!brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}}
+\subsubsection[{interact}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Toon\+Tex\+Switcher\+Callback\+::interact (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{node, }
+\item[{osg\+::\+Node\+Visitor $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classbrtr_1_1_toon_tex_switcher_callback_a97047bc2817ddfecc2c1531d22e289fd}
+
+
+each interact sets the next texture 
+
+
+\begin{DoxyParams}{Parameters}
+{\em not} & used \\
+\hline
+{\em not} & used \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classbrtr_1_1_base_interaction_callback_a3ed50c9c1725f932e0b78c90ba24e1ed}{brtr\+::\+Base\+Interaction\+Callback}.
+
+
+
+Definition at line \hyperlink{_toon_tex_switcher_callback_8cpp_source_l00018}{18} of file \hyperlink{_toon_tex_switcher_callback_8cpp_source}{Toon\+Tex\+Switcher\+Callback.\+cpp}.
+
+\hypertarget{classbrtr_1_1_toon_tex_switcher_callback_aad13301231829b5c28f14910d4d44355}{\index{brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}!set\+Text@{set\+Text}}
+\index{set\+Text@{set\+Text}!brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}}
+\subsubsection[{set\+Text}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Toon\+Tex\+Switcher\+Callback\+::set\+Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classbrtr_1_1_toon_tex_switcher_callback_aad13301231829b5c28f14910d4d44355}
+
+
+sets the text on screen. Subclasses must override to set its own (info)text 
+
+
+
+Implements \hyperlink{classbrtr_1_1_base_interaction_callback_a0fe57e329f044e21d49041c861435ad8}{brtr\+::\+Base\+Interaction\+Callback}.
+
+
+
+Definition at line \hyperlink{_toon_tex_switcher_callback_8cpp_source_l00014}{14} of file \hyperlink{_toon_tex_switcher_callback_8cpp_source}{Toon\+Tex\+Switcher\+Callback.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_toon_tex_switcher_callback_a58030dcd246f0f2c168965ca087cfa17}{\index{brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}!\+\_\+cur\+Tex@{\+\_\+cur\+Tex}}
+\index{\+\_\+cur\+Tex@{\+\_\+cur\+Tex}!brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}}
+\subsubsection[{\+\_\+cur\+Tex}]{\setlength{\rightskip}{0pt plus 5cm}int brtr\+::\+Toon\+Tex\+Switcher\+Callback\+::\+\_\+cur\+Tex\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_toon_tex_switcher_callback_a58030dcd246f0f2c168965ca087cfa17}
+
+
+Definition at line \hyperlink{_toon_tex_switcher_callback_8h_source_l00040}{40} of file \hyperlink{_toon_tex_switcher_callback_8h_source}{Toon\+Tex\+Switcher\+Callback.\+h}.
+
+\hypertarget{classbrtr_1_1_toon_tex_switcher_callback_a96cbd2a83f9ed21efde9d086c34e6d5e}{\index{brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}!\+\_\+toon\+Texs@{\+\_\+toon\+Texs}}
+\index{\+\_\+toon\+Texs@{\+\_\+toon\+Texs}!brtr\+::\+Toon\+Tex\+Switcher\+Callback@{brtr\+::\+Toon\+Tex\+Switcher\+Callback}}
+\subsubsection[{\+\_\+toon\+Texs}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$osg\+::ref\+\_\+ptr$<$osg\+::\+Texture2\+D$>$ $>$ brtr\+::\+Toon\+Tex\+Switcher\+Callback\+::\+\_\+toon\+Texs\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_toon_tex_switcher_callback_a96cbd2a83f9ed21efde9d086c34e6d5e}
+
+
+Definition at line \hyperlink{_toon_tex_switcher_callback_8h_source_l00041}{41} of file \hyperlink{_toon_tex_switcher_callback_8h_source}{Toon\+Tex\+Switcher\+Callback.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_toon_tex_switcher_callback_8h}{Toon\+Tex\+Switcher\+Callback.\+h}\item 
+Callbacks/\hyperlink{_toon_tex_switcher_callback_8cpp}{Toon\+Tex\+Switcher\+Callback.\+cpp}\end{DoxyCompactItemize}

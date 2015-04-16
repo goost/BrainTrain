@@ -1,0 +1,31 @@
+\hypertarget{_control_room_8h_source}{\section{Control\+Room.\+h}
+\label{_control_room_8h_source}\index{header/\+Control\+Room.\+h@{header/\+Control\+Room.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osg/PositionAttitudeTransform>}
+00003 \textcolor{preprocessor}{#include <osg/Group>}
+00004 \textcolor{preprocessor}{#include <osg/Material>}
+00005 \textcolor{preprocessor}{#include "../header/ToonTexSwitcherCallback.h"}
+00006 \textcolor{preprocessor}{#include "../header/ProgramSwitcherCallback.h"}
+00007 
+00008 \textcolor{keyword}{namespace }brtr\{
+\hypertarget{_control_room_8h_source_l00018}{}\hyperlink{classbrtr_1_1_control_room}{00018}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_control_room}{ControlRoom} : \textcolor{keyword}{public} osg::PositionAttitudeTransform \{
+00019     \textcolor{keyword}{public}:
+00028         \hyperlink{classbrtr_1_1_control_room_afb36cd27e18234098fbecd22ac325319}{ControlRoom}(\textcolor{keywordtype}{double} roomSize, \textcolor{keywordtype}{int} lod, 
+      \hyperlink{classbrtr_1_1_toon_tex_switcher_callback}{brtr::ToonTexSwitcherCallback}& toonCallback, 
+      \hyperlink{classbrtr_1_1_program_switcher_callback}{brtr::ProgramSwitcherCallback}& programCallback );
+00029 
+00030     \textcolor{keyword}{protected}:
+\hypertarget{_control_room_8h_source_l00031}{}\hyperlink{classbrtr_1_1_control_room_a97b0eb95277b12a2267f8e7c777aeda2}{00031}         \hyperlink{classbrtr_1_1_control_room_a97b0eb95277b12a2267f8e7c777aeda2}{~ControlRoom}() \{\}
+00032     \textcolor{keyword}{private}:
+00033         osg::ref\_ptr<osg::Group> \hyperlink{classbrtr_1_1_control_room_a5dfafb496e18e8e4f6d792b144dd10b9}{createRoomSurrounding}(\textcolor{keywordtype}{double} roomSize, \textcolor{keywordtype}{int} lod);
+00034         osg::ref\_ptr<osg::Group> \hyperlink{classbrtr_1_1_control_room_a15055ae530b811b7046871c5c1ef3f4f}{createChessFigures}(
+      \hyperlink{classbrtr_1_1_toon_tex_switcher_callback}{brtr::ToonTexSwitcherCallback}& toonCallback, 
+      \hyperlink{classbrtr_1_1_program_switcher_callback}{brtr::ProgramSwitcherCallback}& programCallback);
+00035         osg::ref\_ptr<osg::Material> \hyperlink{classbrtr_1_1_control_room_a1cb8b6799fcb85750e0d321a4fbed6f1}{createMaterial}(osg::Vec4 diffuse, osg::Vec4 ambient, 
+      osg::Vec4 specular = osg::Vec4(0.7,0.7,0.7,1), \textcolor{keywordtype}{double} shininess = 42.0);
+00036     \};
+00037 \}
+\end{DoxyCode}

@@ -1,0 +1,49 @@
+\hypertarget{_base_interaction_callback_8cpp_source}{\section{Base\+Interaction\+Callback.\+cpp}
+\label{_base_interaction_callback_8cpp_source}\index{Callbacks/\+Base\+Interaction\+Callback.\+cpp@{Callbacks/\+Base\+Interaction\+Callback.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/BaseInteractionCallback.h"}
+00002 \textcolor{preprocessor}{#include <osg/Camera>}
+00003 \textcolor{preprocessor}{#include "../header/UtilFunctions.h"}
+00004 \textcolor{keyword}{namespace }brtr \{
+00005 
+\hypertarget{_base_interaction_callback_8cpp_source_l00006}{}\hyperlink{classbrtr_1_1_base_interaction_callback_afc863306967933e0ebef5f7322fab06e}{00006}     \hyperlink{classbrtr_1_1_base_interaction_callback_afc863306967933e0ebef5f7322fab06e}{BaseInteractionCallback::BaseInteractionCallback}(
+      osg::Node* attachTo, osg::Camera* hudCam, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height) :
+00007         \_attachTo(attachTo),
+00008         \_hudCam(hudCam),
+00009         \_done(false)\{
+00010         \hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\_text} = \hyperlink{namespacebrtr_a4431de1c1fa2c1d42c4fb57c38aaa3ce}{brtr::createText}(osg::Vec3d(width / 2.0 - 320, height / 2.0 - 110, 0),
+       \textcolor{stringliteral}{""}, width * 0.02);
+00011         osg::ref\_ptr<osg::Geode> textGeode = \textcolor{keyword}{new} osg::Geode;
+00012         textGeode->addDrawable(\hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\_text});    
+00013         \hyperlink{classbrtr_1_1_base_interaction_callback_a0bca3b64724235e08740be94fe4acc8d}{\_hudCam}->addChild(textGeode);
+00014     \}
+00015 
+\hypertarget{_base_interaction_callback_8cpp_source_l00016}{}\hyperlink{classbrtr_1_1_base_interaction_callback_ab2cf0f22fcc9e79ecda29a547edb5084}{00016}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_base_interaction_callback_ab2cf0f22fcc9e79ecda29a547edb5084}{BaseInteractionCallback::operator()}(osg::Node* node, 
+      osg::NodeVisitor* nv) \{
+00017         \textcolor{keywordflow}{if} (!\hyperlink{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}{\_done}) \{
+00018             \hyperlink{classbrtr_1_1_base_interaction_callback_a3ed50c9c1725f932e0b78c90ba24e1ed}{interact}(node, nv);
+00019         \}
+00020         traverse(node, nv);
+00021     \}
+00022 
+\hypertarget{_base_interaction_callback_8cpp_source_l00023}{}\hyperlink{classbrtr_1_1_base_interaction_callback_a420a1977c954850dbe66a189908cde80}{00023}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_base_interaction_callback_a420a1977c954850dbe66a189908cde80}{BaseInteractionCallback::setNode}(osg::ref\_ptr<osg::Node> val) \{
+00024         \hyperlink{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{\_attachTo} = val;
+00025     \}
+00026 
+\hypertarget{_base_interaction_callback_8cpp_source_l00027}{}\hyperlink{classbrtr_1_1_base_interaction_callback_aafca24ccde1cf21f4132f65a83e0b2bc}{00027}     osg::ref\_ptr<osg::Node> \hyperlink{classbrtr_1_1_base_interaction_callback_aafca24ccde1cf21f4132f65a83e0b2bc}{BaseInteractionCallback::getNode}()\textcolor{keyword}{ const }\{
+00028         \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{\_attachTo};
+00029     \}
+00030 
+\hypertarget{_base_interaction_callback_8cpp_source_l00031}{}\hyperlink{classbrtr_1_1_base_interaction_callback_ad74fe9ac5d86c7f23d18614d5abb1003}{00031}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_base_interaction_callback_ad74fe9ac5d86c7f23d18614d5abb1003}{BaseInteractionCallback::clearText}() \{
+00032         \hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\_text}->setText(\textcolor{stringliteral}{""});
+00033     \}
+00034 
+\hypertarget{_base_interaction_callback_8cpp_source_l00035}{}\hyperlink{classbrtr_1_1_base_interaction_callback_a95ede7c8aa0dc1e067ae64615ecb23db}{00035}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_base_interaction_callback_a95ede7c8aa0dc1e067ae64615ecb23db}{BaseInteractionCallback::reactivate}() \{
+00036         \hyperlink{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}{\_done} = \textcolor{keyword}{false};
+00037     \}
+00038 
+00039 \}
+00040 
+\end{DoxyCode}

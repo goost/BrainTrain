@@ -1,0 +1,26 @@
+\hypertarget{_add_interaction_callback_to_drawable_visitor_8cpp_source}{\section{Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+cpp}
+\label{_add_interaction_callback_to_drawable_visitor_8cpp_source}\index{Util/\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+cpp@{Util/\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/AddInteractionCallbackToDrawableVisitor.h"}
+00002 
+00003 \textcolor{keyword}{namespace }brtr\{
+00004 
+\hypertarget{_add_interaction_callback_to_drawable_visitor_8cpp_source_l00005}{}\hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_a8c1ecd3629ec4f97d4bc2a63c56683d4}{00005}     
+      \hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_a8c1ecd3629ec4f97d4bc2a63c56683d4}{AddInteractionCallbackToDrawableVisitor::AddInteractionCallbackToDrawableVisitor}
+      (\hyperlink{classbrtr_1_1_base_interaction_callback}{brtr::BaseInteractionCallback}* callbackToAdd) \{
+00006         setTraversalMode(osg::NodeVisitor::TRAVERSE\_ALL\_CHILDREN);
+00007         \hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ac23b4a99b1d35c2f7a32f048d4628927}{\_containerToAdd} = \textcolor{keyword}{new} osg::DefaultUserDataContainer;
+00008         \hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ac23b4a99b1d35c2f7a32f048d4628927}{\_containerToAdd}->addUserObject(callbackToAdd);
+00009     \}
+00010 
+\hypertarget{_add_interaction_callback_to_drawable_visitor_8cpp_source_l00011}{}\hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ace5d2fc7aa7c4a48f59e38728dac628a}{00011}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ace5d2fc7aa7c4a48f59e38728dac628a}{AddInteractionCallbackToDrawableVisitor::apply}(
+      osg::Geode& geode) \{
+00012         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < geode.getNumDrawables(); ++i) \{
+00013             geode.getDrawable(i)->setUserDataContainer(\hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ac23b4a99b1d35c2f7a32f048d4628927}{\_containerToAdd});
+00014         \}
+00015     \}
+00016 
+00017 \}
+\end{DoxyCode}

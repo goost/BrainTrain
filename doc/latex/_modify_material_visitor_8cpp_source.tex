@@ -1,0 +1,88 @@
+\hypertarget{_modify_material_visitor_8cpp_source}{\section{Modify\+Material\+Visitor.\+cpp}
+\label{_modify_material_visitor_8cpp_source}\index{Util/\+Modify\+Material\+Visitor.\+cpp@{Util/\+Modify\+Material\+Visitor.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/ModifyMaterialVisitor.h"}
+00002 \textcolor{preprocessor}{#include <osg/Material>}
+00003 \textcolor{keyword}{namespace }brtr\{
+00004 
+\hypertarget{_modify_material_visitor_8cpp_source_l00005}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a240eed8002f7c81d8cd63aaaf4037381}{00005}     \hyperlink{classbrtr_1_1_modify_material_visitor_a240eed8002f7c81d8cd63aaaf4037381}{ModifyMaterialVisitor::ModifyMaterialVisitor}() :
+00006         \_ambientFlag(false),
+00007         \_diffuseFlag(false), 
+00008         \_specularFlag(false), 
+00009         \_shininessFlag(false) \{
+00010         setTraversalMode(osg::NodeVisitor::TRAVERSE\_ALL\_CHILDREN);
+00011 
+00012     \}
+00013 
+\hypertarget{_modify_material_visitor_8cpp_source_l00014}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a74bf42fdfffbc1f7d433c1199f563ccb}{00014}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_modify_material_visitor_a74bf42fdfffbc1f7d433c1199f563ccb}{ModifyMaterialVisitor::apply}(osg::Geode& geode) \{
+00015         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i = 0; i < geode.getNumDrawables(); ++i) \{
+00016             osg::Drawable* drawable = geode.getDrawable(i);
+00017             osg::Material* materialPtr = \textcolor{keyword}{dynamic\_cast<}osg::Material*\textcolor{keyword}{>}(drawable->getOrCreateStateSet()->
+      getAttribute(osg::StateAttribute::Type::MATERIAL));
+00018             \textcolor{keywordflow}{if} (materialPtr) \{
+00019                 osg::Material& material = *materialPtr;
+00020                 \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_modify_material_visitor_a351e4cfeca41aa6f746956661930f994}{\_ambientFlag})
+00021                     material.setAmbient(osg::Material::FRONT\_AND\_BACK, \hyperlink{classbrtr_1_1_modify_material_visitor_a1cffff6daf689c23a4e9680cd8f1441b}{\_ambient});
+00022                 \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_modify_material_visitor_a154ad99cb3796be6d04347cdbfb66e10}{\_specularFlag})
+00023                     material.setSpecular(osg::Material::FRONT\_AND\_BACK, 
+      \hyperlink{classbrtr_1_1_modify_material_visitor_a4cbbdf6ecd85ec563839545fc328fbfe}{\_specular});
+00024                 \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_modify_material_visitor_a8b30ec1a8b93422fc168597a47425041}{\_shininessFlag})
+00025                     material.setShininess(osg::Material::FRONT\_AND\_BACK, 
+      \hyperlink{classbrtr_1_1_modify_material_visitor_a297f5208848d0bba92653bbd15908f68}{\_shininess});
+00026                 \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_modify_material_visitor_a511c43fcd16d68855e6e63ca3ec1a84e}{\_diffuseFlag})
+00027                     material.setDiffuse(osg::Material::FRONT\_AND\_BACK, \hyperlink{classbrtr_1_1_modify_material_visitor_a33e06870644e892df2ac9af4c5bbfbd8}{\_diffuse});
+00028             \}
+00029         \}
+00030 
+00031     \}
+00032 
+\hypertarget{_modify_material_visitor_8cpp_source_l00033}{}\hyperlink{classbrtr_1_1_modify_material_visitor_ac79c5aeaa29e381e46e130c088966ad9}{00033}     osg::Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_ac79c5aeaa29e381e46e130c088966ad9}{ModifyMaterialVisitor::getDiffuse}()\textcolor{keyword}{ const }\{
+00034         \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_modify_material_visitor_a33e06870644e892df2ac9af4c5bbfbd8}{\_diffuse};
+00035     \}
+00036 
+\hypertarget{_modify_material_visitor_8cpp_source_l00037}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a17748f6a7f41431832da66dd65e1c41f}{00037}     \hyperlink{classbrtr_1_1_modify_material_visitor}{ModifyMaterialVisitor}& 
+      \hyperlink{classbrtr_1_1_modify_material_visitor_a17748f6a7f41431832da66dd65e1c41f}{ModifyMaterialVisitor::setDiffuse}(osg::Vec4 val) \{
+00038         \hyperlink{classbrtr_1_1_modify_material_visitor_a511c43fcd16d68855e6e63ca3ec1a84e}{\_diffuseFlag} = \textcolor{keyword}{true};
+00039         \hyperlink{classbrtr_1_1_modify_material_visitor_a33e06870644e892df2ac9af4c5bbfbd8}{\_diffuse} = val; 
+00040         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+00041     \}
+00042 
+\hypertarget{_modify_material_visitor_8cpp_source_l00043}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a5be2b7553a9ecbe1c6d50425119f7e9e}{00043}     osg::Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a5be2b7553a9ecbe1c6d50425119f7e9e}{ModifyMaterialVisitor::getSpecular}()\textcolor{keyword}{ const }\{
+00044         \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_modify_material_visitor_a4cbbdf6ecd85ec563839545fc328fbfe}{\_specular};
+00045     \}
+00046 
+\hypertarget{_modify_material_visitor_8cpp_source_l00047}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a7a8a5a938799c5193645d86aa6dc6a7c}{00047}     \hyperlink{classbrtr_1_1_modify_material_visitor}{ModifyMaterialVisitor}& 
+      \hyperlink{classbrtr_1_1_modify_material_visitor_a7a8a5a938799c5193645d86aa6dc6a7c}{ModifyMaterialVisitor::setSpecular}(osg::Vec4 val) \{
+00048         \hyperlink{classbrtr_1_1_modify_material_visitor_a4cbbdf6ecd85ec563839545fc328fbfe}{\_specular} = val; 
+00049         \hyperlink{classbrtr_1_1_modify_material_visitor_a154ad99cb3796be6d04347cdbfb66e10}{\_specularFlag} = \textcolor{keyword}{true};
+00050         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+00051     \}
+00052 
+\hypertarget{_modify_material_visitor_8cpp_source_l00053}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a2a87910d4f316359eb6bf75620edf947}{00053}     osg::Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a2a87910d4f316359eb6bf75620edf947}{ModifyMaterialVisitor::getAmbient}()\textcolor{keyword}{ const }\{
+00054         \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_modify_material_visitor_a1cffff6daf689c23a4e9680cd8f1441b}{\_ambient};
+00055     \}
+00056 
+\hypertarget{_modify_material_visitor_8cpp_source_l00057}{}\hyperlink{classbrtr_1_1_modify_material_visitor_adfaa00524e765fdf3ddc5968187623cd}{00057}     \hyperlink{classbrtr_1_1_modify_material_visitor}{ModifyMaterialVisitor}& 
+      \hyperlink{classbrtr_1_1_modify_material_visitor_adfaa00524e765fdf3ddc5968187623cd}{ModifyMaterialVisitor::setAmbient}(osg::Vec4 val) \{
+00058         \hyperlink{classbrtr_1_1_modify_material_visitor_a1cffff6daf689c23a4e9680cd8f1441b}{\_ambient} = val;
+00059         \hyperlink{classbrtr_1_1_modify_material_visitor_a351e4cfeca41aa6f746956661930f994}{\_ambientFlag} = \textcolor{keyword}{true};
+00060         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+00061     \}
+00062 
+\hypertarget{_modify_material_visitor_8cpp_source_l00063}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a68f37fe264bd8f51e1d7a37f8048b103}{00063}     \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_modify_material_visitor_a68f37fe264bd8f51e1d7a37f8048b103}{ModifyMaterialVisitor::getShininess}()\textcolor{keyword}{ const }\{
+00064         \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_modify_material_visitor_a297f5208848d0bba92653bbd15908f68}{\_shininess};
+00065     \}
+00066 
+\hypertarget{_modify_material_visitor_8cpp_source_l00067}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a698aa0c31f8c5add503d47bc9898eec3}{00067}     \hyperlink{classbrtr_1_1_modify_material_visitor}{ModifyMaterialVisitor}& 
+      \hyperlink{classbrtr_1_1_modify_material_visitor_a698aa0c31f8c5add503d47bc9898eec3}{ModifyMaterialVisitor::setShininess}(\textcolor{keywordtype}{double} val) \{
+00068         \hyperlink{classbrtr_1_1_modify_material_visitor_a297f5208848d0bba92653bbd15908f68}{\_shininess} = val;
+00069         \hyperlink{classbrtr_1_1_modify_material_visitor_a8b30ec1a8b93422fc168597a47425041}{\_shininessFlag} = \textcolor{keyword}{true};
+00070         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+00071     \}
+00072 
+00073 \}
+00074 
+00075 
+\end{DoxyCode}

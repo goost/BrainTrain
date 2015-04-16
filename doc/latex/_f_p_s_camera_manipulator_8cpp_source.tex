@@ -1,0 +1,340 @@
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source}{\section{F\+P\+S\+Camera\+Manipulator.\+cpp}
+\label{_f_p_s_camera_manipulator_8cpp_source}\index{Camera/\+F\+P\+S\+Camera\+Manipulator.\+cpp@{Camera/\+F\+P\+S\+Camera\+Manipulator.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/FPSCameraManipulator.h"}
+00002 \textcolor{preprocessor}{#include "../header/UtilFunctions.h"}
+00003 \textcolor{preprocessor}{#include <osgGA/GUIEventAdapter>}
+00004 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00005 \textcolor{preprocessor}{#include <osg/PositionAttitudeTransform>}
+00006 \textcolor{preprocessor}{#include <osgDB/ReadFile>}
+00007 
+00008 \textcolor{keyword}{using namespace }osg;
+00009 \textcolor{keyword}{using namespace }osgGA;
+00010 
+00011 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00012}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aaf8bf3f6db925ba6c7d4a3157edcede3}{00012}     FPSCameraManipulator::FPSCameraManipulator(\textcolor{keywordtype}{double} movementSpeed, \textcolor{keywordtype}{double} zHeight, Node* root, \textcolor{keywordtype}{bool} 
+      flightMode)
+00013         :FirstPersonManipulator(),
+00014         \_forwardMovement(false),
+00015         \_backwardMovement(false),
+00016         \_leftMovement(false),
+00017         \_rightMovement(false),
+00018         \_upMovement(false),
+00019         \_downMovement(false),
+00020         \_attachBody(true),
+00021         \_shift(false),
+00022         \_ctrl(false),
+00023         \_jumpingUp(false),
+00024         \_jumpingDown(false),
+00025         \_crouch(false),
+00026         \_movementSpeed(movementSpeed),
+00027         \_zHeight(zHeight),
+00028         \_flightMode(flightMode),
+00029         \_savedzHeight(zHeight),
+00030         \_maxFallHeight(50),
+00031         \_frameFactor(30),
+00032         \_intensity(1.0),
+00033         \_bodyLength(0.0),
+00034         \_savedzHeightCrouch(0.0),
+00035         \_jumpHeight(4)
+00036     \{
+00037         setNode(root);
+00038         ref\_ptr<Node> evaBody= osgDB::readNodeFile(\textcolor{stringliteral}{"../BlenderFiles/exports/BodyEva.ive"});
+00039         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad1e35379f9ec8d6a6fc46441b6d8ae0d}{\_body} = \textcolor{keyword}{new} PositionAttitudeTransform();
+00040         setHomePosition(Vec3(0, 134, 35 + zHeight + 5), Vec3(-1, 0, 26 + zHeight + 5), Z\_AXIS);
+00041         \textcolor{comment}{//\_body->addChild(evaBody); body not used anymore}
+00042         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad1e35379f9ec8d6a6fc46441b6d8ae0d}{\_body}->getOrCreateStateSet()->setAttribute(\textcolor{keyword}{nullptr});
+00043         Vec3d bodyPos = \_homeEye;
+00044         \textcolor{keyword}{auto} forward = \_rotation * osg::Vec3d(0.0, 0.0, -1.0);
+00045         bodyPos.\_v[2] =\_homeEye.\_v[2]-1;
+00046         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad1e35379f9ec8d6a6fc46441b6d8ae0d}{\_body}->setPosition(bodyPos);
+00047         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad1e35379f9ec8d6a6fc46441b6d8ae0d}{\_body}->setNodeMask(~\hyperlink{namespacebrtr_a21ab851f18c0c85fa006766034833a4f}{brtr::interactionAndCollisionMask});
+00048         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad1e35379f9ec8d6a6fc46441b6d8ae0d}{\_body}->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"tex"}, \textcolor{keyword}{false}), StateAttribute::ON | 
+      StateAttribute::OVERRIDE);
+00049         getNode()->asGroup()->addChild(\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad1e35379f9ec8d6a6fc46441b6d8ae0d}{\_body});     
+00050         home(0);
+00051         
+00052     \}
+00053 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00054}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a9f18b06a1f730f39da8fb7bdf960c3a9}{00054}     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a9f18b06a1f730f39da8fb7bdf960c3a9}{FPSCameraManipulator::~FPSCameraManipulator}() \{\}
+00055 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00056}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a2f6319fa6eb148e2f5b59688b38891ae}{00056}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a2f6319fa6eb148e2f5b59688b38891ae}{FPSCameraManipulator::handleMouseMove}(\textcolor{keyword}{const} 
+      osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us) \{
+00057         addMouseEvent(ea);
+00058         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a5c9aa59e32263262b24595ecf57dace6}{performMovement}())
+00059             us.requestRedraw();
+00060         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00061     \}
+00062 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00063}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abad7544ac96384f79b2fa0d5d91606f6}{00063}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abad7544ac96384f79b2fa0d5d91606f6}{FPSCameraManipulator::handleFrame}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& 
+      ea, osgGA::GUIActionAdapter& us) \{
+00064         FirstPersonManipulator::handleFrame(ea, us);
+00065         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aac9cc9e147b61f0afee6d02a98584271}{performEyeMovement}())
+00066             us.requestRedraw();
+00067         centerMousePointer(ea, us);
+00068         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00069     \}
+00070 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00071}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad12557e5ce643476c8850c91a59e4956}{00071}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad12557e5ce643476c8850c91a59e4956}{FPSCameraManipulator::handleKeyDown}(\textcolor{keyword}{const} 
+      osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us) \{
+00072         \textcolor{comment}{//FirstPersonManipulator::handleKeyDown(ea, us);}
+00073         \textcolor{keywordflow}{switch} (ea.getUnmodifiedKey()) \{
+00074         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_W:
+00075             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abc82a762cc644b34c4778ccd89c61f2a}{\_forwardMovement} = \textcolor{keyword}{true};
+00076             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00077         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_A:
+00078             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aebebc4754eb8e12d0d9eb3a304196473}{\_leftMovement} = \textcolor{keyword}{true};
+00079             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00080         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_S:
+00081             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fadc5283652e5bced25ed8c206b6e60}{\_backwardMovement} = \textcolor{keyword}{true};
+00082             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00083         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_D:
+00084             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a681ef6c8b6cb2250d5f6dee155e3d357}{\_rightMovement} = \textcolor{keyword}{true};
+00085             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00086         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_E:
+00087             \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fd26cbf63923d5999eb10009e599e64}{\_flightMode})
+00088                 \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab63f237cc4d2a05b65f8168d55ad788e}{\_upMovement} = \textcolor{keyword}{true};
+00089             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00090         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_Q:
+00091             \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fd26cbf63923d5999eb10009e599e64}{\_flightMode})
+00092                 \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad4e208525965da8d36fb243d5fe1903e}{\_downMovement} = \textcolor{keyword}{true};
+00093             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00094         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_X:
+00095             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab9c1187fd128b8de757af5d0ecb65b28}{\_crouch} = !\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab9c1187fd128b8de757af5d0ecb65b28}{\_crouch};
+00096             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a08dab67599aa8d6d7bc7409f33773da8}{\_savedzHeightCrouch} = \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab9c1187fd128b8de757af5d0ecb65b28}{\_crouch} ? \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight} : 
+      \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a08dab67599aa8d6d7bc7409f33773da8}{\_savedzHeightCrouch};
+00097             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight} = \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab9c1187fd128b8de757af5d0ecb65b28}{\_crouch} ? \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight} -3 : 
+      \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a08dab67599aa8d6d7bc7409f33773da8}{\_savedzHeightCrouch};
+00098             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00099         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_F:
+00100             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fd26cbf63923d5999eb10009e599e64}{\_flightMode} = !\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fd26cbf63923d5999eb10009e599e64}{\_flightMode};
+00101             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00102         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_G:
+00103             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aa97b8839047c137842b05410eadb828e}{\_attachBody} = !\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aa97b8839047c137842b05410eadb828e}{\_attachBody};
+00104             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00105         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_Space:
+00106             \textcolor{keywordflow}{if} (!\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a704712caf668c5989e5a9231f9d71022}{\_jumpingUp} && !\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a2041c39f1ba8c5450f7c5472701c9cd8}{\_jumpingDown} && !
+      \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fd26cbf63923d5999eb10009e599e64}{\_flightMode}) \{
+00107                 \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a6e05c375307130a1e45d69a18760f439}{\_savedzHeight} = \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight};
+00108                 \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a704712caf668c5989e5a9231f9d71022}{\_jumpingUp} = \textcolor{keyword}{true};
+00109             \}
+00110             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00111         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_Shift\_L:
+00112            \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a189d9907cc38cf12b79a7ffc4e815843}{\_shift} = \textcolor{keyword}{true};
+00113             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00114         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_Control\_L:
+00115             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a9eaba9401245f5f1912ff91a751fed20}{\_ctrl} = \textcolor{keyword}{true};
+00116             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00117         \textcolor{keywordflow}{default}:
+00118             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00119         \}
+00120 
+00121     \}
+00122 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00123}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a165a843388846d16426adcf0cd870b5e}{00123}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a165a843388846d16426adcf0cd870b5e}{FPSCameraManipulator::handleKeyUp}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& 
+      ea, osgGA::GUIActionAdapter& us) \{
+00124         \textcolor{keywordflow}{switch} (ea.getUnmodifiedKey()) \{
+00125         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_W:
+00126             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abc82a762cc644b34c4778ccd89c61f2a}{\_forwardMovement} = \textcolor{keyword}{false};
+00127             \textcolor{keywordflow}{return} \textcolor{keyword}{true};     
+00128         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_A:
+00129             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aebebc4754eb8e12d0d9eb3a304196473}{\_leftMovement} = \textcolor{keyword}{false};
+00130             \textcolor{keywordflow}{return} \textcolor{keyword}{true};           
+00131         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_S:
+00132             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fadc5283652e5bced25ed8c206b6e60}{\_backwardMovement} = \textcolor{keyword}{false};
+00133             \textcolor{keywordflow}{return} \textcolor{keyword}{true};            
+00134         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_D:
+00135             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a681ef6c8b6cb2250d5f6dee155e3d357}{\_rightMovement} = \textcolor{keyword}{false};
+00136             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00137         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_E:
+00138             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab63f237cc4d2a05b65f8168d55ad788e}{\_upMovement} = \textcolor{keyword}{false};
+00139             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00140         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_Q:
+00141             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad4e208525965da8d36fb243d5fe1903e}{\_downMovement} = \textcolor{keyword}{false};
+00142             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00143         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_Shift\_L:
+00144             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a189d9907cc38cf12b79a7ffc4e815843}{\_shift} = \textcolor{keyword}{false};
+00145             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00146         \textcolor{keywordflow}{case} GUIEventAdapter::KEY\_Control\_L:
+00147             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a9eaba9401245f5f1912ff91a751fed20}{\_ctrl} = \textcolor{keyword}{false};
+00148             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00149         \textcolor{keywordflow}{default}:
+00150             \textcolor{keywordflow}{return} \textcolor{keyword}{false};           
+00151         \}
+00152     \}
+00153 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00154}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a5c9aa59e32263262b24595ecf57dace6}{00154}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a5c9aa59e32263262b24595ecf57dace6}{FPSCameraManipulator::performMovement}() \{
+00155         \textcolor{keywordflow}{if} (\_ga\_t0.get() == NULL || \_ga\_t1.get() == NULL) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00156         \textcolor{keyword}{auto} dy = \_ga\_t0->getYnormalized();
+00157         \textcolor{keyword}{auto} dx = \_ga\_t0->getXnormalized();
+00158         \textcolor{keyword}{auto} dt = \_ga\_t0->getTime() - \_ga\_t1->getTime();
+00159 
+00160         \textcolor{comment}{// return if there is no movement.}
+00161         \textcolor{keywordflow}{if} (dx == 0. && dy == 0.)
+00162             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00163 
+00164         \textcolor{comment}{//rotate center}
+00165         Vec3d localUp = getUpVector(getCoordinateFrame(\_eye));
+00166         rotateYawPitch(\_rotation, dx, dy, localUp);
+00167         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00168     \}
+00169 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00170}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aac9cc9e147b61f0afee6d02a98584271}{00170}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aac9cc9e147b61f0afee6d02a98584271}{FPSCameraManipulator::performEyeMovement}() \{
+00171         \textcolor{keywordtype}{double} intensity = \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a00283025e62ab200588340a8a11bbc20}{\_intensity} * \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a189d9907cc38cf12b79a7ffc4e815843}{\_shift} ? 2.0 : 1.0 * 
+      \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a9eaba9401245f5f1912ff91a751fed20}{\_ctrl} ? 0.5 : 1;
+00172         OSG\_DEBUG << \textcolor{stringliteral}{"Intensity= "} << intensity << std::endl;
+00173         
+00174         \textcolor{comment}{/*}
+00175 \textcolor{comment}{        *  COLLISION DETECTION AND CLAMPING INSPIRED BY                 *}
+00176 \textcolor{comment}{        *  Viggo Løvli (http://markmail.org/message/e6magjobl7fywbe6)   *}
+00177 \textcolor{comment}{        *  AND DRIVEMANIPULATOR                                         *                            }
+00178 \textcolor{comment}{        */}
+00179 
+00180         \textcolor{comment}{//newEye tmp 'cos we do not know, if the new position is valid}
+00181         \textcolor{keyword}{auto} newEye = \_eye;
+00182         \textcolor{comment}{//up, right, forward dependent on the view}
+00183         \textcolor{keyword}{auto} up = \_rotation * osg::Vec3d(0.0, 1.0, 0.0);
+00184         \textcolor{keyword}{auto} forward = \_rotation * osg::Vec3d(0.0, 0.0, -1.0);
+00185         \textcolor{keyword}{auto} right = \_rotation* osg::Vec3d(1.0, 0.0, 0.0);
+00186         osg::Vec3d movement;
+00187 
+00188         \textcolor{comment}{//where to move}
+00189         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a681ef6c8b6cb2250d5f6dee155e3d357}{\_rightMovement})
+00190             movement += right;
+00191         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aebebc4754eb8e12d0d9eb3a304196473}{\_leftMovement})
+00192             movement += -right;
+00193         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abc82a762cc644b34c4778ccd89c61f2a}{\_forwardMovement})
+00194             movement += forward * 1.2;
+00195         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fadc5283652e5bced25ed8c206b6e60}{\_backwardMovement})
+00196             movement += -forward * 0.8;
+00197         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab63f237cc4d2a05b65f8168d55ad788e}{\_upMovement})
+00198             movement += up;
+00199         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad4e208525965da8d36fb243d5fe1903e}{\_downMovement})
+00200             movement += -up;
+00201 
+00202         \textcolor{comment}{//\_delta\_frame\_time -> not FPS depended, \_frameFactor->'cos \_deltaTime is so small}
+00203         movement *= \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abbc7acdd7a7e643d6e25bf453ac9f1dd}{\_movementSpeed} * intensity * \_delta\_frame\_time * 
+      \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a3638230e6c3c59072caab0dcef0b5371}{\_frameFactor};
+00204 
+00205         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fd26cbf63923d5999eb10009e599e64}{\_flightMode}) \{
+00206             newEye += movement;
+00207             \_eye = newEye;
+00208         \}\textcolor{comment}{//if(\_flightMode)}
+00209         \textcolor{keywordflow}{else} \{
+00210             \textcolor{keywordtype}{double} eyeIntersectionDistance = 1000;
+00211             \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_af6bc3644bd39ad6f8fed053dc97aeb0e}{intersect}(newEye, newEye + movement * 10, eyeIntersectionDistance)) \{
+00212                 \textcolor{keywordflow}{if} (eyeIntersectionDistance < 1.75)
+00213                     movement = Vec3d();
+00214             \}\textcolor{comment}{//if(intersect())}
+00215       
+00216             \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a704712caf668c5989e5a9231f9d71022}{\_jumpingUp}) \{
+00217                 \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight} < \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a6e05c375307130a1e45d69a18760f439}{\_savedzHeight} + \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a53d486248c35c9e70436ebf0dea14b64}{\_jumpHeight})
+00218                     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight} += 0.4 * \_delta\_frame\_time * \_frameFactor * 2;
+00219                 \textcolor{keywordflow}{else} \{
+00220                     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a2041c39f1ba8c5450f7c5472701c9cd8}{\_jumpingDown} = \textcolor{keyword}{true};
+00221                     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a704712caf668c5989e5a9231f9d71022}{\_jumpingUp} = \textcolor{keyword}{false};
+00222                 \} \textcolor{comment}{//else  }
+00223             \}\textcolor{comment}{//if (\_jumpingUp)}
+00224 
+00225             \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a2041c39f1ba8c5450f7c5472701c9cd8}{\_jumpingDown}) \{
+00226                 \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight} > \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a6e05c375307130a1e45d69a18760f439}{\_savedzHeight} )
+00227                     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight} -= 0.2 * \_delta\_frame\_time * \_frameFactor * 2;
+00228                 \textcolor{keywordflow}{else} \{
+00229                     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a2041c39f1ba8c5450f7c5472701c9cd8}{\_jumpingDown} = \textcolor{keyword}{false};
+00230                     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a704712caf668c5989e5a9231f9d71022}{\_jumpingUp} = \textcolor{keyword}{false};
+00231                     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight} = \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a6e05c375307130a1e45d69a18760f439}{\_savedzHeight};
+00232                 \}\textcolor{comment}{//else}
+00233             \}\textcolor{comment}{// if (\_jumpingDown)}
+00234 
+00235             newEye += movement;
+00236             \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a8df110e35ccce81c7fac9d7719a60797}{groundIntersection}(newEye))
+00237                 \_eye = newEye;
+00238             \textcolor{keywordflow}{else} \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00239         \}
+00240         OSG\_DEBUG << \textcolor{stringliteral}{"eyeZ: "} << \_eye.\_v[2]<< std::endl;
+00241         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aa97b8839047c137842b05410eadb828e}{\_attachBody})
+00242             \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad1e35379f9ec8d6a6fc46441b6d8ae0d}{\_body}->setPosition(Vec3d(\_eye.\_v[0], \_eye.\_v[1], \_eye.\_v[2] -1));
+00243         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00244     \}\textcolor{comment}{//performEyeMovement}
+00245 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00246}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a8df110e35ccce81c7fac9d7719a60797}{00246}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a8df110e35ccce81c7fac9d7719a60797}{FPSCameraManipulator::groundIntersection}(osg::Vec3d& 
+      newEye) \{
+00247         \textcolor{keywordtype}{double} dist = 0.0;
+00248 
+00249         \textcolor{keywordflow}{if} (!\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_af6bc3644bd39ad6f8fed053dc97aeb0e}{intersect}(newEye, newEye + Vec3(0, 0, -1) * \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_afff7ee29460f89132b682aa31ed346a6}{\_maxFallHeight}, dist))
+00250             \textcolor{keywordflow}{return} \textcolor{keyword}{false};       
+00251         dist -= \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight};
+00252         OSG\_DEBUG << \textcolor{stringliteral}{"dDist: "} << dist << std::endl;
+00253         \textcolor{keywordflow}{if} (-dist > \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight} -2.5 || dist > \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_afff7ee29460f89132b682aa31ed346a6}{\_maxFallHeight}) \{
+00254              \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00255         \}
+00256 
+00257        
+00258         dist /=2;  \textcolor{comment}{//slide effect, smooth up/down}
+00259         newEye.\_v[2] -=  dist; 
+00260         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00261     \}\textcolor{comment}{//groundIntersection()}
+00262 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00263}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_af6bc3644bd39ad6f8fed053dc97aeb0e}{00263}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_af6bc3644bd39ad6f8fed053dc97aeb0e}{FPSCameraManipulator::intersect}(\textcolor{keyword}{const} osg::Vec3d start, \textcolor{keyword}{const} 
+      osg::Vec3d end, \textcolor{keywordtype}{double}& distance) \{
+00264         \textcolor{keywordflow}{if} ((start - end).length() < 1e-8) \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \textcolor{comment}{//avoids termination of program, if start == end}
+00265         osg::ref\_ptr<osgUtil::LineSegmentIntersector> intersector = \textcolor{keyword}{new} osgUtil::LineSegmentIntersector(
+      start, end);
+00266         intersector->setIntersectionLimit(osgUtil::Intersector::LIMIT\_NEAREST);
+00267         osgUtil::IntersectionVisitor iv(intersector);
+00268         
+00269         iv.setTraversalMask(\hyperlink{namespacebrtr_af79a815819e2ef65ea9cd43dc9d43679}{collisionMask}); 
+00270         \_node->accept(iv);
+00271 
+00272         \textcolor{keywordflow}{if} (intersector->containsIntersections()) \{
+00273             \textcolor{keyword}{auto} intersection = intersector->getIntersections().begin();
+00274             distance = (start - intersection->getWorldIntersectPoint()).length();
+00275             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00276         \}\textcolor{comment}{//if (intersector->containsIntersections()}
+00277         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00278     \}\textcolor{comment}{//intersect()}
+00279 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00280}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a3c576fd94a834b4712c30280ebc38763}{00280}     \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a3c576fd94a834b4712c30280ebc38763}{FPSCameraManipulator::getMovementSpeed}()\textcolor{keyword}{ const }\{
+00281         \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abbc7acdd7a7e643d6e25bf453ac9f1dd}{\_movementSpeed};
+00282     \}
+00283 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00284}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a778a95c8fa5c22d9c5e3bdde5e8c6591}{00284}     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{FPSCameraManipulator}& 
+      \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a778a95c8fa5c22d9c5e3bdde5e8c6591}{FPSCameraManipulator::setMovementSpeed}(\textcolor{keywordtype}{double} val) \{
+00285         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abbc7acdd7a7e643d6e25bf453ac9f1dd}{\_movementSpeed} = val;
+00286         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+00287     \}
+00288 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00289}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad564a29e30a95676a64b06160ba9e6ea}{00289}     \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad564a29e30a95676a64b06160ba9e6ea}{FPSCameraManipulator::getZHeight}()\textcolor{keyword}{ const }\{
+00290         \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight};
+00291     \}
+00292 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00293}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a71f558339f33edf1fa8cf81faf5914aa}{00293}     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{FPSCameraManipulator}& \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a71f558339f33edf1fa8cf81faf5914aa}{FPSCameraManipulator::setZHeight}
+      (\textcolor{keywordtype}{double} val) \{
+00294         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight} = val;
+00295         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+00296     \}
+00297 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00298}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a8bf29fb4cf8f0d8842b7b0ac798e23cb}{00298}     \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{FPSCameraManipulator}& 
+      \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a8bf29fb4cf8f0d8842b7b0ac798e23cb}{FPSCameraManipulator::setJumpHeight}(\textcolor{keywordtype}{double} val) \{
+00299         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a53d486248c35c9e70436ebf0dea14b64}{\_jumpHeight} = val;
+00300         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+00301     \}
+00302 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00303}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a409f00bd591ea3f847319794d4e0f15d}{00303}     \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a409f00bd591ea3f847319794d4e0f15d}{FPSCameraManipulator::getJumpHeight}()\textcolor{keyword}{ const }\{
+00304         \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a53d486248c35c9e70436ebf0dea14b64}{\_jumpHeight};
+00305     \}
+00306 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00307}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_acbda7c2bbd00f5b143723bd7a85f9e9d}{00307}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_acbda7c2bbd00f5b143723bd7a85f9e9d}{FPSCameraManipulator::performMovementLeftMouseButton}
+      (\textcolor{keyword}{const} \textcolor{keywordtype}{double} eventTimeDelta, \textcolor{keyword}{const} \textcolor{keywordtype}{double} dx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} dy) \{
+00308         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00309     \}
+00310 
+\hypertarget{_f_p_s_camera_manipulator_8cpp_source_l00311}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a02b5f77aca53a0974b81d0dfadd811cd}{00311}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a02b5f77aca53a0974b81d0dfadd811cd}{FPSCameraManipulator::handleMouseWheel}(\textcolor{keyword}{const} 
+      osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us) \{
+00312         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00313     \}
+00314 
+00315 \}
+\end{DoxyCode}

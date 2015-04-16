@@ -1,0 +1,389 @@
+\hypertarget{classbrtr_1_1_bench}{\section{brtr\+:\+:Bench Class Reference}
+\label{classbrtr_1_1_bench}\index{brtr\+::\+Bench@{brtr\+::\+Bench}}
+}
+
+
+\hyperlink{classbrtr_1_1_bench}{Bench} class, creates a bench Object.  
+
+
+
+
+{\ttfamily \#include $<$Bench.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Bench\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbrtr_1_1_bench}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_bench_a66ae6f45365c36daeabeed1a4b778d83}{Bench} (const Vec3 \&pcenter=Vec3(0, 0, 0), const double plength=8)
+\item 
+ref\+\_\+ptr\\*
+$<$ Position\+Attitude\+Transform $>$ \hyperlink{classbrtr_1_1_bench_ad59e81ffbe90a7297bd5f256a54a234e}{get\+Hitbox} (const double alpha, double height=8)
+\begin{DoxyCompactList}\small\item\em return the Hitbox of the \hyperlink{classbrtr_1_1_bench}{Bench} \end{DoxyCompactList}\item 
+\hyperlink{classbrtr_1_1_bench_a9bd8ae1e6e48eb278206eff7102cac23}{Bench} (const \hyperlink{classbrtr_1_1_bench}{Bench} \&, const Copy\+Op \&copyop=Copy\+Op\+::\+S\+H\+A\+L\+L\+O\+W\+\_\+\+C\+O\+P\+Y)
+\item 
+\hyperlink{classbrtr_1_1_bench_a22ffdb328f6dac6737108d0f7aa34f67}{$\sim$\+Bench} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classbrtr_1_1_bench_a2813d4878b8a5ef09219323b2f6c9cf5}{init\+Bench} (const double plength)
+\begin{DoxyCompactList}\small\item\em initialize the bench \end{DoxyCompactList}\item 
+ref\+\_\+ptr$<$ Material $>$ \hyperlink{classbrtr_1_1_bench_aafa199aa2218d57b290d99843a1443d4}{create\+Iron\+Material} ()
+\begin{DoxyCompactList}\small\item\em create the material for iron objects \end{DoxyCompactList}\item 
+ref\+\_\+ptr$<$ Material $>$ \hyperlink{classbrtr_1_1_bench_a57d6d3f038d3f0e8d5f8b83895a6670a}{create\+Wood\+Material} ()
+\begin{DoxyCompactList}\small\item\em create the material for wood objects \end{DoxyCompactList}\item 
+ref\+\_\+ptr$<$ Group $>$ \hyperlink{classbrtr_1_1_bench_aefe5a9043a63e13d83c31a42046c6912}{create\+Leg} ()
+\item 
+ref\+\_\+ptr$<$ Group $>$ \hyperlink{classbrtr_1_1_bench_ae17e8e692f6c6deb7b722b5df58dc04b}{create\+Bar} ()
+\item 
+ref\+\_\+ptr$<$ Group $>$ \hyperlink{classbrtr_1_1_bench_a0547e73d10f329b2a9b4453b6319f472}{create\+Seat} (const double width)
+\begin{DoxyCompactList}\small\item\em creates the seat \end{DoxyCompactList}\item 
+ref\+\_\+ptr$<$ Group $>$ \hyperlink{classbrtr_1_1_bench_a9956994e6a20cbbd0f0ce9eb6df25917}{create\+Armrest} (double radius, double width, double \hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{length}, double totalwidth)
+\begin{DoxyCompactList}\small\item\em creates the armrest \end{DoxyCompactList}\item 
+ref\+\_\+ptr$<$ Geometry $>$ \hyperlink{classbrtr_1_1_bench_a28443b856188050680a2c0ab4ad31a93}{create\+Armrest\+Sides\+Front\+Back} (double radius, double width, int lsteps, int wsteps, bool flip=true)
+\begin{DoxyCompactList}\small\item\em creates the front/back for the armrest \end{DoxyCompactList}\item 
+ref\+\_\+ptr$<$ Geometry $>$ \hyperlink{classbrtr_1_1_bench_afac56bea39f6e5e72140d4512dd711d3}{create\+Armrest\+Sides\+Left\+Right} (double \hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{length}, double width, int lsteps, int wsteps, bool flip=true)
+\begin{DoxyCompactList}\small\item\em creates the left/rigth for the armrest \end{DoxyCompactList}\item 
+ref\+\_\+ptr$<$ Draw\+Elements\+U\+Int $>$ \hyperlink{classbrtr_1_1_bench_a90c4ae616eb8d7bf669af2983ed3cd1d}{get\+Primitive\+Setfor\+A\+Rectangle} (int lsteps, int wsteps)
+\begin{DoxyCompactList}\small\item\em creates a primitives set for the get\+Rectangle function \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Vec3 \hyperlink{classbrtr_1_1_bench_a5ea108ad6ee96d487ac00ecacc383aa2}{center}
+\item 
+double \hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{length}
+\item 
+ref\+\_\+ptr$<$ Group $>$ \hyperlink{classbrtr_1_1_bench_aa3da8798872d1c2d595c24a48a5cb427}{bench}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classbrtr_1_1_bench}{Bench} class, creates a bench Object. 
+
+creates a bench with a given length at a given position. The length has to be between 2 and 30 \begin{DoxyAuthor}{Author}
+Marcel Felix 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_bench_8h_source_l00024}{24} of file \hyperlink{_bench_8h_source}{Bench.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_bench_a66ae6f45365c36daeabeed1a4b778d83}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!Bench@{Bench}}
+\index{Bench@{Bench}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{Bench}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Bench\+::\+Bench (
+\begin{DoxyParamCaption}
+\item[{const Vec3 \&}]{pcenter = {\ttfamily Vec3(0,~0,~0)}, }
+\item[{const double}]{plength = {\ttfamily 8}}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_bench_a66ae6f45365c36daeabeed1a4b778d83}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00007}{7} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_a9bd8ae1e6e48eb278206eff7102cac23}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!Bench@{Bench}}
+\index{Bench@{Bench}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{Bench}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Bench\+::\+Bench (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bench} \&}]{copy, }
+\item[{const Copy\+Op \&}]{copyop = {\ttfamily CopyOp\+:\+:SHALLOW\+\_\+COPY}}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_bench_a9bd8ae1e6e48eb278206eff7102cac23}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00018}{18} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_a22ffdb328f6dac6737108d0f7aa34f67}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!````~Bench@{$\sim$\+Bench}}
+\index{````~Bench@{$\sim$\+Bench}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{$\sim$\+Bench}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Bench\+::$\sim$\+Bench (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_bench_a22ffdb328f6dac6737108d0f7aa34f67}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00021}{21} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_bench_a9956994e6a20cbbd0f0ce9eb6df25917}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!create\+Armrest@{create\+Armrest}}
+\index{create\+Armrest@{create\+Armrest}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{create\+Armrest}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Group $>$ brtr\+::\+Bench\+::create\+Armrest (
+\begin{DoxyParamCaption}
+\item[{double}]{radius, }
+\item[{double}]{width, }
+\item[{double}]{length, }
+\item[{double}]{totalwidth}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_a9956994e6a20cbbd0f0ce9eb6df25917}
+
+
+creates the armrest 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & the distance between bench and armrest \\
+\hline
+{\em width} & width of the armrest \\
+\hline
+{\em length} & length of the armrest \\
+\hline
+{\em totalwidth} & width of the bar on the armrest \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00252}{252} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_a28443b856188050680a2c0ab4ad31a93}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!create\+Armrest\+Sides\+Front\+Back@{create\+Armrest\+Sides\+Front\+Back}}
+\index{create\+Armrest\+Sides\+Front\+Back@{create\+Armrest\+Sides\+Front\+Back}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{create\+Armrest\+Sides\+Front\+Back}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Geometry $>$ brtr\+::\+Bench\+::create\+Armrest\+Sides\+Front\+Back (
+\begin{DoxyParamCaption}
+\item[{double}]{radius, }
+\item[{double}]{width, }
+\item[{int}]{lsteps, }
+\item[{int}]{wsteps, }
+\item[{bool}]{flip = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_a28443b856188050680a2c0ab4ad31a93}
+
+
+creates the front/back for the armrest 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & the distance between bench and armrest \\
+\hline
+{\em width} & width of the armrest \\
+\hline
+{\em length} & length of the armrest \\
+\hline
+{\em flip} & switch between front and back creation \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00140}{140} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_afac56bea39f6e5e72140d4512dd711d3}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!create\+Armrest\+Sides\+Left\+Right@{create\+Armrest\+Sides\+Left\+Right}}
+\index{create\+Armrest\+Sides\+Left\+Right@{create\+Armrest\+Sides\+Left\+Right}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{create\+Armrest\+Sides\+Left\+Right}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Geometry $>$ brtr\+::\+Bench\+::create\+Armrest\+Sides\+Left\+Right (
+\begin{DoxyParamCaption}
+\item[{double}]{length, }
+\item[{double}]{width, }
+\item[{int}]{lsteps, }
+\item[{int}]{wsteps, }
+\item[{bool}]{flip = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_afac56bea39f6e5e72140d4512dd711d3}
+
+
+creates the left/rigth for the armrest 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & the distance between bench and armrest \\
+\hline
+{\em width} & width of the armrest \\
+\hline
+{\em length} & length of the armrest \\
+\hline
+{\em flip} & switch between front and back creation \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00084}{84} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_ae17e8e692f6c6deb7b722b5df58dc04b}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!create\+Bar@{create\+Bar}}
+\index{create\+Bar@{create\+Bar}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{create\+Bar}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Group $>$ brtr\+::\+Bench\+::create\+Bar (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_ae17e8e692f6c6deb7b722b5df58dc04b}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00331}{331} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_aafa199aa2218d57b290d99843a1443d4}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!create\+Iron\+Material@{create\+Iron\+Material}}
+\index{create\+Iron\+Material@{create\+Iron\+Material}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{create\+Iron\+Material}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Material $>$ brtr\+::\+Bench\+::create\+Iron\+Material (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_aafa199aa2218d57b290d99843a1443d4}
+
+
+create the material for iron objects 
+
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00053}{53} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_aefe5a9043a63e13d83c31a42046c6912}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!create\+Leg@{create\+Leg}}
+\index{create\+Leg@{create\+Leg}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{create\+Leg}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Group $>$ brtr\+::\+Bench\+::create\+Leg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_aefe5a9043a63e13d83c31a42046c6912}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00190}{190} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_a0547e73d10f329b2a9b4453b6319f472}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!create\+Seat@{create\+Seat}}
+\index{create\+Seat@{create\+Seat}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{create\+Seat}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Group $>$ brtr\+::\+Bench\+::create\+Seat (
+\begin{DoxyParamCaption}
+\item[{const double}]{width}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_a0547e73d10f329b2a9b4453b6319f472}
+
+
+creates the seat 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & the width/length of the Seat \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00212}{212} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_a57d6d3f038d3f0e8d5f8b83895a6670a}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!create\+Wood\+Material@{create\+Wood\+Material}}
+\index{create\+Wood\+Material@{create\+Wood\+Material}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{create\+Wood\+Material}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Material $>$ brtr\+::\+Bench\+::create\+Wood\+Material (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_a57d6d3f038d3f0e8d5f8b83895a6670a}
+
+
+create the material for wood objects 
+
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00062}{62} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_ad59e81ffbe90a7297bd5f256a54a234e}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!get\+Hitbox@{get\+Hitbox}}
+\index{get\+Hitbox@{get\+Hitbox}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{get\+Hitbox}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Position\+Attitude\+Transform $>$ brtr\+::\+Bench\+::get\+Hitbox (
+\begin{DoxyParamCaption}
+\item[{const double}]{alpha, }
+\item[{double}]{height = {\ttfamily 8}}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_bench_ad59e81ffbe90a7297bd5f256a54a234e}
+
+
+return the Hitbox of the \hyperlink{classbrtr_1_1_bench}{Bench} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & \\
+\hline
+{\em height} & the height of the hitbox. height $<$ 0 will use the height of the bench \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the hitbox as a Position\+Attitude\+Transform with the given alpha value 
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00024}{24} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_a90c4ae616eb8d7bf669af2983ed3cd1d}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!get\+Primitive\+Setfor\+A\+Rectangle@{get\+Primitive\+Setfor\+A\+Rectangle}}
+\index{get\+Primitive\+Setfor\+A\+Rectangle@{get\+Primitive\+Setfor\+A\+Rectangle}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{get\+Primitive\+Setfor\+A\+Rectangle}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Draw\+Elements\+U\+Int $>$ brtr\+::\+Bench\+::get\+Primitive\+Setfor\+A\+Rectangle (
+\begin{DoxyParamCaption}
+\item[{int}]{lsteps, }
+\item[{int}]{wsteps}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_a90c4ae616eb8d7bf669af2983ed3cd1d}
+
+
+creates a primitives set for the get\+Rectangle function 
+
+parts of the function are copy/pasted from Chapter 7, C\+G1 Lecture Script by Frauke Sprengel
+
+
+\begin{DoxyParams}{Parameters}
+{\em lsteps} & \\
+\hline
+{\em wsteps} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a ref\+\_\+ptr$<$\+Draw\+Elements\+U\+Int$>$ containing the primitives set 
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00071}{71} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+\hypertarget{classbrtr_1_1_bench_a2813d4878b8a5ef09219323b2f6c9cf5}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!init\+Bench@{init\+Bench}}
+\index{init\+Bench@{init\+Bench}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{init\+Bench}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Bench\+::init\+Bench (
+\begin{DoxyParamCaption}
+\item[{const double}]{plength}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_a2813d4878b8a5ef09219323b2f6c9cf5}
+
+
+initialize the bench 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plength} & the length of the bench \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_bench_8cpp_source_l00360}{360} of file \hyperlink{_bench_8cpp_source}{Bench.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_bench_aa3da8798872d1c2d595c24a48a5cb427}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!bench@{bench}}
+\index{bench@{bench}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{bench}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$Group$>$ brtr\+::\+Bench\+::bench\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_aa3da8798872d1c2d595c24a48a5cb427}
+
+
+Definition at line \hyperlink{_bench_8h_source_l00108}{108} of file \hyperlink{_bench_8h_source}{Bench.\+h}.
+
+\hypertarget{classbrtr_1_1_bench_a5ea108ad6ee96d487ac00ecacc383aa2}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!center@{center}}
+\index{center@{center}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{center}]{\setlength{\rightskip}{0pt plus 5cm}Vec3 brtr\+::\+Bench\+::center\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_a5ea108ad6ee96d487ac00ecacc383aa2}
+
+
+Definition at line \hyperlink{_bench_8h_source_l00105}{105} of file \hyperlink{_bench_8h_source}{Bench.\+h}.
+
+\hypertarget{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{\index{brtr\+::\+Bench@{brtr\+::\+Bench}!length@{length}}
+\index{length@{length}!brtr\+::\+Bench@{brtr\+::\+Bench}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}double brtr\+::\+Bench\+::length\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}
+
+
+Definition at line \hyperlink{_bench_8h_source_l00107}{107} of file \hyperlink{_bench_8h_source}{Bench.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_bench_8h}{Bench.\+h}\item 
+Objects/\hyperlink{_bench_8cpp}{Bench.\+cpp}\end{DoxyCompactItemize}

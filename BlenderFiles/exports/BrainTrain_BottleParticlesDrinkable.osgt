@@ -1,0 +1,58 @@
+#Ascii Scene
+#Version 92
+#Generator osgexport 0.14.1
+
+osg::Group {
+  UniqueID 4695
+  Name "Root"
+  Children 3 {
+    osg::MatrixTransform {
+      UniqueID 4687
+      Name "BottleObject.038"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4690
+          Name "GeodePlane.014"
+          Drawables 0 {
+          }
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        1.05458 0.45864 -0.00000 0.00000
+        -0.45864 1.05458 0.00000 0.00000
+        67.94557 -11.78132 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4691
+      Name "BottleObject.037"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4690
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.99803 0.57135 -0.00000 0.00000
+        -0.57135 0.99803 0.00000 0.00000
+        31.93509 5.18570 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4693
+      Name "BottleObject.036"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4690
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.45804 -1.05484 0.00000 0.00000
+        1.05484 -0.45804 -0.00000 0.00000
+        -80.22762 8.02803 -0.35025 1.00000
+      }
+    }
+  }
+}

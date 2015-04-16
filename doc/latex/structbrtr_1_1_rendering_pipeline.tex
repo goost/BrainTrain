@@ -1,0 +1,83 @@
+\hypertarget{structbrtr_1_1_rendering_pipeline}{\section{brtr\+:\+:Rendering\+Pipeline Struct Reference}
+\label{structbrtr_1_1_rendering_pipeline}\index{brtr\+::\+Rendering\+Pipeline@{brtr\+::\+Rendering\+Pipeline}}
+}
+
+
+struct holding the camera for the multi-\/rendering passes. Also holds the program vector for the post process pass. pass0\+Color, pass0depth, pass\+Post\+Process, program array, count program\+Array The program vector is used by the \hyperlink{classbrtr_1_1_key_handler}{Key\+Handler} and the Interaction\+Items for changing the postprocess programs  
+
+
+
+
+{\ttfamily \#include $<$Util\+Functions.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Camera $>$ \hyperlink{structbrtr_1_1_rendering_pipeline_ae945030321a6b44f00266954c8c50bf3}{pass\+\_\+0\+\_\+color}
+\begin{DoxyCompactList}\small\item\em Camera for the first pass, renders the Color\+Buffer to Texture. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Camera $>$ \hyperlink{structbrtr_1_1_rendering_pipeline_a18752632c1b557d283e523ebbc0443a0}{pass\+\_\+0\+\_\+depth}
+\begin{DoxyCompactList}\small\item\em Camera for the first pass, renders the Depth\+Buffer to Texture. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Camera $>$ \hyperlink{structbrtr_1_1_rendering_pipeline_aea2228e41f1e5c6db5d616c05ecc27fd}{pass\+\_\+\+Post\+Process}
+\begin{DoxyCompactList}\small\item\em Post\+Process Camera, uses the texture from the first pass to create various effects. \end{DoxyCompactList}\item 
+std\+::vector$<$ osg\+::ref\+\_\+ptr\\*
+$<$ osg\+::\+Program $>$ $>$ \hyperlink{structbrtr_1_1_rendering_pipeline_afe773fb98986d39ef23a4edf3634af10}{programs}
+\begin{DoxyCompactList}\small\item\em vector with the avaible postprocess programs \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+struct holding the camera for the multi-\/rendering passes. Also holds the program vector for the post process pass. pass0\+Color, pass0depth, pass\+Post\+Process, program array, count program\+Array The program vector is used by the \hyperlink{classbrtr_1_1_key_handler}{Key\+Handler} and the Interaction\+Items for changing the postprocess programs 
+
+Definition at line \hyperlink{_util_functions_8h_source_l00056}{56} of file \hyperlink{_util_functions_8h_source}{Util\+Functions.\+h}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structbrtr_1_1_rendering_pipeline_ae945030321a6b44f00266954c8c50bf3}{\index{brtr\+::\+Rendering\+Pipeline@{brtr\+::\+Rendering\+Pipeline}!pass\+\_\+0\+\_\+color@{pass\+\_\+0\+\_\+color}}
+\index{pass\+\_\+0\+\_\+color@{pass\+\_\+0\+\_\+color}!brtr\+::\+Rendering\+Pipeline@{brtr\+::\+Rendering\+Pipeline}}
+\subsubsection[{pass\+\_\+0\+\_\+color}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Camera$>$ brtr\+::\+Rendering\+Pipeline\+::pass\+\_\+0\+\_\+color}}\label{structbrtr_1_1_rendering_pipeline_ae945030321a6b44f00266954c8c50bf3}
+
+
+Camera for the first pass, renders the Color\+Buffer to Texture. 
+
+
+
+Definition at line \hyperlink{_util_functions_8h_source_l00057}{57} of file \hyperlink{_util_functions_8h_source}{Util\+Functions.\+h}.
+
+\hypertarget{structbrtr_1_1_rendering_pipeline_a18752632c1b557d283e523ebbc0443a0}{\index{brtr\+::\+Rendering\+Pipeline@{brtr\+::\+Rendering\+Pipeline}!pass\+\_\+0\+\_\+depth@{pass\+\_\+0\+\_\+depth}}
+\index{pass\+\_\+0\+\_\+depth@{pass\+\_\+0\+\_\+depth}!brtr\+::\+Rendering\+Pipeline@{brtr\+::\+Rendering\+Pipeline}}
+\subsubsection[{pass\+\_\+0\+\_\+depth}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Camera$>$ brtr\+::\+Rendering\+Pipeline\+::pass\+\_\+0\+\_\+depth}}\label{structbrtr_1_1_rendering_pipeline_a18752632c1b557d283e523ebbc0443a0}
+
+
+Camera for the first pass, renders the Depth\+Buffer to Texture. 
+
+
+
+Definition at line \hyperlink{_util_functions_8h_source_l00058}{58} of file \hyperlink{_util_functions_8h_source}{Util\+Functions.\+h}.
+
+\hypertarget{structbrtr_1_1_rendering_pipeline_aea2228e41f1e5c6db5d616c05ecc27fd}{\index{brtr\+::\+Rendering\+Pipeline@{brtr\+::\+Rendering\+Pipeline}!pass\+\_\+\+Post\+Process@{pass\+\_\+\+Post\+Process}}
+\index{pass\+\_\+\+Post\+Process@{pass\+\_\+\+Post\+Process}!brtr\+::\+Rendering\+Pipeline@{brtr\+::\+Rendering\+Pipeline}}
+\subsubsection[{pass\+\_\+\+Post\+Process}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Camera$>$ brtr\+::\+Rendering\+Pipeline\+::pass\+\_\+\+Post\+Process}}\label{structbrtr_1_1_rendering_pipeline_aea2228e41f1e5c6db5d616c05ecc27fd}
+
+
+Post\+Process Camera, uses the texture from the first pass to create various effects. 
+
+
+
+Definition at line \hyperlink{_util_functions_8h_source_l00059}{59} of file \hyperlink{_util_functions_8h_source}{Util\+Functions.\+h}.
+
+\hypertarget{structbrtr_1_1_rendering_pipeline_afe773fb98986d39ef23a4edf3634af10}{\index{brtr\+::\+Rendering\+Pipeline@{brtr\+::\+Rendering\+Pipeline}!programs@{programs}}
+\index{programs@{programs}!brtr\+::\+Rendering\+Pipeline@{brtr\+::\+Rendering\+Pipeline}}
+\subsubsection[{programs}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$osg\+::ref\+\_\+ptr$<$osg\+::\+Program$>$ $>$ brtr\+::\+Rendering\+Pipeline\+::programs}}\label{structbrtr_1_1_rendering_pipeline_afe773fb98986d39ef23a4edf3634af10}
+
+
+vector with the avaible postprocess programs 
+
+
+
+Definition at line \hyperlink{_util_functions_8h_source_l00060}{60} of file \hyperlink{_util_functions_8h_source}{Util\+Functions.\+h}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_util_functions_8h}{Util\+Functions.\+h}\end{DoxyCompactItemize}

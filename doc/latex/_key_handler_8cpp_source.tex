@@ -1,0 +1,138 @@
+\hypertarget{_key_handler_8cpp_source}{\section{Key\+Handler.\+cpp}
+\label{_key_handler_8cpp_source}\index{G\+U\+I/\+Key\+Handler.\+cpp@{G\+U\+I/\+Key\+Handler.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/KeyHandler.h"}
+00002 \textcolor{preprocessor}{#include "../header/UtilFunctions.h"}
+00003 \textcolor{preprocessor}{#include <osgUtil/CullVisitor>}
+00004 \textcolor{preprocessor}{#include <osgUtil/LineSegmentIntersector>}
+00005 \textcolor{preprocessor}{#include <osg/ValueObject>}
+00006 
+00007 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_key_handler_8cpp_source_l00008}{}\hyperlink{classbrtr_1_1_key_handler_aaae067fabc959780a9fae9c700c199da}{00008}     \hyperlink{classbrtr_1_1_key_handler_aaae067fabc959780a9fae9c700c199da}{KeyHandler::KeyHandler}(osg::Node* rootNode, osg::Camera* postProcessCam, 
+      std::vector<osg::ref\_ptr<osg::Program>> programs) :
+00009         \_programs(programs),
+00010         \_postProcessCam(postProcessCam),
+00011         \_rootNode(rootNode),
+00012         \_isWireFrame(false),
+00013         \_curProg(0)\{
+00014         \hyperlink{classbrtr_1_1_key_handler_a7aff4e23d4c614d8e0ccdc29a3c8882f}{\_wireFrameMode} = \textcolor{keyword}{new} osg::PolygonMode(osg::PolygonMode::FRONT\_AND\_BACK, 
+      osg::PolygonMode::LINE);
+00015         \hyperlink{classbrtr_1_1_key_handler_ae210945e48748029cbea37fde7d601b5}{\_normaleMode} = \textcolor{keyword}{new} osg::PolygonMode(osg::PolygonMode::FRONT\_AND\_BACK, 
+      osg::PolygonMode::FILL);
+00016     \}
+00017 
+00018 
+\hypertarget{_key_handler_8cpp_source_l00019}{}\hyperlink{classbrtr_1_1_key_handler_aabad0b142ba1d2e648069b4e8af17797}{00019}     \hyperlink{classbrtr_1_1_key_handler_aabad0b142ba1d2e648069b4e8af17797}{KeyHandler::~KeyHandler}() \{\}
+00020 
+\hypertarget{_key_handler_8cpp_source_l00021}{}\hyperlink{classbrtr_1_1_key_handler_a02df9f4339712d5b8b2b25b89048cf47}{00021}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_key_handler_a02df9f4339712d5b8b2b25b89048cf47}{KeyHandler::handle}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa
+      ) \{
+00022         \textcolor{keywordflow}{switch} (ea.getEventType()) \{
+00023         \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::FRAME:
+00024             \hyperlink{classbrtr_1_1_key_handler_a7f402d48b863ed19ef47038a32d1d05c}{mouseIntersection}(aa);
+00025             \textcolor{comment}{//return false;}
+00026         \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::MOVE:
+00027         \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::DRAG:
+00028         \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::RELEASE:
+00029             \hyperlink{classbrtr_1_1_key_handler_a1b2404dcd19426a93d4474cd45da84e8}{\_mouseEvent} = &ea;
+00030             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00031         \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::PUSH:
+00032             \hyperlink{classbrtr_1_1_key_handler_a1b2404dcd19426a93d4474cd45da84e8}{\_mouseEvent} = &ea;
+00033             \textcolor{keywordflow}{if} (ea.getButton() == osgGA::GUIEventAdapter::LEFT\_MOUSE\_BUTTON) \{
+00034                 \hyperlink{classbrtr_1_1_base_interaction_callback}{brtr::BaseInteractionCallback}* callback = 
+      \hyperlink{classbrtr_1_1_key_handler_a1925fa114839192716167477714abfdc}{modifyText}(\textcolor{keyword}{false});
+00035                 \textcolor{keywordflow}{if} (callback) \{
+00036                     OSG\_NOTICE << \textcolor{stringliteral}{"Attaching callback"} << std::endl;
+00037                     \textcolor{keywordflow}{if} (callback->\hyperlink{classbrtr_1_1_base_interaction_callback_aafca24ccde1cf21f4132f65a83e0b2bc}{getNode}()->getUpdateCallback() == callback)
+00038                         callback->\hyperlink{classbrtr_1_1_base_interaction_callback_a95ede7c8aa0dc1e067ae64615ecb23db}{reactivate}();
+00039                     \textcolor{keywordflow}{else}
+00040                         callback->\hyperlink{classbrtr_1_1_base_interaction_callback_aafca24ccde1cf21f4132f65a83e0b2bc}{getNode}()->addUpdateCallback(callback);
+00041                 \}\textcolor{comment}{// callback}
+00042                 
+00043                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00044             \}
+00045             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00046         \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::KEYDOWN:
+00047             \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_key_handler_a5af6a6e66e8754591b3425addc6e6858}{handleKeyDown}(ea, aa);
+00048         \textcolor{keywordflow}{default}:
+00049             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00050         \}
+00051     \}\textcolor{comment}{//hanlde()}
+00052 
+\hypertarget{_key_handler_8cpp_source_l00053}{}\hyperlink{classbrtr_1_1_key_handler_a5af6a6e66e8754591b3425addc6e6858}{00053}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_key_handler_a5af6a6e66e8754591b3425addc6e6858}{KeyHandler::handleKeyDown}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& ea, 
+      osgGA::GUIActionAdapter& aa) \{
+00054         \textcolor{keywordflow}{switch} (ea.getUnmodifiedKey()) \{
+00055             \textcolor{comment}{//Turn PolygonMode on/off}
+00056         \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::KEY\_C: \{
+00057             osg::PolygonMode* curMode = \hyperlink{classbrtr_1_1_key_handler_a6939e2c5e93e53d6090c999eae2fb927}{\_isWireFrame} ? \hyperlink{classbrtr_1_1_key_handler_ae210945e48748029cbea37fde7d601b5}{\_normaleMode} : 
+      \hyperlink{classbrtr_1_1_key_handler_a7aff4e23d4c614d8e0ccdc29a3c8882f}{\_wireFrameMode};
+00058             \hyperlink{classbrtr_1_1_key_handler_a2ff68d9c79145d235f50fec1da625f99}{\_rootNode}->getOrCreateStateSet()->setAttributeAndModes(curMode);
+00059             \hyperlink{classbrtr_1_1_key_handler_a6939e2c5e93e53d6090c999eae2fb927}{\_isWireFrame} = !\hyperlink{classbrtr_1_1_key_handler_a6939e2c5e93e53d6090c999eae2fb927}{\_isWireFrame};
+00060             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00061         \}\textcolor{comment}{//case KEY\_C}
+00062         \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::KEY\_1:\{
+00063             \textcolor{keywordflow}{if} (ea.getModKeyMask() == osgGA::GUIEventAdapter::MODKEY\_LEFT\_SHIFT) \{
+00064                 \hyperlink{classbrtr_1_1_key_handler_aa4cc5f6ac9134e473f37968dfb1dd821}{\_postProcessCam}->getOrCreateStateSet()->removeAttribute(
+      \hyperlink{classbrtr_1_1_key_handler_a492d086b9458475e595b3627a8dee0f9}{\_programs}[\hyperlink{classbrtr_1_1_key_handler_a578b374029e318a509983a01253a7736}{\_curProg}]);
+00065                 \_curProg++;
+00066                 \_curProg = \_curProg % \hyperlink{classbrtr_1_1_key_handler_a492d086b9458475e595b3627a8dee0f9}{\_programs}.size();
+00067                 \hyperlink{classbrtr_1_1_key_handler_aa4cc5f6ac9134e473f37968dfb1dd821}{\_postProcessCam}->getOrCreateStateSet()->setAttributeAndModes(
+      \hyperlink{classbrtr_1_1_key_handler_a492d086b9458475e595b3627a8dee0f9}{\_programs}[\_curProg], osg::StateAttribute::OVERRIDE | osg::StateAttribute::ON);
+00068                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00069             \}
+00070         \}   \textcolor{comment}{//KEY\_1}
+00071         \textcolor{keywordflow}{default}:
+00072             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00073         \}\textcolor{comment}{//switch  }
+00074     \}\textcolor{comment}{//if(KEYDOWN)}
+00075 
+\hypertarget{_key_handler_8cpp_source_l00076}{}\hyperlink{classbrtr_1_1_key_handler_a7f402d48b863ed19ef47038a32d1d05c}{00076}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_key_handler_a7f402d48b863ed19ef47038a32d1d05c}{KeyHandler::mouseIntersection}(osgGA::GUIActionAdapter& aa) \{
+00077         osg::ref\_ptr<osg::Camera> camera = aa.asView()->getCamera();
+00078         \textcolor{keywordflow}{if} (!\hyperlink{classbrtr_1_1_key_handler_a1b2404dcd19426a93d4474cd45da84e8}{\_mouseEvent} || !camera)
+00079             \textcolor{keywordflow}{return};
+00080 
+00081         osg::Vec3d eyeInWorld = osg::Vec3d() *osg::Matrixd::inverse(camera->getViewMatrix());
+00082         osg::ref\_ptr<osgUtil::LineSegmentIntersector> lIntersector =
+00083             \textcolor{keyword}{new} osgUtil::LineSegmentIntersector(osgUtil::Intersector::WINDOW, 
+      \hyperlink{classbrtr_1_1_key_handler_a1b2404dcd19426a93d4474cd45da84e8}{\_mouseEvent}->getX(), \hyperlink{classbrtr_1_1_key_handler_a1b2404dcd19426a93d4474cd45da84e8}{\_mouseEvent}->getY());
+00084         lIntersector->setIntersectionLimit(osgUtil::Intersector::LIMIT\_NEAREST);
+00085         osgUtil::IntersectionVisitor iv(lIntersector);
+00086         iv.setTraversalMask(\hyperlink{namespacebrtr_a2060f4d70c0e3bc7e2e35f82e279a40d}{interactionMask});
+00087         camera->accept(iv);
+00088         \textcolor{keywordflow}{if} (lIntersector->containsIntersections()) \{
+00089             \textcolor{keyword}{auto} intersection = lIntersector->getIntersections().begin();           
+00090             \textcolor{keywordtype}{double} curDistance = (eyeInWorld - intersection->getWorldIntersectPoint()).length();
+00091             \textcolor{keywordflow}{if} (curDistance < 4.5 ) \{
+00092                 \hyperlink{classbrtr_1_1_key_handler_a4b0e380186a8172af6cf7c10dcff675a}{\_curDrawable} = intersection->drawable;
+00093                 \hyperlink{classbrtr_1_1_key_handler_a1925fa114839192716167477714abfdc}{modifyText}(\textcolor{keyword}{true});
+00094             \}\textcolor{comment}{//if (curDistance < distance)}
+00095             \textcolor{keywordflow}{else} \{\textcolor{comment}{//not the right distance, remove Text & drawable, if any were present}
+00096                 \hyperlink{classbrtr_1_1_key_handler_a1925fa114839192716167477714abfdc}{modifyText}(\textcolor{keyword}{false});
+00097             \}\textcolor{comment}{//else}
+00098         \}\textcolor{comment}{//if (intersector->containsIntersections()}
+00099     \}\textcolor{comment}{//intersect()}
+00100 
+\hypertarget{_key_handler_8cpp_source_l00101}{}\hyperlink{classbrtr_1_1_key_handler_a1925fa114839192716167477714abfdc}{00101}     \hyperlink{classbrtr_1_1_base_interaction_callback}{brtr::BaseInteractionCallback}* 
+      \hyperlink{classbrtr_1_1_key_handler_a1925fa114839192716167477714abfdc}{KeyHandler::modifyText}(\textcolor{keywordtype}{bool} show) \{
+00102         \hyperlink{classbrtr_1_1_base_interaction_callback}{brtr::BaseInteractionCallback}* callback =\textcolor{keyword}{nullptr};
+00103         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_key_handler_a4b0e380186a8172af6cf7c10dcff675a}{\_curDrawable}) \{
+00104             OSG\_NOTICE << \textcolor{stringliteral}{"Checking Container..."} << std::endl;
+00105             osg::UserDataContainer* container = \hyperlink{classbrtr_1_1_key_handler_a4b0e380186a8172af6cf7c10dcff675a}{\_curDrawable}->getUserDataContainer();
+00106             \textcolor{keywordflow}{if} (container) \{
+00107                 OSG\_NOTICE << \textcolor{stringliteral}{"Container True"} << std::endl;
+00108                 callback = \textcolor{keyword}{dynamic\_cast<}\hyperlink{classbrtr_1_1_base_interaction_callback}{brtr::BaseInteractionCallback}*\textcolor{keyword}{>}(
+      container->getUserObject(0));
+00109                 \textcolor{keywordflow}{if} (callback) \{
+00110                     \textcolor{keywordflow}{if} (show) callback->\hyperlink{classbrtr_1_1_base_interaction_callback_a0fe57e329f044e21d49041c861435ad8}{setText}();
+00111                     \textcolor{keywordflow}{else} callback->\hyperlink{classbrtr_1_1_base_interaction_callback_ad74fe9ac5d86c7f23d18614d5abb1003}{clearText}();
+00112                 \}\textcolor{comment}{// callback}
+00113             \}\textcolor{comment}{//container}
+00114         \}\textcolor{comment}{//\_curDrawable}
+00115         \textcolor{keywordflow}{if} (!show)
+00116             \hyperlink{classbrtr_1_1_key_handler_a4b0e380186a8172af6cf7c10dcff675a}{\_curDrawable} = \textcolor{keyword}{nullptr};
+00117         \textcolor{keywordflow}{return} callback;
+00118     \}\textcolor{comment}{//modifyText()}
+00119 
+00120 \}\textcolor{comment}{//namespace}
+\end{DoxyCode}

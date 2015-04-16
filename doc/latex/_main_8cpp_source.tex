@@ -1,0 +1,334 @@
+\hypertarget{_main_8cpp_source}{\section{Main.\+cpp}
+\label{_main_8cpp_source}\index{Main/\+Main.\+cpp@{Main/\+Main.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00002 \textcolor{preprocessor}{#include <osg/Geometry>}
+00003 \textcolor{preprocessor}{#include <osgDB/ReadFile>}
+00004 \textcolor{preprocessor}{#include <osg/BlendFunc>}
+00005 \textcolor{preprocessor}{#include <osg/ValueObject>}
+00006 \textcolor{preprocessor}{#include <osgUtil/Optimizer>}
+00007 \textcolor{preprocessor}{#include <string>}
+00008 \textcolor{preprocessor}{#include <sstream>}
+00009 \textcolor{preprocessor}{#include <iostream>}
+00010 
+00011 \textcolor{preprocessor}{#include "../header/UtilFunctions.h"}
+00012 \textcolor{preprocessor}{#include "../header/WeaponHUD.h"}
+00013 \textcolor{preprocessor}{#include "../header/FPSCameraManipulator.h"}
+00014 \textcolor{preprocessor}{#include "../header/GeometryPlacerVisitor.h"}
+00015 \textcolor{preprocessor}{#include "../header/DrunkenInteractionCallback.h"}
+00016 \textcolor{preprocessor}{#include "../header/ModifyMaterialVisitor.h"}
+00017 \textcolor{preprocessor}{#include "../header/Bench.h"}
+00018 \textcolor{preprocessor}{#include "../header/CelShading.h"}
+00019 \textcolor{preprocessor}{#include "../header/BaseInteractionCallback.h"}
+00020 \textcolor{preprocessor}{#include "../header/KeyHandler.h"}
+00021 \textcolor{preprocessor}{#include "../header/AnimationCreater.h"}
+00022 \textcolor{preprocessor}{#include "../header/AddPortalGunInteractionCallback.h"}
+00023 \textcolor{preprocessor}{#include "../header/AddInteractionCallbackToDrawableVisitor.h"}
+00024 \textcolor{preprocessor}{#include "../header/ControlRoom.h"}
+00025 \textcolor{preprocessor}{#include "../header/TrainSwitcherCallback.h"}
+00026 
+00032 \textcolor{keyword}{using namespace }osg;
+00033 
+\hypertarget{_main_8cpp_source_l00034}{}\hyperlink{_main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{00034} \textcolor{keywordtype}{int} \hyperlink{_main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main}(\textcolor{keywordtype}{void})\{
+00035     \textcolor{comment}{//some vars}
+00036     osg::setNotifyLevel(FATAL);
+00037     Vec3f fogColor(.3219, 0.37, 0.3564);
+00038     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} width, height;
+00039     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} oldWidth, oldHeight;
+00040     \textcolor{keywordtype}{int} screen = 0;  \textcolor{comment}{//for easy multimonitor switching while debugging}
+00041     std::string inputLine = \textcolor{stringliteral}{""};
+00042     \textcolor{keywordtype}{int} choose = 0;
+00043     std::vector<ref\_ptr<Texture2D>> toonTexs;
+00044     toonTexs.push\_back(\hyperlink{namespacebrtr_aea7b3b188858f0bce09f2450a749f497}{brtr::createToonTex}(\textcolor{stringliteral}{"2d\_toons\_brown.png"}));
+00045     toonTexs.push\_back(\hyperlink{namespacebrtr_aea7b3b188858f0bce09f2450a749f497}{brtr::createToonTex}(\textcolor{stringliteral}{"2d\_toons\_blue.png"}));
+00046     toonTexs.push\_back(\hyperlink{namespacebrtr_aea7b3b188858f0bce09f2450a749f497}{brtr::createToonTex}(\textcolor{stringliteral}{"2d\_toons\_red.png"}));
+00047     toonTexs.push\_back(\hyperlink{namespacebrtr_aea7b3b188858f0bce09f2450a749f497}{brtr::createToonTex}(\textcolor{stringliteral}{"2d\_toons\_violet.png"}));
+00048     toonTexs.push\_back(\hyperlink{namespacebrtr_aea7b3b188858f0bce09f2450a749f497}{brtr::createToonTex}(\textcolor{stringliteral}{"2d\_toons\_yellow.png"}));
+00049     ref\_ptr<GraphicsContext::WindowingSystemInterface> wsi = GraphicsContext::getWindowingSystemInterface()
+      ;
+00050 
+00051     OSG\_ALWAYS << \textcolor{stringliteral}{"Please choose the desired Display Resolution:"} << std::endl;
+00052     OSG\_ALWAYS << \textcolor{stringliteral}{"\(\backslash\)t(1): Full HD 1920x1080 (only with a decent Graphic Card!)"} << std::endl;
+00053     OSG\_ALWAYS << \textcolor{stringliteral}{"\(\backslash\)t(2): HD+ 1366x768 (should work with most Cards)"} << std::endl;
+00054     OSG\_ALWAYS << \textcolor{stringliteral}{"\(\backslash\)t(3): HD 1280x720 (choose this for best performance, but worst quality)"} <<std::endl;
+00055     OSG\_ALWAYS << \textcolor{stringliteral}{"\(\backslash\)t(4): Use Screen Resolution"} <<std::endl; 
+00056     OSG\_ALWAYS << \textcolor{stringliteral}{"\(\backslash\)t(5): quit the program without experiencing the forsaken station =("} << std::endl;
+00057     std::getline(std::cin, inputLine);
+00058     std::stringstream(inputLine) >> choose;
+00059     \textcolor{keywordflow}{while} (!(choose == 1 || choose == 2 || choose == 3 || choose == 4 || choose == 5)) \{
+00060         OSG\_ALWAYS << \textcolor{stringliteral}{"Only (1), (2), (3), (4) or (5) are valid options!"} <<std::endl;
+00061         OSG\_ALWAYS << choose << std::endl;
+00062         std::getline(std::cin, inputLine);
+00063         std::stringstream(inputLine) >> choose;
+00064     \} 
+00065     \textcolor{keywordflow}{switch} (choose) \{
+00066     \textcolor{keywordflow}{case} 1:
+00067         width = 1920;
+00068         height = 1080;
+00069         \textcolor{keywordflow}{break};
+00070     \textcolor{keywordflow}{case} 2:
+00071         width = 1366;
+00072         height = 768;
+00073         \textcolor{keywordflow}{break};
+00074     \textcolor{keywordflow}{case} 3:
+00075         width = 1280;
+00076         height = 720;
+00077         \textcolor{keywordflow}{break};
+00078     \textcolor{keywordflow}{case} 4:
+00079         wsi->getScreenResolution(GraphicsContext::ScreenIdentifier(screen), width, height);
+00080         \textcolor{keywordflow}{break};
+00081     \textcolor{keywordflow}{case} 5:
+00082         \textcolor{keywordflow}{return} EXIT\_SUCCESS;
+00083     \}
+00084       
+00085     
+00086     OSG\_ALWAYS << \textcolor{stringliteral}{"Setting some options which should help with performance (but probably do not)"} << 
+      std::endl;
+00087     \textcolor{comment}{//this viewer will display our graph}
+00088     osgViewer::Viewer viewer;
+00089     \textcolor{comment}{//Faster Intersection, hell yeah!}
+00090     osgDB::Registry::instance()->setBuildKdTreesHint(osgDB::Options::BUILD\_KDTREES);
+00091     \textcolor{comment}{//Get/Set Screen Resolution }
+00092     wsi->getScreenResolution(GraphicsContext::ScreenIdentifier(screen), oldWidth, oldHeight);
+00093     OSG\_ALWAYS << \textcolor{stringliteral}{"This DisplaySettings will be used:"} << std::endl;
+00094     OSG\_ALWAYS << width << \textcolor{stringliteral}{"x"} << height << std::endl;
+00095     wsi->setScreenResolution(GraphicsContext::ScreenIdentifier(screen), width, height);
+00096     \textcolor{comment}{//to make sure, we are using the right resolution, even if the set fails}
+00097     wsi->getScreenResolution(GraphicsContext::ScreenIdentifier(screen), width, height);
+00098 
+00099     \textcolor{comment}{//Read IVEs, set Masks}
+00100     OSG\_ALWAYS << \textcolor{stringliteral}{"Reading IVE's, making cookies."} << std::endl;
+00101     ref\_ptr<Node> trainStation = osgDB::readNodeFile(\textcolor{stringliteral}{"../BlenderFiles/exports/BrainTrain6\_1p25E\_Lights.ive"}
+      );
+00102     trainStation->setNodeMask(\hyperlink{namespacebrtr_af79a815819e2ef65ea9cd43dc9d43679}{brtr::collisionMask});
+00103     ref\_ptr<Node> trainStationHitbox = osgDB::readNodeFile(\textcolor{stringliteral}{"
+      ../BlenderFiles/exports/BrainTrain6\_1p25E\_Lights\_Hitbox.osgt"});
+00104     trainStationHitbox->setNodeMask(\hyperlink{namespacebrtr_af79a815819e2ef65ea9cd43dc9d43679}{brtr::collisionMask});
+00105     ref\_ptr<Node> bottleEmitter = osgDB::readNodeFile(\textcolor{stringliteral}{"
+      ../BlenderFiles/exports/BrainTrain\_BottleParticles.osgt"});
+00106     bottleEmitter->setNodeMask(~\hyperlink{namespacebrtr_a21ab851f18c0c85fa006766034833a4f}{brtr::interactionAndCollisionMask});
+00107     ref\_ptr<Node> drinkablebottleEmitter = osgDB::readNodeFile(\textcolor{stringliteral}{"
+      ../BlenderFiles/exports/BrainTrain\_BottleParticlesDrinkable.osgt"});
+00108     drinkablebottleEmitter->setNodeMask(\hyperlink{namespacebrtr_a2060f4d70c0e3bc7e2e35f82e279a40d}{brtr::interactionMask});
+00109     ref\_ptr<Node> trainModel = osgDB::readNodeFile(\textcolor{stringliteral}{"../BlenderFiles/exports/Train.ive.0,0,-48.rot"});
+00110     ref\_ptr<Node> portalGunTrain = osgDB::readNodeFile(\textcolor{stringliteral}{"
+      ../BlenderFiles/exports/Portalgun\_Big.ive.0,0,-48.rot"});
+00111     \textcolor{comment}{//Position "Trains" }
+00112     ref\_ptr<PositionAttitudeTransform> trainPosition = \textcolor{keyword}{new} PositionAttitudeTransform;
+00113     trainPosition->setNodeMask(\hyperlink{namespacebrtr_af79a815819e2ef65ea9cd43dc9d43679}{brtr::collisionMask});
+00114     trainPosition->setPosition(Vec3(0, 0, -20));
+00115     trainPosition->addChild(trainModel);
+00116     trainPosition->setDataVariance(Object::DYNAMIC);
+00117     ref\_ptr<PositionAttitudeTransform> portalGuntrainPosition = \textcolor{keyword}{new} PositionAttitudeTransform;
+00118     portalGuntrainPosition->setNodeMask(~\hyperlink{namespacebrtr_a21ab851f18c0c85fa006766034833a4f}{brtr::interactionAndCollisionMask}
+      );
+00119     portalGuntrainPosition->setPosition(Vec3(0, 0, -20));
+00120     portalGuntrainPosition->addChild(portalGunTrain);
+00121     portalGuntrainPosition->setDataVariance(Object::DYNAMIC);
+00122 
+00123     \textcolor{comment}{//Animation for Train   }
+00124     ref\_ptr<AnimationPath> trainPath = \hyperlink{class_animation_creator}{AnimationCreator}().
+      \hyperlink{class_animation_creator_aca52f3472d0be7043c63ff5ede8084aa}{createAnimationPath}(0.1f);
+00125     osg::ref\_ptr<osg::AnimationPathCallback> trainAniCallback = \textcolor{keyword}{new}  osg::AnimationPathCallback;
+00126     trainAniCallback->setAnimationPath(trainPath);
+00127     trainPosition->setUpdateCallback(trainAniCallback);
+00128     portalGuntrainPosition->setUpdateCallback(trainAniCallback);
+00129 
+00130     \textcolor{comment}{//Switch for trains}
+00131     ref\_ptr<Switch> train = \textcolor{keyword}{new} Switch;
+00132     train->addChild(trainPosition, \textcolor{keyword}{true});
+00133     train->addChild(portalGuntrainPosition, \textcolor{keyword}{false});
+00134     train->addUpdateCallback(\textcolor{keyword}{new} \hyperlink{classbrtr_1_1_train_switcher_callback}{brtr::TrainSwitcherCallback});
+00135 
+00136     ref\_ptr<Node> ponyFlagSourceNode = osgDB::readNodeFile(\textcolor{stringliteral}{"../BlenderFiles/exports/BrainTrain\_Flag.ive"});
+00137     ref\_ptr<brtr::CelShading> ponyFlag = \textcolor{keyword}{new} \hyperlink{classbrtr_1_1_cel_shading}{brtr::CelShading}(\textcolor{keyword}{false});
+00138     ponyFlag->addChild(ponyFlagSourceNode);
+00139     \textcolor{comment}{//let the flag move!}
+00140     ponyFlag->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"zAnimation"},\textcolor{keyword}{true}), StateAttribute::ON | 
+      StateAttribute::OVERRIDE);
+00141     ref\_ptr<Node> portalGunSource = osgDB::readNodeFile(\textcolor{stringliteral}{"../BlenderFiles/exports/Portalgun.ive"});
+00142     ref\_ptr<PositionAttitudeTransform> portalGunPlacer = \textcolor{keyword}{new} PositionAttitudeTransform;
+00143     portalGunPlacer->addChild(portalGunSource);
+00144     portalGunPlacer->setPosition(Vec3(-76.54, 5.28, 3.82));
+00145     \textcolor{comment}{//vase on top of the ticketcorner}
+00146     ref\_ptr<PositionAttitudeTransform> vase = \hyperlink{namespacebrtr_a05625aff9337331ae351d283f79f0f1e}{brtr::createVaseWithFlower}();
+00147     vase->setPosition(Vec3(-27.9, 17.4, 9.7));
+00148     
+00149     OSG\_ALWAYS << \textcolor{stringliteral}{"Placing bottles (and making some them drinkable)"} << std::endl;
+00150     OSG\_ALWAYS << \textcolor{stringliteral}{"Do not drink and drive"} << std::endl;
+00151     OSG\_ALWAYS << \textcolor{stringliteral}{"Actually, this drink is bad, so do not drink it at all."} << std::endl;
+00152     \textcolor{comment}{//Create and make alpha Bottle}
+00153 
+00154     ref\_ptr<Geometry> bottle = \hyperlink{namespacebrtr_a614d8d6b8bcc6c4e7f7ffb24ca48eb4c}{brtr::createRealBottle}();
+00155     
+00156     \textcolor{comment}{//Drinkable bottles}
+00157     ref\_ptr<Geometry> drinkablebottle = \hyperlink{namespacebrtr_a614d8d6b8bcc6c4e7f7ffb24ca48eb4c}{brtr::createRealBottle}();
+00158    
+00159     \textcolor{comment}{//drunk one bottle, disable all! It's a Feature, not a bug ;)}
+00160     ref\_ptr<Switch> drinableBottleSwitch = \textcolor{keyword}{new} Switch;
+00161     drinableBottleSwitch->addChild(drinkablebottleEmitter, \textcolor{keyword}{true});
+00162     drinableBottleSwitch->setNodeMask(\hyperlink{namespacebrtr_a2060f4d70c0e3bc7e2e35f82e279a40d}{brtr::interactionMask});
+00163 
+00164     \textcolor{comment}{//portalGunPicker}
+00165     ref\_ptr<Switch> portalGunSwitch = \textcolor{keyword}{new} Switch;
+00166     portalGunSwitch->addChild(portalGunPlacer, \textcolor{keyword}{true});
+00167     portalGunSwitch->setNodeMask(\hyperlink{namespacebrtr_a2060f4d70c0e3bc7e2e35f82e279a40d}{brtr::interactionMask});
+00168 
+00169     \textcolor{comment}{//place bottle}
+00170     \hyperlink{classbrtr_1_1_geometry_placer_visitor}{brtr::GeometryPlacerVisitor} bottlePlacer(bottle);
+00171     bottleEmitter->accept(bottlePlacer);
+00172     \textcolor{comment}{//place drinkablebottle}
+00173     \hyperlink{classbrtr_1_1_geometry_placer_visitor}{brtr::GeometryPlacerVisitor} drinkablebottlePlacer(drinkablebottle);
+00174     drinkablebottleEmitter->accept(drinkablebottlePlacer);
+00175 
+00176     \textcolor{comment}{//Placing Benches}
+00177     OSG\_ALWAYS << \textcolor{stringliteral}{"Placing (uncomfortable) benches."} << std::endl;
+00178     OSG\_ALWAYS << \textcolor{stringliteral}{"Lying, they are great!"} << std::endl;
+00179     OSG\_ALWAYS << \textcolor{stringliteral}{"Na, that was a lie."} << std::endl;
+00180 
+00181     ref\_ptr<PositionAttitudeTransform> leftBench = \textcolor{keyword}{new} \hyperlink{classbrtr_1_1_bench}{brtr::Bench}(Vec3(49.5, -2.3, -0.6), 8);
+00182     leftBench->setAttitude(Quat(DegreesToRadians(167.0), Z\_AXIS));
+00183     leftBench->setNodeMask(\hyperlink{namespacebrtr_af79a815819e2ef65ea9cd43dc9d43679}{brtr::collisionMask});
+00184 
+00185     ref\_ptr<PositionAttitudeTransform> rightBench = \textcolor{keyword}{new} \hyperlink{classbrtr_1_1_bench}{brtr::Bench}(Vec3(-50, 14.3, -0.6), 14);
+00186     rightBench->setAttitude(Quat(DegreesToRadians(192.7), Z\_AXIS));
+00187     rightBench->setNodeMask(\hyperlink{namespacebrtr_af79a815819e2ef65ea9cd43dc9d43679}{brtr::collisionMask});
+00188 
+00189     \textcolor{comment}{//a group for the whole station}
+00190     \textcolor{comment}{//needed for the createPipeLine Function}
+00191     ref\_ptr<Group> rootForToon = \textcolor{keyword}{new} Group;
+00192     rootForToon->addChild(trainStation);
+00193     rootForToon->addChild(leftBench);
+00194     rootForToon->addChild(rightBench);
+00195     rootForToon->addChild(train);
+00196     rootForToon->addChild(bottleEmitter);
+00197     rootForToon->addChild(drinableBottleSwitch);
+00198     rootForToon->addChild(portalGunSwitch);
+00199     rootForToon->addChild(vase);
+00200     \textcolor{comment}{//just to make sure}
+00201     rootForToon->setDataVariance(Object::STATIC);
+00202 
+00203 
+00204     OSG\_ALWAYS << \textcolor{stringliteral}{"Creating Lights. Nobody wants a creepy, dark station."} << std::endl;
+00205     OSG\_ALWAYS << \textcolor{stringliteral}{"Except for the creators."} << std::endl;
+00206     ref\_ptr<LightSource> light1 = \hyperlink{namespacebrtr_ad772c6dbc0a2cabd40a284676c124a97}{brtr::createLight}(Vec3(-76.88403, -8.27441, 20.63965), 1
+      );
+00207     ref\_ptr<LightSource> light2 = \hyperlink{namespacebrtr_ad772c6dbc0a2cabd40a284676c124a97}{brtr::createLight}(Vec3(-26.8972, 1.97552, 20.02043), 2);
+00208     ref\_ptr<LightSource> light3 = \hyperlink{namespacebrtr_ad772c6dbc0a2cabd40a284676c124a97}{brtr::createLight}(Vec3(24.33239, 2.49185, 21.58063), 3);
+00209     ref\_ptr<LightSource> light4 = \hyperlink{namespacebrtr_ad772c6dbc0a2cabd40a284676c124a97}{brtr::createLight}(Vec3(74.73347, -8.83866, 21.33362), 4)
+      ;
+00210     ref\_ptr<LightSource> staircaseLight = \hyperlink{namespacebrtr_ad772c6dbc0a2cabd40a284676c124a97}{brtr::createLight}(Vec3(0, 110, 38), 5);
+00211     staircaseLight->getLight()->setQuadraticAttenuation(0.005);
+00212 
+00213 
+00214     rootForToon->addChild(light1);
+00215     rootForToon->addChild(light2);
+00216     rootForToon->addChild(light3);
+00217     rootForToon->addChild(light4); 
+00218     rootForToon->addChild(staircaseLight);
+00219 
+00220 
+00221     OSG\_ALWAYS << \textcolor{stringliteral}{"Creating RenderingPipeline. ToonyLoony!"} << std::endl;
+00222     \hyperlink{structbrtr_1_1_rendering_pipeline}{brtr::RenderingPipeline} pipe;
+00223     \hyperlink{namespacebrtr_adcf0546a392221be3958ec96f99887f0}{brtr::createRenderingPipeline}(width, height, *rootForToon, viewer, pipe,
+      fogColor);
+00224 
+00225 
+00226     \textcolor{comment}{//HUD Cams}
+00227     ref\_ptr<brtr::WeaponHUD> weaponHUD = \textcolor{keyword}{new} \hyperlink{classbrtr_1_1_weapon_h_u_d}{brtr::WeaponHUD};
+00228     ref\_ptr<Camera> textHUD = \hyperlink{namespacebrtr_a62da4f109238c45882dd64d7a7e97a1d}{brtr::createHUDCamera}(0, width, 0, height);
+00229     textHUD->addChild(\hyperlink{namespacebrtr_a31c533ae635c528c761cc83e34e91b2f}{brtr::createCrosshair}(width, height));
+00230     textHUD->getOrCreateStateSet()->setTextureMode(1, GL\_TEXTURE\_2D, StateAttribute::OFF);
+00231     \textcolor{comment}{//making bottles drinkable}
+00232     drinkablebottle->getOrCreateUserDataContainer()->addUserObject(\textcolor{keyword}{new} 
+      \hyperlink{classbrtr_1_1_drunken_interaction_callback}{brtr::DrunkenInteractionCallback}(viewer.getCamera(), textHUD, 
+      drinableBottleSwitch, width, height));
+00233     ref\_ptr<brtr::AddPortalGunInteractionCallback> portalGunCallback = \textcolor{keyword}{new} 
+      \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback}{brtr::AddPortalGunInteractionCallback}(weaponHUD, textHUD, 
+      portalGunSwitch, width, height);
+00234     \hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor}{brtr::AddInteractionCallbackToDrawableVisitor} 
+      portalGunCallbackVisitor(portalGunCallback);
+00235     portalGunSource->accept(portalGunCallbackVisitor);
+00236 
+00237     OSG\_ALWAYS << \textcolor{stringliteral}{"Making coffee."} << std::endl;
+00238     \hyperlink{classbrtr_1_1_modify_material_visitor}{brtr::ModifyMaterialVisitor} mmv;
+00239     mmv.\hyperlink{classbrtr_1_1_modify_material_visitor_adfaa00524e765fdf3ddc5968187623cd}{setAmbient}(Vec4(0.4, 0.4, 0.4, 4)).\hyperlink{classbrtr_1_1_modify_material_visitor_a17748f6a7f41431832da66dd65e1c41f}{setDiffuse}(Vec4(0.7,0.7,0.7,1.0)).
+      \hyperlink{classbrtr_1_1_modify_material_visitor_a698aa0c31f8c5add503d47bc9898eec3}{setShininess}(42*3); \textcolor{comment}{//.setShininess(42 * 3).setSpecular(Vec4(0.7, 0.7, 0.7, 1));}
+00240     \textcolor{comment}{//weaponHUD->accept(imv);}
+00241     trainStation->accept(mmv);
+00242     trainPosition->accept(mmv);
+00243     portalGunSource->accept(mmv);
+00244 
+00245     \textcolor{comment}{//the root node, which holds the cams (pass and HUDs) as siblings}
+00246     ref\_ptr<Group> sceneData = \textcolor{keyword}{new} Group;
+00247     \textcolor{comment}{//add elements to sceneData}
+00248     OSG\_ALWAYS << \textcolor{stringliteral}{"Adding elements to scene root."} << std::endl;
+00249     OSG\_ALWAYS << \textcolor{stringliteral}{"I am soooo excited, we are nearly done!."} << std::endl;
+00250     sceneData->addChild(pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_ae945030321a6b44f00266954c8c50bf3}{pass\_0\_color});
+00251     sceneData->addChild(pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_a18752632c1b557d283e523ebbc0443a0}{pass\_0\_depth});
+00252     sceneData->addChild(pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_aea2228e41f1e5c6db5d616c05ecc27fd}{pass\_PostProcess});  
+00253     sceneData->addChild(trainStationHitbox);
+00254     sceneData->addChild(weaponHUD);
+00255     sceneData->addChild(textHUD);
+00256     \textcolor{comment}{//safety}
+00257     \textcolor{comment}{//sceneData->getOrCreateStateSet()->setMode(GL\_LIGHTING, StateAttribute::OFF |
+       StateAttribute::OVERRIDE);}
+00258 
+00259     \textcolor{comment}{//Set toonTex}
+00260     sceneData->getOrCreateStateSet()->setTextureAttributeAndModes(1, toonTexs[0], osg::StateAttribute::ON);
+00261 
+00262     \textcolor{comment}{//Control Room}
+00263     ref\_ptr<brtr::ToonTexSwitcherCallback> toonCallback = \textcolor{keyword}{new} 
+      \hyperlink{classbrtr_1_1_toon_tex_switcher_callback}{brtr::ToonTexSwitcherCallback}(sceneData, textHUD, width, height, toonTexs);
+00264     ref\_ptr<brtr::ProgramSwitcherCallback> programCallback = \textcolor{keyword}{new} 
+      \hyperlink{classbrtr_1_1_program_switcher_callback}{brtr::ProgramSwitcherCallback}(pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_aea2228e41f1e5c6db5d616c05ecc27fd}{pass\_PostProcess}, textHUD, 
+      width, height, pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_afe773fb98986d39ef23a4edf3634af10}{programs});
+00265     ref\_ptr<brtr::ControlRoom> controlRoom = \textcolor{keyword}{new} \hyperlink{classbrtr_1_1_control_room}{brtr::ControlRoom}(40, 50, *toonCallback, 
+      *programCallback);
+00266     controlRoom->setPosition(Vec3(0, 170.3, 23.2));
+00267 
+00268     \textcolor{comment}{//Adding "special-treatment nodes" (mainly no outlines) to first pass}
+00269     pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_ae945030321a6b44f00266954c8c50bf3}{pass\_0\_color}->addChild(ponyFlag);
+00270     pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_a18752632c1b557d283e523ebbc0443a0}{pass\_0\_depth}->addChild(ponyFlag);
+00271     pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_ae945030321a6b44f00266954c8c50bf3}{pass\_0\_color}->addChild(controlRoom);
+00272     pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_a18752632c1b557d283e523ebbc0443a0}{pass\_0\_depth}->addChild(controlRoom);
+00273 
+00274     viewer.setSceneData(sceneData);
+00275     osgUtil::Optimizer optimizer;
+00276     optimizer.optimize(sceneData,osgUtil::Optimizer::STATIC\_OBJECT\_DETECTION);
+00277     
+00278 
+00279     \textcolor{comment}{//Manipulator and KeyHandler}
+00280     OSG\_ALWAYS << \textcolor{stringliteral}{"Adding Manipulator and KeyHandler. What could possible go wrong?."} << std::endl;
+00281     viewer.setCameraManipulator(\textcolor{keyword}{new} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{brtr::FPSCameraManipulator}(0.25, 7, 
+      rootForToon));
+00282     osg::ref\_ptr<brtr::KeyHandler> keyHandler = \textcolor{keyword}{new} \hyperlink{classbrtr_1_1_key_handler}{brtr::KeyHandler}(sceneData, pipe.
+      \hyperlink{structbrtr_1_1_rendering_pipeline_aea2228e41f1e5c6db5d616c05ecc27fd}{pass\_PostProcess}, pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_afe773fb98986d39ef23a4edf3634af10}{programs});
+00283     viewer.addEventHandler(weaponHUD->getWeaponHandler());
+00284     viewer.addEventHandler(keyHandler);
+00285 
+00286     OSG\_ALWAYS << \textcolor{stringliteral}{"Potato."} << std::endl;
+00287     OSG\_ALWAYS << \textcolor{stringliteral}{"Finished! Press Enter to start the fun!"} <<std::endl;
+00288  
+00289     getchar();
+00290     OSG\_ALWAYS << \textcolor{stringliteral}{"The cake is a lie."} << std::endl;
+00291     viewer.setUpViewOnSingleScreen(screen);
+00292     osgViewer::GraphicsWindow* window = \textcolor{keyword}{dynamic\_cast<}osgViewer::GraphicsWindow*\textcolor{keyword}{>}(viewer.getCamera()->
+      getGraphicsContext());
+00293     \textcolor{keywordflow}{if} (window) \{
+00294         window->useCursor(\textcolor{keyword}{false});
+00295     \}
+00296     \textcolor{keywordflow}{else} \{
+00297         OSG\_ALWAYS << \textcolor{stringliteral}{"WARNING: COULD NOT HIDE MOUSE CURSOR"} << std::endl << \textcolor{stringliteral}{"PICTURE WILL SUCK A BIT"} << 
+      std::endl << \textcolor{stringliteral}{"This just had to go wrong -.-*"} << std::endl;
+00298     \}
+00299 
+00300     \textcolor{keywordflow}{while} (!viewer.done())
+00301         viewer.frame();
+00302  
+00303     wsi->setScreenResolution(GraphicsContext::ScreenIdentifier(screen), oldWidth, oldHeight);
+00304     \textcolor{keywordflow}{return} EXIT\_SUCCESS;
+00305 \}
+\end{DoxyCode}

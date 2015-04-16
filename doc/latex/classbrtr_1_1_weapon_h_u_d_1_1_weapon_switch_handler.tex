@@ -1,0 +1,152 @@
+\hypertarget{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}{\section{brtr\+:\+:Weapon\+H\+U\+D\+:\+:Weapon\+Switch\+Handler Class Reference}
+\label{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}\index{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}}
+}
+
+
+Event\+Handler for Weapon\+Switching.  
+
+
+Inheritance diagram for brtr\+:\+:Weapon\+H\+U\+D\+:\+:Weapon\+Switch\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a0f61e3aa44c58264e440186f1d7dbb0f}{Weapon\+Switch\+Handler} (Switch $\ast$switch\+Node)
+\begin{DoxyCompactList}\small\item\em initializes a switch handler to switch through weapons \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_ad3bd49035273e857144c1ad4927a22df}{handle} (const osg\+G\+A\+::\+G\+U\+I\+Event\+Adapter \&ea, osg\+G\+A\+::\+G\+U\+I\+Action\+Adapter \&aa)
+\begin{DoxyCompactList}\small\item\em When a mouse event is triggered, this function is called to switch between weapons. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a22b7a9e8884ac0c4a63979d6d441e58f}{$\sim$\+Weapon\+Switch\+Handler} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ref\+\_\+ptr$<$ Switch $>$ \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_af4b40e431f9cbcaddf843578316bb9c4}{\+\_\+switch}
+\item 
+int \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a15b23d25cb1847f558493adc2a97311e}{\+\_\+cur\+Weapon}
+\item 
+unsigned int \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_abfa6e6c2904d1e6ed7cd5d029a632ddf}{\+\_\+frame\+Number}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Event\+Handler for Weapon\+Switching. 
+
+can only be obtained trough \hyperlink{classbrtr_1_1_weapon_h_u_d_a6a9a434ff3aa3861caf030763772ac74}{Weapon\+H\+U\+D\+::get\+Weapon\+Handler()} \begin{DoxyAuthor}{Author}
+Jonathan Spielvogel 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8h_source_l00032}{32} of file \hyperlink{_weapon_h_u_d_8h_source}{Weapon\+H\+U\+D.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a0f61e3aa44c58264e440186f1d7dbb0f}{\index{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}!Weapon\+Switch\+Handler@{Weapon\+Switch\+Handler}}
+\index{Weapon\+Switch\+Handler@{Weapon\+Switch\+Handler}!brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}}
+\subsubsection[{Weapon\+Switch\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler\+::\+Weapon\+Switch\+Handler (
+\begin{DoxyParamCaption}
+\item[{Switch $\ast$}]{switch\+Node}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a0f61e3aa44c58264e440186f1d7dbb0f}
+
+
+initializes a switch handler to switch through weapons 
+
+
+\begin{DoxyParams}{Parameters}
+{\em switch\+Node} & pointer to Switch \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}{Weapon\+Switch\+Handler} 
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8cpp_source_l00101}{101} of file \hyperlink{_weapon_h_u_d_8cpp_source}{Weapon\+H\+U\+D.\+cpp}.
+
+\hypertarget{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a22b7a9e8884ac0c4a63979d6d441e58f}{\index{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}!````~Weapon\+Switch\+Handler@{$\sim$\+Weapon\+Switch\+Handler}}
+\index{````~Weapon\+Switch\+Handler@{$\sim$\+Weapon\+Switch\+Handler}!brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}}
+\subsubsection[{$\sim$\+Weapon\+Switch\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler\+::$\sim$\+Weapon\+Switch\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}}\label{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a22b7a9e8884ac0c4a63979d6d441e58f}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8h_source_l00049}{49} of file \hyperlink{_weapon_h_u_d_8h_source}{Weapon\+H\+U\+D.\+h}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_ad3bd49035273e857144c1ad4927a22df}{\index{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}!handle@{handle}}
+\index{handle@{handle}!brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}}
+\subsubsection[{handle}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler\+::handle (
+\begin{DoxyParamCaption}
+\item[{const osg\+G\+A\+::\+G\+U\+I\+Event\+Adapter \&}]{ea, }
+\item[{osg\+G\+A\+::\+G\+U\+I\+Action\+Adapter \&}]{aa}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_ad3bd49035273e857144c1ad4927a22df}
+
+
+When a mouse event is triggered, this function is called to switch between weapons. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ea} & Gui\+Event\+Adapter \\
+\hline
+{\em aa} & Gui\+Action\+Adapter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, if the event was handled, otherwise false 
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8cpp_source_l00106}{106} of file \hyperlink{_weapon_h_u_d_8cpp_source}{Weapon\+H\+U\+D.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a15b23d25cb1847f558493adc2a97311e}{\index{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}!\+\_\+cur\+Weapon@{\+\_\+cur\+Weapon}}
+\index{\+\_\+cur\+Weapon@{\+\_\+cur\+Weapon}!brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}}
+\subsubsection[{\+\_\+cur\+Weapon}]{\setlength{\rightskip}{0pt plus 5cm}int brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler\+::\+\_\+cur\+Weapon\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a15b23d25cb1847f558493adc2a97311e}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8h_source_l00052}{52} of file \hyperlink{_weapon_h_u_d_8h_source}{Weapon\+H\+U\+D.\+h}.
+
+\hypertarget{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_abfa6e6c2904d1e6ed7cd5d029a632ddf}{\index{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}!\+\_\+frame\+Number@{\+\_\+frame\+Number}}
+\index{\+\_\+frame\+Number@{\+\_\+frame\+Number}!brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}}
+\subsubsection[{\+\_\+frame\+Number}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler\+::\+\_\+frame\+Number\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_abfa6e6c2904d1e6ed7cd5d029a632ddf}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8h_source_l00053}{53} of file \hyperlink{_weapon_h_u_d_8h_source}{Weapon\+H\+U\+D.\+h}.
+
+\hypertarget{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_af4b40e431f9cbcaddf843578316bb9c4}{\index{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}!\+\_\+switch@{\+\_\+switch}}
+\index{\+\_\+switch@{\+\_\+switch}!brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler@{brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler}}
+\subsubsection[{\+\_\+switch}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$Switch$>$ brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler\+::\+\_\+switch\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_af4b40e431f9cbcaddf843578316bb9c4}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8h_source_l00051}{51} of file \hyperlink{_weapon_h_u_d_8h_source}{Weapon\+H\+U\+D.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_weapon_h_u_d_8h}{Weapon\+H\+U\+D.\+h}\item 
+Camera/\hyperlink{_weapon_h_u_d_8cpp}{Weapon\+H\+U\+D.\+cpp}\end{DoxyCompactItemize}

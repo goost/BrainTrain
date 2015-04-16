@@ -1,0 +1,35 @@
+\hypertarget{_base_interaction_callback_8h_source}{\section{Base\+Interaction\+Callback.\+h}
+\label{_base_interaction_callback_8h_source}\index{header/\+Base\+Interaction\+Callback.\+h@{header/\+Base\+Interaction\+Callback.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osg/NodeCallback>}
+00003 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00004 \textcolor{preprocessor}{#include <osgText/Text>}
+00005 
+00006 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_base_interaction_callback_8h_source_l00024}{}\hyperlink{classbrtr_1_1_base_interaction_callback}{00024}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_base_interaction_callback}{BaseInteractionCallback}: \textcolor{keyword}{public} osg::NodeCallback \{
+00025     \textcolor{keyword}{public}:
+00026 
+00035         \hyperlink{classbrtr_1_1_base_interaction_callback_afc863306967933e0ebef5f7322fab06e}{BaseInteractionCallback}(osg::Node* attachTo, osg::Camera* hudCam, \textcolor{keywordtype}{int} width,
+       \textcolor{keywordtype}{int} height);
+00036         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_base_interaction_callback_ab2cf0f22fcc9e79ecda29a547edb5084}{operator()}(osg::Node* node, osg::NodeVisitor* nv);
+00037 
+00041         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_base_interaction_callback_a0fe57e329f044e21d49041c861435ad8}{setText}() = 0;
+00042         \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_base_interaction_callback_ad74fe9ac5d86c7f23d18614d5abb1003}{clearText}();
+00043         \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_base_interaction_callback_a95ede7c8aa0dc1e067ae64615ecb23db}{reactivate}();
+00044         osg::ref\_ptr<osg::Node> \hyperlink{classbrtr_1_1_base_interaction_callback_aafca24ccde1cf21f4132f65a83e0b2bc}{getNode}() \textcolor{keyword}{const};
+00045         \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_base_interaction_callback_a420a1977c954850dbe66a189908cde80}{setNode}(osg::ref\_ptr<osg::Node> val);
+00046     \textcolor{keyword}{protected}:
+00050         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_base_interaction_callback_a3ed50c9c1725f932e0b78c90ba24e1ed}{interact}(osg::Node*, osg::NodeVisitor*)=0;
+\hypertarget{_base_interaction_callback_8h_source_l00051}{}\hyperlink{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{00051}         osg::ref\_ptr<osg::Node> \hyperlink{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{\_attachTo};
+\hypertarget{_base_interaction_callback_8h_source_l00052}{}\hyperlink{classbrtr_1_1_base_interaction_callback_a0bca3b64724235e08740be94fe4acc8d}{00052}         osg::ref\_ptr<osg::Camera> \hyperlink{classbrtr_1_1_base_interaction_callback_a0bca3b64724235e08740be94fe4acc8d}{\_hudCam};
+\hypertarget{_base_interaction_callback_8h_source_l00053}{}\hyperlink{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}{00053}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}{\_done};
+\hypertarget{_base_interaction_callback_8h_source_l00054}{}\hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{00054}         osg::ref\_ptr<osgText::Text> \hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\_text};
+00055         
+00056         
+00057     \textcolor{keyword}{private}:
+00058     \};
+00059 \}
+\end{DoxyCode}

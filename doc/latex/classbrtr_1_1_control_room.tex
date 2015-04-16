@@ -1,0 +1,148 @@
+\hypertarget{classbrtr_1_1_control_room}{\section{brtr\+:\+:Control\+Room Class Reference}
+\label{classbrtr_1_1_control_room}\index{brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}}
+}
+
+
+Control Room Class, derived from Position\+Attitude\+Transform, set ups the whole room as its own children.  
+
+
+
+
+{\ttfamily \#include $<$Control\+Room.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Control\+Room\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbrtr_1_1_control_room}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_control_room_afb36cd27e18234098fbecd22ac325319}{Control\+Room} (double room\+Size, int lod, \hyperlink{classbrtr_1_1_toon_tex_switcher_callback}{brtr\+::\+Toon\+Tex\+Switcher\+Callback} \&toon\+Callback, \hyperlink{classbrtr_1_1_program_switcher_callback}{brtr\+::\+Program\+Switcher\+Callback} \&program\+Callback)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_control_room_a97b0eb95277b12a2267f8e7c777aeda2}{$\sim$\+Control\+Room} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Group $>$ \hyperlink{classbrtr_1_1_control_room_a5dfafb496e18e8e4f6d792b144dd10b9}{create\+Room\+Surrounding} (double room\+Size, int lod)
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Group $>$ \hyperlink{classbrtr_1_1_control_room_a15055ae530b811b7046871c5c1ef3f4f}{create\+Chess\+Figures} (\hyperlink{classbrtr_1_1_toon_tex_switcher_callback}{brtr\+::\+Toon\+Tex\+Switcher\+Callback} \&toon\+Callback, \hyperlink{classbrtr_1_1_program_switcher_callback}{brtr\+::\+Program\+Switcher\+Callback} \&program\+Callback)
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Material $>$ \hyperlink{classbrtr_1_1_control_room_a1cb8b6799fcb85750e0d321a4fbed6f1}{create\+Material} (osg\+::\+Vec4 diffuse, osg\+::\+Vec4 ambient, osg\+::\+Vec4 specular=osg\+::\+Vec4(0.\+7, 0.\+7, 0.\+7, 1), double shininess=42.\+0)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Control Room Class, derived from Position\+Attitude\+Transform, set ups the whole room as its own children. 
+
+sets always a light as light0, client should not use this light number any more the chess figures alongside with the provided interactioncallbacks are also set up \begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_control_room_8h_source_l00018}{18} of file \hyperlink{_control_room_8h_source}{Control\+Room.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_control_room_afb36cd27e18234098fbecd22ac325319}{\index{brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}!Control\+Room@{Control\+Room}}
+\index{Control\+Room@{Control\+Room}!brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}}
+\subsubsection[{Control\+Room}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Control\+Room\+::\+Control\+Room (
+\begin{DoxyParamCaption}
+\item[{double}]{room\+Size, }
+\item[{int}]{lod, }
+\item[{{\bf brtr\+::\+Toon\+Tex\+Switcher\+Callback} \&}]{toon\+Callback, }
+\item[{{\bf brtr\+::\+Program\+Switcher\+Callback} \&}]{program\+Callback}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_control_room_afb36cd27e18234098fbecd22ac325319}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em room\+Size} & size of the room, height is roomsize/2 \\
+\hline
+{\em lod} & level of detail, the higher the more triangles are created \\
+\hline
+{\em toon\+Callback} & \hyperlink{classbrtr_1_1_toon_tex_switcher_callback}{Toon\+Tex\+Switcher\+Callback}, will be attached to first chess figure \\
+\hline
+{\em program\+Callback} & \hyperlink{classbrtr_1_1_program_switcher_callback}{Program\+Switcher\+Callback}, will be attached to third chess figure \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_control_room_8cpp_source_l00013}{13} of file \hyperlink{_control_room_8cpp_source}{Control\+Room.\+cpp}.
+
+\hypertarget{classbrtr_1_1_control_room_a97b0eb95277b12a2267f8e7c777aeda2}{\index{brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}!````~Control\+Room@{$\sim$\+Control\+Room}}
+\index{````~Control\+Room@{$\sim$\+Control\+Room}!brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}}
+\subsubsection[{$\sim$\+Control\+Room}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Control\+Room\+::$\sim$\+Control\+Room (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}}\label{classbrtr_1_1_control_room_a97b0eb95277b12a2267f8e7c777aeda2}
+
+
+Definition at line \hyperlink{_control_room_8h_source_l00031}{31} of file \hyperlink{_control_room_8h_source}{Control\+Room.\+h}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_control_room_a15055ae530b811b7046871c5c1ef3f4f}{\index{brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}!create\+Chess\+Figures@{create\+Chess\+Figures}}
+\index{create\+Chess\+Figures@{create\+Chess\+Figures}!brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}}
+\subsubsection[{create\+Chess\+Figures}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Group $>$ brtr\+::\+Control\+Room\+::create\+Chess\+Figures (
+\begin{DoxyParamCaption}
+\item[{{\bf brtr\+::\+Toon\+Tex\+Switcher\+Callback} \&}]{toon\+Callback, }
+\item[{{\bf brtr\+::\+Program\+Switcher\+Callback} \&}]{program\+Callback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_control_room_a15055ae530b811b7046871c5c1ef3f4f}
+
+
+Definition at line \hyperlink{_control_room_8cpp_source_l00100}{100} of file \hyperlink{_control_room_8cpp_source}{Control\+Room.\+cpp}.
+
+\hypertarget{classbrtr_1_1_control_room_a1cb8b6799fcb85750e0d321a4fbed6f1}{\index{brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}!create\+Material@{create\+Material}}
+\index{create\+Material@{create\+Material}!brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}}
+\subsubsection[{create\+Material}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Material $>$ brtr\+::\+Control\+Room\+::create\+Material (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Vec4}]{diffuse, }
+\item[{osg\+::\+Vec4}]{ambient, }
+\item[{osg\+::\+Vec4}]{specular = {\ttfamily osg\+:\+:Vec4(0.7,0.7,0.7,1)}, }
+\item[{double}]{shininess = {\ttfamily 42.0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_control_room_a1cb8b6799fcb85750e0d321a4fbed6f1}
+
+
+Definition at line \hyperlink{_control_room_8cpp_source_l00145}{145} of file \hyperlink{_control_room_8cpp_source}{Control\+Room.\+cpp}.
+
+\hypertarget{classbrtr_1_1_control_room_a5dfafb496e18e8e4f6d792b144dd10b9}{\index{brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}!create\+Room\+Surrounding@{create\+Room\+Surrounding}}
+\index{create\+Room\+Surrounding@{create\+Room\+Surrounding}!brtr\+::\+Control\+Room@{brtr\+::\+Control\+Room}}
+\subsubsection[{create\+Room\+Surrounding}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ Group $>$ brtr\+::\+Control\+Room\+::create\+Room\+Surrounding (
+\begin{DoxyParamCaption}
+\item[{double}]{room\+Size, }
+\item[{int}]{lod}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_control_room_a5dfafb496e18e8e4f6d792b144dd10b9}
+
+
+Definition at line \hyperlink{_control_room_8cpp_source_l00026}{26} of file \hyperlink{_control_room_8cpp_source}{Control\+Room.\+cpp}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_control_room_8h}{Control\+Room.\+h}\item 
+Objects/\hyperlink{_control_room_8cpp}{Control\+Room.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,666 @@
+\hypertarget{_util_functions_8cpp_source}{\section{Util\+Functions.\+cpp}
+\label{_util_functions_8cpp_source}\index{Util/\+Util\+Functions.\+cpp@{Util/\+Util\+Functions.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/UtilFunctions.h"}
+00002 \textcolor{preprocessor}{#include "../header/CelShading.h"}
+00003 \textcolor{preprocessor}{#include <osgText/Text>}
+00004 \textcolor{preprocessor}{#include <osg/PolygonMode>}
+00005 \textcolor{preprocessor}{#include <osg/LightSource>}
+00006 \textcolor{preprocessor}{#include <osg/BlendFunc>}
+00007 \textcolor{preprocessor}{#include <osg/ComputeBoundsVisitor>}
+00008 \textcolor{preprocessor}{#include <osg/Point>}
+00009 \textcolor{preprocessor}{#include <osg/PointSprite>}
+00010 \textcolor{preprocessor}{#include <osgParticle/ParticleSystem>}
+00011 \textcolor{preprocessor}{#include <osgParticle/ParticleSystemUpdater>}
+00012 \textcolor{preprocessor}{#include <osgParticle/Particle>}
+00013 \textcolor{preprocessor}{#include <osgParticle/ModularEmitter>}
+00014 \textcolor{preprocessor}{#include <osgParticle/ModularProgram>}
+00015 \textcolor{preprocessor}{#include <osgParticle/RandomRateCounter>}
+00016 \textcolor{preprocessor}{#include <osgParticle/MultiSegmentPlacer>}
+00017 \textcolor{preprocessor}{#include <osgParticle/RadialShooter>}
+00018 \textcolor{preprocessor}{#include <osgParticle/FluidFrictionOperator>}
+00019 \textcolor{preprocessor}{#include <osgParticle/AccelOperator>}
+00020 
+00021 \textcolor{keyword}{using namespace }osg;
+00022 
+00023 \textcolor{keyword}{namespace }brtr\{
+00024   
+\hypertarget{_util_functions_8cpp_source_l00025}{}\hyperlink{namespacebrtr_aa7a89c381be095a7eb1e248d2e6c0e23}{00025}     ref\_ptr<osg::Camera> \hyperlink{namespacebrtr_aa7a89c381be095a7eb1e248d2e6c0e23}{createRTTCamera}(osg::Camera::BufferComponent buffer, osg::Texture* 
+      tex, \textcolor{keywordtype}{bool} isAbsolute) \{
+00026         osg::ref\_ptr<osg::Camera> camera = \textcolor{keyword}{new} osg::Camera;
+00027         camera->setClearColor(osg::Vec4());
+00028         camera->setClearMask(GL\_COLOR\_BUFFER\_BIT | GL\_DEPTH\_BUFFER\_BIT);
+00029         camera->setRenderTargetImplementation(osg::Camera::FRAME\_BUFFER\_OBJECT);
+00030         camera->setRenderOrder(osg::Camera::PRE\_RENDER);
+00031         \textcolor{keywordflow}{if} (tex) \{
+00032             tex->setFilter(osg::Texture2D::MIN\_FILTER, osg::Texture2D::LINEAR);
+00033             tex->setFilter(osg::Texture2D::MAG\_FILTER, osg::Texture2D::LINEAR);
+00034             camera->setViewport(0, 0, tex->getTextureWidth(), tex->getTextureHeight());
+00035             camera->attach(buffer, tex);
+00036         \}
+00037 
+00038         \textcolor{keywordflow}{if} (isAbsolute) \{
+00039             camera->setReferenceFrame(osg::Transform::ABSOLUTE\_RF);
+00040             camera->setProjectionMatrix(osg::Matrix::ortho2D(0.0, 1.0, 0.0, 1.0));
+00041             camera->setViewMatrix(osg::Matrix::identity());
+00042             camera->addChild(\hyperlink{namespacebrtr_a32cfc96621681baabc76c52af5d6a347}{createScreenQuad}(1.0f, 1.0f,1.0f));
+00043         \}
+00044         \textcolor{keywordflow}{return} camera;
+00045     \}
+00046     
+\hypertarget{_util_functions_8cpp_source_l00047}{}\hyperlink{namespacebrtr_a32cfc96621681baabc76c52af5d6a347}{00047}     ref\_ptr<osg::Geode> \hyperlink{namespacebrtr_a32cfc96621681baabc76c52af5d6a347}{createScreenQuad}(\textcolor{keywordtype}{float} width, \textcolor{keywordtype}{float} height, \textcolor{keywordtype}{float} scale) \{
+00048         osg::Geometry* geom = osg::createTexturedQuadGeometry(
+00049             osg::Vec3(), osg::Vec3(width, 0.0f, 0.0f), osg::Vec3(0.0f, height, 0.0f),
+00050             0.0f, 0.0f, width*scale, height*scale);
+00051         osg::ref\_ptr<osg::Geode> quad = \textcolor{keyword}{new} osg::Geode;
+00052         quad->addDrawable(geom);
+00053 
+00054         \textcolor{keywordtype}{int} values = osg::StateAttribute::OFF | osg::StateAttribute::PROTECTED;
+00055         quad->getOrCreateStateSet()->setAttribute(
+00056             \textcolor{keyword}{new} osg::PolygonMode(osg::PolygonMode::FRONT\_AND\_BACK, osg::PolygonMode::FILL), values);
+00057         quad->getOrCreateStateSet()->setMode(GL\_LIGHTING, values);
+00058         \textcolor{keywordflow}{return} quad;
+00059     \}
+00060 
+\hypertarget{_util_functions_8cpp_source_l00061}{}\hyperlink{namespacebrtr_a62da4f109238c45882dd64d7a7e97a1d}{00061}     ref\_ptr<Camera> \hyperlink{namespacebrtr_a62da4f109238c45882dd64d7a7e97a1d}{createHUDCamera}(\textcolor{keywordtype}{double} left, \textcolor{keywordtype}{double} right, \textcolor{keywordtype}{double} bottom, \textcolor{keywordtype}{double} top) \{
+00062         osg::ref\_ptr<Camera> camera = \textcolor{keyword}{new} Camera;
+00063         camera->setReferenceFrame(Transform::ABSOLUTE\_RF);
+00064         camera->setClearMask(GL\_DEPTH\_BUFFER\_BIT);
+00065         camera->setRenderOrder(Camera::POST\_RENDER);
+00066         camera->setAllowEventFocus(\textcolor{keyword}{false});
+00067         camera->setProjectionMatrix(Matrix::ortho2D(left, right, bottom, top));
+00068         camera->getOrCreateStateSet()->setMode(GL\_LIGHTING, StateAttribute::OFF);
+00069         \textcolor{keywordflow}{return} camera;
+00070     \}
+00071 
+\hypertarget{_util_functions_8cpp_source_l00072}{}\hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{00072}     ref\_ptr<Geometry> \hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{createRectangle}(\textcolor{keywordtype}{double} length, \textcolor{keywordtype}{double} width, \textcolor{keywordtype}{int} lsteps, \textcolor{keywordtype}{int} wsteps) \{
+00073         ref\_ptr<Geometry> rect = \textcolor{keyword}{new} Geometry;
+00074         ref\_ptr<Vec3Array> vertices = \textcolor{keyword}{new} Vec3Array();
+00075         ref\_ptr<Vec3Array> normals = \textcolor{keyword}{new} Vec3Array();
+00076         ref\_ptr<DrawElementsUInt> indices = \textcolor{keyword}{new} DrawElementsUInt(GL\_TRIANGLE\_STRIP);
+00077 
+00078         \textcolor{keywordtype}{double} xstep = length / lsteps;
+00079         \textcolor{keywordtype}{double} ystep = width / wsteps;
+00080         \textcolor{comment}{// current vertex coordinates}
+00081         \textcolor{keywordtype}{double} x = 0.0;
+00082         \textcolor{keywordtype}{double} y = 0.0;
+00083         \textcolor{keywordtype}{double} z = 0.0;
+00084         \textcolor{comment}{//  current normal coordinates}
+00085         \textcolor{keywordtype}{double} nx = 0.0;
+00086         \textcolor{keywordtype}{double} ny = 0.0;
+00087         \textcolor{keywordtype}{double} nz = 1.0;
+00088 
+00089         \textcolor{comment}{// set vertices and normals}
+00090         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i <= lsteps; i++) \{
+00091             y = 0.0;
+00092             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j <= wsteps; j++) \{
+00093                 vertices->push\_back(Vec3d(x, y, z));
+00094                 normals->push\_back(Vec3d(nx, ny, nz));
+00095                 y += ystep;
+00096             \}
+00097             x += xstep;
+00098         \}
+00099 
+00100         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < lsteps; i++) \{
+00101 
+00102             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j <= wsteps; j++) \{
+00103                 indices->push\_back(i*(wsteps + 1) + j);
+00104                 indices->push\_back((i + 1)*(wsteps + 1) + j);
+00105             \}
+00106             indices->push\_back((i + 1)*(wsteps + 1) + wsteps);
+00107             indices->push\_back((i + 1)*(wsteps + 1));
+00108         \}
+00109 
+00110         rect->setVertexArray(vertices.get());
+00111         rect->addPrimitiveSet(indices.get());
+00112         rect->setNormalArray(normals.get());
+00113         rect->setNormalBinding(Geometry::BIND\_PER\_VERTEX);
+00114          
+00115         \textcolor{keywordflow}{return} rect;
+00116     \}
+00117 
+\hypertarget{_util_functions_8cpp_source_l00118}{}\hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{00118}     ref\_ptr<Geometry> \hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{createRectangleWithTexcoords}(\textcolor{keywordtype}{double} length, \textcolor{keywordtype}{double} width,
+       \textcolor{keywordtype}{int} lsteps, \textcolor{keywordtype}{int} wsteps) \{
+00119         ref\_ptr<Geometry> rect = \hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{createRectangle}(length,  width,  lsteps,  wsteps);
+00120 
+00121         osg::ref\_ptr<osg::Vec2Array> texcoords = \textcolor{keyword}{new} osg::Vec2Array;
+00122         \textcolor{keywordtype}{double} xstep = length / lsteps;
+00123         \textcolor{keywordtype}{double} ystep = width / wsteps;
+00124         \textcolor{comment}{// current vertex coordinates}
+00125         \textcolor{keywordtype}{double} x = 0.0;
+00126         \textcolor{keywordtype}{double} y = 0.0;
+00127         \textcolor{keywordtype}{double} z = 0.0;
+00128         \textcolor{comment}{//  current normal coordinates}
+00129         \textcolor{keywordtype}{double} nx = 0.0;
+00130         \textcolor{keywordtype}{double} ny = 0.0;
+00131         \textcolor{keywordtype}{double} nz = 1.0;
+00132         \textcolor{keywordtype}{double} coordlen = length;
+00133         \textcolor{keywordtype}{double} coordwid = width;
+00134         \textcolor{keywordflow}{if} (width / length < 0.25) coordlen = 1;
+00135         \textcolor{keywordflow}{else} coordlen = length;
+00136         \textcolor{keywordflow}{if} (length / width < 0.25) coordwid = 1;
+00137         \textcolor{keywordflow}{else} coordwid = width;
+00138         \textcolor{comment}{// set vertices and normals}
+00139         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i <= lsteps; i++) \{
+00140             y = 0.0;
+00141             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j <= wsteps; j++) \{
+00142                 texcoords->push\_back(Vec2(x / coordlen, y / coordwid));
+00143                 y += ystep;
+00144             \}
+00145             x += xstep;
+00146         \}
+00147         rect->setTexCoordArray(0, texcoords.get());
+00148         \textcolor{keywordflow}{return} rect;
+00149     \}
+00150 
+\hypertarget{_util_functions_8cpp_source_l00151}{}\hyperlink{namespacebrtr_a83d3e627c9dc247459610aa9fec23d7b}{00151}     osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a83d3e627c9dc247459610aa9fec23d7b}{createBodyOfRotation}(\textcolor{keywordtype}{double} height, \textcolor{keywordtype}{int} hsteps, \textcolor{keywordtype}{int} 
+      rsteps, \textcolor{keyword}{const} \hyperlink{structbrtr_1_1_body_of_rotation_function}{BodyOfRotationFunction}& \textcolor{keyword}{function}) \{
+00152         ref\_ptr<Geometry> rect = \textcolor{keyword}{new} Geometry;
+00153         ref\_ptr<Vec3Array> vertices = \textcolor{keyword}{new} Vec3Array();
+00154         ref\_ptr<Vec3Array> normals = \textcolor{keyword}{new} Vec3Array();
+00155         ref\_ptr<DrawElementsUInt> indices = \textcolor{keyword}{new} DrawElementsUInt(GL\_TRIANGLE\_STRIP);
+00156         \textcolor{keyword}{const} \hyperlink{structbrtr_1_1_body_of_rotation_function}{BodyOfRotationFunction}* curFunc = &\textcolor{keyword}{function};
+00157 
+00158         \textcolor{keywordtype}{double} zstep = height / hsteps;
+00159         \textcolor{keywordtype}{double} alphastep = DegreesToRadians(360.0 / rsteps);
+00160         \textcolor{comment}{// current vertex coordinates}
+00161         \textcolor{keywordtype}{double} z = 0.0;
+00162         \textcolor{keywordtype}{double} alpha = 2*PI;
+00163         \textcolor{comment}{//normal coordinates are calculated on the fly}
+00164 
+00165         \textcolor{comment}{// set vertices and normals}
+00166         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i <= hsteps; i++) \{
+00167             alpha = 0;
+00168             \textcolor{keywordtype}{double} curRadius = curFunc->\hyperlink{structbrtr_1_1_body_of_rotation_function_a5fda598eb0a63696b059e3a27c01142b}{func}(z);
+00169             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j <= rsteps; j++) \{
+00170                 vertices->push\_back(Vec3d(
+00171                     curRadius * cos(alpha), \textcolor{comment}{//X }
+00172                     curRadius * sin(alpha),\textcolor{comment}{//Y }
+00173                     z));                   \textcolor{comment}{//Z}
+00174                 normals->push\_back(Vec3d(
+00175                     curRadius * cos(alpha), \textcolor{comment}{//X}
+00176                     curRadius * sin(alpha), \textcolor{comment}{//Y}
+00177                     -curRadius * curFunc->\hyperlink{structbrtr_1_1_body_of_rotation_function_a22861c378686dabe1c35c90a0a8dcf46}{derivation}(z))); \textcolor{comment}{//Z}
+00178                 alpha -= alphastep;
+00179             \}
+00180             z += zstep;
+00181             \textcolor{keywordflow}{if} (curFunc->\hyperlink{structbrtr_1_1_body_of_rotation_function_a46667ab72bfeddc305bf31fa359c8699}{end} < z - 1e-8)
+00182                 curFunc = curFunc->\hyperlink{structbrtr_1_1_body_of_rotation_function_ad7df29eaeb2504928488691196cc06eb}{nextFunc};
+00183         \}
+00184 
+00185         \textcolor{comment}{//set strip connections}
+00186         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < hsteps; i++) \{
+00187 
+00188             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j <= rsteps; j++) \{
+00189                 indices->push\_back(i*(rsteps + 1) + j);
+00190                 indices->push\_back((i + 1)*(rsteps + 1) + j);
+00191             \}
+00192             indices->push\_back((i + 1)*(rsteps + 1) + rsteps);
+00193             indices->push\_back((i + 1)*(rsteps + 1));
+00194         \}
+00195 
+00196         \textcolor{comment}{//normalize the normals}
+00197         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} cnt = 0; cnt < normals->size(); cnt++) \{
+00198             normals->at(cnt).normalize();
+00199         \}
+00200 
+00201         rect->setVertexArray(vertices);
+00202         rect->addPrimitiveSet(indices);
+00203         rect->setNormalArray(normals);
+00204         \textcolor{comment}{//i know, deprecated, but osg 3.0.1}
+00205         rect->setNormalBinding(Geometry::BIND\_PER\_VERTEX);
+00206 
+00207         \textcolor{keywordflow}{return} rect;
+00208     \}
+00209 
+\hypertarget{_util_functions_8cpp_source_l00210}{}\hyperlink{namespacebrtr_a4431de1c1fa2c1d42c4fb57c38aaa3ce}{00210}     osg::ref\_ptr<osgText::Text> \hyperlink{namespacebrtr_a4431de1c1fa2c1d42c4fb57c38aaa3ce}{createText}(\textcolor{keyword}{const} osg::Vec3& pos, \textcolor{keyword}{const} std::string& content, \textcolor{keywordtype}{
+      float} size) \{
+00211         osg::ref\_ptr<osgText::Font> g\_font = osgText::readFontFile(\textcolor{stringliteral}{"../fonts/dirtydoz.ttf"});
+00212         osg::ref\_ptr<osgText::Text> text = \textcolor{keyword}{new} osgText::Text;
+00213         text->setDataVariance(osg::Object::DYNAMIC);
+00214         text->setFont(g\_font);
+00215         text->setCharacterSize(size);
+00216         text->setAxisAlignment(osgText::TextBase::XY\_PLANE);
+00217         text->setPosition(pos);
+00218         text->setText(content);
+00219         \textcolor{keywordflow}{return} text;
+00220     \}
+00221 
+\hypertarget{_util_functions_8cpp_source_l00222}{}\hyperlink{namespacebrtr_a73a88e86934887bd8750e4bbc0766b1f}{00222}     ref\_ptr<LightSource> \hyperlink{namespacebrtr_a73a88e86934887bd8750e4bbc0766b1f}{createLight}(\textcolor{keyword}{const} Vec3 &pos, \textcolor{keywordtype}{int} lightNum, \textcolor{keywordtype}{int} point, \textcolor{keywordtype}{double} spotCutoff
+      , \textcolor{keywordtype}{double} spotExponent) \{
+00223         ref\_ptr<LightSource> light = \textcolor{keyword}{new} LightSource;
+00224         light->getLight()->setPosition(Vec4(pos.x(), pos.y(), pos.z(), point));
+00225         light->getLight()->setAmbient(Vec4(.2, .2, .2, 1));
+00226         light->getLight()->setDiffuse(Vec4(.7, .7, .7, 1));
+00227         light->getLight()->setSpecular(Vec4(0.7, 0.7, 0.7, 1));
+00228         light->getLight()->setLightNum(lightNum);
+00229         light->getLight()->setLinearAttenuation(0);
+00230         light->getLight()->setQuadraticAttenuation(0.0008);
+00231         light->getLight()->setConstantAttenuation(0.000);
+00232         light->getLight()->setSpotCutoff(spotCutoff);
+00233         light->getLight()->setSpotExponent(spotExponent);
+00234         \textcolor{keywordflow}{return} light;
+00235     \}
+00236 
+00237 
+\hypertarget{_util_functions_8cpp_source_l00238}{}\hyperlink{namespacebrtr_a887d7975f37c4334b70e2196735b6678}{00238}   osg::ref\_ptr<osg::PositionAttitudeTransform> \hyperlink{namespacebrtr_a887d7975f37c4334b70e2196735b6678}{wrapInPositionAttitudeTransform}
+      (osg::Node * srcNode, \textcolor{keyword}{const} osg::Vec3d& pos)\{
+00239     osg::ref\_ptr<osg::PositionAttitudeTransform> newpos = \textcolor{keyword}{new} osg::PositionAttitudeTransform;
+00240     newpos->setPosition(pos);
+00241     newpos->addChild(srcNode);
+00242     \textcolor{keywordflow}{return} newpos;    
+00243   \}
+00244 
+\hypertarget{_util_functions_8cpp_source_l00245}{}\hyperlink{namespacebrtr_ae7f155c263aec9663a02763ed0bb882b}{00245}     ref\_ptr<osg::Group> \hyperlink{namespacebrtr_ae7f155c263aec9663a02763ed0bb882b}{createCuboid}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} length, \textcolor{keyword}{const} \textcolor{keywordtype}{double} width, \textcolor{keyword}{const} \textcolor{keywordtype}{double} 
+      height, \textcolor{keyword}{const} \textcolor{keywordtype}{double} faktor)\{
+00246 
+00247         ref\_ptr<Group> cube = \textcolor{keyword}{new} Group();
+00248         Geode *cubeSides[6];
+00249         MatrixTransform *cubeTrans[6];
+00250         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 6; i++)\{
+00251             cubeSides[i] = \textcolor{keyword}{new} Geode();
+00252             cubeTrans[i] = \textcolor{keyword}{new} MatrixTransform;
+00253             
+00254         \}
+00255         cubeSides[0]->addDrawable(\hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{createRectangleWithTexcoords}(length, width, (\textcolor{keywordtype}{
+      int})(length * faktor) + 1, (\textcolor{keywordtype}{int})(width * faktor) + 1));
+00256         cubeSides[1]->addDrawable(\hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{createRectangleWithTexcoords}(length, width, (\textcolor{keywordtype}{
+      int})(length * faktor) + 1, (\textcolor{keywordtype}{int})(width * faktor) + 1));
+00257 
+00258         cubeSides[2]->addDrawable(\hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{createRectangleWithTexcoords}(height, width, (\textcolor{keywordtype}{
+      int})(height * faktor) + 1, (\textcolor{keywordtype}{int})(width * faktor) + 1));
+00259         cubeSides[3]->addDrawable(\hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{createRectangleWithTexcoords}(height, width, (\textcolor{keywordtype}{
+      int})(height * faktor) + 1, (\textcolor{keywordtype}{int})(width * faktor) + 1));
+00260 
+00261         cubeSides[4]->addDrawable(\hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{createRectangleWithTexcoords}(height, length, 
+      (\textcolor{keywordtype}{int})(height * faktor) + 1, (\textcolor{keywordtype}{int})(length * faktor) + 1));
+00262         cubeSides[5]->addDrawable(\hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{createRectangleWithTexcoords}(height, length, 
+      (\textcolor{keywordtype}{int})(height * faktor) + 1, (\textcolor{keywordtype}{int})(length * faktor) + 1));
+00263 
+00264         cubeTrans[0]->setMatrix(osg::Matrix::translate(0, 0, height));
+00265         cubeTrans[1]->setMatrix(osg::Matrix::rotate((3 / 2)*PI, 1, 0, 0)*osg::Matrix::translate(0.0f, width
+      , 0));
+00266 
+00267         cubeTrans[2]->setMatrix(osg::Matrix::rotate(PI / 2, 0, 1, 0)*osg::Matrix::translate(length, 0, 
+      height));
+00268         cubeTrans[3]->setMatrix(osg::Matrix::rotate((PI / 2) * 3, 0, 1, 0));
+00269 
+00270         cubeTrans[4]->setMatrix(osg::Matrix::rotate((PI / 2), 0, 0, 1)*osg::Matrix::rotate((PI / 2), 1, 0, 
+      0)*osg::Matrix::translate(length, 0, 0));
+00271         cubeTrans[5]->setMatrix(osg::Matrix::rotate((PI / 2) * 3, 0, 0, 1)*osg::Matrix::rotate((PI / 2) * 3
+      , 1, 0, 0)*osg::Matrix::translate(0, width, 0));
+00272 
+00273         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 6; i++)\{
+00274             cubeTrans[i]->addChild(cubeSides[i]);           
+00275             cube->addChild(cubeTrans[i]);
+00276         \}
+00277 
+00278         \textcolor{keywordflow}{return} cube.release();
+00279 
+00280     \}
+00281 
+00282 
+\hypertarget{_util_functions_8cpp_source_l00283}{}\hyperlink{namespacebrtr_a0ecf5882dba499332dc5c6f3c2e819b1}{00283}     \textcolor{keywordtype}{void} \hyperlink{namespacebrtr_a0ecf5882dba499332dc5c6f3c2e819b1}{createRenderingPipeline}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} height, osg::Node&
+       rootForToon, osgViewer::Viewer &viewer, \hyperlink{structbrtr_1_1_rendering_pipeline}{RenderingPipeline}& pipe, Vec3f& fogColor) \{
+00284         osg::ref\_ptr<brtr::CelShading> toonRoot = \textcolor{keyword}{new} \hyperlink{classbrtr_1_1_cel_shading}{brtr::CelShading};
+00285         toonRoot->addChild(&rootForToon);
+00286 
+00287         osg::ref\_ptr<osg::Texture2D> toonAndOutline = \textcolor{keyword}{new} osg::Texture2D;
+00288         toonAndOutline->setTextureSize(width, height);
+00289         toonAndOutline->setInternalFormat(GL\_RGBA);
+00290         osg::ref\_ptr<osg::Camera> rttCamToon = \hyperlink{namespacebrtr_aa7a89c381be095a7eb1e248d2e6c0e23}{brtr::createRTTCamera}(
+      osg::Camera::COLOR\_BUFFER, toonAndOutline);
+00291         rttCamToon->addChild(toonRoot);
+00292 
+00293         \textcolor{comment}{//taken from the OSG Beginners Guide}
+00294         osg::ref\_ptr<osg::Texture2D> deepth = \textcolor{keyword}{new} osg::Texture2D;
+00295         deepth->setTextureSize(width, height);
+00296         deepth->setInternalFormat(GL\_DEPTH\_COMPONENT24);
+00297         deepth->setSourceFormat(GL\_DEPTH\_COMPONENT);
+00298         deepth->setSourceType(GL\_FLOAT);
+00299 
+00300         osg::ref\_ptr<osg::Camera> rttCamDepth = \hyperlink{namespacebrtr_aa7a89c381be095a7eb1e248d2e6c0e23}{brtr::createRTTCamera}(
+      osg::Camera::DEPTH\_BUFFER, deepth);
+00301         rttCamDepth->addChild(toonRoot);
+00302 
+00303         osg::ref\_ptr<Camera> postProcessCam = \hyperlink{namespacebrtr_a62da4f109238c45882dd64d7a7e97a1d}{brtr::createHUDCamera}(0, 1, 0, 1);
+00304         postProcessCam->addChild(\hyperlink{namespacebrtr_a32cfc96621681baabc76c52af5d6a347}{brtr::createScreenQuad}(width, height));
+00305 
+00306         osg::ref\_ptr<osg::Shader> fogFrag = osgDB::readShaderFile(\textcolor{stringliteral}{"../Shader/fogShader.frag"});
+00307         osg::ref\_ptr<osg::Shader> fogVert = osgDB::readShaderFile(\textcolor{stringliteral}{"../Shader/fogShader.vert"});
+00308         osg::ref\_ptr<osg::Program> fogProgram = \textcolor{keyword}{new} osg::Program;
+00309         fogProgram->addShader(fogFrag);
+00310         fogProgram->addShader(fogVert);
+00311 
+00312         osg::ref\_ptr<osg::Shader> sepiaFogFrag = osgDB::readShaderFile(\textcolor{stringliteral}{"../Shader/sepiaFogShader.frag"});
+00313         osg::ref\_ptr<osg::Program> sepiaFogProgram = \textcolor{keyword}{new} osg::Program;
+00314         sepiaFogProgram->addShader(sepiaFogFrag);
+00315         sepiaFogProgram->addShader(fogVert);
+00316 
+00317         osg::ref\_ptr<osg::Shader> wavesFrag = osgDB::readShaderFile(\textcolor{stringliteral}{"../Shader/sinShader.frag"});
+00318         osg::ref\_ptr<osg::Program> wavesProgram = \textcolor{keyword}{new} osg::Program;
+00319         wavesProgram->addShader(wavesFrag);
+00320         wavesProgram->addShader(fogVert);
+00321 
+00322         \textcolor{comment}{//creating Program vector, element 0 should be the active one}
+00323         std::vector<osg::ref\_ptr<osg::Program>> programVector;
+00324         programVector.push\_back(fogProgram);
+00325         programVector.push\_back(sepiaFogProgram);
+00326         programVector.push\_back(wavesProgram);
+00327 
+00328         \textcolor{comment}{//postprocess Attributs and Mods}
+00329         postProcessCam->getOrCreateStateSet()->setAttributeAndModes(programVector[0], 
+      osg::StateAttribute::OVERRIDE | osg::StateAttribute::ON | osg::StateAttribute::PROTECTED);
+00330         postProcessCam->getOrCreateStateSet()->setTextureAttributeAndModes(0, toonAndOutline, 
+      osg::StateAttribute::OVERRIDE | osg::StateAttribute::ON | osg::StateAttribute::PROTECTED);
+00331         postProcessCam->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} osg::Uniform(\textcolor{stringliteral}{"texture0"}, 0), 
+      osg::StateAttribute::OVERRIDE | osg::StateAttribute::ON | osg::StateAttribute::PROTECTED);
+00332         postProcessCam->getOrCreateStateSet()->setTextureAttributeAndModes(1, deepth, 
+      osg::StateAttribute::OVERRIDE | osg::StateAttribute::ON | osg::StateAttribute::PROTECTED);
+00333         postProcessCam->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} osg::Uniform(\textcolor{stringliteral}{"deepth"}, 1), 
+      osg::StateAttribute::OVERRIDE | osg::StateAttribute::ON | osg::StateAttribute::PROTECTED);
+00334         postProcessCam->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} osg::Uniform(\textcolor{stringliteral}{"fogColor"}, fogColor), 
+      osg::StateAttribute::OVERRIDE | osg::StateAttribute::ON | osg::StateAttribute::PROTECTED);
+00335 
+00336         \textcolor{comment}{//setting Clipping Pane}
+00337         \textcolor{keywordtype}{float} zNear = 0.01, zFar = 100000;
+00338         osg::ref\_ptr<osg::Uniform> zNearUniform = \textcolor{keyword}{new} osg::Uniform(\textcolor{stringliteral}{"zNear"}, zNear);
+00339         osg::ref\_ptr<osg::Uniform> zFarUniform = \textcolor{keyword}{new} osg::Uniform(\textcolor{stringliteral}{"zFar"}, zFar);
+00340         postProcessCam->getOrCreateStateSet()->addUniform(zNearUniform);
+00341         postProcessCam->getOrCreateStateSet()->addUniform(zFarUniform);
+00342         viewer.getCamera()->setComputeNearFarMode(osg::CullSettings::DO\_NOT\_COMPUTE\_NEAR\_FAR);
+00343         viewer.getCamera()->setProjectionMatrixAsPerspective(70, 1.778, zNear, zFar);
+00344 
+00345         \textcolor{comment}{//Setting Pipeline}
+00346         pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_ae945030321a6b44f00266954c8c50bf3}{pass\_0\_color} = rttCamToon;
+00347         pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_a18752632c1b557d283e523ebbc0443a0}{pass\_0\_depth} = rttCamDepth;
+00348         pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_aea2228e41f1e5c6db5d616c05ecc27fd}{pass\_PostProcess} = postProcessCam;
+00349         pipe.\hyperlink{structbrtr_1_1_rendering_pipeline_afe773fb98986d39ef23a4edf3634af10}{programs} = programVector;
+00350     \}
+00351 
+\hypertarget{_util_functions_8cpp_source_l00352}{}\hyperlink{namespacebrtr_a16fa8982307a039c08ab56912bab94b9}{00352}     osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a16fa8982307a039c08ab56912bab94b9}{createBeerBottle}() \{
+00353         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} seventh = \{ [](\textcolor{keywordtype}{double} x) \{
+00354             \textcolor{keywordflow}{return} -18.4*x + 17.02;
+00355         \}, 0.925, \textcolor{keyword}{nullptr} \};
+00356         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} sixth = \{ [](\textcolor{keywordtype}{double} x) \{
+00357             \textcolor{keywordflow}{return} 0.19* exp(-0.77 * x);
+00358         \}, 0.92, &seventh \};
+00359         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} fifth = \{ [](\textcolor{keywordtype}{double} x) \{
+00360             \textcolor{keywordflow}{return} 0.8*x - 0.6;
+00361         \}, 0.865, &sixth \};
+00362         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} fourth = \{ [](\textcolor{keywordtype}{double} x) \{
+00363             \textcolor{keywordflow}{return} 0.092;
+00364         \}, 0.86, &fifth \};
+00365         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} third = \{ [](\textcolor{keywordtype}{double} x) \{
+00366             \textcolor{keywordflow}{return} 0.22*exp(-1.49 * x);
+00367         \}, 0.6, &fourth \};
+00368         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} second = \{ [](\textcolor{keywordtype}{double} x) \{
+00369             \textcolor{keywordflow}{return} 0.11;
+00370         \}, 0.48, &third \};
+00371         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} first = \{ [](\textcolor{keywordtype}{double} x) \{
+00372             \textcolor{keywordflow}{return} 55 * x;
+00373         \}, 0.002, &second \};
+00374         \textcolor{keywordflow}{return} \hyperlink{namespacebrtr_a83d3e627c9dc247459610aa9fec23d7b}{brtr::createBodyOfRotation}(0.925, 1000, 50, first);
+00375     \}
+00376 
+\hypertarget{_util_functions_8cpp_source_l00377}{}\hyperlink{namespacebrtr_a614d8d6b8bcc6c4e7f7ffb24ca48eb4c}{00377}     osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a614d8d6b8bcc6c4e7f7ffb24ca48eb4c}{createRealBottle}() \{
+00378         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} six = \{ [](\textcolor{keywordtype}{double} x) \{
+00379             \textcolor{keywordflow}{return} -1e3*x + 1280.06;
+00380         \}, 1.28002, \textcolor{keyword}{nullptr} \};
+00381         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} fifth = \{ [](\textcolor{keywordtype}{double} x) \{
+00382             \textcolor{keywordflow}{return} 0.06;
+00383         \}, 1.28, &six \};
+00384         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} fourth = \{ [](\textcolor{keywordtype}{double} x) \{
+00385             \textcolor{keywordflow}{return} 0.054;
+00386         \}, 1.22, &fifth \};
+00387         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} third = \{ [](\textcolor{keywordtype}{double} x) \{
+00388             \textcolor{keywordflow}{return} -9594.216687 *x*x*x*x*x + 41734.84259*x*x*x*x
+00389                 - 72461.92057 * x*x*x + 62769.20326*x*x - 27127.83957*x + 4679.866301;
+00390         \}, 0.94, &fourth \};
+00391         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} second = \{ [](\textcolor{keywordtype}{double} x) \{
+00392             \textcolor{keywordflow}{return} 0.14;
+00393         \}, 0.8, &third \};
+00394         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} first = \{ [](\textcolor{keywordtype}{double} x) \{
+00395             \textcolor{keywordflow}{return} 1e3 * x;
+00396         \}, 0.14e-3, &second \};
+00397 
+00398 
+00399         ref\_ptr<Geometry> body = \hyperlink{namespacebrtr_a83d3e627c9dc247459610aa9fec23d7b}{brtr::createBodyOfRotation}(1.28002, 50, 25, 
+      first);
+00400         ref\_ptr<Material> bodyMat = \textcolor{keyword}{new} Material;
+00401         bodyMat->setDiffuse(Material::FRONT, Vec4(0.33, 0.23, 0.15, 1));
+00402         bodyMat->setAmbient(Material::FRONT, Vec4(0.33, 0.23, 0.15, 1));
+00403         bodyMat->setSpecular(Material::FRONT, Vec4(0.7, 0.7, 0.7, 1));
+00404         bodyMat->setShininess(Material::FRONT, 42.0);
+00405 
+00406         
+00407         body->getOrCreateStateSet()->setAttributeAndModes(bodyMat, StateAttribute::ON);
+00408         body->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"tex"},\textcolor{keyword}{false}), StateAttribute::ON | 
+      StateAttribute::OVERRIDE);
+00409         \textcolor{keywordflow}{return} body;
+00410     \}
+00411 
+\hypertarget{_util_functions_8cpp_source_l00412}{}\hyperlink{namespacebrtr_ab4f3c063f7a8fa6cc33a8cb52b036d27}{00412}     osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_ab4f3c063f7a8fa6cc33a8cb52b036d27}{createVase}() \{
+00413         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} six = \{ [](\textcolor{keywordtype}{double} x) \{
+00414             \textcolor{keywordflow}{return}  13.14800902*x*x*x - 29.67693464*x*x + 22.22013524*x - 5.442163787;
+00415         \}, 0.92, \textcolor{keyword}{nullptr} \};
+00416         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} fifth = \{ [](\textcolor{keywordtype}{double} x) \{
+00417             \textcolor{keywordflow}{return} -7723.99737*pow(x, 6) + 34421.33266*pow(x, 5) - 63445.68073*pow(x, 4)
+00418                 + 61911.20624*x*x*x - 33732.12852*x*x + 9729.204284*x - 1160.328634;
+00419         \}, 0.7, &six \};
+00420         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} fourth = \{ [](\textcolor{keywordtype}{double} x) \{
+00421             \textcolor{keywordflow}{return} -6.74046e-4*pow(x, 7) + 22500.00265*pow(x, 6) - 67500.00438*pow(x, 5)
+00422                 + 83825.00396*pow(x, 4) - 55150.00212*x*x*x + 20268.00067*x*x - 3943.000117*x + 317.1600086
+      ;
+00423         \}, 0.6, &fifth \};
+00424         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} third = \{ [](\textcolor{keywordtype}{double} x) \{
+00425             \textcolor{keywordflow}{return} -2.46772e-4*pow(x, 7) - 22499.99949*pow(x, 6) + 40499.99956*pow(x, 5)
+00426                 - 29824.99979*pow(x, 4) + 11489.99994*x*x*x - 2435.99999*x*x + 268.1999991*x - 11.79999997;
+00427         \}, 0.4, &fourth \};
+00428         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} second = \{ [](\textcolor{keywordtype}{double} x) \{
+00429             \textcolor{keywordflow}{return} 91.2477433*pow(x, 7) + 22479.62608*pow(x, 6) - 13517.78749*pow(x, 5) + 2833.488659*pow(x
+      , 4)
+00430                 - 231.3692301*x*x*x + 0.0830483429*x*x + 0.999990044*x + 0.1198800004;
+00431         \}, 0.2, &third \};
+00432         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} first = \{ [](\textcolor{keywordtype}{double} x) \{
+00433             \textcolor{keywordflow}{return} 1e3 * x;
+00434         \}, 0.12e-3, &second \};
+00435 
+00436 
+00437         ref\_ptr<Geometry> body = \hyperlink{namespacebrtr_a83d3e627c9dc247459610aa9fec23d7b}{brtr::createBodyOfRotation}(0.92, 50, 25, first);
+00438         ref\_ptr<Material> bodyMat = \textcolor{keyword}{new} Material;
+00439         bodyMat->setDiffuse(Material::FRONT, Vec4(0.0754, 0.3529, 0.58, 1));
+00440         bodyMat->setAmbient(Material::FRONT, Vec4(0.0754, 0.3529, 0.58, 1));
+00441         bodyMat->setSpecular(Material::FRONT, Vec4(0.7, 0.7, 0.7, 1));
+00442         bodyMat->setShininess(Material::FRONT, 42.0);
+00443 
+00444 
+00445         body->getOrCreateStateSet()->setAttributeAndModes(bodyMat, StateAttribute::ON);
+00446         body->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"tex"}, \textcolor{keyword}{false}), StateAttribute::ON | 
+      StateAttribute::OVERRIDE);
+00447 
+00448         \textcolor{keywordflow}{return} body;
+00449     \}
+00450 
+\hypertarget{_util_functions_8cpp_source_l00451}{}\hyperlink{namespacebrtr_a4ccd9746e37278e47832da270dc00fb3}{00451}     osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a4ccd9746e37278e47832da270dc00fb3}{createStalk}() \{
+00452         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} third = \{ [](\textcolor{keywordtype}{double} x) \{
+00453             \textcolor{keywordflow}{return} -1e3*x + 1200.02;
+00454         \}, 1.20002, \textcolor{keyword}{nullptr} \};
+00455         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} second = \{ [](\textcolor{keywordtype}{double} x) \{
+00456             \textcolor{keywordflow}{return} 0.015;
+00457         \}, 1.2, &third \};
+00458         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} first = \{ [](\textcolor{keywordtype}{double} x) \{
+00459             \textcolor{keywordflow}{return} 1e3 * x;
+00460         \}, 0.02e-3, &second \};
+00461 
+00462 
+00463         ref\_ptr<Geometry> body = \hyperlink{namespacebrtr_a83d3e627c9dc247459610aa9fec23d7b}{brtr::createBodyOfRotation}(1.20002, 50, 25, 
+      first);
+00464         ref\_ptr<Material> bodyMat = \textcolor{keyword}{new} Material;
+00465         bodyMat->setDiffuse(Material::FRONT, Vec4(0, 0.43, 0.0215, 1));
+00466         bodyMat->setAmbient(Material::FRONT, Vec4(0, 0.43, 0.0215, 1));
+00467         bodyMat->setSpecular(Material::FRONT, Vec4(0.1, 0.1, 0.1, 1));
+00468         bodyMat->setShininess(Material::FRONT, 100.0);
+00469 
+00470 
+00471         body->getOrCreateStateSet()->setAttributeAndModes(bodyMat, StateAttribute::ON);
+00472         body->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"tex"}, \textcolor{keyword}{false}), StateAttribute::ON | 
+      StateAttribute::OVERRIDE);
+00473 
+00474         \textcolor{keywordflow}{return} body;
+00475     \}
+00476 
+\hypertarget{_util_functions_8cpp_source_l00477}{}\hyperlink{namespacebrtr_a51b3741c30ca1b6282b9693055ddc060}{00477}     osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a51b3741c30ca1b6282b9693055ddc060}{createBud}() \{
+00478         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} second = \{ [](\textcolor{keywordtype}{double} x) \{
+00479             \textcolor{keywordflow}{return}  -1.5625 * x*x + 0.25 * x + 0.03;
+00480         \}, 0.24, \textcolor{keyword}{nullptr} \};
+00481         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} first = \{ [](\textcolor{keywordtype}{double} x) \{
+00482             \textcolor{keywordflow}{return} -6.25 * x *x + x;
+00483         \}, 0.08, &second \};
+00484 
+00485 
+00486         ref\_ptr<Geometry> body = \hyperlink{namespacebrtr_a83d3e627c9dc247459610aa9fec23d7b}{brtr::createBodyOfRotation}(0.24, 50, 25, first);
+00487         ref\_ptr<Material> bodyMat = \textcolor{keyword}{new} Material;
+00488         bodyMat->setDiffuse(Material::FRONT, Vec4(0.8, 0.008, 0.4304, 1));
+00489         bodyMat->setAmbient(Material::FRONT, Vec4(0.8, 0.008, 0.4304, 1)); 
+00490         bodyMat->setSpecular(Material::FRONT, Vec4(0.1, 0.1, 0.1, 1));
+00491         bodyMat->setShininess(Material::FRONT, 100.0);
+00492 
+00493 
+00494         body->getOrCreateStateSet()->setAttributeAndModes(bodyMat, StateAttribute::ON);
+00495         body->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"tex"}, \textcolor{keyword}{false}), StateAttribute::ON | 
+      StateAttribute::OVERRIDE);
+00496 
+00497         \textcolor{keywordflow}{return} body;
+00498     \}
+00499 
+\hypertarget{_util_functions_8cpp_source_l00500}{}\hyperlink{namespacebrtr_a118d4013732dea1a161b6d225df6dc2e}{00500}     osg::ref\_ptr<osg::Geometry> \hyperlink{namespacebrtr_a118d4013732dea1a161b6d225df6dc2e}{createChessFigure}() \{
+00501         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} thirtheen = \{ [](\textcolor{keywordtype}{double} x) \{
+00502             \textcolor{keywordflow}{return}  -1e3*x + 8000.44;
+00503         \}, 8.00044, \textcolor{keyword}{nullptr} \};
+00504         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} twelve = \{ [](\textcolor{keywordtype}{double} x) \{
+00505             \textcolor{keywordflow}{return} sqrt(0.375 *0.375 - (x - 7.625)*(x - 7.625)) + 0.44;
+00506         \}, 8, &thirtheen \};
+00507         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} eleventh = \{ [](\textcolor{keywordtype}{double} x) \{
+00508             \textcolor{keywordflow}{return} 0.44;
+00509         \}, 7.25, &twelve \};
+00510         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} tenth = \{ [](\textcolor{keywordtype}{double} x) \{
+00511             \textcolor{keywordflow}{return} 0.4*x - 2.2;
+00512         \}, 7, &eleventh \};
+00513         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} ninth = \{ [](\textcolor{keywordtype}{double} x) \{
+00514             \textcolor{keywordflow}{return}  -(1 + 1 / 3)*x*x + (17.6 + 1 / 30)*x - 57.5;
+00515         \}, 7, &eleventh \};
+00516         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} eight = \{ [](\textcolor{keywordtype}{double} x) \{
+00517             \textcolor{keywordflow}{return}   -2.25*x*x + 29.7*x - 97.2;
+00518         \}, 6.6, &tenth \};
+00519         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} seventh = \{ [](\textcolor{keywordtype}{double} x) \{
+00520             \textcolor{keywordflow}{return} 0.44;
+00521         \}, 6.2, &eight \};
+00522         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} six = \{ [](\textcolor{keywordtype}{double} x) \{
+00523             \textcolor{keywordflow}{return}  -1e3*x + 4200.96;
+00524         \}, 4.20052, &seventh \};
+00525         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} fifth = \{ [](\textcolor{keywordtype}{double} x) \{
+00526             \textcolor{keywordflow}{return}  0.96;
+00527         \}, 4.2, &six \};
+00528         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} fourth = \{ [](\textcolor{keywordtype}{double} x) \{
+00529             \textcolor{keywordflow}{return} 3.59724403e-58*exp(32.90396023*x) + 0.44;
+00530         \}, 4, &fifth \};
+00531         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} third = \{ [](\textcolor{keywordtype}{double} x) \{
+00532             \textcolor{keywordflow}{return} 0.44;
+00533         \}, 3.6, &fourth \};
+00534         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} second = \{ [](\textcolor{keywordtype}{double} x) \{
+00535             \textcolor{keywordflow}{return} sqrt(1.44*1.44 - x*x) + 0.44;
+00536         \}, 1.44, &third \};
+00537         \hyperlink{structbrtr_1_1_body_of_rotation_function}{brtr::BodyOfRotationFunction} first = \{ [](\textcolor{keywordtype}{double} x) \{
+00538             \textcolor{keywordflow}{return} 1e3 * x;
+00539         \}, 0.00188, &second \};
+00540 
+00541         ref\_ptr<Geometry> body = \hyperlink{namespacebrtr_a83d3e627c9dc247459610aa9fec23d7b}{brtr::createBodyOfRotation}(8.00044, 1000, 50, 
+      first);
+00542         ref\_ptr<Material> bodyMat = \textcolor{keyword}{new} Material;
+00543         bodyMat->setDiffuse(Material::FRONT, Vec4(0.84, 0.238, 0.0, 1));
+00544         bodyMat->setAmbient(Material::FRONT, Vec4(0.84, 0.238, 0.0, 1));
+00545         bodyMat->setSpecular(Material::FRONT, Vec4(0.7, 0.7, 0.7, 1));
+00546         bodyMat->setShininess(Material::FRONT, 42.0);
+00547 
+00548 
+00549         body->getOrCreateStateSet()->setAttributeAndModes(bodyMat, StateAttribute::ON);
+00550         body->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"tex"}, \textcolor{keyword}{false}), StateAttribute::ON | 
+      StateAttribute::OVERRIDE);
+00551 
+00552         \textcolor{keywordflow}{return} body;
+00553     \}
+00554 
+\hypertarget{_util_functions_8cpp_source_l00555}{}\hyperlink{namespacebrtr_a31c533ae635c528c761cc83e34e91b2f}{00555}     \textcolor{keyword}{extern} osg::ref\_ptr<osg::Geode> \hyperlink{namespacebrtr_a31c533ae635c528c761cc83e34e91b2f}{createCrosshair}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} height)
+       \{
+00556         ref\_ptr<osg::Geode>         geode = \textcolor{keyword}{new} osg::Geode;
+00557         ref\_ptr<osg::Geometry>    geom = \textcolor{keyword}{new} Geometry;;
+00558         ref\_ptr<osg::Vec3Array>   vertices =\textcolor{keyword}{new} osg::Vec3Array;
+00559         geode->addDrawable(geom);
+00560 
+00561         vertices->push\_back(osg::Vec3(width / 2.0 - 10, height / 2.0 - 1, 0.0));
+00562         vertices->push\_back(osg::Vec3(width / 2.0 - 10, height / 2.0 + 1, 0.0));
+00563         vertices->push\_back(osg::Vec3(width / 2.0 + 10, height / 2.0 + 1, 0.0));
+00564         vertices->push\_back(osg::Vec3(width / 2.0 + 10, height / 2.0 - 1, 0.0));
+00565 
+00566         vertices->push\_back(osg::Vec3(width / 2.0 - 1, height / 2.0 - 10, 0.0));
+00567         vertices->push\_back(osg::Vec3(width / 2.0 - 1, height / 2.0 + 10, 0.0));
+00568         vertices->push\_back(osg::Vec3(width / 2.0 + 1, height / 2.0 + 10, 0.0));
+00569         vertices->push\_back(osg::Vec3(width / 2.0 + 1, height / 2.0 - 10, 0.0));
+00570         geom->setVertexArray(vertices);
+00571 
+00572         \textcolor{comment}{// set colors}
+00573         ref\_ptr<osg::Vec4Array> colors = \textcolor{keyword}{new} osg::Vec4Array;
+00574         colors->push\_back(osg::Vec4(0.55, 0.55, 0.55, 1.0));
+00575         geom->setColorArray(colors);
+00576         geom->setColorBinding(Geometry::BIND\_OVERALL);
+00577         geom->addPrimitiveSet(\textcolor{keyword}{new} osg::DrawArrays(GL\_QUADS, 0, 8));
+00578         \textcolor{keywordflow}{return} geode;
+00579     \}
+00580 
+\hypertarget{_util_functions_8cpp_source_l00581}{}\hyperlink{namespacebrtr_a05625aff9337331ae351d283f79f0f1e}{00581}     osg::ref\_ptr<osg::PositionAttitudeTransform> \hyperlink{namespacebrtr_a05625aff9337331ae351d283f79f0f1e}{createVaseWithFlower}() \{
+00582         ref\_ptr<Geode> bottom = \textcolor{keyword}{new} Geode;
+00583         bottom->addDrawable(\hyperlink{namespacebrtr_ab4f3c063f7a8fa6cc33a8cb52b036d27}{brtr::createVase}());
+00584         ref\_ptr<Geode> inner = \textcolor{keyword}{new} Geode;
+00585         inner->addDrawable(\hyperlink{namespacebrtr_a4ccd9746e37278e47832da270dc00fb3}{brtr::createStalk}());
+00586         ref\_ptr<Geode> knospe = \textcolor{keyword}{new} Geode;
+00587         knospe->addDrawable(\hyperlink{namespacebrtr_a51b3741c30ca1b6282b9693055ddc060}{brtr::createBud}());
+00588         ref\_ptr<PositionAttitudeTransform> budTranslate = \textcolor{keyword}{new} PositionAttitudeTransform;
+00589         budTranslate->addChild(knospe);
+00590         budTranslate->setPosition(Vec3(0, 0, 1.0));
+00591         ref\_ptr<PositionAttitudeTransform> vaseFlower = \textcolor{keyword}{new} PositionAttitudeTransform;
+00592         vaseFlower->addChild(bottom);
+00593         vaseFlower->addChild(inner);
+00594         vaseFlower->addChild(budTranslate);
+00595         \textcolor{keywordflow}{return} vaseFlower;
+00596     \}
+\hypertarget{_util_functions_8cpp_source_l00597}{}\hyperlink{namespacebrtr_a7b54dcabf5846ea963221e59b38b0a79}{00597}     osg::ref\_ptr<osg::Material> \hyperlink{namespacebrtr_a7b54dcabf5846ea963221e59b38b0a79}{createSimpleMaterial}(osg::Material::Face face, \textcolor{keyword}{const} 
+      osg::Vec4& diffuse, \textcolor{keyword}{const} osg::Vec4& ambient, \textcolor{keyword}{const} osg::Vec4& specular, \textcolor{keyword}{const} \textcolor{keywordtype}{double} shininess) \{
+00598         ref\_ptr<Material> mat = \textcolor{keyword}{new} osg::Material;
+00599         mat->setDiffuse(face, osg::Vec4(.7f, .7f, .7f, 1.0f));
+00600         mat->setAmbient(face, osg::Vec4(.3f, .3f, .3f, 1.0f));
+00601         mat->setSpecular(face, osg::Vec4(.9f, .9f, .9f, 1.0f));
+00602         mat->setShininess(face, shininess);
+00603         \textcolor{keywordflow}{return} mat;
+00604     \}
+00605 
+\hypertarget{_util_functions_8cpp_source_l00606}{}\hyperlink{namespacebrtr_acdb44124f5beeb960792c874499276db}{00606}     osg::Vec3 \hyperlink{namespacebrtr_acdb44124f5beeb960792c874499276db}{getDimensionOfNode}(Node * source) \{
+00607         ComputeBoundsVisitor cbbv;
+00608         source->accept(cbbv);
+00609         BoundingBox bb = cbbv.getBoundingBox();
+00610         Vec3 size = bb.\_max - bb.\_min;
+00611         \textcolor{keywordflow}{return} size;
+00612     \}
+00613 
+\hypertarget{_util_functions_8cpp_source_l00614}{}\hyperlink{namespacebrtr_aea7b3b188858f0bce09f2450a749f497}{00614}     osg::ref\_ptr<osg::Texture2D> \hyperlink{namespacebrtr_aea7b3b188858f0bce09f2450a749f497}{createToonTex}(std::string toonTex) \{
+00615         osg::ref\_ptr<osg::Texture2D> toonTexture = \textcolor{keyword}{new} osg::Texture2D;
+00616         toonTexture->setImage(osgDB::readImageFile(\textcolor{stringliteral}{"../BlenderFiles/Texturen/toons/"} + toonTex));
+00617         toonTexture->setFilter(osg::Texture::MIN\_FILTER, osg::Texture::NEAREST);
+00618         toonTexture->setFilter(osg::Texture::MAG\_FILTER, osg::Texture::NEAREST);
+00619         \textcolor{keywordflow}{return} toonTexture;
+00620     \}
+00621 
+00622 \}
+\end{DoxyCode}

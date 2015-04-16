@@ -1,0 +1,27 @@
+\hypertarget{_program_switcher_callback_8h_source}{\section{Program\+Switcher\+Callback.\+h}
+\label{_program_switcher_callback_8h_source}\index{header/\+Program\+Switcher\+Callback.\+h@{header/\+Program\+Switcher\+Callback.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osg/NodeCallback>}
+00003 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00004 \textcolor{preprocessor}{#include <osg/Program>}
+00005 \textcolor{preprocessor}{#include "../header/BaseInteractionCallback.h"}
+00006 
+00007 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_program_switcher_callback_8h_source_l00017}{}\hyperlink{classbrtr_1_1_program_switcher_callback}{00017}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_program_switcher_callback}{ProgramSwitcherCallback} : \textcolor{keyword}{public} 
+      \hyperlink{classbrtr_1_1_base_interaction_callback}{BaseInteractionCallback} \{
+00018     \textcolor{keyword}{public}:
+00028         \hyperlink{classbrtr_1_1_program_switcher_callback_a36a59e70c5db59a00f2d7fd7fbf9e505}{ProgramSwitcherCallback}(osg::Node* postprocessCam, osg::Camera* hudCam, \textcolor{keywordtype}{int} 
+      width, \textcolor{keywordtype}{int} height, std::vector<osg::ref\_ptr<osg::Program>> programs);
+00029         \textcolor{comment}{//Doc in parent}
+00030         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_program_switcher_callback_a2202619d98a432578c8ed7342b957638}{setText}();
+00031     \textcolor{keyword}{protected}:
+00038         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_program_switcher_callback_a06dd3fc2b09d3138e67599d8d56db62a}{interact}(osg::Node*, osg::NodeVisitor*);
+00039     \textcolor{keyword}{private}:
+\hypertarget{_program_switcher_callback_8h_source_l00040}{}\hyperlink{classbrtr_1_1_program_switcher_callback_a9cbcf4d65f6ee468bb20d16b9e795e49}{00040}         std::vector<osg::ref\_ptr<osg::Program>> \hyperlink{classbrtr_1_1_program_switcher_callback_a9cbcf4d65f6ee468bb20d16b9e795e49}{\_programs};
+\hypertarget{_program_switcher_callback_8h_source_l00041}{}\hyperlink{classbrtr_1_1_program_switcher_callback_a06ee6d68fe703e6a88960219b019f1bd}{00041}         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \hyperlink{classbrtr_1_1_program_switcher_callback_a06ee6d68fe703e6a88960219b019f1bd}{\_curProg};
+00042     \};
+00043 \}
+\end{DoxyCode}

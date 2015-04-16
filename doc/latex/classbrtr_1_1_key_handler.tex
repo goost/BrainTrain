@@ -1,0 +1,274 @@
+\hypertarget{classbrtr_1_1_key_handler}{\section{brtr\+:\+:Key\+Handler Class Reference}
+\label{classbrtr_1_1_key_handler}\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+}
+
+
+Key Handler Class, handles all of our Key\+Functions, which do not belong to camera control (this are handled by \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{F\+P\+S\+Camera\+Manipulator})  
+
+
+
+
+{\ttfamily \#include $<$Key\+Handler.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Key\+Handler\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbrtr_1_1_key_handler}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_key_handler_aaae067fabc959780a9fae9c700c199da}{Key\+Handler} (osg\+::\+Node $\ast$, osg\+::\+Camera $\ast$post\+Process\+Cam, std\+::vector$<$ osg\+::ref\+\_\+ptr$<$ osg\+::\+Program $>$$>$ programs)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classbrtr_1_1_key_handler_a02df9f4339712d5b8b2b25b89048cf47}{handle} (const osg\+G\+A\+::\+G\+U\+I\+Event\+Adapter \&ea, osg\+G\+A\+::\+G\+U\+I\+Action\+Adapter \&aa)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_key_handler_aabad0b142ba1d2e648069b4e8af17797}{$\sim$\+Key\+Handler} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classbrtr_1_1_key_handler_a5af6a6e66e8754591b3425addc6e6858}{handle\+Key\+Down} (const osg\+G\+A\+::\+G\+U\+I\+Event\+Adapter \&ea, osg\+G\+A\+::\+G\+U\+I\+Action\+Adapter \&aa)
+\item 
+void \hyperlink{classbrtr_1_1_key_handler_a7f402d48b863ed19ef47038a32d1d05c}{mouse\+Intersection} (osg\+G\+A\+::\+G\+U\+I\+Action\+Adapter \&aa)
+\begin{DoxyCompactList}\small\item\em Checks, if under the mouse (e.\+a center of screen) is an interact-\/able object (e.\+a geometry) \end{DoxyCompactList}\item 
+\hyperlink{classbrtr_1_1_base_interaction_callback}{brtr\+::\+Base\+Interaction\+Callback} $\ast$ \hyperlink{classbrtr_1_1_key_handler_a1925fa114839192716167477714abfdc}{modify\+Text} (bool show)
+\begin{DoxyCompactList}\small\item\em Shows the Interaction\+Message on screen, if there is an Interaction\+Object beneath the mouse (e.\+a center of screen) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Drawable $>$ \hyperlink{classbrtr_1_1_key_handler_a4b0e380186a8172af6cf7c10dcff675a}{\+\_\+cur\+Drawable}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Node $>$ \hyperlink{classbrtr_1_1_key_handler_a2ff68d9c79145d235f50fec1da625f99}{\+\_\+root\+Node}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Polygon\+Mode $>$ \hyperlink{classbrtr_1_1_key_handler_a7aff4e23d4c614d8e0ccdc29a3c8882f}{\+\_\+wire\+Frame\+Mode}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Polygon\+Mode $>$ \hyperlink{classbrtr_1_1_key_handler_ae210945e48748029cbea37fde7d601b5}{\+\_\+normale\+Mode}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Camera $>$ \hyperlink{classbrtr_1_1_key_handler_aa4cc5f6ac9134e473f37968dfb1dd821}{\+\_\+post\+Process\+Cam}
+\item 
+std\+::vector$<$ osg\+::ref\+\_\+ptr\\*
+$<$ osg\+::\+Program $>$ $>$ \hyperlink{classbrtr_1_1_key_handler_a492d086b9458475e595b3627a8dee0f9}{\+\_\+programs}
+\item 
+osg\+::ref\+\_\+ptr$<$ const \\*
+osg\+G\+A\+::\+G\+U\+I\+Event\+Adapter $>$ \hyperlink{classbrtr_1_1_key_handler_a1b2404dcd19426a93d4474cd45da84e8}{\+\_\+mouse\+Event}
+\item 
+bool \hyperlink{classbrtr_1_1_key_handler_a6939e2c5e93e53d6090c999eae2fb927}{\+\_\+is\+Wire\+Frame}
+\item 
+unsigned int \hyperlink{classbrtr_1_1_key_handler_a578b374029e318a509983a01253a7736}{\+\_\+cur\+Prog}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Key Handler Class, handles all of our Key\+Functions, which do not belong to camera control (this are handled by \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{F\+P\+S\+Camera\+Manipulator}) 
+
+\begin{DoxyParagraph}{Controls\+: }
+
+\begin{DoxyPre}
+                   C       = Toggle WireFrame Mode On/Off
+                 LClick    = Interact
+                 Shift+1   = Toggle programs
+             \end{DoxyPre}
+ 
+\end{DoxyParagraph}
+\begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_key_handler_8h_source_l00023}{23} of file \hyperlink{_key_handler_8h_source}{Key\+Handler.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_key_handler_aaae067fabc959780a9fae9c700c199da}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!Key\+Handler@{Key\+Handler}}
+\index{Key\+Handler@{Key\+Handler}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{Key\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Key\+Handler\+::\+Key\+Handler (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{root\+Node, }
+\item[{osg\+::\+Camera $\ast$}]{post\+Process\+Cam, }
+\item[{std\+::vector$<$ osg\+::ref\+\_\+ptr$<$ osg\+::\+Program $>$$>$}]{programs}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_key_handler_aaae067fabc959780a9fae9c700c199da}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rootnode} & rootnode of the scene, polygonmode will be activatd on all children \\
+\hline
+{\em post\+Process\+Cam} & node containing the postprocess programs \\
+\hline
+{\em programs} & vector with postprocess programs \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_key_handler_8cpp_source_l00008}{8} of file \hyperlink{_key_handler_8cpp_source}{Key\+Handler.\+cpp}.
+
+\hypertarget{classbrtr_1_1_key_handler_aabad0b142ba1d2e648069b4e8af17797}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!````~Key\+Handler@{$\sim$\+Key\+Handler}}
+\index{````~Key\+Handler@{$\sim$\+Key\+Handler}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{$\sim$\+Key\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Key\+Handler\+::$\sim$\+Key\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classbrtr_1_1_key_handler_aabad0b142ba1d2e648069b4e8af17797}
+
+
+Definition at line \hyperlink{_key_handler_8cpp_source_l00019}{19} of file \hyperlink{_key_handler_8cpp_source}{Key\+Handler.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_key_handler_a02df9f4339712d5b8b2b25b89048cf47}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!handle@{handle}}
+\index{handle@{handle}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{handle}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Key\+Handler\+::handle (
+\begin{DoxyParamCaption}
+\item[{const osg\+G\+A\+::\+G\+U\+I\+Event\+Adapter \&}]{ea, }
+\item[{osg\+G\+A\+::\+G\+U\+I\+Action\+Adapter \&}]{aa}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classbrtr_1_1_key_handler_a02df9f4339712d5b8b2b25b89048cf47}
+
+
+Definition at line \hyperlink{_key_handler_8cpp_source_l00021}{21} of file \hyperlink{_key_handler_8cpp_source}{Key\+Handler.\+cpp}.
+
+\hypertarget{classbrtr_1_1_key_handler_a5af6a6e66e8754591b3425addc6e6858}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!handle\+Key\+Down@{handle\+Key\+Down}}
+\index{handle\+Key\+Down@{handle\+Key\+Down}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{handle\+Key\+Down}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Key\+Handler\+::handle\+Key\+Down (
+\begin{DoxyParamCaption}
+\item[{const osg\+G\+A\+::\+G\+U\+I\+Event\+Adapter \&}]{ea, }
+\item[{osg\+G\+A\+::\+G\+U\+I\+Action\+Adapter \&}]{aa}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_a5af6a6e66e8754591b3425addc6e6858}
+
+
+Definition at line \hyperlink{_key_handler_8cpp_source_l00053}{53} of file \hyperlink{_key_handler_8cpp_source}{Key\+Handler.\+cpp}.
+
+\hypertarget{classbrtr_1_1_key_handler_a1925fa114839192716167477714abfdc}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!modify\+Text@{modify\+Text}}
+\index{modify\+Text@{modify\+Text}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{modify\+Text}]{\setlength{\rightskip}{0pt plus 5cm}{\bf brtr\+::\+Base\+Interaction\+Callback} $\ast$ brtr\+::\+Key\+Handler\+::modify\+Text (
+\begin{DoxyParamCaption}
+\item[{bool}]{show}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_a1925fa114839192716167477714abfdc}
+
+
+Shows the Interaction\+Message on screen, if there is an Interaction\+Object beneath the mouse (e.\+a center of screen) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em to} & show or not show the text, that is the question \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the \hyperlink{classbrtr_1_1_base_interaction_callback}{Base\+Interaction\+Callback} associated with the interaction\+Object, if any, null else; 
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{_key_handler_8cpp_source_l00101}{101} of file \hyperlink{_key_handler_8cpp_source}{Key\+Handler.\+cpp}.
+
+\hypertarget{classbrtr_1_1_key_handler_a7f402d48b863ed19ef47038a32d1d05c}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!mouse\+Intersection@{mouse\+Intersection}}
+\index{mouse\+Intersection@{mouse\+Intersection}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{mouse\+Intersection}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Key\+Handler\+::mouse\+Intersection (
+\begin{DoxyParamCaption}
+\item[{osg\+G\+A\+::\+G\+U\+I\+Action\+Adapter \&}]{aa}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_a7f402d48b863ed19ef47038a32d1d05c}
+
+
+Checks, if under the mouse (e.\+a center of screen) is an interact-\/able object (e.\+a geometry) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aa} & G\+U\+I\+Action\+Adapter for getting the camera , to whom the Line\+Intersection\+Visitor will be attached to \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_key_handler_8cpp_source_l00076}{76} of file \hyperlink{_key_handler_8cpp_source}{Key\+Handler.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_key_handler_a4b0e380186a8172af6cf7c10dcff675a}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!\+\_\+cur\+Drawable@{\+\_\+cur\+Drawable}}
+\index{\+\_\+cur\+Drawable@{\+\_\+cur\+Drawable}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{\+\_\+cur\+Drawable}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Drawable$>$ brtr\+::\+Key\+Handler\+::\+\_\+cur\+Drawable\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_a4b0e380186a8172af6cf7c10dcff675a}
+
+
+Definition at line \hyperlink{_key_handler_8h_source_l00053}{53} of file \hyperlink{_key_handler_8h_source}{Key\+Handler.\+h}.
+
+\hypertarget{classbrtr_1_1_key_handler_a578b374029e318a509983a01253a7736}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!\+\_\+cur\+Prog@{\+\_\+cur\+Prog}}
+\index{\+\_\+cur\+Prog@{\+\_\+cur\+Prog}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{\+\_\+cur\+Prog}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int brtr\+::\+Key\+Handler\+::\+\_\+cur\+Prog\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_a578b374029e318a509983a01253a7736}
+
+
+Definition at line \hyperlink{_key_handler_8h_source_l00061}{61} of file \hyperlink{_key_handler_8h_source}{Key\+Handler.\+h}.
+
+\hypertarget{classbrtr_1_1_key_handler_a6939e2c5e93e53d6090c999eae2fb927}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!\+\_\+is\+Wire\+Frame@{\+\_\+is\+Wire\+Frame}}
+\index{\+\_\+is\+Wire\+Frame@{\+\_\+is\+Wire\+Frame}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{\+\_\+is\+Wire\+Frame}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Key\+Handler\+::\+\_\+is\+Wire\+Frame\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_a6939e2c5e93e53d6090c999eae2fb927}
+
+
+Definition at line \hyperlink{_key_handler_8h_source_l00060}{60} of file \hyperlink{_key_handler_8h_source}{Key\+Handler.\+h}.
+
+\hypertarget{classbrtr_1_1_key_handler_a1b2404dcd19426a93d4474cd45da84e8}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!\+\_\+mouse\+Event@{\+\_\+mouse\+Event}}
+\index{\+\_\+mouse\+Event@{\+\_\+mouse\+Event}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{\+\_\+mouse\+Event}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$ const osg\+G\+A\+::\+G\+U\+I\+Event\+Adapter $>$ brtr\+::\+Key\+Handler\+::\+\_\+mouse\+Event\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_a1b2404dcd19426a93d4474cd45da84e8}
+
+
+Definition at line \hyperlink{_key_handler_8h_source_l00059}{59} of file \hyperlink{_key_handler_8h_source}{Key\+Handler.\+h}.
+
+\hypertarget{classbrtr_1_1_key_handler_ae210945e48748029cbea37fde7d601b5}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!\+\_\+normale\+Mode@{\+\_\+normale\+Mode}}
+\index{\+\_\+normale\+Mode@{\+\_\+normale\+Mode}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{\+\_\+normale\+Mode}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Polygon\+Mode$>$ brtr\+::\+Key\+Handler\+::\+\_\+normale\+Mode\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_ae210945e48748029cbea37fde7d601b5}
+
+
+Definition at line \hyperlink{_key_handler_8h_source_l00056}{56} of file \hyperlink{_key_handler_8h_source}{Key\+Handler.\+h}.
+
+\hypertarget{classbrtr_1_1_key_handler_aa4cc5f6ac9134e473f37968dfb1dd821}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!\+\_\+post\+Process\+Cam@{\+\_\+post\+Process\+Cam}}
+\index{\+\_\+post\+Process\+Cam@{\+\_\+post\+Process\+Cam}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{\+\_\+post\+Process\+Cam}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Camera$>$ brtr\+::\+Key\+Handler\+::\+\_\+post\+Process\+Cam\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_aa4cc5f6ac9134e473f37968dfb1dd821}
+
+
+Definition at line \hyperlink{_key_handler_8h_source_l00057}{57} of file \hyperlink{_key_handler_8h_source}{Key\+Handler.\+h}.
+
+\hypertarget{classbrtr_1_1_key_handler_a492d086b9458475e595b3627a8dee0f9}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!\+\_\+programs@{\+\_\+programs}}
+\index{\+\_\+programs@{\+\_\+programs}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{\+\_\+programs}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$osg\+::ref\+\_\+ptr$<$osg\+::\+Program$>$ $>$ brtr\+::\+Key\+Handler\+::\+\_\+programs\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_a492d086b9458475e595b3627a8dee0f9}
+
+
+Definition at line \hyperlink{_key_handler_8h_source_l00058}{58} of file \hyperlink{_key_handler_8h_source}{Key\+Handler.\+h}.
+
+\hypertarget{classbrtr_1_1_key_handler_a2ff68d9c79145d235f50fec1da625f99}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!\+\_\+root\+Node@{\+\_\+root\+Node}}
+\index{\+\_\+root\+Node@{\+\_\+root\+Node}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{\+\_\+root\+Node}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Node$>$ brtr\+::\+Key\+Handler\+::\+\_\+root\+Node\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_a2ff68d9c79145d235f50fec1da625f99}
+
+
+Definition at line \hyperlink{_key_handler_8h_source_l00054}{54} of file \hyperlink{_key_handler_8h_source}{Key\+Handler.\+h}.
+
+\hypertarget{classbrtr_1_1_key_handler_a7aff4e23d4c614d8e0ccdc29a3c8882f}{\index{brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}!\+\_\+wire\+Frame\+Mode@{\+\_\+wire\+Frame\+Mode}}
+\index{\+\_\+wire\+Frame\+Mode@{\+\_\+wire\+Frame\+Mode}!brtr\+::\+Key\+Handler@{brtr\+::\+Key\+Handler}}
+\subsubsection[{\+\_\+wire\+Frame\+Mode}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Polygon\+Mode$>$ brtr\+::\+Key\+Handler\+::\+\_\+wire\+Frame\+Mode\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_key_handler_a7aff4e23d4c614d8e0ccdc29a3c8882f}
+
+
+Definition at line \hyperlink{_key_handler_8h_source_l00055}{55} of file \hyperlink{_key_handler_8h_source}{Key\+Handler.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_key_handler_8h}{Key\+Handler.\+h}\item 
+G\+U\+I/\hyperlink{_key_handler_8cpp}{Key\+Handler.\+cpp}\end{DoxyCompactItemize}

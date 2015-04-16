@@ -1,0 +1,153 @@
+\hypertarget{classbrtr_1_1_add_portal_gun_interaction_callback}{\section{brtr\+:\+:Add\+Portal\+Gun\+Interaction\+Callback Class Reference}
+\label{classbrtr_1_1_add_portal_gun_interaction_callback}\index{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback@{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}}
+}
+
+
+Interaction\+Callback for adding the portal gun to the players inventar.  
+
+
+
+
+{\ttfamily \#include $<$Add\+Portal\+Gun\+Interaction\+Callback.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Add\+Portal\+Gun\+Interaction\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classbrtr_1_1_add_portal_gun_interaction_callback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_a849f25b53c2a3c81e8201777bf481c96}{Add\+Portal\+Gun\+Interaction\+Callback} (osg\+::\+Node $\ast$weapon\+H\+U\+D, osg\+::\+Camera $\ast$hud\+Cam, osg\+::\+Switch $\ast$switcher, int width, int height)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_aa0db50622c7ae1cd25f8554c916137db}{set\+Text} ()
+\begin{DoxyCompactList}\small\item\em sets the text on screen. Subclasses must override to set its own (info)text \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_a9b6571b0295f7e12425b57ff0262dbd4}{interact} (osg\+::\+Node $\ast$, osg\+::\+Node\+Visitor $\ast$)
+\begin{DoxyCompactList}\small\item\em the interaction logic must be implemented be the children in this method \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Switch $>$ \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_ac110a98cbe720e599b344d9940702597}{\+\_\+switcher}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Interaction\+Callback for adding the portal gun to the players inventar. 
+
+\begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_add_portal_gun_interaction_callback_8h_source_l00014}{14} of file \hyperlink{_add_portal_gun_interaction_callback_8h_source}{Add\+Portal\+Gun\+Interaction\+Callback.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_add_portal_gun_interaction_callback_a849f25b53c2a3c81e8201777bf481c96}{\index{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback@{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}!Add\+Portal\+Gun\+Interaction\+Callback@{Add\+Portal\+Gun\+Interaction\+Callback}}
+\index{Add\+Portal\+Gun\+Interaction\+Callback@{Add\+Portal\+Gun\+Interaction\+Callback}!brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback@{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}}
+\subsubsection[{Add\+Portal\+Gun\+Interaction\+Callback}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback\+::\+Add\+Portal\+Gun\+Interaction\+Callback (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{weapon\+H\+U\+D, }
+\item[{osg\+::\+Camera $\ast$}]{hud\+Cam, }
+\item[{osg\+::\+Switch $\ast$}]{switcher, }
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_add_portal_gun_interaction_callback_a849f25b53c2a3c81e8201777bf481c96}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em weapon\+H\+U\+D} & weapon\+H\+U\+D which provides the method to add the portalgun to it \\
+\hline
+{\em hud\+Cam} & \\
+\hline
+{\em switcher} & switch-\/node which contains the portal\+Gun object, will be switched to off upon interaction, removing the portal Gun from the world \\
+\hline
+{\em width} & screen\+Width \\
+\hline
+{\em height} & screen\+Height \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{_add_portal_gun_interaction_callback_8cpp_source_l00005}{5} of file \hyperlink{_add_portal_gun_interaction_callback_8cpp_source}{Add\+Portal\+Gun\+Interaction\+Callback.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_add_portal_gun_interaction_callback_a9b6571b0295f7e12425b57ff0262dbd4}{\index{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback@{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}!interact@{interact}}
+\index{interact@{interact}!brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback@{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}}
+\subsubsection[{interact}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback\+::interact (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{, }
+\item[{osg\+::\+Node\+Visitor $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classbrtr_1_1_add_portal_gun_interaction_callback_a9b6571b0295f7e12425b57ff0262dbd4}
+
+
+the interaction logic must be implemented be the children in this method 
+
+
+
+Implements \hyperlink{classbrtr_1_1_base_interaction_callback_a3ed50c9c1725f932e0b78c90ba24e1ed}{brtr\+::\+Base\+Interaction\+Callback}.
+
+
+
+Definition at line \hyperlink{_add_portal_gun_interaction_callback_8cpp_source_l00013}{13} of file \hyperlink{_add_portal_gun_interaction_callback_8cpp_source}{Add\+Portal\+Gun\+Interaction\+Callback.\+cpp}.
+
+\hypertarget{classbrtr_1_1_add_portal_gun_interaction_callback_aa0db50622c7ae1cd25f8554c916137db}{\index{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback@{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}!set\+Text@{set\+Text}}
+\index{set\+Text@{set\+Text}!brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback@{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}}
+\subsubsection[{set\+Text}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback\+::set\+Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classbrtr_1_1_add_portal_gun_interaction_callback_aa0db50622c7ae1cd25f8554c916137db}
+
+
+sets the text on screen. Subclasses must override to set its own (info)text 
+
+
+
+Implements \hyperlink{classbrtr_1_1_base_interaction_callback_a0fe57e329f044e21d49041c861435ad8}{brtr\+::\+Base\+Interaction\+Callback}.
+
+
+
+Definition at line \hyperlink{_add_portal_gun_interaction_callback_8cpp_source_l00009}{9} of file \hyperlink{_add_portal_gun_interaction_callback_8cpp_source}{Add\+Portal\+Gun\+Interaction\+Callback.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_add_portal_gun_interaction_callback_ac110a98cbe720e599b344d9940702597}{\index{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback@{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}!\+\_\+switcher@{\+\_\+switcher}}
+\index{\+\_\+switcher@{\+\_\+switcher}!brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback@{brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback}}
+\subsubsection[{\+\_\+switcher}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Switch$>$ brtr\+::\+Add\+Portal\+Gun\+Interaction\+Callback\+::\+\_\+switcher\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_add_portal_gun_interaction_callback_ac110a98cbe720e599b344d9940702597}
+
+
+Definition at line \hyperlink{_add_portal_gun_interaction_callback_8h_source_l00032}{32} of file \hyperlink{_add_portal_gun_interaction_callback_8h_source}{Add\+Portal\+Gun\+Interaction\+Callback.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_add_portal_gun_interaction_callback_8h}{Add\+Portal\+Gun\+Interaction\+Callback.\+h}\item 
+Callbacks/\hyperlink{_add_portal_gun_interaction_callback_8cpp}{Add\+Portal\+Gun\+Interaction\+Callback.\+cpp}\end{DoxyCompactItemize}

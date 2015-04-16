@@ -1,0 +1,172 @@
+\hypertarget{_weapon_h_u_d_8cpp_source}{\section{Weapon\+H\+U\+D.\+cpp}
+\label{_weapon_h_u_d_8cpp_source}\index{Camera/\+Weapon\+H\+U\+D.\+cpp@{Camera/\+Weapon\+H\+U\+D.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/WeaponHUD.h"}
+00002 \textcolor{preprocessor}{#include "../header/CelShading.h"}
+00003 \textcolor{preprocessor}{#include "../header/ModifyMaterialVisitor.h"}
+00004 \textcolor{preprocessor}{#include "../header/UtilFunctions.h"}
+00005 
+00006 
+00007 \textcolor{keyword}{using namespace }osg;
+00008 
+00009 \textcolor{keyword}{namespace }brtr \{
+00010 
+\hypertarget{_weapon_h_u_d_8cpp_source_l00011}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_a79723105b944c088928741a620551d8d}{00011}     WeaponHUD::WeaponHUD(\textcolor{keyword}{const} \hyperlink{classbrtr_1_1_weapon_h_u_d}{WeaponHUD}& copy,\textcolor{keyword}{const} CopyOp& copyop)
+00012     : Camera(copy, copyop)
+00013     \{\}
+00014 
+00015     \textcolor{comment}{/*}
+00016 \textcolor{comment}{     * The constructor initializes the WeaponHUD with a standard weapon (in this case it's a crowbar) }
+00017 \textcolor{comment}{     */}
+\hypertarget{_weapon_h_u_d_8cpp_source_l00018}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_a8bc53d9bc7df80c28e2d9eeeed113281}{00018}     \hyperlink{classbrtr_1_1_weapon_h_u_d_a8bc53d9bc7df80c28e2d9eeeed113281}{WeaponHUD::WeaponHUD}()\{
+00019         \hyperlink{classbrtr_1_1_weapon_h_u_d_a86191d6e9041afc84575e77576464da9}{createWeaponHUD}();
+00020     \}
+00021 
+\hypertarget{_weapon_h_u_d_8cpp_source_l00022}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_a86191d6e9041afc84575e77576464da9}{00022}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_weapon_h_u_d_a86191d6e9041afc84575e77576464da9}{WeaponHUD::createWeaponHUD}() \{
+00023     
+00024         ref\_ptr<Node> crow = osgDB::readNodeFile(\textcolor{stringliteral}{"../BlenderFiles/exports/Brecheisen.ive"});
+00025     \textcolor{comment}{/*}
+00026 \textcolor{comment}{     * here a transformation is applied to the crowbar to show }
+00027 \textcolor{comment}{     * it at the lower right of the screen as if it is held in}
+00028 \textcolor{comment}{     * the right hand}
+00029 \textcolor{comment}{     */}
+00030         ref\_ptr<MatrixTransform> crowTransform = \textcolor{keyword}{new} MatrixTransform;
+00031         crowTransform->setMatrix(
+00032          Matrix::rotate(osg::DegreesToRadians(3.0f), Y\_AXIS)
+00033        * Matrix::rotate(DegreesToRadians(190.0f), Z\_AXIS)
+00034        * Matrix::translate(osg::Vec3(1.0f, 1.5f, -1.5f))
+00035                                 );
+00036         crowTransform->addChild(crow);
+00037     \textcolor{comment}{/*}
+00038 \textcolor{comment}{     * adjusting the shininess to give the crowbar a good appearance }
+00039 \textcolor{comment}{     */}
+00040         \hyperlink{classbrtr_1_1_modify_material_visitor}{brtr::ModifyMaterialVisitor} mmv;
+00041         mmv.\hyperlink{classbrtr_1_1_modify_material_visitor_a698aa0c31f8c5add503d47bc9898eec3}{setShininess}(42).\hyperlink{classbrtr_1_1_modify_material_visitor_a7a8a5a938799c5193645d86aa6dc6a7c}{setSpecular}(Vec4(0.4, 0.4, 0.4, 1));
+00042         crow->accept(mmv);
+00043     \textcolor{comment}{/*}
+00044 \textcolor{comment}{     * Adding a weapon switch to enable multiple weapon use}
+00045 \textcolor{comment}{     */}
+00046         ref\_ptr<Switch> switcher = \textcolor{keyword}{new} Switch;
+00047         switcher->addChild(crowTransform, \textcolor{keyword}{true});
+00048         \hyperlink{classbrtr_1_1_weapon_h_u_d_a32d5e498c15faa87f3bcfa83ca6c5b0e}{\_switcher} = switcher;
+00049         \hyperlink{classbrtr_1_1_weapon_h_u_d_a4ebf9d9e600e3a6b9f5d8601c084ee51}{\_handler} = \textcolor{keyword}{new} \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}{WeaponSwitchHandler}(switcher);
+00050 
+00051         ref\_ptr<brtr::CelShading> celshade = \textcolor{keyword}{new} \hyperlink{classbrtr_1_1_cel_shading}{brtr::CelShading};
+00052         celshade->addChild(switcher);
+00053         celshade->setNodeMask(~\hyperlink{namespacebrtr_a21ab851f18c0c85fa006766034833a4f}{brtr::interactionAndCollisionMask});
+00054 
+00055         setClearMask(GL\_DEPTH\_BUFFER\_BIT);
+00056         setRenderOrder(Camera::POST\_RENDER);
+00057         setReferenceFrame(Camera::ABSOLUTE\_RF);
+00058         setProjectionMatrixAsPerspective(100, 1, 0.001, 5);
+00059         
+00060         setViewMatrixAsLookAt(Vec3(), Vec3(0,1,0), Z\_AXIS);
+00061         getOrCreateStateSet()->setMode(GL\_LIGHTING, StateAttribute::OFF | StateAttribute::PROTECTED | 
+      StateAttribute::OVERRIDE);
+00062         addChild(celshade);
+00063     \}
+00064 
+\hypertarget{_weapon_h_u_d_8cpp_source_l00065}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_aaaa6c5e92034b7efb6194032f6ffca0f}{00065}     \hyperlink{classbrtr_1_1_weapon_h_u_d_aaaa6c5e92034b7efb6194032f6ffca0f}{WeaponHUD::~WeaponHUD}() \{
+00066 
+00067     \}
+00068 
+\hypertarget{_weapon_h_u_d_8cpp_source_l00069}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_a6a9a434ff3aa3861caf030763772ac74}{00069}     ref\_ptr<WeaponHUD::WeaponSwitchHandler> \hyperlink{classbrtr_1_1_weapon_h_u_d_a6a9a434ff3aa3861caf030763772ac74}{WeaponHUD::getWeaponHandler}() \{
+00070         \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_weapon_h_u_d_a4ebf9d9e600e3a6b9f5d8601c084ee51}{\_handler};
+00071     \}
+00072 
+\hypertarget{_weapon_h_u_d_8cpp_source_l00073}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_ab8ccf2821f698af567b7ce40eb6840d8}{00073}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_weapon_h_u_d_ab8ccf2821f698af567b7ce40eb6840d8}{WeaponHUD::addPortalGun}() \{
+00074         ref\_ptr<Node> portalGun = osgDB::readNodeFile(\textcolor{stringliteral}{"../BlenderFiles/exports/Portalgun.ive"});
+00075     \textcolor{comment}{/*}
+00076 \textcolor{comment}{     * rotating and translating the portal gun to the lower}
+00077 \textcolor{comment}{     * right of the screen}
+00078 \textcolor{comment}{     */}
+00079         ref\_ptr<MatrixTransform> portalGunTransform = \textcolor{keyword}{new} MatrixTransform;
+00080         portalGunTransform->setMatrix(
+00081             Matrix::rotate(osg::DegreesToRadians(0.0), X\_AXIS)
+00082             *Matrix::rotate(DegreesToRadians(0.0), Y\_AXIS)
+00083             *Matrix::rotate(DegreesToRadians(90.0), Z\_AXIS)
+00084             *Matrix::translate(osg::Vec3(0.7f, 1.5f, -1.3f))
+00085             );
+00086         portalGunTransform->addChild(portalGun);
+00087         \textcolor{comment}{/*}
+00088 \textcolor{comment}{     * Set proper lighting and reflection}
+00089 \textcolor{comment}{     */}
+00090     \hyperlink{classbrtr_1_1_modify_material_visitor}{brtr::ModifyMaterialVisitor} mmv;
+00091         mmv.\hyperlink{classbrtr_1_1_modify_material_visitor_adfaa00524e765fdf3ddc5968187623cd}{setAmbient}(Vec4(1.3, 1.3, 1.3, 1)).\hyperlink{classbrtr_1_1_modify_material_visitor_a698aa0c31f8c5add503d47bc9898eec3}{setShininess}(42).
+      \hyperlink{classbrtr_1_1_modify_material_visitor_a7a8a5a938799c5193645d86aa6dc6a7c}{setSpecular}(Vec4(0.4, 0.4, 0.4, 1));
+00092         portalGun->accept(mmv);
+00093         \hyperlink{classbrtr_1_1_weapon_h_u_d_a32d5e498c15faa87f3bcfa83ca6c5b0e}{\_switcher}->setAllChildrenOff();
+00094         \hyperlink{classbrtr_1_1_weapon_h_u_d_a32d5e498c15faa87f3bcfa83ca6c5b0e}{\_switcher}->addChild(portalGunTransform, \textcolor{keyword}{true});
+00095         
+00096 
+00097     \}
+00098 
+00099 \textcolor{comment}{//WEAPON\_SWITCH\_HANDLER}
+00100 
+\hypertarget{_weapon_h_u_d_8cpp_source_l00101}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a0f61e3aa44c58264e440186f1d7dbb0f}{00101}     \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a0f61e3aa44c58264e440186f1d7dbb0f}{WeaponHUD::WeaponSwitchHandler::WeaponSwitchHandler}(
+      Switch* switchNode) :
+00102         \_switch(switchNode),
+00103         \_curWeapon(0),
+00104         \_frameNumber(0)\{\}
+00105 
+\hypertarget{_weapon_h_u_d_8cpp_source_l00106}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_ad3bd49035273e857144c1ad4927a22df}{00106}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_ad3bd49035273e857144c1ad4927a22df}{WeaponHUD::WeaponSwitchHandler::handle}(\textcolor{keyword}{const} 
+      osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa) \{
+00107         \textcolor{keywordflow}{switch} (ea.getEventType()) \{
+00108         \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::SCROLL:
+00109         \{
+00110       \textcolor{comment}{/*}
+00111 \textcolor{comment}{       * catches multiple activations of the weapon switching}
+00112 \textcolor{comment}{       * per frame because linux triggers keys twice}
+00113 \textcolor{comment}{       */}
+00114             \textcolor{keywordflow}{if} (\_frameNumber == aa.asView()->getFrameStamp()->getFrameNumber()) \{
+00115                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00116             \}
+00117             \_frameNumber = aa.asView()->getFrameStamp()->getFrameNumber();
+00118         \textcolor{comment}{//Debug message}
+00119             OSG\_ALWAYS << \textcolor{stringliteral}{"SCROLL: "} << aa.asView()->getFrameStamp()->getFrameNumber() << std::endl;
+00120             osgGA::GUIEventAdapter::ScrollingMotion sm = ea.getScrollingMotion();
+00121             \textcolor{keywordflow}{switch} (sm) \{
+00122             \textcolor{comment}{/*}
+00123 \textcolor{comment}{         * switches backwards through weapon list when}
+00124 \textcolor{comment}{         * the mouse wheel is scrolled down}
+00125 \textcolor{comment}{         */}
+00126             \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::SCROLL\_DOWN:
+00127         \textcolor{comment}{//Debug message}
+00128           OSG\_ALWAYS << \textcolor{stringliteral}{"SCROLL DOWN"} << std::endl;
+00129         \_switch->setValue(\_curWeapon, \textcolor{keyword}{false});
+00130                 \_curWeapon--;
+00131                 \textcolor{comment}{/*}
+00132 \textcolor{comment}{         * if the first weapon is selected and another}
+00133 \textcolor{comment}{         * scroll backwards is triggered, the last weapon}
+00134 \textcolor{comment}{         * gets selected}
+00135 \textcolor{comment}{         */}
+00136         \textcolor{keywordflow}{if} (\_curWeapon < 0)
+00137                     \_curWeapon = \_switch->getNumChildren() - 1;
+00138                 \_curWeapon = \_curWeapon % \_switch->getNumChildren();
+00139                 \_switch->setValue(\_curWeapon, \textcolor{keyword}{true});
+00140                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00141         \textcolor{comment}{/*}
+00142 \textcolor{comment}{         * switches forward through weapon list when}
+00143 \textcolor{comment}{         * the mouse wheel is scrolled up}
+00144 \textcolor{comment}{         */}
+00145         \textcolor{keywordflow}{case} osgGA::GUIEventAdapter::SCROLL\_UP:
+00146           \textcolor{comment}{//Debug message}
+00147                 OSG\_ALWAYS << \textcolor{stringliteral}{"SCROLL UP"} << std::endl;
+00148                 \_switch->setValue(\_curWeapon, \textcolor{keyword}{false});
+00149                 \_curWeapon++;
+00150                 \_curWeapon = \_curWeapon % \_switch->getNumChildren();
+00151                 \_switch->setValue(\_curWeapon, \textcolor{keyword}{true});
+00152                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00153             \textcolor{keywordflow}{default}:
+00154                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00155             \}
+00156         \}
+00157         \textcolor{keywordflow}{default}:
+00158             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00159         \}
+00160     \}
+00161 
+00162 \}
+\end{DoxyCode}

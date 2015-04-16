@@ -1,0 +1,21 @@
+\hypertarget{_train_switcher_callback_8h_source}{\section{Train\+Switcher\+Callback.\+h}
+\label{_train_switcher_callback_8h_source}\index{header/\+Train\+Switcher\+Callback.\+h@{header/\+Train\+Switcher\+Callback.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osg/NodeCallback>}
+00003 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00004 
+00005 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_train_switcher_callback_8h_source_l00015}{}\hyperlink{classbrtr_1_1_train_switcher_callback}{00015}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_train_switcher_callback}{TrainSwitcherCallback} : \textcolor{keyword}{public} osg::NodeCallback \{
+00016     \textcolor{keyword}{public}:
+00017 
+00018         \hyperlink{classbrtr_1_1_train_switcher_callback_a54ad53b07976bf34af2a0e6061088f3c}{TrainSwitcherCallback}();
+00019         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_train_switcher_callback_a5a8182c650febc07a8443f6a35c32087}{operator()}(osg::Node* node, osg::NodeVisitor* nv);
+00020     \textcolor{keyword}{private}:
+\hypertarget{_train_switcher_callback_8h_source_l00021}{}\hyperlink{classbrtr_1_1_train_switcher_callback_ac87e64555ad379814a93220447c49257}{00021}         \textcolor{keywordtype}{int} \hyperlink{classbrtr_1_1_train_switcher_callback_ac87e64555ad379814a93220447c49257}{\_curActiveTrain};
+\hypertarget{_train_switcher_callback_8h_source_l00022}{}\hyperlink{classbrtr_1_1_train_switcher_callback_a1d2fbe75d19ca03cba449cdf4277f0eb}{00022}         \textcolor{keywordtype}{int} \hyperlink{classbrtr_1_1_train_switcher_callback_a1d2fbe75d19ca03cba449cdf4277f0eb}{\_deltaTime};
+00023     \};
+00024 \}
+\end{DoxyCode}

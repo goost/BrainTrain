@@ -1,0 +1,262 @@
+\hypertarget{classbrtr_1_1_modify_material_visitor}{\section{brtr\+:\+:Modify\+Material\+Visitor Class Reference}
+\label{classbrtr_1_1_modify_material_visitor}\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+}
+
+
+Visitor for altering the material attributes, mainly used for objects craeted with blender.  
+
+
+
+
+{\ttfamily \#include $<$Modify\+Material\+Visitor.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Modify\+Material\+Visitor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbrtr_1_1_modify_material_visitor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_modify_material_visitor_a240eed8002f7c81d8cd63aaaf4037381}{Modify\+Material\+Visitor} ()
+\item 
+void \hyperlink{classbrtr_1_1_modify_material_visitor_a74bf42fdfffbc1f7d433c1199f563ccb}{apply} (osg\+::\+Geode \&geode)
+\item 
+osg\+::\+Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_ac79c5aeaa29e381e46e130c088966ad9}{get\+Diffuse} () const 
+\item 
+\hyperlink{classbrtr_1_1_modify_material_visitor}{Modify\+Material\+Visitor} \& \hyperlink{classbrtr_1_1_modify_material_visitor_a17748f6a7f41431832da66dd65e1c41f}{set\+Diffuse} (osg\+::\+Vec4 val)
+\item 
+osg\+::\+Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a5be2b7553a9ecbe1c6d50425119f7e9e}{get\+Specular} () const 
+\item 
+\hyperlink{classbrtr_1_1_modify_material_visitor}{Modify\+Material\+Visitor} \& \hyperlink{classbrtr_1_1_modify_material_visitor_a7a8a5a938799c5193645d86aa6dc6a7c}{set\+Specular} (osg\+::\+Vec4 val)
+\item 
+osg\+::\+Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a2a87910d4f316359eb6bf75620edf947}{get\+Ambient} () const 
+\item 
+\hyperlink{classbrtr_1_1_modify_material_visitor}{Modify\+Material\+Visitor} \& \hyperlink{classbrtr_1_1_modify_material_visitor_adfaa00524e765fdf3ddc5968187623cd}{set\+Ambient} (osg\+::\+Vec4 val)
+\item 
+double \hyperlink{classbrtr_1_1_modify_material_visitor_a68f37fe264bd8f51e1d7a37f8048b103}{get\+Shininess} () const 
+\item 
+\hyperlink{classbrtr_1_1_modify_material_visitor}{Modify\+Material\+Visitor} \& \hyperlink{classbrtr_1_1_modify_material_visitor_a698aa0c31f8c5add503d47bc9898eec3}{set\+Shininess} (double val)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+osg\+::\+Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a33e06870644e892df2ac9af4c5bbfbd8}{\+\_\+diffuse}
+\item 
+osg\+::\+Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a4cbbdf6ecd85ec563839545fc328fbfe}{\+\_\+specular}
+\item 
+osg\+::\+Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a1cffff6daf689c23a4e9680cd8f1441b}{\+\_\+ambient}
+\item 
+double \hyperlink{classbrtr_1_1_modify_material_visitor_a297f5208848d0bba92653bbd15908f68}{\+\_\+shininess}
+\item 
+bool \hyperlink{classbrtr_1_1_modify_material_visitor_a351e4cfeca41aa6f746956661930f994}{\+\_\+ambient\+Flag}
+\item 
+bool \hyperlink{classbrtr_1_1_modify_material_visitor_a154ad99cb3796be6d04347cdbfb66e10}{\+\_\+specular\+Flag}
+\item 
+bool \hyperlink{classbrtr_1_1_modify_material_visitor_a8b30ec1a8b93422fc168597a47425041}{\+\_\+shininess\+Flag}
+\item 
+bool \hyperlink{classbrtr_1_1_modify_material_visitor_a511c43fcd16d68855e6e63ca3ec1a84e}{\+\_\+diffuse\+Flag}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Visitor for altering the material attributes, mainly used for objects craeted with blender. 
+
+before applying one must set the desired changes (set\+Diffuse, set\+Ambient, set\+Specular oder set\+Shininess) \begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8h_source_l00014}{14} of file \hyperlink{_modify_material_visitor_8h_source}{Modify\+Material\+Visitor.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_modify_material_visitor_a240eed8002f7c81d8cd63aaaf4037381}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!Modify\+Material\+Visitor@{Modify\+Material\+Visitor}}
+\index{Modify\+Material\+Visitor@{Modify\+Material\+Visitor}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{Modify\+Material\+Visitor}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Modify\+Material\+Visitor\+::\+Modify\+Material\+Visitor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_modify_material_visitor_a240eed8002f7c81d8cd63aaaf4037381}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8cpp_source_l00005}{5} of file \hyperlink{_modify_material_visitor_8cpp_source}{Modify\+Material\+Visitor.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_modify_material_visitor_a74bf42fdfffbc1f7d433c1199f563ccb}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!apply@{apply}}
+\index{apply@{apply}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Modify\+Material\+Visitor\+::apply (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Geode \&}]{geode}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_modify_material_visitor_a74bf42fdfffbc1f7d433c1199f563ccb}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8cpp_source_l00014}{14} of file \hyperlink{_modify_material_visitor_8cpp_source}{Modify\+Material\+Visitor.\+cpp}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a2a87910d4f316359eb6bf75620edf947}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!get\+Ambient@{get\+Ambient}}
+\index{get\+Ambient@{get\+Ambient}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{get\+Ambient}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::\+Vec4 brtr\+::\+Modify\+Material\+Visitor\+::get\+Ambient (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classbrtr_1_1_modify_material_visitor_a2a87910d4f316359eb6bf75620edf947}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8cpp_source_l00053}{53} of file \hyperlink{_modify_material_visitor_8cpp_source}{Modify\+Material\+Visitor.\+cpp}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_ac79c5aeaa29e381e46e130c088966ad9}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!get\+Diffuse@{get\+Diffuse}}
+\index{get\+Diffuse@{get\+Diffuse}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{get\+Diffuse}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::\+Vec4 brtr\+::\+Modify\+Material\+Visitor\+::get\+Diffuse (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classbrtr_1_1_modify_material_visitor_ac79c5aeaa29e381e46e130c088966ad9}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8cpp_source_l00033}{33} of file \hyperlink{_modify_material_visitor_8cpp_source}{Modify\+Material\+Visitor.\+cpp}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a68f37fe264bd8f51e1d7a37f8048b103}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!get\+Shininess@{get\+Shininess}}
+\index{get\+Shininess@{get\+Shininess}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{get\+Shininess}]{\setlength{\rightskip}{0pt plus 5cm}double brtr\+::\+Modify\+Material\+Visitor\+::get\+Shininess (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classbrtr_1_1_modify_material_visitor_a68f37fe264bd8f51e1d7a37f8048b103}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8cpp_source_l00063}{63} of file \hyperlink{_modify_material_visitor_8cpp_source}{Modify\+Material\+Visitor.\+cpp}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a5be2b7553a9ecbe1c6d50425119f7e9e}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!get\+Specular@{get\+Specular}}
+\index{get\+Specular@{get\+Specular}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{get\+Specular}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::\+Vec4 brtr\+::\+Modify\+Material\+Visitor\+::get\+Specular (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classbrtr_1_1_modify_material_visitor_a5be2b7553a9ecbe1c6d50425119f7e9e}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8cpp_source_l00043}{43} of file \hyperlink{_modify_material_visitor_8cpp_source}{Modify\+Material\+Visitor.\+cpp}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_adfaa00524e765fdf3ddc5968187623cd}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!set\+Ambient@{set\+Ambient}}
+\index{set\+Ambient@{set\+Ambient}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{set\+Ambient}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Modify\+Material\+Visitor} \& brtr\+::\+Modify\+Material\+Visitor\+::set\+Ambient (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Vec4}]{val}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_modify_material_visitor_adfaa00524e765fdf3ddc5968187623cd}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8cpp_source_l00057}{57} of file \hyperlink{_modify_material_visitor_8cpp_source}{Modify\+Material\+Visitor.\+cpp}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a17748f6a7f41431832da66dd65e1c41f}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!set\+Diffuse@{set\+Diffuse}}
+\index{set\+Diffuse@{set\+Diffuse}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{set\+Diffuse}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Modify\+Material\+Visitor} \& brtr\+::\+Modify\+Material\+Visitor\+::set\+Diffuse (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Vec4}]{val}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_modify_material_visitor_a17748f6a7f41431832da66dd65e1c41f}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8cpp_source_l00037}{37} of file \hyperlink{_modify_material_visitor_8cpp_source}{Modify\+Material\+Visitor.\+cpp}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a698aa0c31f8c5add503d47bc9898eec3}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!set\+Shininess@{set\+Shininess}}
+\index{set\+Shininess@{set\+Shininess}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{set\+Shininess}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Modify\+Material\+Visitor} \& brtr\+::\+Modify\+Material\+Visitor\+::set\+Shininess (
+\begin{DoxyParamCaption}
+\item[{double}]{val}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_modify_material_visitor_a698aa0c31f8c5add503d47bc9898eec3}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8cpp_source_l00067}{67} of file \hyperlink{_modify_material_visitor_8cpp_source}{Modify\+Material\+Visitor.\+cpp}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a7a8a5a938799c5193645d86aa6dc6a7c}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!set\+Specular@{set\+Specular}}
+\index{set\+Specular@{set\+Specular}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{set\+Specular}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Modify\+Material\+Visitor} \& brtr\+::\+Modify\+Material\+Visitor\+::set\+Specular (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Vec4}]{val}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_modify_material_visitor_a7a8a5a938799c5193645d86aa6dc6a7c}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8cpp_source_l00047}{47} of file \hyperlink{_modify_material_visitor_8cpp_source}{Modify\+Material\+Visitor.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_modify_material_visitor_a1cffff6daf689c23a4e9680cd8f1441b}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!\+\_\+ambient@{\+\_\+ambient}}
+\index{\+\_\+ambient@{\+\_\+ambient}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{\+\_\+ambient}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::\+Vec4 brtr\+::\+Modify\+Material\+Visitor\+::\+\_\+ambient\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_modify_material_visitor_a1cffff6daf689c23a4e9680cd8f1441b}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8h_source_l00031}{31} of file \hyperlink{_modify_material_visitor_8h_source}{Modify\+Material\+Visitor.\+h}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a351e4cfeca41aa6f746956661930f994}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!\+\_\+ambient\+Flag@{\+\_\+ambient\+Flag}}
+\index{\+\_\+ambient\+Flag@{\+\_\+ambient\+Flag}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{\+\_\+ambient\+Flag}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Modify\+Material\+Visitor\+::\+\_\+ambient\+Flag\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_modify_material_visitor_a351e4cfeca41aa6f746956661930f994}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8h_source_l00033}{33} of file \hyperlink{_modify_material_visitor_8h_source}{Modify\+Material\+Visitor.\+h}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a33e06870644e892df2ac9af4c5bbfbd8}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!\+\_\+diffuse@{\+\_\+diffuse}}
+\index{\+\_\+diffuse@{\+\_\+diffuse}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{\+\_\+diffuse}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::\+Vec4 brtr\+::\+Modify\+Material\+Visitor\+::\+\_\+diffuse\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_modify_material_visitor_a33e06870644e892df2ac9af4c5bbfbd8}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8h_source_l00029}{29} of file \hyperlink{_modify_material_visitor_8h_source}{Modify\+Material\+Visitor.\+h}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a511c43fcd16d68855e6e63ca3ec1a84e}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!\+\_\+diffuse\+Flag@{\+\_\+diffuse\+Flag}}
+\index{\+\_\+diffuse\+Flag@{\+\_\+diffuse\+Flag}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{\+\_\+diffuse\+Flag}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Modify\+Material\+Visitor\+::\+\_\+diffuse\+Flag\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_modify_material_visitor_a511c43fcd16d68855e6e63ca3ec1a84e}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8h_source_l00036}{36} of file \hyperlink{_modify_material_visitor_8h_source}{Modify\+Material\+Visitor.\+h}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a297f5208848d0bba92653bbd15908f68}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!\+\_\+shininess@{\+\_\+shininess}}
+\index{\+\_\+shininess@{\+\_\+shininess}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{\+\_\+shininess}]{\setlength{\rightskip}{0pt plus 5cm}double brtr\+::\+Modify\+Material\+Visitor\+::\+\_\+shininess\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_modify_material_visitor_a297f5208848d0bba92653bbd15908f68}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8h_source_l00032}{32} of file \hyperlink{_modify_material_visitor_8h_source}{Modify\+Material\+Visitor.\+h}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a8b30ec1a8b93422fc168597a47425041}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!\+\_\+shininess\+Flag@{\+\_\+shininess\+Flag}}
+\index{\+\_\+shininess\+Flag@{\+\_\+shininess\+Flag}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{\+\_\+shininess\+Flag}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Modify\+Material\+Visitor\+::\+\_\+shininess\+Flag\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_modify_material_visitor_a8b30ec1a8b93422fc168597a47425041}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8h_source_l00035}{35} of file \hyperlink{_modify_material_visitor_8h_source}{Modify\+Material\+Visitor.\+h}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a4cbbdf6ecd85ec563839545fc328fbfe}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!\+\_\+specular@{\+\_\+specular}}
+\index{\+\_\+specular@{\+\_\+specular}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{\+\_\+specular}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::\+Vec4 brtr\+::\+Modify\+Material\+Visitor\+::\+\_\+specular\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_modify_material_visitor_a4cbbdf6ecd85ec563839545fc328fbfe}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8h_source_l00030}{30} of file \hyperlink{_modify_material_visitor_8h_source}{Modify\+Material\+Visitor.\+h}.
+
+\hypertarget{classbrtr_1_1_modify_material_visitor_a154ad99cb3796be6d04347cdbfb66e10}{\index{brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}!\+\_\+specular\+Flag@{\+\_\+specular\+Flag}}
+\index{\+\_\+specular\+Flag@{\+\_\+specular\+Flag}!brtr\+::\+Modify\+Material\+Visitor@{brtr\+::\+Modify\+Material\+Visitor}}
+\subsubsection[{\+\_\+specular\+Flag}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Modify\+Material\+Visitor\+::\+\_\+specular\+Flag\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_modify_material_visitor_a154ad99cb3796be6d04347cdbfb66e10}
+
+
+Definition at line \hyperlink{_modify_material_visitor_8h_source_l00034}{34} of file \hyperlink{_modify_material_visitor_8h_source}{Modify\+Material\+Visitor.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_modify_material_visitor_8h}{Modify\+Material\+Visitor.\+h}\item 
+Util/\hyperlink{_modify_material_visitor_8cpp}{Modify\+Material\+Visitor.\+cpp}\end{DoxyCompactItemize}

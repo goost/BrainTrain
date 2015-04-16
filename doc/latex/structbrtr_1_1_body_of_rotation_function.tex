@@ -1,0 +1,88 @@
+\hypertarget{structbrtr_1_1_body_of_rotation_function}{\section{brtr\+:\+:Body\+Of\+Rotation\+Function Struct Reference}
+\label{structbrtr_1_1_body_of_rotation_function}\index{brtr\+::\+Body\+Of\+Rotation\+Function@{brtr\+::\+Body\+Of\+Rotation\+Function}}
+}
+
+
+struct holding the function, which calculates the radius in dependece of the height. lambda (double)-\/$>$double func, int end, Body\+Of\+Rotation\+Function$\ast$ next\+Func if one wish to have more then one function then the end value and next\+Func pointer must be set accordingly the end+1 is the beginning x of the next function  
+
+
+
+
+{\ttfamily \#include $<$Util\+Functions.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{structbrtr_1_1_body_of_rotation_function_a22861c378686dabe1c35c90a0a8dcf46}{derivation} (double x) const 
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::function$<$ double(double)$>$ \hyperlink{structbrtr_1_1_body_of_rotation_function_a5fda598eb0a63696b059e3a27c01142b}{func}
+\begin{DoxyCompactList}\small\item\em the function \end{DoxyCompactList}\item 
+double \hyperlink{structbrtr_1_1_body_of_rotation_function_a46667ab72bfeddc305bf31fa359c8699}{end}
+\begin{DoxyCompactList}\small\item\em the end value of the function, should be less or equal create\+Body\+Of\+Rotation\+::height \end{DoxyCompactList}\item 
+const \hyperlink{structbrtr_1_1_body_of_rotation_function}{Body\+Of\+Rotation\+Function} $\ast$ \hyperlink{structbrtr_1_1_body_of_rotation_function_ad7df29eaeb2504928488691196cc06eb}{next\+Func}
+\begin{DoxyCompactList}\small\item\em if end is less then create\+Body\+Of\+Rotation\+::height, must point towards the next function which shall be used from end \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+struct holding the function, which calculates the radius in dependece of the height. lambda (double)-\/$>$double func, int end, Body\+Of\+Rotation\+Function$\ast$ next\+Func if one wish to have more then one function then the end value and next\+Func pointer must be set accordingly the end+1 is the beginning x of the next function 
+
+Definition at line \hyperlink{_util_functions_8h_source_l00040}{40} of file \hyperlink{_util_functions_8h_source}{Util\+Functions.\+h}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{structbrtr_1_1_body_of_rotation_function_a22861c378686dabe1c35c90a0a8dcf46}{\index{brtr\+::\+Body\+Of\+Rotation\+Function@{brtr\+::\+Body\+Of\+Rotation\+Function}!derivation@{derivation}}
+\index{derivation@{derivation}!brtr\+::\+Body\+Of\+Rotation\+Function@{brtr\+::\+Body\+Of\+Rotation\+Function}}
+\subsubsection[{derivation}]{\setlength{\rightskip}{0pt plus 5cm}double brtr\+::\+Body\+Of\+Rotation\+Function\+::derivation (
+\begin{DoxyParamCaption}
+\item[{double}]{x}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{structbrtr_1_1_body_of_rotation_function_a22861c378686dabe1c35c90a0a8dcf46}
+
+
+Definition at line \hyperlink{_util_functions_8h_source_l00044}{44} of file \hyperlink{_util_functions_8h_source}{Util\+Functions.\+h}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structbrtr_1_1_body_of_rotation_function_a46667ab72bfeddc305bf31fa359c8699}{\index{brtr\+::\+Body\+Of\+Rotation\+Function@{brtr\+::\+Body\+Of\+Rotation\+Function}!end@{end}}
+\index{end@{end}!brtr\+::\+Body\+Of\+Rotation\+Function@{brtr\+::\+Body\+Of\+Rotation\+Function}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}double brtr\+::\+Body\+Of\+Rotation\+Function\+::end}}\label{structbrtr_1_1_body_of_rotation_function_a46667ab72bfeddc305bf31fa359c8699}
+
+
+the end value of the function, should be less or equal create\+Body\+Of\+Rotation\+::height 
+
+
+
+Definition at line \hyperlink{_util_functions_8h_source_l00042}{42} of file \hyperlink{_util_functions_8h_source}{Util\+Functions.\+h}.
+
+\hypertarget{structbrtr_1_1_body_of_rotation_function_a5fda598eb0a63696b059e3a27c01142b}{\index{brtr\+::\+Body\+Of\+Rotation\+Function@{brtr\+::\+Body\+Of\+Rotation\+Function}!func@{func}}
+\index{func@{func}!brtr\+::\+Body\+Of\+Rotation\+Function@{brtr\+::\+Body\+Of\+Rotation\+Function}}
+\subsubsection[{func}]{\setlength{\rightskip}{0pt plus 5cm}std\+::function$<$double(double)$>$ brtr\+::\+Body\+Of\+Rotation\+Function\+::func}}\label{structbrtr_1_1_body_of_rotation_function_a5fda598eb0a63696b059e3a27c01142b}
+
+
+the function 
+
+
+
+Definition at line \hyperlink{_util_functions_8h_source_l00041}{41} of file \hyperlink{_util_functions_8h_source}{Util\+Functions.\+h}.
+
+\hypertarget{structbrtr_1_1_body_of_rotation_function_ad7df29eaeb2504928488691196cc06eb}{\index{brtr\+::\+Body\+Of\+Rotation\+Function@{brtr\+::\+Body\+Of\+Rotation\+Function}!next\+Func@{next\+Func}}
+\index{next\+Func@{next\+Func}!brtr\+::\+Body\+Of\+Rotation\+Function@{brtr\+::\+Body\+Of\+Rotation\+Function}}
+\subsubsection[{next\+Func}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Body\+Of\+Rotation\+Function}$\ast$ brtr\+::\+Body\+Of\+Rotation\+Function\+::next\+Func}}\label{structbrtr_1_1_body_of_rotation_function_ad7df29eaeb2504928488691196cc06eb}
+
+
+if end is less then create\+Body\+Of\+Rotation\+::height, must point towards the next function which shall be used from end 
+
+
+
+Definition at line \hyperlink{_util_functions_8h_source_l00043}{43} of file \hyperlink{_util_functions_8h_source}{Util\+Functions.\+h}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_util_functions_8h}{Util\+Functions.\+h}\end{DoxyCompactItemize}

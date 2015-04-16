@@ -1,0 +1,176 @@
+\hypertarget{classbrtr_1_1_weapon_h_u_d}{\section{brtr\+:\+:Weapon\+H\+U\+D Class Reference}
+\label{classbrtr_1_1_weapon_h_u_d}\index{brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}}
+}
+
+
+\hyperlink{classbrtr_1_1_weapon_h_u_d}{Weapon\+H\+U\+D} class, provides the functions to add a H\+U\+D camera to the scene.  
+
+
+
+
+{\ttfamily \#include $<$Weapon\+H\+U\+D.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Weapon\+H\+U\+D\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbrtr_1_1_weapon_h_u_d}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}{Weapon\+Switch\+Handler}
+\begin{DoxyCompactList}\small\item\em Event\+Handler for Weapon\+Switching. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_weapon_h_u_d_a8bc53d9bc7df80c28e2d9eeeed113281}{Weapon\+H\+U\+D} ()
+\item 
+\hyperlink{classbrtr_1_1_weapon_h_u_d_a79723105b944c088928741a620551d8d}{Weapon\+H\+U\+D} (const \hyperlink{classbrtr_1_1_weapon_h_u_d}{Weapon\+H\+U\+D} \&, const Copy\+Op \&copyop=Copy\+Op\+::\+S\+H\+A\+L\+L\+O\+W\+\_\+\+C\+O\+P\+Y)
+\item 
+ref\+\_\+ptr$<$ \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}{Weapon\+Switch\+Handler} $>$ \hyperlink{classbrtr_1_1_weapon_h_u_d_a6a9a434ff3aa3861caf030763772ac74}{get\+Weapon\+Handler} ()
+\item 
+void \hyperlink{classbrtr_1_1_weapon_h_u_d_ab8ccf2821f698af567b7ce40eb6840d8}{add\+Portal\+Gun} ()
+\begin{DoxyCompactList}\small\item\em a portal gun is added to the weapon switch \end{DoxyCompactList}\item 
+\hyperlink{classbrtr_1_1_weapon_h_u_d_aaaa6c5e92034b7efb6194032f6ffca0f}{$\sim$\+Weapon\+H\+U\+D} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classbrtr_1_1_weapon_h_u_d_a86191d6e9041afc84575e77576464da9}{create\+Weapon\+H\+U\+D} ()
+\begin{DoxyCompactList}\small\item\em creates a weapon hud with the default weapon crowbar \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ref\+\_\+ptr$<$ Switch $>$ \hyperlink{classbrtr_1_1_weapon_h_u_d_a32d5e498c15faa87f3bcfa83ca6c5b0e}{\+\_\+switcher}
+\item 
+ref\+\_\+ptr$<$ \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}{Weapon\+Switch\+Handler} $>$ \hyperlink{classbrtr_1_1_weapon_h_u_d_a4ebf9d9e600e3a6b9f5d8601c084ee51}{\+\_\+handler}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classbrtr_1_1_weapon_h_u_d}{Weapon\+H\+U\+D} class, provides the functions to add a H\+U\+D camera to the scene. 
+
+Use the mouse wheel to shift between weapons after picking up a second one \begin{DoxyAuthor}{Author}
+Jonathan Spielvogel 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyPrecond}{Precondition}
+create a root node and attach the scene to it, then add the H\+U\+D to root 
+\end{DoxyPrecond}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8h_source_l00023}{23} of file \hyperlink{_weapon_h_u_d_8h_source}{Weapon\+H\+U\+D.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_weapon_h_u_d_a8bc53d9bc7df80c28e2d9eeeed113281}{\index{brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}!Weapon\+H\+U\+D@{Weapon\+H\+U\+D}}
+\index{Weapon\+H\+U\+D@{Weapon\+H\+U\+D}!brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}}
+\subsubsection[{Weapon\+H\+U\+D}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+H\+U\+D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_weapon_h_u_d_a8bc53d9bc7df80c28e2d9eeeed113281}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8cpp_source_l00018}{18} of file \hyperlink{_weapon_h_u_d_8cpp_source}{Weapon\+H\+U\+D.\+cpp}.
+
+\hypertarget{classbrtr_1_1_weapon_h_u_d_a79723105b944c088928741a620551d8d}{\index{brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}!Weapon\+H\+U\+D@{Weapon\+H\+U\+D}}
+\index{Weapon\+H\+U\+D@{Weapon\+H\+U\+D}!brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}}
+\subsubsection[{Weapon\+H\+U\+D}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Weapon\+H\+U\+D\+::\+Weapon\+H\+U\+D (
+\begin{DoxyParamCaption}
+\item[{const {\bf Weapon\+H\+U\+D} \&}]{copy, }
+\item[{const Copy\+Op \&}]{copyop = {\ttfamily CopyOp\+:\+:SHALLOW\+\_\+COPY}}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_weapon_h_u_d_a79723105b944c088928741a620551d8d}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8cpp_source_l00011}{11} of file \hyperlink{_weapon_h_u_d_8cpp_source}{Weapon\+H\+U\+D.\+cpp}.
+
+\hypertarget{classbrtr_1_1_weapon_h_u_d_aaaa6c5e92034b7efb6194032f6ffca0f}{\index{brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}!````~Weapon\+H\+U\+D@{$\sim$\+Weapon\+H\+U\+D}}
+\index{````~Weapon\+H\+U\+D@{$\sim$\+Weapon\+H\+U\+D}!brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}}
+\subsubsection[{$\sim$\+Weapon\+H\+U\+D}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Weapon\+H\+U\+D\+::$\sim$\+Weapon\+H\+U\+D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_weapon_h_u_d_aaaa6c5e92034b7efb6194032f6ffca0f}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8cpp_source_l00065}{65} of file \hyperlink{_weapon_h_u_d_8cpp_source}{Weapon\+H\+U\+D.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_weapon_h_u_d_ab8ccf2821f698af567b7ce40eb6840d8}{\index{brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}!add\+Portal\+Gun@{add\+Portal\+Gun}}
+\index{add\+Portal\+Gun@{add\+Portal\+Gun}!brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}}
+\subsubsection[{add\+Portal\+Gun}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Weapon\+H\+U\+D\+::add\+Portal\+Gun (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_weapon_h_u_d_ab8ccf2821f698af567b7ce40eb6840d8}
+
+
+a portal gun is added to the weapon switch 
+
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8cpp_source_l00073}{73} of file \hyperlink{_weapon_h_u_d_8cpp_source}{Weapon\+H\+U\+D.\+cpp}.
+
+\hypertarget{classbrtr_1_1_weapon_h_u_d_a86191d6e9041afc84575e77576464da9}{\index{brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}!create\+Weapon\+H\+U\+D@{create\+Weapon\+H\+U\+D}}
+\index{create\+Weapon\+H\+U\+D@{create\+Weapon\+H\+U\+D}!brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}}
+\subsubsection[{create\+Weapon\+H\+U\+D}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Weapon\+H\+U\+D\+::create\+Weapon\+H\+U\+D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_weapon_h_u_d_a86191d6e9041afc84575e77576464da9}
+
+
+creates a weapon hud with the default weapon crowbar 
+
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8cpp_source_l00022}{22} of file \hyperlink{_weapon_h_u_d_8cpp_source}{Weapon\+H\+U\+D.\+cpp}.
+
+\hypertarget{classbrtr_1_1_weapon_h_u_d_a6a9a434ff3aa3861caf030763772ac74}{\index{brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}!get\+Weapon\+Handler@{get\+Weapon\+Handler}}
+\index{get\+Weapon\+Handler@{get\+Weapon\+Handler}!brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}}
+\subsubsection[{get\+Weapon\+Handler}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$ {\bf Weapon\+H\+U\+D\+::\+Weapon\+Switch\+Handler} $>$ brtr\+::\+Weapon\+H\+U\+D\+::get\+Weapon\+Handler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_weapon_h_u_d_a6a9a434ff3aa3861caf030763772ac74}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8cpp_source_l00069}{69} of file \hyperlink{_weapon_h_u_d_8cpp_source}{Weapon\+H\+U\+D.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_weapon_h_u_d_a4ebf9d9e600e3a6b9f5d8601c084ee51}{\index{brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}!\+\_\+handler@{\+\_\+handler}}
+\index{\+\_\+handler@{\+\_\+handler}!brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}}
+\subsubsection[{\+\_\+handler}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<${\bf Weapon\+Switch\+Handler}$>$ brtr\+::\+Weapon\+H\+U\+D\+::\+\_\+handler\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_weapon_h_u_d_a4ebf9d9e600e3a6b9f5d8601c084ee51}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8h_source_l00073}{73} of file \hyperlink{_weapon_h_u_d_8h_source}{Weapon\+H\+U\+D.\+h}.
+
+\hypertarget{classbrtr_1_1_weapon_h_u_d_a32d5e498c15faa87f3bcfa83ca6c5b0e}{\index{brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}!\+\_\+switcher@{\+\_\+switcher}}
+\index{\+\_\+switcher@{\+\_\+switcher}!brtr\+::\+Weapon\+H\+U\+D@{brtr\+::\+Weapon\+H\+U\+D}}
+\subsubsection[{\+\_\+switcher}]{\setlength{\rightskip}{0pt plus 5cm}ref\+\_\+ptr$<$Switch$>$ brtr\+::\+Weapon\+H\+U\+D\+::\+\_\+switcher\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_weapon_h_u_d_a32d5e498c15faa87f3bcfa83ca6c5b0e}
+
+
+Definition at line \hyperlink{_weapon_h_u_d_8h_source_l00072}{72} of file \hyperlink{_weapon_h_u_d_8h_source}{Weapon\+H\+U\+D.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_weapon_h_u_d_8h}{Weapon\+H\+U\+D.\+h}\item 
+Camera/\hyperlink{_weapon_h_u_d_8cpp}{Weapon\+H\+U\+D.\+cpp}\end{DoxyCompactItemize}

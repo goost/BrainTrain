@@ -1,0 +1,25 @@
+\hypertarget{_add_portal_gun_interaction_callback_8h_source}{\section{Add\+Portal\+Gun\+Interaction\+Callback.\+h}
+\label{_add_portal_gun_interaction_callback_8h_source}\index{header/\+Add\+Portal\+Gun\+Interaction\+Callback.\+h@{header/\+Add\+Portal\+Gun\+Interaction\+Callback.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osg/NodeCallback>}
+00003 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00004 \textcolor{preprocessor}{#include "../header/BaseInteractionCallback.h"}
+00005 
+00006 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_add_portal_gun_interaction_callback_8h_source_l00014}{}\hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback}{00014}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback}{AddPortalGunInteractionCallback} : \textcolor{keyword}{public} 
+      \hyperlink{classbrtr_1_1_base_interaction_callback}{BaseInteractionCallback} \{
+00015     \textcolor{keyword}{public}:
+00026         \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_a849f25b53c2a3c81e8201777bf481c96}{AddPortalGunInteractionCallback}(osg::Node* weaponHUD, osg::Camera* 
+      hudCam, osg::Switch* switcher, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height);
+00027         \textcolor{comment}{//doc in parent}
+00028         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_aa0db50622c7ae1cd25f8554c916137db}{setText}();
+00029     \textcolor{keyword}{protected}:
+00030         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_a9b6571b0295f7e12425b57ff0262dbd4}{interact}(osg::Node*, osg::NodeVisitor*);
+00031     \textcolor{keyword}{private}:
+\hypertarget{_add_portal_gun_interaction_callback_8h_source_l00032}{}\hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_ac110a98cbe720e599b344d9940702597}{00032}         osg::ref\_ptr<osg::Switch> \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_ac110a98cbe720e599b344d9940702597}{\_switcher};
+00033     \};
+00034 \}
+\end{DoxyCode}

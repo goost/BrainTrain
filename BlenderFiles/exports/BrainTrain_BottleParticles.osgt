@@ -1,0 +1,538 @@
+#Ascii Scene
+#Version 92
+#Generator osgexport 0.14.1
+
+osg::Group {
+  UniqueID 4768
+  Name "Root"
+  Children 35 {
+    osg::MatrixTransform {
+      UniqueID 4696
+      Name "BottleObject.035"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+          Name "GeodePlane.002"
+          Drawables 0 {
+          }
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.55949 1.00472 0.00000 0.00000
+        -1.00472 -0.55949 0.00000 0.00000
+        95.56995 12.94169 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4700
+      Name "BottleObject.034"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        -0.00000 0.00000 1.15000 0.00000
+        -0.28975 -1.11290 -0.00000 0.00000
+        1.11290 -0.28975 0.00000 0.00000
+        70.61501 18.17340 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4702
+      Name "BottleObject.033"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.22564 -1.12765 0.00000 0.00000
+        1.12765 -0.22564 -0.00000 0.00000
+        43.42877 24.76889 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4704
+      Name "BottleObject.032"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        1.14926 0.04127 -0.00000 0.00000
+        -0.04127 1.14926 0.00000 0.00000
+        9.05228 29.21348 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4706
+      Name "BottleObject.031"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.05389 1.14874 -0.00000 0.00000
+        -1.14874 -0.05389 0.00000 0.00000
+        -60.09285 20.09969 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4708
+      Name "BottleObject.030"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.00000 1.15000 0.00000 0.00000
+        -1.15000 0.00000 0.00000 0.00000
+        -40.33908 22.72886 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4710
+      Name "BottleObject.029"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.60473 -0.97816 -0.00000 0.00000
+        0.97816 0.60473 -0.00000 0.00000
+        -94.81073 10.75261 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4712
+      Name "BottleObject.028"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        1.10500 -0.31856 -0.00000 0.00000
+        0.31856 1.10500 -0.00000 0.00000
+        -74.13405 12.38058 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4714
+      Name "BottleObject.027"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.00000 1.15000 0.00000 0.00000
+        -1.15000 0.00000 0.00000 0.00000
+        16.23234 22.75180 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4716
+      Name "BottleObject.026"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -1.03685 -0.49745 0.00000 0.00000
+        0.49745 -1.03685 -0.00000 0.00000
+        48.38419 15.49528 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4718
+      Name "BottleObject.025"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.59830 0.98211 -0.00000 0.00000
+        -0.98211 0.59830 0.00000 0.00000
+        46.21863 15.98579 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4720
+      Name "BottleObject.024"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.05280 1.14879 0.00000 0.00000
+        -1.14879 -0.05280 0.00000 0.00000
+        -6.07134 21.20240 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4722
+      Name "BottleObject.023"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.51189 1.02979 0.00000 0.00000
+        -1.02979 -0.51189 0.00000 0.00000
+        -58.11163 12.34890 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4724
+      Name "BottleObject.022"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.00000 1.15000 0.00000 0.00000
+        -1.15000 0.00000 0.00000 0.00000
+        105.14206 3.00970 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4726
+      Name "BottleObject.021"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.20289 1.13196 0.00000 0.00000
+        -1.13196 -0.20289 0.00000 0.00000
+        73.69337 7.06938 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4728
+      Name "BottleObject.020"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.71467 -0.90097 0.00000 0.00000
+        0.90097 -0.71467 -0.00000 0.00000
+        -40.90846 14.42902 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4730
+      Name "BottleObject.019"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.40539 1.07618 -0.00000 0.00000
+        -1.07618 0.40539 0.00000 0.00000
+        -42.64476 11.99813 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4732
+      Name "BottleObject.018"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.47183 -1.04875 -0.00000 0.00000
+        1.04875 0.47183 -0.00000 0.00000
+        -55.12176 8.98515 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4734
+      Name "BottleObject.017"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.88125 -0.73885 -0.00000 0.00000
+        0.73885 0.88125 -0.00000 0.00000
+        -95.63033 0.70907 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4736
+      Name "BottleObject.016"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.10101 -1.14556 -0.00000 0.00000
+        1.14556 0.10101 -0.00000 0.00000
+        86.56149 0.11307 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4738
+      Name "BottleObject.015"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        -0.00000 0.00000 1.15000 0.00000
+        -0.36466 -1.09065 -0.00000 0.00000
+        1.09065 -0.36466 0.00000 0.00000
+        40.60339 11.05700 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4740
+      Name "BottleObject.014"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.61839 -0.96959 -0.00000 0.00000
+        0.96959 0.61839 -0.00000 0.00000
+        38.02866 9.53824 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4742
+      Name "BottleObject.013"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        1.14926 0.04127 -0.00000 0.00000
+        -0.04127 1.14926 0.00000 0.00000
+        8.39825 13.22701 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4744
+      Name "BottleObject.012"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        -0.00000 -0.00000 1.15000 0.00000
+        0.23290 -1.12617 -0.00000 0.00000
+        1.12617 0.23290 0.00000 0.00000
+        105.03752 -5.06387 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4746
+      Name "BottleObject.011"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.10737 1.14498 0.00000 0.00000
+        -1.14498 -0.10737 0.00000 0.00000
+        12.81131 8.97333 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4748
+      Name "BottleObject.010"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.23473 1.12579 -0.00000 0.00000
+        -1.12579 0.23473 0.00000 0.00000
+        -21.41577 7.76303 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4750
+      Name "BottleObject.009"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.20881 -1.13088 -0.00000 0.00000
+        1.13088 0.20881 -0.00000 0.00000
+        108.18860 -8.65520 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4752
+      Name "BottleObject.008"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.44893 1.05876 -0.00000 0.00000
+        -1.05876 0.44893 0.00000 0.00000
+        104.08243 -9.16912 -0.35026 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4754
+      Name "BottleObject.007"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.50113 1.03507 -0.00000 0.00000
+        -1.03507 0.50113 0.00000 0.00000
+        74.03914 -7.42878 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4756
+      Name "BottleObject.006"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.02860 1.14964 0.00000 0.00000
+        -1.14964 -0.02860 0.00000 0.00000
+        54.91107 -2.56063 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4758
+      Name "BottleObject.005"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.57501 0.99592 0.00000 0.00000
+        -0.99592 -0.57501 0.00000 0.00000
+        104.40231 -13.15613 -0.35026 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4760
+      Name "BottleObject.004"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        -0.58941 -0.98747 0.00000 0.00000
+        0.98747 -0.58941 -0.00000 0.00000
+        36.09396 -0.27278 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4762
+      Name "BottleObject.003"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        1.13814 0.16474 -0.00000 0.00000
+        -0.16474 1.13814 0.00000 0.00000
+        107.98505 -16.78613 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4764
+      Name "BottleObject.002"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.44901 1.05872 -0.00000 0.00000
+        -1.05872 0.44901 0.00000 0.00000
+        20.43264 -3.81206 -0.35025 1.00000
+      }
+    }
+    osg::MatrixTransform {
+      UniqueID 4766
+      Name "BottleObject.001"
+      Children 1 {
+        osg::Geode {
+          UniqueID 4699
+        }
+      }
+      Matrix {
+        0.00000 0.00000 1.15000 0.00000
+        0.64173 -0.95430 -0.00000 0.00000
+        0.95430 0.64173 -0.00000 0.00000
+        -28.10849 -5.44871 -0.35025 1.00000
+      }
+    }
+  }
+}

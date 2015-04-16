@@ -1,0 +1,67 @@
+\hypertarget{_bench_8h_source}{\section{Bench.\+h}
+\label{_bench_8h_source}\index{header/\+Bench.\+h@{header/\+Bench.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include <osg/ShapeDrawable>}
+00002 \textcolor{preprocessor}{#include <osg/Geometry>}
+00003 \textcolor{preprocessor}{#include <osg/Material>}
+00004 \textcolor{preprocessor}{#include <osg/BlendFunc>}
+00005 \textcolor{preprocessor}{#include <osgDB/ReadFile>}
+00006 \textcolor{preprocessor}{#include <osg/PositionAttitudeTransform>}
+00007 \textcolor{preprocessor}{#include <osg/MatrixTransform>}
+00008 \textcolor{preprocessor}{#include <osg/Texture2D>}
+00009 \textcolor{preprocessor}{#include <osg/ComputeBoundsVisitor>}
+00010 
+00011 \textcolor{keyword}{using namespace }osg;
+00012 
+00013 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_bench_8h_source_l00024}{}\hyperlink{classbrtr_1_1_bench}{00024}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_bench}{Bench} : \textcolor{keyword}{public} PositionAttitudeTransform\{
+00025     
+00026           
+00027       \textcolor{keyword}{public}:
+00028           
+00029           \hyperlink{classbrtr_1_1_bench}{Bench}(\textcolor{keyword}{const} Vec3& pcenter = Vec3(0, 0, 0), \textcolor{keyword}{const} \textcolor{keywordtype}{double} plength = 8);
+00030 
+00038           ref\_ptr<PositionAttitudeTransform> getHitbox(\textcolor{keyword}{const} \textcolor{keywordtype}{double} alpha, \textcolor{keywordtype}{double} height = 8);
+00039       
+00040           \hyperlink{classbrtr_1_1_bench}{Bench}(\textcolor{keyword}{const} \hyperlink{classbrtr_1_1_bench}{Bench}&, \textcolor{keyword}{const} CopyOp& copyop = CopyOp::SHALLOW\_COPY);
+00041           ~\hyperlink{classbrtr_1_1_bench}{Bench}();
+00042       
+00043       \textcolor{keyword}{private}:
+00044       
+00050       \textcolor{keywordtype}{void} initBench(\textcolor{keyword}{const} \textcolor{keywordtype}{double} plength);
+00051       
+00055       ref\_ptr<Material> createIronMaterial();
+00056       
+00060       ref\_ptr<Material> createWoodMaterial();
+00061       
+00062       ref\_ptr<Group> createLeg();
+00063       
+00064       ref\_ptr<Group> createBar();
+00065       
+00066       
+00072       ref\_ptr<Group> createSeat(\textcolor{keyword}{const} \textcolor{keywordtype}{double} width);
+00073       
+00082       ref\_ptr<Group> createArmrest(\textcolor{keywordtype}{double} radius, \textcolor{keywordtype}{double} width, \textcolor{keywordtype}{double} length, \textcolor{keywordtype}{double} totalwidth);
+00083       
+00092       ref\_ptr<Geometry> createArmrestSidesFrontBack(\textcolor{keywordtype}{double} radius, \textcolor{keywordtype}{double} width, \textcolor{keywordtype}{int} lsteps, \textcolor{keywordtype}{int} wsteps, \textcolor{keywordtype}{
+      bool} flip = \textcolor{keyword}{true});
+00093       
+00102       ref\_ptr<Geometry> createArmrestSidesLeftRight(\textcolor{keywordtype}{double} length, \textcolor{keywordtype}{double} width, \textcolor{keywordtype}{int} lsteps, \textcolor{keywordtype}{int} wsteps, \textcolor{keywordtype}{
+      bool} flip = \textcolor{keyword}{true});
+00103 
+00104 
+\hypertarget{_bench_8h_source_l00105}{}\hyperlink{classbrtr_1_1_bench_a5ea108ad6ee96d487ac00ecacc383aa2}{00105}       Vec3 \hyperlink{classbrtr_1_1_bench_a5ea108ad6ee96d487ac00ecacc383aa2}{center};
+00106 
+\hypertarget{_bench_8h_source_l00107}{}\hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{00107}       \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{length};
+\hypertarget{_bench_8h_source_l00108}{}\hyperlink{classbrtr_1_1_bench_aa3da8798872d1c2d595c24a48a5cb427}{00108}       ref\_ptr<Group>  \hyperlink{classbrtr_1_1_bench_aa3da8798872d1c2d595c24a48a5cb427}{bench};
+00118       ref\_ptr<DrawElementsUInt> getPrimitiveSetforARectangle(\textcolor{keywordtype}{int} lsteps, \textcolor{keywordtype}{int} wsteps);
+00119     \};
+00120 
+00121 
+00122 
+00123     
+00124     
+00125 \}
+\end{DoxyCode}

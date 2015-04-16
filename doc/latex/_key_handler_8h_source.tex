@@ -1,0 +1,39 @@
+\hypertarget{_key_handler_8h_source}{\section{Key\+Handler.\+h}
+\label{_key_handler_8h_source}\index{header/\+Key\+Handler.\+h@{header/\+Key\+Handler.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osgGA/GUIEventHandler>}
+00003 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00004 \textcolor{preprocessor}{#include <osg/PolygonMode>}
+00005 \textcolor{preprocessor}{#include <osg/Program>}
+00006 \textcolor{preprocessor}{#include "../header/FPSCameraManipulator.h"}
+00007 \textcolor{preprocessor}{#include "../header/BaseInteractionCallback.h"}
+00008 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_key_handler_8h_source_l00023}{}\hyperlink{classbrtr_1_1_key_handler}{00023}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_key_handler}{KeyHandler} :
+00024         \textcolor{keyword}{public} osgGA::GUIEventHandler \{
+00025     \textcolor{keyword}{public}:
+00033         \hyperlink{classbrtr_1_1_key_handler_aaae067fabc959780a9fae9c700c199da}{KeyHandler}(osg::Node*, osg::Camera* postProcessCam, std::vector<
+      osg::ref\_ptr<osg::Program>> programs);
+00034         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_key_handler_a02df9f4339712d5b8b2b25b89048cf47}{handle}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa);
+00035 
+00036     \textcolor{keyword}{protected}:
+00037         \hyperlink{classbrtr_1_1_key_handler_aabad0b142ba1d2e648069b4e8af17797}{~KeyHandler}();
+00038     \textcolor{keyword}{private}:
+00039         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_key_handler_a5af6a6e66e8754591b3425addc6e6858}{handleKeyDown}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa);
+00045         \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_key_handler_a7f402d48b863ed19ef47038a32d1d05c}{mouseIntersection}(osgGA::GUIActionAdapter& aa);
+00052         \hyperlink{classbrtr_1_1_base_interaction_callback}{brtr::BaseInteractionCallback}* \hyperlink{classbrtr_1_1_key_handler_a1925fa114839192716167477714abfdc}{modifyText}(\textcolor{keywordtype}{bool} show);
+\hypertarget{_key_handler_8h_source_l00053}{}\hyperlink{classbrtr_1_1_key_handler_a4b0e380186a8172af6cf7c10dcff675a}{00053}         osg::ref\_ptr<osg::Drawable> \hyperlink{classbrtr_1_1_key_handler_a4b0e380186a8172af6cf7c10dcff675a}{\_curDrawable};
+\hypertarget{_key_handler_8h_source_l00054}{}\hyperlink{classbrtr_1_1_key_handler_a2ff68d9c79145d235f50fec1da625f99}{00054}         osg::ref\_ptr<osg::Node> \hyperlink{classbrtr_1_1_key_handler_a2ff68d9c79145d235f50fec1da625f99}{\_rootNode};
+\hypertarget{_key_handler_8h_source_l00055}{}\hyperlink{classbrtr_1_1_key_handler_a7aff4e23d4c614d8e0ccdc29a3c8882f}{00055}         osg::ref\_ptr<osg::PolygonMode> \hyperlink{classbrtr_1_1_key_handler_a7aff4e23d4c614d8e0ccdc29a3c8882f}{\_wireFrameMode};
+\hypertarget{_key_handler_8h_source_l00056}{}\hyperlink{classbrtr_1_1_key_handler_ae210945e48748029cbea37fde7d601b5}{00056}         osg::ref\_ptr<osg::PolygonMode> \hyperlink{classbrtr_1_1_key_handler_ae210945e48748029cbea37fde7d601b5}{\_normaleMode};
+\hypertarget{_key_handler_8h_source_l00057}{}\hyperlink{classbrtr_1_1_key_handler_aa4cc5f6ac9134e473f37968dfb1dd821}{00057}         osg::ref\_ptr<osg::Camera> \hyperlink{classbrtr_1_1_key_handler_aa4cc5f6ac9134e473f37968dfb1dd821}{\_postProcessCam};
+\hypertarget{_key_handler_8h_source_l00058}{}\hyperlink{classbrtr_1_1_key_handler_a492d086b9458475e595b3627a8dee0f9}{00058}         std::vector<osg::ref\_ptr<osg::Program>> \hyperlink{classbrtr_1_1_key_handler_a492d086b9458475e595b3627a8dee0f9}{\_programs};
+\hypertarget{_key_handler_8h_source_l00059}{}\hyperlink{classbrtr_1_1_key_handler_a1b2404dcd19426a93d4474cd45da84e8}{00059}         osg::ref\_ptr< const osgGA::GUIEventAdapter > \hyperlink{classbrtr_1_1_key_handler_a1b2404dcd19426a93d4474cd45da84e8}{\_mouseEvent};
+\hypertarget{_key_handler_8h_source_l00060}{}\hyperlink{classbrtr_1_1_key_handler_a6939e2c5e93e53d6090c999eae2fb927}{00060}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_key_handler_a6939e2c5e93e53d6090c999eae2fb927}{\_isWireFrame};
+\hypertarget{_key_handler_8h_source_l00061}{}\hyperlink{classbrtr_1_1_key_handler_a578b374029e318a509983a01253a7736}{00061}         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \hyperlink{classbrtr_1_1_key_handler_a578b374029e318a509983a01253a7736}{\_curProg};
+00062     \};
+00063 \}
+00064 
+\end{DoxyCode}

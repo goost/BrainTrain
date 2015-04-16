@@ -1,0 +1,22 @@
+\hypertarget{_add_interaction_callback_to_drawable_visitor_8h_source}{\section{Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+h}
+\label{_add_interaction_callback_to_drawable_visitor_8h_source}\index{header/\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+h@{header/\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osg/NodeVisitor>}
+00003 \textcolor{preprocessor}{#include <../header/BaseInteractionCallback.h>}
+00004 \textcolor{preprocessor}{#include <osg/ValueObject>}
+00005 
+00006 \textcolor{keyword}{namespace }brtr\{
+\hypertarget{_add_interaction_callback_to_drawable_visitor_8h_source_l00017}{}\hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor}{00017}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor}{AddInteractionCallbackToDrawableVisitor} : \textcolor{keyword}{public} 
+      osg::NodeVisitor \{
+00018     \textcolor{keyword}{public}:
+00025         \hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_a8c1ecd3629ec4f97d4bc2a63c56683d4}{AddInteractionCallbackToDrawableVisitor}(
+      \hyperlink{classbrtr_1_1_base_interaction_callback}{brtr::BaseInteractionCallback}* callbackToAdd);
+00026         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ace5d2fc7aa7c4a48f59e38728dac628a}{apply}(osg::Geode& geode);
+00027     \textcolor{keyword}{private}:
+\hypertarget{_add_interaction_callback_to_drawable_visitor_8h_source_l00028}{}\hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ac23b4a99b1d35c2f7a32f048d4628927}{00028}         osg::ref\_ptr<osg::DefaultUserDataContainer> \hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ac23b4a99b1d35c2f7a32f048d4628927}{\_containerToAdd};
+00029     \};
+00030 \}
+\end{DoxyCode}

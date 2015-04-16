@@ -1,0 +1,30 @@
+\hypertarget{_drunken_interaction_callback_8h_source}{\section{Drunken\+Interaction\+Callback.\+h}
+\label{_drunken_interaction_callback_8h_source}\index{header/\+Drunken\+Interaction\+Callback.\+h@{header/\+Drunken\+Interaction\+Callback.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osg/NodeCallback>}
+00003 \textcolor{preprocessor}{#include <osgAnimation/EaseMotion>}
+00004 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00005 \textcolor{preprocessor}{#include "../header/BaseInteractionCallback.h"}
+00006 
+00007 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_drunken_interaction_callback_8h_source_l00015}{}\hyperlink{classbrtr_1_1_drunken_interaction_callback}{00015}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_drunken_interaction_callback}{DrunkenInteractionCallback} : \textcolor{keyword}{public} 
+      \hyperlink{classbrtr_1_1_base_interaction_callback}{BaseInteractionCallback} \{
+00016     \textcolor{keyword}{public}:
+00017 
+00027         \hyperlink{classbrtr_1_1_drunken_interaction_callback_aa252ac5f3bc393ecb75784b98e17b5a5}{DrunkenInteractionCallback}(osg::Node* camera, osg::Camera* hudCam, 
+      osg::Switch* geometrySwitch, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height);
+00028 
+00029         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_drunken_interaction_callback_a71b86fc410bf2965ca998eff1350cfaf}{setText}();
+00030     \textcolor{keyword}{protected}:
+00037         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_drunken_interaction_callback_a86e4062f00a33768f752c1c5fa50c291}{interact}(osg::Node*, osg::NodeVisitor*);
+00038     \textcolor{keyword}{private}:        
+\hypertarget{_drunken_interaction_callback_8h_source_l00039}{}\hyperlink{classbrtr_1_1_drunken_interaction_callback_ab1a42a563e42cfd1d480741b30e22245}{00039}         \textcolor{keywordtype}{int} \hyperlink{classbrtr_1_1_drunken_interaction_callback_ab1a42a563e42cfd1d480741b30e22245}{\_startTime};
+\hypertarget{_drunken_interaction_callback_8h_source_l00040}{}\hyperlink{classbrtr_1_1_drunken_interaction_callback_a0aa1983e0fc1cb720badb80464a8e391}{00040}         osg::ref\_ptr<osg::Switch> \hyperlink{classbrtr_1_1_drunken_interaction_callback_a0aa1983e0fc1cb720badb80464a8e391}{\_geometrySwitch};
+\hypertarget{_drunken_interaction_callback_8h_source_l00041}{}\hyperlink{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{00041}         osg::ref\_ptr<osgAnimation::LinearMotion> \hyperlink{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{\_motion};
+\hypertarget{_drunken_interaction_callback_8h_source_l00042}{}\hyperlink{classbrtr_1_1_drunken_interaction_callback_a4be32ea919b41bd46acc34904fb5c7b7}{00042}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_drunken_interaction_callback_a4be32ea919b41bd46acc34904fb5c7b7}{\_backwards};
+00043     \};
+00044 \}
+\end{DoxyCode}

@@ -1,0 +1,177 @@
+\hypertarget{_control_room_8cpp_source}{\section{Control\+Room.\+cpp}
+\label{_control_room_8cpp_source}\index{Objects/\+Control\+Room.\+cpp@{Objects/\+Control\+Room.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/ControlRoom.h"}
+00002 \textcolor{preprocessor}{#include "../header/UtilFunctions.h"}
+00003 \textcolor{preprocessor}{#include "../header/CelShading.h"}
+00004 
+00005 \textcolor{preprocessor}{#include <osg/Geode>}
+00006 \textcolor{preprocessor}{#include <osg/MatrixTransform>}
+00007 \textcolor{preprocessor}{#include <osg/ValueObject>}
+00008 
+00009 \textcolor{keyword}{using namespace }osg;
+00010 
+00011 \textcolor{keyword}{namespace }brtr\{
+00012 
+\hypertarget{_control_room_8cpp_source_l00013}{}\hyperlink{classbrtr_1_1_control_room_afb36cd27e18234098fbecd22ac325319}{00013}     ControlRoom::ControlRoom(\textcolor{keywordtype}{double} roomSize, \textcolor{keywordtype}{int} lod, 
+      \hyperlink{classbrtr_1_1_toon_tex_switcher_callback}{brtr::ToonTexSwitcherCallback}& toonCallback, 
+      \hyperlink{classbrtr_1_1_program_switcher_callback}{brtr::ProgramSwitcherCallback}& programCallback) \{
+00014         ref\_ptr<Group> roomRoot = createRoomSurrounding(roomSize, lod);
+00015         ref\_ptr<Group> chessFigureRoot = createChessFigures(toonCallback,programCallback);
+00016 
+00017         ref\_ptr<brtr::CelShading> celShader = \textcolor{keyword}{new} \hyperlink{classbrtr_1_1_cel_shading}{brtr::CelShading}(\textcolor{keyword}{false});
+00018         ref\_ptr<LightSource> roomLight = \hyperlink{namespacebrtr_ad772c6dbc0a2cabd40a284676c124a97}{brtr::createLight}(Vec3(0, 0, roomSize / 2.0 /2.0 
+      +2), 0);
+00019 
+00020         celShader->addChild(roomLight);
+00021         celShader->addChild(roomRoot);
+00022         celShader->addChild(chessFigureRoot);
+00023         addChild(celShader);
+00024     \}
+00025 
+\hypertarget{_control_room_8cpp_source_l00026}{}\hyperlink{classbrtr_1_1_control_room_a5dfafb496e18e8e4f6d792b144dd10b9}{00026}     ref\_ptr<Group> ControlRoom::createRoomSurrounding(\textcolor{keywordtype}{double} roomSize, \textcolor{keywordtype}{int} lod) \{
+00027         ref\_ptr<Geode> floorGeode = \textcolor{keyword}{new} Geode;
+00028         floorGeode->addDrawable(\hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{brtr::createRectangle}(roomSize, roomSize, lod, lod));
+00029         ref\_ptr<MatrixTransform> floor = \textcolor{keyword}{new} MatrixTransform;
+00030         floor->setMatrix(Matrix::translate(-roomSize / 2, -roomSize / 2, 0));
+00031         floor->addChild(floorGeode);
+00032 
+00033         ref\_ptr<Geode> ceilingGeode = \textcolor{keyword}{new} Geode;
+00034         ceilingGeode->addDrawable(\hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{brtr::createRectangle}(roomSize, roomSize, lod, lod))
+      ;
+00035         ref\_ptr<MatrixTransform> ceiling = \textcolor{keyword}{new} MatrixTransform;
+00036         ceiling->setMatrix(Matrix::translate(-roomSize / 2, -roomSize / 2, -roomSize / 2)
+00037             * Matrix::rotate(DegreesToRadians(180.0), X\_AXIS));
+00038         ceiling->addChild(ceilingGeode);
+00039 
+00040         ref\_ptr<Geode> firstWallGeode = \textcolor{keyword}{new} Geode;
+00041         firstWallGeode->addDrawable(\hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{brtr::createRectangle}(roomSize / 2, roomSize, lod,
+       lod));
+00042         ref\_ptr<MatrixTransform> firstWall = \textcolor{keyword}{new} MatrixTransform;
+00043         firstWall->setMatrix(
+00044             Matrix::translate(-roomSize / 2, -roomSize / 2, 0)
+00045             *Matrix::rotate(DegreesToRadians(90.0), Y\_AXIS)
+00046             *Matrix::translate(-roomSize / 2, 0, 0)
+00047             );
+00048         firstWall->addChild(firstWallGeode);
+00049 
+00050         ref\_ptr<Geode> secondWallGeode = \textcolor{keyword}{new} Geode;
+00051         secondWallGeode->addDrawable(\hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{brtr::createRectangle}(roomSize / 2, roomSize, lod
+      , lod));
+00052         ref\_ptr<MatrixTransform> secondWall = \textcolor{keyword}{new} MatrixTransform;
+00053         secondWall->setMatrix(
+00054             Matrix::translate(-roomSize / 2, -roomSize / 2, 0)
+00055             *Matrix::rotate(DegreesToRadians(-90.0), Y\_AXIS)
+00056             *Matrix::translate(roomSize / 2, 0, roomSize / 2)
+00057             );
+00058         secondWall->addChild(secondWallGeode);
+00059 
+00060         ref\_ptr<Geode> thirdWallGeode = \textcolor{keyword}{new} Geode;
+00061         thirdWallGeode->addDrawable(\hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{brtr::createRectangle}(roomSize, roomSize / 2, lod,
+       lod));
+00062         ref\_ptr<MatrixTransform> thirdWall = \textcolor{keyword}{new} MatrixTransform;
+00063         thirdWall->setMatrix(
+00064             Matrix::translate(-roomSize / 2, -roomSize / 2, 0)
+00065             *Matrix::rotate(DegreesToRadians(-90.0), X\_AXIS)
+00066             *Matrix::translate(0, -roomSize / 2, 0)
+00067             );
+00068         thirdWall->addChild(thirdWallGeode);
+00069 
+00070         ref\_ptr<Geode> fourthWallGeode = \textcolor{keyword}{new} Geode;
+00071         fourthWallGeode->addDrawable(\hyperlink{namespacebrtr_a793c6ef7f57632fc5ac280b94f60dd65}{brtr::createRectangle}(roomSize, roomSize / 2, lod
+      , lod));
+00072         ref\_ptr<MatrixTransform> fourthWall = \textcolor{keyword}{new} MatrixTransform;
+00073         fourthWall->setMatrix(
+00074             Matrix::translate(-roomSize / 2, -roomSize / 2, 0)
+00075             *Matrix::rotate(DegreesToRadians(90.0), X\_AXIS)
+00076             *Matrix::translate(0, roomSize / 2, roomSize / 2)
+00077             );
+00078         fourthWall->addChild(thirdWallGeode);
+00079 
+00080         ref\_ptr<Group> roomRoot = \textcolor{keyword}{new} Group;
+00081         roomRoot->addChild(floor);
+00082         roomRoot->addChild(ceiling);
+00083         roomRoot->addChild(firstWall);
+00084         roomRoot->addChild(secondWall);
+00085         roomRoot->addChild(thirdWall);
+00086         roomRoot->addChild(fourthWall);
+00087         roomRoot->setNodeMask(\hyperlink{namespacebrtr_af79a815819e2ef65ea9cd43dc9d43679}{brtr::collisionMask});
+00088         \textcolor{comment}{//this is the fakewall}
+00089         thirdWall->setNodeMask(~\hyperlink{namespacebrtr_a21ab851f18c0c85fa006766034833a4f}{brtr::interactionAndCollisionMask});
+00090 
+00091         \textcolor{comment}{//material for the whole room}
+00092         ref\_ptr<Material> roomMaterial = createMaterial(Vec4(0.3, 0.3, 0.3, 1.0), Vec4(0.4, 0.4, 0.4, 1.0),
+       Vec4(0.9, 0.9, 0.9, 1.0), 42);     
+00093         roomRoot->getOrCreateStateSet()->setAttributeAndModes(roomMaterial, StateAttribute::ON);
+00094         \textcolor{comment}{//shader should know that there is no texture}
+00095         roomRoot->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"tex"}, \textcolor{keyword}{false}), StateAttribute::ON | 
+      StateAttribute::OVERRIDE);
+00096 
+00097         \textcolor{keywordflow}{return} roomRoot;
+00098     \}
+00099 
+\hypertarget{_control_room_8cpp_source_l00100}{}\hyperlink{classbrtr_1_1_control_room_a15055ae530b811b7046871c5c1ef3f4f}{00100}     ref\_ptr<Group> ControlRoom::createChessFigures(\hyperlink{classbrtr_1_1_toon_tex_switcher_callback}{brtr::ToonTexSwitcherCallback}
+      & toonCallback, \hyperlink{classbrtr_1_1_program_switcher_callback}{brtr::ProgramSwitcherCallback}& programCallback)
+00101 \{
+00102         ref\_ptr<Geometry> chessFigure1Geometry = \hyperlink{namespacebrtr_a118d4013732dea1a161b6d225df6dc2e}{brtr::createChessFigure}();
+00103         ref\_ptr<Geode> chessFigure1Source = \textcolor{keyword}{new} Geode;
+00104         chessFigure1Source->addDrawable(chessFigure1Geometry);
+00105 
+00106         ref\_ptr<MatrixTransform> chessFigure1 = \textcolor{keyword}{new} MatrixTransform;
+00107         chessFigure1->setMatrix(
+00108             Matrix::translate(-5, 0, 0)
+00109             );
+00110         chessFigure1->addChild(chessFigure1Source);
+00111         chessFigure1->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"xAnimation"}, \textcolor{keyword}{true}), StateAttribute::ON
+       | StateAttribute::OVERRIDE);
+00112 
+00113         ref\_ptr<Geode> chessFigure2Source = \textcolor{keyword}{new} Geode;
+00114         chessFigure2Source->addDrawable(\hyperlink{namespacebrtr_a118d4013732dea1a161b6d225df6dc2e}{brtr::createChessFigure}());
+00115         ref\_ptr<MatrixTransform> chessFigure2 = \textcolor{keyword}{new} MatrixTransform;
+00116         chessFigure2->setMatrix(
+00117             Matrix::translate(0, 5, 0)
+00118             );
+00119         chessFigure2->addChild(chessFigure2Source);
+00120         chessFigure2->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"zAnimation"}, \textcolor{keyword}{true}), StateAttribute::ON
+       | StateAttribute::OVERRIDE);
+00121         chessFigure2->getOrCreateStateSet()->setAttributeAndModes(createMaterial(Vec4(0.4583, 0.35, 1, 1), 
+      Vec4(0.4583, 0.35, 1, 1)), StateAttribute::ON | StateAttribute::OVERRIDE);
+00122 
+00123         ref\_ptr<Geometry> chessFigure3Geometry = \hyperlink{namespacebrtr_a118d4013732dea1a161b6d225df6dc2e}{brtr::createChessFigure}();
+00124         ref\_ptr<Geode> chessFigure3Source = \textcolor{keyword}{new} Geode;
+00125         chessFigure3Source->addDrawable(chessFigure3Geometry);
+00126         ref\_ptr<MatrixTransform> chessFigure3 = \textcolor{keyword}{new} MatrixTransform;
+00127         chessFigure3->setMatrix(
+00128             Matrix::translate(5, 0, 0)
+00129             );
+00130         chessFigure3->addChild(chessFigure3Source);
+00131         chessFigure3->getOrCreateStateSet()->addUniform(\textcolor{keyword}{new} Uniform(\textcolor{stringliteral}{"yAnimation"}, \textcolor{keyword}{true}), StateAttribute::ON
+       | StateAttribute::OVERRIDE);
+00132         chessFigure3->getOrCreateStateSet()->setAttributeAndModes(createMaterial(Vec4(0, 0.63, 0.084, 1), 
+      Vec4(0, 0.63, 0.084, 1)), StateAttribute::ON | StateAttribute::OVERRIDE);
+00133 
+00134         
+00135         chessFigure1Geometry->getOrCreateUserDataContainer()->addUserObject(&toonCallback);
+00136         chessFigure3Geometry->getOrCreateUserDataContainer()->addUserObject(&programCallback);
+00137         ref\_ptr<Group> chessFigureRoot = \textcolor{keyword}{new} Group;
+00138         chessFigureRoot->addChild(chessFigure1);
+00139         chessFigureRoot->addChild(chessFigure2);
+00140         chessFigureRoot->addChild(chessFigure3);
+00141 
+00142         \textcolor{keywordflow}{return} chessFigureRoot;
+00143     \}
+00144 
+\hypertarget{_control_room_8cpp_source_l00145}{}\hyperlink{classbrtr_1_1_control_room_a1cb8b6799fcb85750e0d321a4fbed6f1}{00145}     ref\_ptr<Material> ControlRoom::createMaterial(Vec4 diffuse, Vec4 ambient, Vec4 specular, \textcolor{keywordtype}{double} 
+      shininess) \{
+00146         ref\_ptr<Material> mat = \textcolor{keyword}{new} Material;
+00147         mat->setAmbient(Material::FRONT\_AND\_BACK, ambient);
+00148         mat->setDiffuse(Material::FRONT\_AND\_BACK, diffuse);
+00149         mat->setSpecular(Material::FRONT\_AND\_BACK, specular);
+00150         mat->setShininess(Material::FRONT\_AND\_BACK, shininess);
+00151         \textcolor{keywordflow}{return} mat;
+00152     \}
+00153 
+00154 \}
+\end{DoxyCode}

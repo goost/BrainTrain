@@ -1,0 +1,32 @@
+\hypertarget{_geometry_placer_visitor_8cpp_source}{\section{Geometry\+Placer\+Visitor.\+cpp}
+\label{_geometry_placer_visitor_8cpp_source}\index{Util/\+Geometry\+Placer\+Visitor.\+cpp@{Util/\+Geometry\+Placer\+Visitor.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/GeometryPlacerVisitor.h"}
+00002 
+00003 \textcolor{keyword}{using namespace }osg;
+00004 
+00005 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_geometry_placer_visitor_8cpp_source_l00006}{}\hyperlink{classbrtr_1_1_geometry_placer_visitor_a5e6ca74eba57f86c0916434cb38eb7fc}{00006}     GeometryPlacerVisitor::GeometryPlacerVisitor(osg::Geometry* geometryToPlace) :
+00007         \_geometryToPlace(geometryToPlace) \{
+00008         setTraversalMode(NodeVisitor::TRAVERSE\_ALL\_CHILDREN);
+00009     \}
+00010 
+\hypertarget{_geometry_placer_visitor_8cpp_source_l00011}{}\hyperlink{classbrtr_1_1_geometry_placer_visitor_a26089587464d88953e38926162cb1c6e}{00011}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_geometry_placer_visitor_a26089587464d88953e38926162cb1c6e}{GeometryPlacerVisitor::apply}(osg::Geode& geode) \{
+00012         geode.removeDrawables(0, geode.getNumDrawables());
+00013         geode.addDrawable(\hyperlink{classbrtr_1_1_geometry_placer_visitor_a171826d64ddd04161d7525bc60faf045}{\_geometryToPlace});
+00014     \}
+00015 
+\hypertarget{_geometry_placer_visitor_8cpp_source_l00016}{}\hyperlink{classbrtr_1_1_geometry_placer_visitor_ad784364cfe34434dc2183a5ead95db40}{00016}     osg::ref\_ptr<osg::Geometry> \hyperlink{classbrtr_1_1_geometry_placer_visitor_ad784364cfe34434dc2183a5ead95db40}{GeometryPlacerVisitor::getGeometryToPlace}
+      ()\textcolor{keyword}{ const }\{
+00017         \textcolor{keywordflow}{return} \hyperlink{classbrtr_1_1_geometry_placer_visitor_a171826d64ddd04161d7525bc60faf045}{\_geometryToPlace};
+00018     \}
+00019 
+\hypertarget{_geometry_placer_visitor_8cpp_source_l00020}{}\hyperlink{classbrtr_1_1_geometry_placer_visitor_a95e8e5c2df5b9a31949c55c796c90fd5}{00020}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_geometry_placer_visitor_a95e8e5c2df5b9a31949c55c796c90fd5}{GeometryPlacerVisitor::setGeometryToPlace}(
+      osg::ref\_ptr<osg::Geometry> val) \{
+00021         \hyperlink{classbrtr_1_1_geometry_placer_visitor_a171826d64ddd04161d7525bc60faf045}{\_geometryToPlace} = val;
+00022     \}
+00023 
+00024 \}
+\end{DoxyCode}

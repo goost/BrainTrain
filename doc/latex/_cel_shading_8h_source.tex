@@ -1,0 +1,44 @@
+\hypertarget{_cel_shading_8h_source}{\section{Cel\+Shading.\+h}
+\label{_cel_shading_8h_source}\index{header/\+Cel\+Shading.\+h@{header/\+Cel\+Shading.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osgFX/Export>}
+00003 \textcolor{preprocessor}{#include <osgFX/Effect>}
+00004 \textcolor{preprocessor}{#include <osg/Material>}
+00005 \textcolor{preprocessor}{#include <osg/LineWidth>}
+00006 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_cel_shading_8h_source_l00018}{}\hyperlink{classbrtr_1_1_cel_shading}{00018}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_cel_shading}{CelShading} : \textcolor{keyword}{public} osgFX::Effect \{
+00019     \textcolor{keyword}{public}:
+00026         \hyperlink{classbrtr_1_1_cel_shading_ae497a14c2c379b608643d8f39d156b52}{CelShading}(\textcolor{keywordtype}{bool} secondPass = \textcolor{keyword}{true}, std::string vertSource = \textcolor{stringliteral}{"celShader.vert"});
+00027         \hyperlink{classbrtr_1_1_cel_shading_ae497a14c2c379b608643d8f39d156b52}{CelShading}(\textcolor{keyword}{const} \hyperlink{classbrtr_1_1_cel_shading}{CelShading}& copy, \textcolor{keyword}{const} osg::CopyOp& copyop = 
+      osg::CopyOp::SHALLOW\_COPY);
+00028 
+00029         \hyperlink{classbrtr_1_1_cel_shading_a02ab424cf06935b9560b5c39d733d02c}{META\_Effect}(
+00030             null,
+00031             \hyperlink{classbrtr_1_1_cel_shading}{CelShading},
+00032 
+00033             \textcolor{stringliteral}{"CelShading"},
+00034 
+00035             \textcolor{stringliteral}{"This effect implements a technique called 'Cel-Shading' to produce a "}
+00036             \textcolor{stringliteral}{"cartoon-style (non photorealistic) rendering. Two passes are required: "}
+00037             \textcolor{stringliteral}{"the first one draws solid surfaces, the second one draws the outlines. "}
+00038             \textcolor{stringliteral}{"Vertices Shader, Toon Texture pass can be customize upon creating."}
+00039              ,
+00040             \textcolor{stringliteral}{"Marco Jez; OGLSL port by Mike Weiblen, adaptions by Gleb Ostrowski "});
+00041 
+00042     \textcolor{keyword}{protected}:
+\hypertarget{_cel_shading_8h_source_l00043}{}\hyperlink{classbrtr_1_1_cel_shading_ab6148e389081719d56d2971cc8924841}{00043}         \textcolor{keyword}{virtual} \hyperlink{classbrtr_1_1_cel_shading_ab6148e389081719d56d2971cc8924841}{~CelShading}() \{\}
+00044 
+00045         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_cel_shading_a28212bb66f29ff8cf1169625b598b93b}{define\_techniques}();
+00046 
+00047     \textcolor{keyword}{private}:
+\hypertarget{_cel_shading_8h_source_l00048}{}\hyperlink{classbrtr_1_1_cel_shading_ae67a870d7a985694fb0d3290f0163f84}{00048}         osg::ref\_ptr<osg::Material> \hyperlink{classbrtr_1_1_cel_shading_ae67a870d7a985694fb0d3290f0163f84}{\_material};
+\hypertarget{_cel_shading_8h_source_l00049}{}\hyperlink{classbrtr_1_1_cel_shading_ae1e0a4de3ca638da0fe0a3b3aa018f07}{00049}         osg::ref\_ptr<osg::LineWidth> \hyperlink{classbrtr_1_1_cel_shading_ae1e0a4de3ca638da0fe0a3b3aa018f07}{\_lineWidth};
+\hypertarget{_cel_shading_8h_source_l00050}{}\hyperlink{classbrtr_1_1_cel_shading_a15226eda13f5a3deaee3260414f664bf}{00050}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_cel_shading_a15226eda13f5a3deaee3260414f664bf}{\_secondPass};
+\hypertarget{_cel_shading_8h_source_l00051}{}\hyperlink{classbrtr_1_1_cel_shading_a6c9ea02f1a90b0ba711394c4ff716081}{00051}         std::string \hyperlink{classbrtr_1_1_cel_shading_a6c9ea02f1a90b0ba711394c4ff716081}{\_vertSource};
+00052     \};
+00053 \}
+00054 
+\end{DoxyCode}

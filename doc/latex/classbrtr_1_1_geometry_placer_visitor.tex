@@ -1,0 +1,145 @@
+\hypertarget{classbrtr_1_1_geometry_placer_visitor}{\section{brtr\+:\+:Geometry\+Placer\+Visitor Class Reference}
+\label{classbrtr_1_1_geometry_placer_visitor}\index{brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}}
+}
+
+
+Node\+Visitor for batch replacing all Geometry in all visited Geodes.  
+
+
+
+
+{\ttfamily \#include $<$Geometry\+Placer\+Visitor.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Geometry\+Placer\+Visitor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbrtr_1_1_geometry_placer_visitor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_geometry_placer_visitor_a5e6ca74eba57f86c0916434cb38eb7fc}{Geometry\+Placer\+Visitor} (osg\+::\+Geometry $\ast$geometry\+To\+Place)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classbrtr_1_1_geometry_placer_visitor_a26089587464d88953e38926162cb1c6e}{apply} (osg\+::\+Geode \&geode)
+\begin{DoxyCompactList}\small\item\em Change the Geometry of this Geode. \end{DoxyCompactList}\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{classbrtr_1_1_geometry_placer_visitor_ad784364cfe34434dc2183a5ead95db40}{get\+Geometry\+To\+Place} () const 
+\item 
+void \hyperlink{classbrtr_1_1_geometry_placer_visitor_a95e8e5c2df5b9a31949c55c796c90fd5}{set\+Geometry\+To\+Place} (osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ val)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ \hyperlink{classbrtr_1_1_geometry_placer_visitor_a171826d64ddd04161d7525bc60faf045}{\+\_\+geometry\+To\+Place}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Node\+Visitor for batch replacing all Geometry in all visited Geodes. 
+
+Takes a geometry as argument and replaces every geometry in the sub scene Useful for batch replacing a bunch of geometrys which were placed as dummys in Blender and then imported. Rotation and Scaling of the Geometry will persist. \begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyPrecond}{Precondition}
+needs a Node which will accept it. Should have some Geode's for this to work 
+\end{DoxyPrecond}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_geometry_placer_visitor_8h_source_l00015}{15} of file \hyperlink{_geometry_placer_visitor_8h_source}{Geometry\+Placer\+Visitor.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_geometry_placer_visitor_a5e6ca74eba57f86c0916434cb38eb7fc}{\index{brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}!Geometry\+Placer\+Visitor@{Geometry\+Placer\+Visitor}}
+\index{Geometry\+Placer\+Visitor@{Geometry\+Placer\+Visitor}!brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}}
+\subsubsection[{Geometry\+Placer\+Visitor}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Geometry\+Placer\+Visitor\+::\+Geometry\+Placer\+Visitor (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Geometry $\ast$}]{geometry\+To\+Place}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_geometry_placer_visitor_a5e6ca74eba57f86c0916434cb38eb7fc}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em geometry\+To\+Place} & geometry to replace the found drawables \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{_geometry_placer_visitor_8cpp_source_l00006}{6} of file \hyperlink{_geometry_placer_visitor_8cpp_source}{Geometry\+Placer\+Visitor.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_geometry_placer_visitor_a26089587464d88953e38926162cb1c6e}{\index{brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}!apply@{apply}}
+\index{apply@{apply}!brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Geometry\+Placer\+Visitor\+::apply (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Geode \&}]{geode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classbrtr_1_1_geometry_placer_visitor_a26089587464d88953e38926162cb1c6e}
+
+
+Change the Geometry of this Geode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em geode} & the Geode which will be alternate \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_geometry_placer_visitor_8cpp_source_l00011}{11} of file \hyperlink{_geometry_placer_visitor_8cpp_source}{Geometry\+Placer\+Visitor.\+cpp}.
+
+\hypertarget{classbrtr_1_1_geometry_placer_visitor_ad784364cfe34434dc2183a5ead95db40}{\index{brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}!get\+Geometry\+To\+Place@{get\+Geometry\+To\+Place}}
+\index{get\+Geometry\+To\+Place@{get\+Geometry\+To\+Place}!brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}}
+\subsubsection[{get\+Geometry\+To\+Place}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$ brtr\+::\+Geometry\+Placer\+Visitor\+::get\+Geometry\+To\+Place (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{classbrtr_1_1_geometry_placer_visitor_ad784364cfe34434dc2183a5ead95db40}
+
+
+Definition at line \hyperlink{_geometry_placer_visitor_8cpp_source_l00016}{16} of file \hyperlink{_geometry_placer_visitor_8cpp_source}{Geometry\+Placer\+Visitor.\+cpp}.
+
+\hypertarget{classbrtr_1_1_geometry_placer_visitor_a95e8e5c2df5b9a31949c55c796c90fd5}{\index{brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}!set\+Geometry\+To\+Place@{set\+Geometry\+To\+Place}}
+\index{set\+Geometry\+To\+Place@{set\+Geometry\+To\+Place}!brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}}
+\subsubsection[{set\+Geometry\+To\+Place}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Geometry\+Placer\+Visitor\+::set\+Geometry\+To\+Place (
+\begin{DoxyParamCaption}
+\item[{osg\+::ref\+\_\+ptr$<$ osg\+::\+Geometry $>$}]{val}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_geometry_placer_visitor_a95e8e5c2df5b9a31949c55c796c90fd5}
+
+
+Definition at line \hyperlink{_geometry_placer_visitor_8cpp_source_l00020}{20} of file \hyperlink{_geometry_placer_visitor_8cpp_source}{Geometry\+Placer\+Visitor.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_geometry_placer_visitor_a171826d64ddd04161d7525bc60faf045}{\index{brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}!\+\_\+geometry\+To\+Place@{\+\_\+geometry\+To\+Place}}
+\index{\+\_\+geometry\+To\+Place@{\+\_\+geometry\+To\+Place}!brtr\+::\+Geometry\+Placer\+Visitor@{brtr\+::\+Geometry\+Placer\+Visitor}}
+\subsubsection[{\+\_\+geometry\+To\+Place}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Geometry$>$ brtr\+::\+Geometry\+Placer\+Visitor\+::\+\_\+geometry\+To\+Place\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_geometry_placer_visitor_a171826d64ddd04161d7525bc60faf045}
+
+
+Definition at line \hyperlink{_geometry_placer_visitor_8h_source_l00034}{34} of file \hyperlink{_geometry_placer_visitor_8h_source}{Geometry\+Placer\+Visitor.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_geometry_placer_visitor_8h}{Geometry\+Placer\+Visitor.\+h}\item 
+Util/\hyperlink{_geometry_placer_visitor_8cpp}{Geometry\+Placer\+Visitor.\+cpp}\end{DoxyCompactItemize}

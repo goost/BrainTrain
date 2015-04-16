@@ -1,0 +1,92 @@
+\hypertarget{class_animation_creator}{\section{Animation\+Creator Class Reference}
+\label{class_animation_creator}\index{Animation\+Creator@{Animation\+Creator}}
+}
+
+
+{\ttfamily \#include $<$Animation\+Creater.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{class_animation_creator_a03e8400c38e8710ee20fd44f57ab1903}{get\+Angle\+Rad} (osg\+::\+Vec3 point\+A, osg\+::\+Vec3 point\+B)
+\begin{DoxyCompactList}\small\item\em Creator of the Animation Path for the Train-\/\+Simulation. \end{DoxyCompactList}\item 
+osg\+::\+Animation\+Path $\ast$ \hyperlink{class_animation_creator_aca52f3472d0be7043c63ff5ede8084aa}{create\+Animation\+Path} (float time)
+\begin{DoxyCompactList}\small\item\em Creates the animation path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line \hyperlink{_animation_creater_8h_source_l00005}{5} of file \hyperlink{_animation_creater_8h_source}{Animation\+Creater.\+h}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_animation_creator_aca52f3472d0be7043c63ff5ede8084aa}{\index{Animation\+Creator@{Animation\+Creator}!create\+Animation\+Path@{create\+Animation\+Path}}
+\index{create\+Animation\+Path@{create\+Animation\+Path}!Animation\+Creator@{Animation\+Creator}}
+\subsubsection[{create\+Animation\+Path}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::\+Animation\+Path $\ast$ Animation\+Creator\+::create\+Animation\+Path (
+\begin{DoxyParamCaption}
+\item[{float}]{time}
+\end{DoxyParamCaption}
+)}}\label{class_animation_creator_aca52f3472d0be7043c63ff5ede8084aa}
+
+
+Creates the animation path. 
+
+The Method creates the Train Animation\+Path. Each vector will be included in the Animation\+Path, together with the correct rotation between two points.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & is the time that the train will take between two vectors, low time = fast train. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the complete Animation\+Path for the train 
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{_animation_creater_8cpp_source_l00040}{40} of file \hyperlink{_animation_creater_8cpp_source}{Animation\+Creater.\+cpp}.
+
+\hypertarget{class_animation_creator_a03e8400c38e8710ee20fd44f57ab1903}{\index{Animation\+Creator@{Animation\+Creator}!get\+Angle\+Rad@{get\+Angle\+Rad}}
+\index{get\+Angle\+Rad@{get\+Angle\+Rad}!Animation\+Creator@{Animation\+Creator}}
+\subsubsection[{get\+Angle\+Rad}]{\setlength{\rightskip}{0pt plus 5cm}double Animation\+Creator\+::get\+Angle\+Rad (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Vec3}]{point\+A, }
+\item[{osg\+::\+Vec3}]{point\+B}
+\end{DoxyParamCaption}
+)}}\label{class_animation_creator_a03e8400c38e8710ee20fd44f57ab1903}
+
+
+Creator of the Animation Path for the Train-\/\+Simulation. 
+
+\begin{DoxyAuthor}{Author}
+Philip Sauer 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 Calculate the angle between two Vectors
+\end{DoxyDate}
+The Method calculates the dotproduct between two vectors and devides it with the length of both vectors. ( vector\+A $\ast$ vector\+B ) / ( $\vert$vector\+A$\vert$ $\ast$ $\vert$vector\+B$\vert$ )
+
+
+\begin{DoxyParams}{Parameters}
+{\em point\+A} & the starting Vector \\
+\hline
+{\em point\+B} & the end Vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the angle in radian 
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{_animation_creater_8cpp_source_l00016}{16} of file \hyperlink{_animation_creater_8cpp_source}{Animation\+Creater.\+cpp}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_animation_creater_8h}{Animation\+Creater.\+h}\item 
+Animation/\hyperlink{_animation_creater_8cpp}{Animation\+Creater.\+cpp}\end{DoxyCompactItemize}

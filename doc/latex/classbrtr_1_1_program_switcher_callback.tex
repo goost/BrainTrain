@@ -1,0 +1,167 @@
+\hypertarget{classbrtr_1_1_program_switcher_callback}{\section{brtr\+:\+:Program\+Switcher\+Callback Class Reference}
+\label{classbrtr_1_1_program_switcher_callback}\index{brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}}
+}
+
+
+Callback for switching the postprocess programs.  
+
+
+
+
+{\ttfamily \#include $<$Program\+Switcher\+Callback.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Program\+Switcher\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classbrtr_1_1_program_switcher_callback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_program_switcher_callback_a36a59e70c5db59a00f2d7fd7fbf9e505}{Program\+Switcher\+Callback} (osg\+::\+Node $\ast$postprocess\+Cam, osg\+::\+Camera $\ast$hud\+Cam, int width, int height, std\+::vector$<$ osg\+::ref\+\_\+ptr$<$ osg\+::\+Program $>$$>$ programs)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classbrtr_1_1_program_switcher_callback_a2202619d98a432578c8ed7342b957638}{set\+Text} ()
+\begin{DoxyCompactList}\small\item\em sets the text on screen. Subclasses must override to set its own (info)text \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classbrtr_1_1_program_switcher_callback_a06dd3fc2b09d3138e67599d8d56db62a}{interact} (osg\+::\+Node $\ast$, osg\+::\+Node\+Visitor $\ast$)
+\begin{DoxyCompactList}\small\item\em each interact sets the next program \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ osg\+::ref\+\_\+ptr\\*
+$<$ osg\+::\+Program $>$ $>$ \hyperlink{classbrtr_1_1_program_switcher_callback_a9cbcf4d65f6ee468bb20d16b9e795e49}{\+\_\+programs}
+\item 
+unsigned int \hyperlink{classbrtr_1_1_program_switcher_callback_a06ee6d68fe703e6a88960219b019f1bd}{\+\_\+cur\+Prog}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Callback for switching the postprocess programs. 
+
+Every click the next program in the vector is choosen postprocess\+Cam is the node which stateset holds the programs \begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_program_switcher_callback_8h_source_l00017}{17} of file \hyperlink{_program_switcher_callback_8h_source}{Program\+Switcher\+Callback.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_program_switcher_callback_a36a59e70c5db59a00f2d7fd7fbf9e505}{\index{brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}!Program\+Switcher\+Callback@{Program\+Switcher\+Callback}}
+\index{Program\+Switcher\+Callback@{Program\+Switcher\+Callback}!brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}}
+\subsubsection[{Program\+Switcher\+Callback}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Program\+Switcher\+Callback\+::\+Program\+Switcher\+Callback (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{postprocess\+Cam, }
+\item[{osg\+::\+Camera $\ast$}]{hud\+Cam, }
+\item[{int}]{width, }
+\item[{int}]{height, }
+\item[{std\+::vector$<$ osg\+::ref\+\_\+ptr$<$ osg\+::\+Program $>$$>$}]{programs}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_program_switcher_callback_a36a59e70c5db59a00f2d7fd7fbf9e505}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em postprocess\+Cam} & node which stateset contains the programs \\
+\hline
+{\em hud\+Cam} & \\
+\hline
+{\em width} & screen\+Width \\
+\hline
+{\em height} & screen\+Height \\
+\hline
+{\em programs} & vector with post\+Processprograms \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_program_switcher_callback_8cpp_source_l00008}{8} of file \hyperlink{_program_switcher_callback_8cpp_source}{Program\+Switcher\+Callback.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_program_switcher_callback_a06dd3fc2b09d3138e67599d8d56db62a}{\index{brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}!interact@{interact}}
+\index{interact@{interact}!brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}}
+\subsubsection[{interact}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Program\+Switcher\+Callback\+::interact (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{, }
+\item[{osg\+::\+Node\+Visitor $\ast$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classbrtr_1_1_program_switcher_callback_a06dd3fc2b09d3138e67599d8d56db62a}
+
+
+each interact sets the next program 
+
+
+\begin{DoxyParams}{Parameters}
+{\em not} & used \\
+\hline
+{\em not} & used \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classbrtr_1_1_base_interaction_callback_a3ed50c9c1725f932e0b78c90ba24e1ed}{brtr\+::\+Base\+Interaction\+Callback}.
+
+
+
+Definition at line \hyperlink{_program_switcher_callback_8cpp_source_l00017}{17} of file \hyperlink{_program_switcher_callback_8cpp_source}{Program\+Switcher\+Callback.\+cpp}.
+
+\hypertarget{classbrtr_1_1_program_switcher_callback_a2202619d98a432578c8ed7342b957638}{\index{brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}!set\+Text@{set\+Text}}
+\index{set\+Text@{set\+Text}!brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}}
+\subsubsection[{set\+Text}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Program\+Switcher\+Callback\+::set\+Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classbrtr_1_1_program_switcher_callback_a2202619d98a432578c8ed7342b957638}
+
+
+sets the text on screen. Subclasses must override to set its own (info)text 
+
+
+
+Implements \hyperlink{classbrtr_1_1_base_interaction_callback_a0fe57e329f044e21d49041c861435ad8}{brtr\+::\+Base\+Interaction\+Callback}.
+
+
+
+Definition at line \hyperlink{_program_switcher_callback_8cpp_source_l00013}{13} of file \hyperlink{_program_switcher_callback_8cpp_source}{Program\+Switcher\+Callback.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_program_switcher_callback_a06ee6d68fe703e6a88960219b019f1bd}{\index{brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}!\+\_\+cur\+Prog@{\+\_\+cur\+Prog}}
+\index{\+\_\+cur\+Prog@{\+\_\+cur\+Prog}!brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}}
+\subsubsection[{\+\_\+cur\+Prog}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int brtr\+::\+Program\+Switcher\+Callback\+::\+\_\+cur\+Prog\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_program_switcher_callback_a06ee6d68fe703e6a88960219b019f1bd}
+
+
+Definition at line \hyperlink{_program_switcher_callback_8h_source_l00041}{41} of file \hyperlink{_program_switcher_callback_8h_source}{Program\+Switcher\+Callback.\+h}.
+
+\hypertarget{classbrtr_1_1_program_switcher_callback_a9cbcf4d65f6ee468bb20d16b9e795e49}{\index{brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}!\+\_\+programs@{\+\_\+programs}}
+\index{\+\_\+programs@{\+\_\+programs}!brtr\+::\+Program\+Switcher\+Callback@{brtr\+::\+Program\+Switcher\+Callback}}
+\subsubsection[{\+\_\+programs}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$osg\+::ref\+\_\+ptr$<$osg\+::\+Program$>$ $>$ brtr\+::\+Program\+Switcher\+Callback\+::\+\_\+programs\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_program_switcher_callback_a9cbcf4d65f6ee468bb20d16b9e795e49}
+
+
+Definition at line \hyperlink{_program_switcher_callback_8h_source_l00040}{40} of file \hyperlink{_program_switcher_callback_8h_source}{Program\+Switcher\+Callback.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_program_switcher_callback_8h}{Program\+Switcher\+Callback.\+h}\item 
+Callbacks/\hyperlink{_program_switcher_callback_8cpp}{Program\+Switcher\+Callback.\+cpp}\end{DoxyCompactItemize}

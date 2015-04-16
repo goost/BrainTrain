@@ -1,0 +1,29 @@
+\hypertarget{_add_portal_gun_interaction_callback_8cpp_source}{\section{Add\+Portal\+Gun\+Interaction\+Callback.\+cpp}
+\label{_add_portal_gun_interaction_callback_8cpp_source}\index{Callbacks/\+Add\+Portal\+Gun\+Interaction\+Callback.\+cpp@{Callbacks/\+Add\+Portal\+Gun\+Interaction\+Callback.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/AddPortalGunInteractionCallback.h"}
+00002 \textcolor{preprocessor}{#include "../header/WeaponHUD.h"}
+00003 
+\hypertarget{_add_portal_gun_interaction_callback_8cpp_source_l00004}{}\hyperlink{namespacebrtr}{00004} \textcolor{keyword}{namespace }brtr\{
+\hypertarget{_add_portal_gun_interaction_callback_8cpp_source_l00005}{}\hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_a849f25b53c2a3c81e8201777bf481c96}{00005}     \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_a849f25b53c2a3c81e8201777bf481c96}{AddPortalGunInteractionCallback::AddPortalGunInteractionCallback}
+      (osg::Node* weaponHUD, osg::Camera* hudCam, osg::Switch* switcher, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height):
+00006     \hyperlink{classbrtr_1_1_base_interaction_callback}{BaseInteractionCallback}(weaponHUD,hudCam,width,height),
+00007     \_switcher(switcher)\{\}
+00008 
+\hypertarget{_add_portal_gun_interaction_callback_8cpp_source_l00009}{}\hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_aa0db50622c7ae1cd25f8554c916137db}{00009}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_aa0db50622c7ae1cd25f8554c916137db}{AddPortalGunInteractionCallback::setText}() \{
+00010         \hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\_text}->setText(\textcolor{stringliteral}{"Defect Portal Gun. \(\backslash\)nLeft Click to pick it up anyway."});
+00011     \}
+00012 
+\hypertarget{_add_portal_gun_interaction_callback_8cpp_source_l00013}{}\hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_a9b6571b0295f7e12425b57ff0262dbd4}{00013}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_a9b6571b0295f7e12425b57ff0262dbd4}{AddPortalGunInteractionCallback::interact}(osg::Node* node
+      , osg::NodeVisitor* nv) \{
+00014         \hyperlink{classbrtr_1_1_add_portal_gun_interaction_callback_ac110a98cbe720e599b344d9940702597}{\_switcher}->setAllChildrenOff();
+00015         \hyperlink{classbrtr_1_1_weapon_h_u_d}{brtr::WeaponHUD}* weaponHUD = \textcolor{keyword}{static\_cast<}\hyperlink{classbrtr_1_1_weapon_h_u_d}{brtr::WeaponHUD}*\textcolor{keyword}{>}(node);
+00016         weaponHUD->\hyperlink{classbrtr_1_1_weapon_h_u_d_ab8ccf2821f698af567b7ce40eb6840d8}{addPortalGun}();
+00017         OSG\_ALWAYS << \textcolor{stringliteral}{"after add method"} << std:: endl;
+00018         \hyperlink{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}{\_done} = \textcolor{keyword}{true};
+00019     \}
+00020 
+00021 \}
+\end{DoxyCode}

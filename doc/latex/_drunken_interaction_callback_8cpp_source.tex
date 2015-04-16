@@ -1,0 +1,58 @@
+\hypertarget{_drunken_interaction_callback_8cpp_source}{\section{Drunken\+Interaction\+Callback.\+cpp}
+\label{_drunken_interaction_callback_8cpp_source}\index{Callbacks/\+Drunken\+Interaction\+Callback.\+cpp@{Callbacks/\+Drunken\+Interaction\+Callback.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/DrunkenInteractionCallback.h"}
+00002 
+00003 
+00004 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_drunken_interaction_callback_8cpp_source_l00005}{}\hyperlink{classbrtr_1_1_drunken_interaction_callback_aa252ac5f3bc393ecb75784b98e17b5a5}{00005}     \hyperlink{classbrtr_1_1_drunken_interaction_callback_aa252ac5f3bc393ecb75784b98e17b5a5}{DrunkenInteractionCallback::DrunkenInteractionCallback}
+      (osg::Node* camera,osg::Camera* hudCam, osg::Switch* geometrySwitch, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height) :
+00006     \hyperlink{classbrtr_1_1_base_interaction_callback}{BaseInteractionCallback}(camera, hudCam, width, height),
+00007     \_geometrySwitch(geometrySwitch),
+00008     \_startTime(0),
+00009     \_backwards(false)\{
+00010         \hyperlink{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{\_motion} = \textcolor{keyword}{new} osgAnimation::LinearMotion(70, 70, 70, osgAnimation::Motion::LOOP);
+00011     \}
+00012 
+\hypertarget{_drunken_interaction_callback_8cpp_source_l00013}{}\hyperlink{classbrtr_1_1_drunken_interaction_callback_a86e4062f00a33768f752c1c5fa50c291}{00013}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_drunken_interaction_callback_a86e4062f00a33768f752c1c5fa50c291}{DrunkenInteractionCallback::interact}(osg::Node* node, 
+      osg::NodeVisitor* nv) \{
+00014         \textcolor{comment}{//save starttime and switch off the bottle}
+00015         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_drunken_interaction_callback_ab1a42a563e42cfd1d480741b30e22245}{\_startTime} == 0) \{
+00016             \hyperlink{classbrtr_1_1_drunken_interaction_callback_a0aa1983e0fc1cb720badb80464a8e391}{\_geometrySwitch}->setAllChildrenOff();
+00017             \hyperlink{classbrtr_1_1_drunken_interaction_callback_ab1a42a563e42cfd1d480741b30e22245}{\_startTime} = nv->getFrameStamp()->getReferenceTime();
+00018         \}
+00019         \textcolor{comment}{//linear motion for the effect}
+00020         \hyperlink{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{\_motion}->update(1);
+00021         osg::Camera* camera = \textcolor{keyword}{static\_cast<}osg::Camera*\textcolor{keyword}{>}(node);
+00022         \textcolor{keywordflow}{if} (camera) \{
+00023             OSG\_NOTICE << \textcolor{stringliteral}{"Motion Value "} << \hyperlink{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{\_motion}->getValue() << std::endl;
+00024             \textcolor{comment}{//backwards after up to FOV 125}
+00025             \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{\_motion}->getValue() >= 125)
+00026                 \hyperlink{classbrtr_1_1_drunken_interaction_callback_a4be32ea919b41bd46acc34904fb5c7b7}{\_backwards} = !\hyperlink{classbrtr_1_1_drunken_interaction_callback_a4be32ea919b41bd46acc34904fb5c7b7}{\_backwards};
+00027             camera->setProjectionMatrixAsPerspective(\hyperlink{classbrtr_1_1_drunken_interaction_callback_a4be32ea919b41bd46acc34904fb5c7b7}{\_backwards} ? 195 - 
+      \hyperlink{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{\_motion}->getValue() : \hyperlink{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{\_motion}->getValue(), 2, 0.01, 100000);
+00028         \}\textcolor{comment}{//camera}
+00029         
+00030         \textcolor{keywordflow}{if} (nv->getFrameStamp()->getReferenceTime() - \hyperlink{classbrtr_1_1_drunken_interaction_callback_ab1a42a563e42cfd1d480741b30e22245}{\_startTime} >= 20) \{
+00031             \textcolor{keywordflow}{if} (camera) \{
+00032                 camera->setProjectionMatrixAsPerspective(70, 1.778, 0.01, 100000);
+00033                 \hyperlink{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}{\_done} = \textcolor{keyword}{true};
+00034                 \hyperlink{classbrtr_1_1_drunken_interaction_callback_a0aa1983e0fc1cb720badb80464a8e391}{\_geometrySwitch} = \textcolor{keyword}{nullptr};
+00035                 \hyperlink{classbrtr_1_1_base_interaction_callback_a0bca3b64724235e08740be94fe4acc8d}{\_hudCam} = \textcolor{keyword}{nullptr};
+00036                 \hyperlink{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{\_attachTo} = \textcolor{keyword}{nullptr};
+00037                 \hyperlink{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{\_motion} = \textcolor{keyword}{nullptr};
+00038                 \hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\_text} = \textcolor{keyword}{nullptr};
+00039                 OSG\_NOTICE << \textcolor{stringliteral}{"DrunkenInteractionCallback: Should now be removed"} << std::endl;
+00040             \}\textcolor{comment}{//camera}
+00041         \}\textcolor{comment}{//30 sec over}
+00042     \}
+00043 
+\hypertarget{_drunken_interaction_callback_8cpp_source_l00044}{}\hyperlink{classbrtr_1_1_drunken_interaction_callback_a71b86fc410bf2965ca998eff1350cfaf}{00044}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_drunken_interaction_callback_a71b86fc410bf2965ca998eff1350cfaf}{DrunkenInteractionCallback::setText}() \{
+00045         \hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\_text}->setText(\textcolor{stringliteral}{"Click Left Mouse for a drink!"});
+00046     \}
+00047 
+00048 \}
+00049 
+\end{DoxyCode}

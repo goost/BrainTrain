@@ -1,0 +1,39 @@
+\hypertarget{_toon_tex_switcher_callback_8cpp_source}{\section{Toon\+Tex\+Switcher\+Callback.\+cpp}
+\label{_toon_tex_switcher_callback_8cpp_source}\index{Callbacks/\+Toon\+Tex\+Switcher\+Callback.\+cpp@{Callbacks/\+Toon\+Tex\+Switcher\+Callback.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include <osg/NodeCallback>}
+00002 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00003 \textcolor{preprocessor}{#include <osgDB/ReadFile>}
+00004 \textcolor{preprocessor}{#include "../header/ToonTexSwitcherCallback.h"}
+00005 
+00006 \textcolor{keyword}{namespace }brtr \{
+00007    
+00008 
+\hypertarget{_toon_tex_switcher_callback_8cpp_source_l00009}{}\hyperlink{classbrtr_1_1_toon_tex_switcher_callback_ae117afe5056c885a625a850e1d0fbae7}{00009}     \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_ae117afe5056c885a625a850e1d0fbae7}{ToonTexSwitcherCallback::ToonTexSwitcherCallback}(
+      osg::Node* sceneData, osg::Camera* hudCam, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height, std::vector<osg::ref\_ptr<osg::Texture2D>> 
+      toonTexs) :
+00010     \hyperlink{classbrtr_1_1_base_interaction_callback}{BaseInteractionCallback}(sceneData,hudCam,width,height),
+00011     \_curTex(0),
+00012     \_toonTexs(toonTexs)\{ \}
+00013 
+\hypertarget{_toon_tex_switcher_callback_8cpp_source_l00014}{}\hyperlink{classbrtr_1_1_toon_tex_switcher_callback_aad13301231829b5c28f14910d4d44355}{00014}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_aad13301231829b5c28f14910d4d44355}{ToonTexSwitcherCallback::setText}() \{
+00015         \hyperlink{classbrtr_1_1_base_interaction_callback_af60dece4300b09fafe3c048397122cbd}{\_text}->setText(\textcolor{stringliteral}{"The colors of the world\(\backslash\)nare hidden here.\(\backslash\)nTouch them, if you dare."});
+00016     \}
+00017 
+\hypertarget{_toon_tex_switcher_callback_8cpp_source_l00018}{}\hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a97047bc2817ddfecc2c1531d22e289fd}{00018}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a97047bc2817ddfecc2c1531d22e289fd}{ToonTexSwitcherCallback::interact}(osg::Node*, osg::NodeVisitor*) 
+      \{
+00019         \hyperlink{classbrtr_1_1_base_interaction_callback_a2f36052886ec60a227e0734bfbc4bdbb}{\_done} = \textcolor{keyword}{true};
+00020         \hyperlink{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{\_attachTo}->getOrCreateStateSet()->removeTextureAttribute(1, 
+      \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a96cbd2a83f9ed21efde9d086c34e6d5e}{\_toonTexs}[\hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a58030dcd246f0f2c168965ca087cfa17}{\_curTex}]);
+00021         \_curTex++;
+00022         \_curTex = \_curTex % \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a96cbd2a83f9ed21efde9d086c34e6d5e}{\_toonTexs}.size();
+00023         \hyperlink{classbrtr_1_1_base_interaction_callback_a6666bae9f8f89ebbf75637c922ebfb54}{\_attachTo}->getOrCreateStateSet()->setTextureAttribute(1, 
+      \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a96cbd2a83f9ed21efde9d086c34e6d5e}{\_toonTexs}[\_curTex], osg::StateAttribute::ON | osg::StateAttribute::OVERRIDE);
+00024     \}
+00025 
+00026 
+00027 
+00028 \}
+\end{DoxyCode}

@@ -1,0 +1,39 @@
+\hypertarget{_modify_material_visitor_8h_source}{\section{Modify\+Material\+Visitor.\+h}
+\label{_modify_material_visitor_8h_source}\index{header/\+Modify\+Material\+Visitor.\+h@{header/\+Modify\+Material\+Visitor.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osg/NodeCallback>}
+00003 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00004 
+00005 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_modify_material_visitor_8h_source_l00014}{}\hyperlink{classbrtr_1_1_modify_material_visitor}{00014}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_modify_material_visitor}{ModifyMaterialVisitor} : \textcolor{keyword}{public} osg::NodeVisitor \{
+00015     \textcolor{keyword}{public}:
+00016 
+00017         \hyperlink{classbrtr_1_1_modify_material_visitor_a240eed8002f7c81d8cd63aaaf4037381}{ModifyMaterialVisitor}();
+00018         \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_modify_material_visitor_a74bf42fdfffbc1f7d433c1199f563ccb}{apply}(osg::Geode& geode);
+00019 
+00020         osg::Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_ac79c5aeaa29e381e46e130c088966ad9}{getDiffuse}() \textcolor{keyword}{const};
+00021         \hyperlink{classbrtr_1_1_modify_material_visitor}{ModifyMaterialVisitor}& \hyperlink{classbrtr_1_1_modify_material_visitor_a17748f6a7f41431832da66dd65e1c41f}{setDiffuse}(osg::Vec4 val);
+00022         osg::Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a5be2b7553a9ecbe1c6d50425119f7e9e}{getSpecular}() \textcolor{keyword}{const};
+00023         \hyperlink{classbrtr_1_1_modify_material_visitor}{ModifyMaterialVisitor}& \hyperlink{classbrtr_1_1_modify_material_visitor_a7a8a5a938799c5193645d86aa6dc6a7c}{setSpecular}(osg::Vec4 val);
+00024         osg::Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a2a87910d4f316359eb6bf75620edf947}{getAmbient}() \textcolor{keyword}{const};
+00025         \hyperlink{classbrtr_1_1_modify_material_visitor}{ModifyMaterialVisitor}& \hyperlink{classbrtr_1_1_modify_material_visitor_adfaa00524e765fdf3ddc5968187623cd}{setAmbient}(osg::Vec4 val);
+00026         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_modify_material_visitor_a68f37fe264bd8f51e1d7a37f8048b103}{getShininess}() \textcolor{keyword}{const};
+00027         \hyperlink{classbrtr_1_1_modify_material_visitor}{ModifyMaterialVisitor}& \hyperlink{classbrtr_1_1_modify_material_visitor_a698aa0c31f8c5add503d47bc9898eec3}{setShininess}(\textcolor{keywordtype}{double} val);
+00028     \textcolor{keyword}{private}:
+\hypertarget{_modify_material_visitor_8h_source_l00029}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a33e06870644e892df2ac9af4c5bbfbd8}{00029}         osg::Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a33e06870644e892df2ac9af4c5bbfbd8}{\_diffuse};
+\hypertarget{_modify_material_visitor_8h_source_l00030}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a4cbbdf6ecd85ec563839545fc328fbfe}{00030}         osg::Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a4cbbdf6ecd85ec563839545fc328fbfe}{\_specular};
+\hypertarget{_modify_material_visitor_8h_source_l00031}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a1cffff6daf689c23a4e9680cd8f1441b}{00031}         osg::Vec4 \hyperlink{classbrtr_1_1_modify_material_visitor_a1cffff6daf689c23a4e9680cd8f1441b}{\_ambient};
+\hypertarget{_modify_material_visitor_8h_source_l00032}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a297f5208848d0bba92653bbd15908f68}{00032}         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_modify_material_visitor_a297f5208848d0bba92653bbd15908f68}{\_shininess};
+\hypertarget{_modify_material_visitor_8h_source_l00033}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a351e4cfeca41aa6f746956661930f994}{00033}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_modify_material_visitor_a351e4cfeca41aa6f746956661930f994}{\_ambientFlag};
+\hypertarget{_modify_material_visitor_8h_source_l00034}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a154ad99cb3796be6d04347cdbfb66e10}{00034}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_modify_material_visitor_a154ad99cb3796be6d04347cdbfb66e10}{\_specularFlag};
+\hypertarget{_modify_material_visitor_8h_source_l00035}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a8b30ec1a8b93422fc168597a47425041}{00035}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_modify_material_visitor_a8b30ec1a8b93422fc168597a47425041}{\_shininessFlag};
+\hypertarget{_modify_material_visitor_8h_source_l00036}{}\hyperlink{classbrtr_1_1_modify_material_visitor_a511c43fcd16d68855e6e63ca3ec1a84e}{00036}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_modify_material_visitor_a511c43fcd16d68855e6e63ca3ec1a84e}{\_diffuseFlag};
+00037     \};
+00038 \}
+00039 
+00040 
+00041 
+\end{DoxyCode}

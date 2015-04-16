@@ -1,0 +1,27 @@
+\hypertarget{_toon_tex_switcher_callback_8h_source}{\section{Toon\+Tex\+Switcher\+Callback.\+h}
+\label{_toon_tex_switcher_callback_8h_source}\index{header/\+Toon\+Tex\+Switcher\+Callback.\+h@{header/\+Toon\+Tex\+Switcher\+Callback.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osg/NodeCallback>}
+00003 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00004 \textcolor{preprocessor}{#include <osg/Texture2D>}
+00005 \textcolor{preprocessor}{#include "../header/BaseInteractionCallback.h"}
+00006 
+00007 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_toon_tex_switcher_callback_8h_source_l00017}{}\hyperlink{classbrtr_1_1_toon_tex_switcher_callback}{00017}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_toon_tex_switcher_callback}{ToonTexSwitcherCallback} : \textcolor{keyword}{public} 
+      \hyperlink{classbrtr_1_1_base_interaction_callback}{BaseInteractionCallback} \{
+00018     \textcolor{keyword}{public}:
+00028         \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_ae117afe5056c885a625a850e1d0fbae7}{ToonTexSwitcherCallback}(osg::Node* scenedata, osg::Camera* hudCam, \textcolor{keywordtype}{int} width
+      , \textcolor{keywordtype}{int} height, std::vector<osg::ref\_ptr<osg::Texture2D>> toonTexs);
+00029         \textcolor{comment}{//docu in parent}
+00030         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_aad13301231829b5c28f14910d4d44355}{setText}();
+00031     \textcolor{keyword}{protected}:
+00038         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a97047bc2817ddfecc2c1531d22e289fd}{interact}(osg::Node* node, osg::NodeVisitor*);
+00039     \textcolor{keyword}{private}:
+\hypertarget{_toon_tex_switcher_callback_8h_source_l00040}{}\hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a58030dcd246f0f2c168965ca087cfa17}{00040}         \textcolor{keywordtype}{int} \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a58030dcd246f0f2c168965ca087cfa17}{\_curTex};
+\hypertarget{_toon_tex_switcher_callback_8h_source_l00041}{}\hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a96cbd2a83f9ed21efde9d086c34e6d5e}{00041}         std::vector<osg::ref\_ptr<osg::Texture2D>> \hyperlink{classbrtr_1_1_toon_tex_switcher_callback_a96cbd2a83f9ed21efde9d086c34e6d5e}{\_toonTexs};
+00042     \};
+00043 \}
+\end{DoxyCode}

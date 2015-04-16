@@ -1,0 +1,75 @@
+\hypertarget{_f_p_s_camera_manipulator_8h_source}{\section{F\+P\+S\+Camera\+Manipulator.\+h}
+\label{_f_p_s_camera_manipulator_8h_source}\index{header/\+F\+P\+S\+Camera\+Manipulator.\+h@{header/\+F\+P\+S\+Camera\+Manipulator.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osgGA/FirstPersonManipulator>}
+00003 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00033}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{00033}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{FPSCameraManipulator} :
+00034         \textcolor{keyword}{public} osgGA::FirstPersonManipulator \{
+00035     \textcolor{keyword}{public}:
+00043         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aaf8bf3f6db925ba6c7d4a3157edcede3}{FPSCameraManipulator}(\textcolor{keywordtype}{double} movementSpeed, \textcolor{keywordtype}{double} zHeight, osg::Node* root, \textcolor{keywordtype}{
+      bool} flightMode = \textcolor{keyword}{false});
+00044         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a3c576fd94a834b4712c30280ebc38763}{getMovementSpeed}() \textcolor{keyword}{const};
+00045         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{FPSCameraManipulator}& \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a778a95c8fa5c22d9c5e3bdde5e8c6591}{setMovementSpeed}(\textcolor{keywordtype}{double} val);
+00046         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad564a29e30a95676a64b06160ba9e6ea}{getZHeight}() \textcolor{keyword}{const};
+00047         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{FPSCameraManipulator}& \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a71f558339f33edf1fa8cf81faf5914aa}{setZHeight}(\textcolor{keywordtype}{double} val);
+00048         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a409f00bd591ea3f847319794d4e0f15d}{getJumpHeight}() \textcolor{keyword}{const};
+00049         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator}{FPSCameraManipulator}& \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a8bf29fb4cf8f0d8842b7b0ac798e23cb}{setJumpHeight}(\textcolor{keywordtype}{double} val);
+00050 
+00051     \textcolor{keyword}{protected}:
+00052         \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a9f18b06a1f730f39da8fb7bdf960c3a9}{~FPSCameraManipulator}();
+00063         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a2f6319fa6eb148e2f5b59688b38891ae}{handleMouseMove}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& ea, 
+      osgGA::GUIActionAdapter& us) ;
+00074         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abad7544ac96384f79b2fa0d5d91606f6}{handleFrame}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us) 
+      ;
+00083         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad12557e5ce643476c8850c91a59e4956}{handleKeyDown}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& 
+      us) ;
+00092         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a165a843388846d16426adcf0cd870b5e}{handleKeyUp}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& us) 
+      ;       
+00102         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a5c9aa59e32263262b24595ecf57dace6}{performMovement}() ;
+00103         
+00104 
+00105         \textcolor{comment}{//Just  to kill the implementation}
+00106         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_acbda7c2bbd00f5b143723bd7a85f9e9d}{performMovementLeftMouseButton}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} 
+      eventTimeDelta, \textcolor{keyword}{const} \textcolor{keywordtype}{double} dx, \textcolor{keyword}{const} \textcolor{keywordtype}{double} dy) ;
+00107        \textcolor{comment}{// virtual bool performMovementRightMouseButton(const double eventTimeDelta, const double dx, const
+       double dy) ; //remove?}
+00108        \textcolor{comment}{// virtual bool performMovementMiddleMouseButton(const double eventTimeDelta, const double dx, const
+       double dy) ; //remove?}
+00109         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a02b5f77aca53a0974b81d0dfadd811cd}{handleMouseWheel}(\textcolor{keyword}{const} osgGA::GUIEventAdapter& ea, 
+      osgGA::GUIActionAdapter& us) ;
+00110 
+00111     \textcolor{keyword}{private}:
+00124         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aac9cc9e147b61f0afee6d02a98584271}{performEyeMovement}();
+00136         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_af6bc3644bd39ad6f8fed053dc97aeb0e}{intersect}(\textcolor{keyword}{const} osg::Vec3d start, \textcolor{keyword}{const} osg::Vec3d end, \textcolor{keywordtype}{double}& distance);
+00148         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a8df110e35ccce81c7fac9d7719a60797}{groundIntersection}(osg::Vec3d& newEye);
+00149 
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00150}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad1e35379f9ec8d6a6fc46441b6d8ae0d}{00150}         osg::ref\_ptr<osg::PositionAttitudeTransform> \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad1e35379f9ec8d6a6fc46441b6d8ae0d}{\_body};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00151}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fd26cbf63923d5999eb10009e599e64}{00151}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fd26cbf63923d5999eb10009e599e64}{\_flightMode};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00152}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abc82a762cc644b34c4778ccd89c61f2a}{00152}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abc82a762cc644b34c4778ccd89c61f2a}{\_forwardMovement}; 
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00153}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fadc5283652e5bced25ed8c206b6e60}{00153}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a1fadc5283652e5bced25ed8c206b6e60}{\_backwardMovement};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00154}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aebebc4754eb8e12d0d9eb3a304196473}{00154}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aebebc4754eb8e12d0d9eb3a304196473}{\_leftMovement};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00155}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a681ef6c8b6cb2250d5f6dee155e3d357}{00155}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a681ef6c8b6cb2250d5f6dee155e3d357}{\_rightMovement};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00156}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab63f237cc4d2a05b65f8168d55ad788e}{00156}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab63f237cc4d2a05b65f8168d55ad788e}{\_upMovement};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00157}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad4e208525965da8d36fb243d5fe1903e}{00157}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ad4e208525965da8d36fb243d5fe1903e}{\_downMovement};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00158}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aa97b8839047c137842b05410eadb828e}{00158}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aa97b8839047c137842b05410eadb828e}{\_attachBody};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00159}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a189d9907cc38cf12b79a7ffc4e815843}{00159}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a189d9907cc38cf12b79a7ffc4e815843}{\_shift};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00160}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a9eaba9401245f5f1912ff91a751fed20}{00160}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a9eaba9401245f5f1912ff91a751fed20}{\_ctrl};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00161}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a704712caf668c5989e5a9231f9d71022}{00161}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a704712caf668c5989e5a9231f9d71022}{\_jumpingUp};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00162}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a2041c39f1ba8c5450f7c5472701c9cd8}{00162}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a2041c39f1ba8c5450f7c5472701c9cd8}{\_jumpingDown};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00163}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab9c1187fd128b8de757af5d0ecb65b28}{00163}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_ab9c1187fd128b8de757af5d0ecb65b28}{\_crouch};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00164}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_afff7ee29460f89132b682aa31ed346a6}{00164}         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_afff7ee29460f89132b682aa31ed346a6}{\_maxFallHeight};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00165}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abbc7acdd7a7e643d6e25bf453ac9f1dd}{00165}         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_abbc7acdd7a7e643d6e25bf453ac9f1dd}{\_movementSpeed};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00166}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{00166}         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_aef10149826f951be3dc1b3d7b7f6b334}{\_zHeight};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00167}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a6e05c375307130a1e45d69a18760f439}{00167}         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a6e05c375307130a1e45d69a18760f439}{\_savedzHeight};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00168}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a00283025e62ab200588340a8a11bbc20}{00168}         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a00283025e62ab200588340a8a11bbc20}{\_intensity};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00169}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a3638230e6c3c59072caab0dcef0b5371}{00169}         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a3638230e6c3c59072caab0dcef0b5371}{\_frameFactor};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00170}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_af1c207c0b72b4124db14bd1983deeb62}{00170}         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_af1c207c0b72b4124db14bd1983deeb62}{\_bodyLength};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00171}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a53d486248c35c9e70436ebf0dea14b64}{00171}         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a53d486248c35c9e70436ebf0dea14b64}{\_jumpHeight};
+\hypertarget{_f_p_s_camera_manipulator_8h_source_l00172}{}\hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a08dab67599aa8d6d7bc7409f33773da8}{00172}         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_f_p_s_camera_manipulator_a08dab67599aa8d6d7bc7409f33773da8}{\_savedzHeightCrouch};
+00173         \};
+00174 \}
+00175 
+\end{DoxyCode}

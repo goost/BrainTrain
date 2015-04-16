@@ -1,0 +1,185 @@
+\hypertarget{classbrtr_1_1_drunken_interaction_callback}{\section{brtr\+:\+:Drunken\+Interaction\+Callback Class Reference}
+\label{classbrtr_1_1_drunken_interaction_callback}\index{brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}}
+}
+
+
+Callback for the drunk effect.  
+
+
+
+
+{\ttfamily \#include $<$Drunken\+Interaction\+Callback.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Drunken\+Interaction\+Callback\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classbrtr_1_1_drunken_interaction_callback}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_drunken_interaction_callback_aa252ac5f3bc393ecb75784b98e17b5a5}{Drunken\+Interaction\+Callback} (osg\+::\+Node $\ast$camera, osg\+::\+Camera $\ast$hud\+Cam, osg\+::\+Switch $\ast$geometry\+Switch, int width, int height)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classbrtr_1_1_drunken_interaction_callback_a71b86fc410bf2965ca998eff1350cfaf}{set\+Text} ()
+\begin{DoxyCompactList}\small\item\em sets the text on screen. Subclasses must override to set its own (info)text \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classbrtr_1_1_drunken_interaction_callback_a86e4062f00a33768f752c1c5fa50c291}{interact} (osg\+::\+Node $\ast$, osg\+::\+Node\+Visitor $\ast$)
+\begin{DoxyCompactList}\small\item\em Drunk effect is simulated by changing the F\+O\+V of the projection matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classbrtr_1_1_drunken_interaction_callback_ab1a42a563e42cfd1d480741b30e22245}{\+\_\+start\+Time}
+\item 
+osg\+::ref\+\_\+ptr$<$ osg\+::\+Switch $>$ \hyperlink{classbrtr_1_1_drunken_interaction_callback_a0aa1983e0fc1cb720badb80464a8e391}{\+\_\+geometry\+Switch}
+\item 
+osg\+::ref\+\_\+ptr\\*
+$<$ osg\+Animation\+::\+Linear\+Motion $>$ \hyperlink{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{\+\_\+motion}
+\item 
+bool \hyperlink{classbrtr_1_1_drunken_interaction_callback_a4be32ea919b41bd46acc34904fb5c7b7}{\+\_\+backwards}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Callback for the drunk effect. 
+
+\begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_drunken_interaction_callback_8h_source_l00015}{15} of file \hyperlink{_drunken_interaction_callback_8h_source}{Drunken\+Interaction\+Callback.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_drunken_interaction_callback_aa252ac5f3bc393ecb75784b98e17b5a5}{\index{brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}!Drunken\+Interaction\+Callback@{Drunken\+Interaction\+Callback}}
+\index{Drunken\+Interaction\+Callback@{Drunken\+Interaction\+Callback}!brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}}
+\subsubsection[{Drunken\+Interaction\+Callback}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Drunken\+Interaction\+Callback\+::\+Drunken\+Interaction\+Callback (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{camera, }
+\item[{osg\+::\+Camera $\ast$}]{hud\+Cam, }
+\item[{osg\+::\+Switch $\ast$}]{geometry\+Switch, }
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_drunken_interaction_callback_aa252ac5f3bc393ecb75784b98e17b5a5}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em camera} & the camera, whichs projection matrix will be manipulated \\
+\hline
+{\em hud\+Cam} & \\
+\hline
+{\em geometry\+Switch} & switch containing the bottle, for removing it after the interaction \\
+\hline
+{\em width} & screenwidth \\
+\hline
+{\em height} & screenheight \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{_drunken_interaction_callback_8cpp_source_l00005}{5} of file \hyperlink{_drunken_interaction_callback_8cpp_source}{Drunken\+Interaction\+Callback.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_drunken_interaction_callback_a86e4062f00a33768f752c1c5fa50c291}{\index{brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}!interact@{interact}}
+\index{interact@{interact}!brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}}
+\subsubsection[{interact}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Drunken\+Interaction\+Callback\+::interact (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Node $\ast$}]{node, }
+\item[{osg\+::\+Node\+Visitor $\ast$}]{nv}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classbrtr_1_1_drunken_interaction_callback_a86e4062f00a33768f752c1c5fa50c291}
+
+
+Drunk effect is simulated by changing the F\+O\+V of the projection matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em not} & needed \\
+\hline
+{\em not} & needed \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classbrtr_1_1_base_interaction_callback_a3ed50c9c1725f932e0b78c90ba24e1ed}{brtr\+::\+Base\+Interaction\+Callback}.
+
+
+
+Definition at line \hyperlink{_drunken_interaction_callback_8cpp_source_l00013}{13} of file \hyperlink{_drunken_interaction_callback_8cpp_source}{Drunken\+Interaction\+Callback.\+cpp}.
+
+\hypertarget{classbrtr_1_1_drunken_interaction_callback_a71b86fc410bf2965ca998eff1350cfaf}{\index{brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}!set\+Text@{set\+Text}}
+\index{set\+Text@{set\+Text}!brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}}
+\subsubsection[{set\+Text}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Drunken\+Interaction\+Callback\+::set\+Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classbrtr_1_1_drunken_interaction_callback_a71b86fc410bf2965ca998eff1350cfaf}
+
+
+sets the text on screen. Subclasses must override to set its own (info)text 
+
+
+
+Implements \hyperlink{classbrtr_1_1_base_interaction_callback_a0fe57e329f044e21d49041c861435ad8}{brtr\+::\+Base\+Interaction\+Callback}.
+
+
+
+Definition at line \hyperlink{_drunken_interaction_callback_8cpp_source_l00044}{44} of file \hyperlink{_drunken_interaction_callback_8cpp_source}{Drunken\+Interaction\+Callback.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_drunken_interaction_callback_a4be32ea919b41bd46acc34904fb5c7b7}{\index{brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}!\+\_\+backwards@{\+\_\+backwards}}
+\index{\+\_\+backwards@{\+\_\+backwards}!brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}}
+\subsubsection[{\+\_\+backwards}]{\setlength{\rightskip}{0pt plus 5cm}bool brtr\+::\+Drunken\+Interaction\+Callback\+::\+\_\+backwards\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_drunken_interaction_callback_a4be32ea919b41bd46acc34904fb5c7b7}
+
+
+Definition at line \hyperlink{_drunken_interaction_callback_8h_source_l00042}{42} of file \hyperlink{_drunken_interaction_callback_8h_source}{Drunken\+Interaction\+Callback.\+h}.
+
+\hypertarget{classbrtr_1_1_drunken_interaction_callback_a0aa1983e0fc1cb720badb80464a8e391}{\index{brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}!\+\_\+geometry\+Switch@{\+\_\+geometry\+Switch}}
+\index{\+\_\+geometry\+Switch@{\+\_\+geometry\+Switch}!brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}}
+\subsubsection[{\+\_\+geometry\+Switch}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Switch$>$ brtr\+::\+Drunken\+Interaction\+Callback\+::\+\_\+geometry\+Switch\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_drunken_interaction_callback_a0aa1983e0fc1cb720badb80464a8e391}
+
+
+Definition at line \hyperlink{_drunken_interaction_callback_8h_source_l00040}{40} of file \hyperlink{_drunken_interaction_callback_8h_source}{Drunken\+Interaction\+Callback.\+h}.
+
+\hypertarget{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}{\index{brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}!\+\_\+motion@{\+\_\+motion}}
+\index{\+\_\+motion@{\+\_\+motion}!brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}}
+\subsubsection[{\+\_\+motion}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+Animation\+::\+Linear\+Motion$>$ brtr\+::\+Drunken\+Interaction\+Callback\+::\+\_\+motion\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_drunken_interaction_callback_adaa3e659a9f6516a5b59a43813506a11}
+
+
+Definition at line \hyperlink{_drunken_interaction_callback_8h_source_l00041}{41} of file \hyperlink{_drunken_interaction_callback_8h_source}{Drunken\+Interaction\+Callback.\+h}.
+
+\hypertarget{classbrtr_1_1_drunken_interaction_callback_ab1a42a563e42cfd1d480741b30e22245}{\index{brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}!\+\_\+start\+Time@{\+\_\+start\+Time}}
+\index{\+\_\+start\+Time@{\+\_\+start\+Time}!brtr\+::\+Drunken\+Interaction\+Callback@{brtr\+::\+Drunken\+Interaction\+Callback}}
+\subsubsection[{\+\_\+start\+Time}]{\setlength{\rightskip}{0pt plus 5cm}int brtr\+::\+Drunken\+Interaction\+Callback\+::\+\_\+start\+Time\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_drunken_interaction_callback_ab1a42a563e42cfd1d480741b30e22245}
+
+
+Definition at line \hyperlink{_drunken_interaction_callback_8h_source_l00039}{39} of file \hyperlink{_drunken_interaction_callback_8h_source}{Drunken\+Interaction\+Callback.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_drunken_interaction_callback_8h}{Drunken\+Interaction\+Callback.\+h}\item 
+Callbacks/\hyperlink{_drunken_interaction_callback_8cpp}{Drunken\+Interaction\+Callback.\+cpp}\end{DoxyCompactItemize}

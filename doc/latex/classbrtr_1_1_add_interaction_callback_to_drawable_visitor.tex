@@ -1,0 +1,111 @@
+\hypertarget{classbrtr_1_1_add_interaction_callback_to_drawable_visitor}{\section{brtr\+:\+:Add\+Interaction\+Callback\+To\+Drawable\+Visitor Class Reference}
+\label{classbrtr_1_1_add_interaction_callback_to_drawable_visitor}\index{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor@{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor}}
+}
+
+
+Node\+Visitor for batch replacing all User\+Data\+Container of all Drawables.  
+
+
+
+
+{\ttfamily \#include $<$Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+h$>$}
+
+Inheritance diagram for brtr\+:\+:Add\+Interaction\+Callback\+To\+Drawable\+Visitor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classbrtr_1_1_add_interaction_callback_to_drawable_visitor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_a8c1ecd3629ec4f97d4bc2a63c56683d4}{Add\+Interaction\+Callback\+To\+Drawable\+Visitor} (\hyperlink{classbrtr_1_1_base_interaction_callback}{brtr\+::\+Base\+Interaction\+Callback} $\ast$callback\+To\+Add)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ace5d2fc7aa7c4a48f59e38728dac628a}{apply} (osg\+::\+Geode \&geode)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+osg\+::ref\+\_\+ptr\\*
+$<$ osg\+::\+Default\+User\+Data\+Container $>$ \hyperlink{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ac23b4a99b1d35c2f7a32f048d4628927}{\+\_\+container\+To\+Add}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Node\+Visitor for batch replacing all User\+Data\+Container of all Drawables. 
+
+New Container contains the provided Interaction\+Callback. Mainly used for making imported objects (e.\+g. from blender) interact-\/able. \begin{DoxyAuthor}{Author}
+Gleb Ostrowski 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014 
+\end{DoxyDate}
+\begin{DoxyPrecond}{Precondition}
+needs a Node which will accept it. Should have some Geode's for this to work 
+\end{DoxyPrecond}
+\begin{DoxyCopyright}{Copyright}
+G\+N\+U Public License. 
+\end{DoxyCopyright}
+
+
+Definition at line \hyperlink{_add_interaction_callback_to_drawable_visitor_8h_source_l00017}{17} of file \hyperlink{_add_interaction_callback_to_drawable_visitor_8h_source}{Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_a8c1ecd3629ec4f97d4bc2a63c56683d4}{\index{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor@{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor}!Add\+Interaction\+Callback\+To\+Drawable\+Visitor@{Add\+Interaction\+Callback\+To\+Drawable\+Visitor}}
+\index{Add\+Interaction\+Callback\+To\+Drawable\+Visitor@{Add\+Interaction\+Callback\+To\+Drawable\+Visitor}!brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor@{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor}}
+\subsubsection[{Add\+Interaction\+Callback\+To\+Drawable\+Visitor}]{\setlength{\rightskip}{0pt plus 5cm}brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor (
+\begin{DoxyParamCaption}
+\item[{{\bf brtr\+::\+Base\+Interaction\+Callback} $\ast$}]{callback\+To\+Add}
+\end{DoxyParamCaption}
+)}}\label{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_a8c1ecd3629ec4f97d4bc2a63c56683d4}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback\+To\+Add} & the callback which should be add to all drawables in the object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{_add_interaction_callback_to_drawable_visitor_8cpp_source_l00005}{5} of file \hyperlink{_add_interaction_callback_to_drawable_visitor_8cpp_source}{Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ace5d2fc7aa7c4a48f59e38728dac628a}{\index{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor@{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor}!apply@{apply}}
+\index{apply@{apply}!brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor@{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}void brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor\+::apply (
+\begin{DoxyParamCaption}
+\item[{osg\+::\+Geode \&}]{geode}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ace5d2fc7aa7c4a48f59e38728dac628a}
+
+
+Definition at line \hyperlink{_add_interaction_callback_to_drawable_visitor_8cpp_source_l00011}{11} of file \hyperlink{_add_interaction_callback_to_drawable_visitor_8cpp_source}{Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ac23b4a99b1d35c2f7a32f048d4628927}{\index{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor@{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor}!\+\_\+container\+To\+Add@{\+\_\+container\+To\+Add}}
+\index{\+\_\+container\+To\+Add@{\+\_\+container\+To\+Add}!brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor@{brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor}}
+\subsubsection[{\+\_\+container\+To\+Add}]{\setlength{\rightskip}{0pt plus 5cm}osg\+::ref\+\_\+ptr$<$osg\+::\+Default\+User\+Data\+Container$>$ brtr\+::\+Add\+Interaction\+Callback\+To\+Drawable\+Visitor\+::\+\_\+container\+To\+Add\hspace{0.3cm}{\ttfamily [private]}}}\label{classbrtr_1_1_add_interaction_callback_to_drawable_visitor_ac23b4a99b1d35c2f7a32f048d4628927}
+
+
+Definition at line \hyperlink{_add_interaction_callback_to_drawable_visitor_8h_source_l00028}{28} of file \hyperlink{_add_interaction_callback_to_drawable_visitor_8h_source}{Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+header/\hyperlink{_add_interaction_callback_to_drawable_visitor_8h}{Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+h}\item 
+Util/\hyperlink{_add_interaction_callback_to_drawable_visitor_8cpp}{Add\+Interaction\+Callback\+To\+Drawable\+Visitor.\+cpp}\end{DoxyCompactItemize}

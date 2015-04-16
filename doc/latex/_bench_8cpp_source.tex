@@ -1,0 +1,496 @@
+\hypertarget{_bench_8cpp_source}{\section{Bench.\+cpp}
+\label{_bench_8cpp_source}\index{Objects/\+Bench.\+cpp@{Objects/\+Bench.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/UtilFunctions.h"}
+00002 
+00003 \textcolor{preprocessor}{#include "../header/Bench.h"}
+00004 \textcolor{keyword}{using namespace }osg;
+00005 
+00006 \textcolor{keyword}{namespace }brtr\{
+\hypertarget{_bench_8cpp_source_l00007}{}\hyperlink{classbrtr_1_1_bench_a66ae6f45365c36daeabeed1a4b778d83}{00007}     Bench::Bench(\textcolor{keyword}{const} Vec3& pcenter, \textcolor{keyword}{const} \textcolor{keywordtype}{double} plength)\{
+00008       \textcolor{keywordflow}{if}(plength < 2 || plength > 30) length = 8;
+00009             \textcolor{keywordflow}{else} length = plength;
+00010         
+00011         initBench(length); \textcolor{comment}{//initalize the bench and saves it into a private attribute}
+00012         center = pcenter;
+00013 
+00014         addChild(bench.get()); 
+00015         setPosition(center);
+00016     \}
+00017 
+\hypertarget{_bench_8cpp_source_l00018}{}\hyperlink{classbrtr_1_1_bench_a9bd8ae1e6e48eb278206eff7102cac23}{00018}     Bench::Bench(\textcolor{keyword}{const} \hyperlink{classbrtr_1_1_bench}{Bench}& copy, \textcolor{keyword}{const} CopyOp& copyop)
+00019         : PositionAttitudeTransform(copy, copyop)\{\}
+00020 
+\hypertarget{_bench_8cpp_source_l00021}{}\hyperlink{classbrtr_1_1_bench_a22ffdb328f6dac6737108d0f7aa34f67}{00021}     \hyperlink{classbrtr_1_1_bench_a22ffdb328f6dac6737108d0f7aa34f67}{Bench::~Bench}() \{
+00022     \}   
+00023 
+\hypertarget{_bench_8cpp_source_l00024}{}\hyperlink{classbrtr_1_1_bench_ad59e81ffbe90a7297bd5f256a54a234e}{00024}     ref\_ptr<PositionAttitudeTransform> \hyperlink{classbrtr_1_1_bench_ad59e81ffbe90a7297bd5f256a54a234e}{Bench::getHitbox}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} alpha, \textcolor{keywordtype}{double} height)\{     
+00025         Vec3 size = \hyperlink{namespacebrtr_a24ba7c5d07ad50afb09990116dd3556d}{getDimensionOfNode}(\hyperlink{classbrtr_1_1_bench_aa3da8798872d1c2d595c24a48a5cb427}{bench});
+00026         
+00027         \textcolor{keywordflow}{if} (height < 0) height = size.z();
+00028         ref\_ptr<Group> hitbox = \hyperlink{namespacebrtr_ae7f155c263aec9663a02763ed0bb882b}{brtr::createCuboid}(size.x(), size.y(), height, 0);
+00029         
+00030         \textcolor{comment}{//needed to make the hitbox transparent}
+00031         ref\_ptr<BlendFunc> blendFunc = \textcolor{keyword}{new} BlendFunc;
+00032         blendFunc->setFunction(GL\_SRC\_ALPHA, GL\_ONE\_MINUS\_SRC\_ALPHA);
+00033 
+00034         StateSet* stateset = hitbox->getOrCreateStateSet();
+00035         Material * newmaterial = \textcolor{keyword}{new} Material();
+00036         newmaterial->setEmission(Material::FRONT, Vec4(0, 0, 0, alpha));
+00037         newmaterial->setDiffuse(Material::FRONT, Vec4(0, 0, 0, alpha));
+00038         newmaterial->setAmbient(Material::FRONT, Vec4(0, 0, 0, alpha));
+00039         stateset->setAttributeAndModes(newmaterial, StateAttribute::OVERRIDE | StateAttribute::ON);
+00040         stateset->setRenderingHint(StateSet::TRANSPARENT\_BIN);
+00041 
+00042         stateset->setAttributeAndModes(blendFunc);
+00043         
+00044         \textcolor{comment}{//set the position of the hitbox}
+00045         ref\_ptr<PositionAttitudeTransform> benchpos = \textcolor{keyword}{new} PositionAttitudeTransform;
+00046         benchpos->setPosition(this->\hyperlink{classbrtr_1_1_bench_a5ea108ad6ee96d487ac00ecacc383aa2}{center});
+00047         benchpos->addChild(hitbox);
+00048 
+00049 
+00050         \textcolor{keywordflow}{return} benchpos;
+00051     \}
+00052     
+\hypertarget{_bench_8cpp_source_l00053}{}\hyperlink{classbrtr_1_1_bench_aafa199aa2218d57b290d99843a1443d4}{00053}     ref\_ptr<Material> \hyperlink{classbrtr_1_1_bench_aafa199aa2218d57b290d99843a1443d4}{Bench::createIronMaterial}()\{
+00054         ref\_ptr<Material> mat = \hyperlink{namespacebrtr_a7b54dcabf5846ea963221e59b38b0a79}{createSimpleMaterial}(   osg::Material::FRONT\_AND\_BACK,  
+00055                                 osg::Vec4(.9f, .9f, .9f, 1.0f), \textcolor{comment}{//diffuse}
+00056                                 osg::Vec4(.7f, .7f, .7f, 1.0f), \textcolor{comment}{//ambient}
+00057                                 osg::Vec4(.3f, .3f, .3f, 1.0f), \textcolor{comment}{//specular}
+00058                                 128); \textcolor{comment}{//Shininess}
+00059         \textcolor{keywordflow}{return} mat;
+00060     \}
+00061     
+\hypertarget{_bench_8cpp_source_l00062}{}\hyperlink{classbrtr_1_1_bench_a57d6d3f038d3f0e8d5f8b83895a6670a}{00062}     ref\_ptr<Material> \hyperlink{classbrtr_1_1_bench_a57d6d3f038d3f0e8d5f8b83895a6670a}{Bench::createWoodMaterial}()\{
+00063         ref\_ptr<Material> mat = \hyperlink{namespacebrtr_a7b54dcabf5846ea963221e59b38b0a79}{createSimpleMaterial}(osg::Material::FRONT\_AND\_BACK, 
+00064                                 osg::Vec4(.3f, .3f, .3f, 1.0f), \textcolor{comment}{//diffuse}
+00065                                 osg::Vec4(.7f, .7f, .7f, 1.0f), \textcolor{comment}{//ambient}
+00066                                 osg::Vec4(.1f, .1f, .1f, 1.0f), \textcolor{comment}{//specular}
+00067                                 3); \textcolor{comment}{//Shininess}
+00068         \textcolor{keywordflow}{return} mat;
+00069     \}
+00070 
+\hypertarget{_bench_8cpp_source_l00071}{}\hyperlink{classbrtr_1_1_bench_a90c4ae616eb8d7bf669af2983ed3cd1d}{00071}     ref\_ptr<DrawElementsUInt> \hyperlink{classbrtr_1_1_bench_a90c4ae616eb8d7bf669af2983ed3cd1d}{Bench::getPrimitiveSetforARectangle}(\textcolor{keywordtype}{int} 
+      lsteps, \textcolor{keywordtype}{int} wsteps)\{
+00072         ref\_ptr<DrawElementsUInt> indices = \textcolor{keyword}{new} DrawElementsUInt(GL\_TRIANGLE\_STRIP);
+00073         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < lsteps; i++) \{
+00074             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j <= wsteps; j++) \{
+00075                 indices->push\_back(i*(wsteps + 1) + j);
+00076                 indices->push\_back((i + 1)*(wsteps + 1) + j);
+00077             \}
+00078             indices->push\_back((i + 1)*(wsteps + 1) + wsteps);
+00079             indices->push\_back((i + 1)*(wsteps + 1));
+00080         \}
+00081         \textcolor{keywordflow}{return} indices;
+00082     \}
+00083 
+\hypertarget{_bench_8cpp_source_l00084}{}\hyperlink{classbrtr_1_1_bench_afac56bea39f6e5e72140d4512dd711d3}{00084}     ref\_ptr<Geometry> \hyperlink{classbrtr_1_1_bench_afac56bea39f6e5e72140d4512dd711d3}{Bench::createArmrestSidesLeftRight}(\textcolor{keywordtype}{double} radius, \textcolor{keywordtype}{
+      double} radius2, \textcolor{keywordtype}{int} lsteps, \textcolor{keywordtype}{int} wsteps, \textcolor{keywordtype}{bool} flip)\{
+00085         ref\_ptr<Geometry> side = \textcolor{keyword}{new} Geometry;
+00086         ref\_ptr<Vec3Array> vertices = \textcolor{keyword}{new} Vec3Array();
+00087         ref\_ptr<Vec3Array> normals = \textcolor{keyword}{new} Vec3Array();       
+00088 
+00089         \textcolor{keywordtype}{double} xstep = (radius2 - radius) / lsteps;
+00090         \textcolor{keywordtype}{double} ystep = radius / wsteps;
+00091         \textcolor{comment}{// current vertex coordinates}
+00092         \textcolor{keywordtype}{double} x = 0.0;
+00093         \textcolor{keywordtype}{double} y = 0.0;
+00094         \textcolor{comment}{//  current normal coordinates}
+00095         \textcolor{keywordtype}{double} nx = 0.0;
+00096         \textcolor{keywordtype}{double} ny = 1.0;
+00097         \textcolor{keywordtype}{double} nz = 0.0;
+00098         
+00099         \textcolor{keywordtype}{double} curRad = radius; \textcolor{comment}{//the current radius}
+00100         \textcolor{keywordtype}{double} radSteps = (radius2 - radius) / wsteps; 
+00101         \textcolor{keywordtype}{double} xstepalpha = DegreesToRadians(90.0 / wsteps); \textcolor{comment}{//steps for the radius}
+00102 
+00103         \textcolor{keywordtype}{double} alpha = DegreesToRadians(180.0);
+00104         \textcolor{keywordflow}{if} (flip)  alpha -= DegreesToRadians(90.0); \textcolor{comment}{// when this should be the other side, the start radius
+       is changed }
+00105         
+00106         ref\_ptr<Vec2Array> texcoords = \textcolor{keyword}{new} Vec2Array;
+00107         \textcolor{comment}{// set vertices and normals}
+00108         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i <= lsteps; i++) \{
+00109             y = 0.0;
+00110             curRad = radius;
+00111             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j <= wsteps; j++) \{
+00112                 vertices->push\_back(Vec3d(cos(alpha)*curRad, 0, sin(alpha)*curRad));
+00113                 
+00114                 texcoords->push\_back(Vec2(x / (radius2 - radius), y / radius));
+00115                 
+00116                 normals->push\_back(Vec3d(nx, ny, nz));
+00117                 y += ystep;
+00118                 curRad += radSteps;
+00119             \}
+00120             alpha += xstepalpha;
+00121 
+00122             x += xstep;
+00123         \}
+00124 
+00125         
+00126         \textcolor{comment}{//normalize the normals}
+00127         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} cnt = 0; cnt < normals->size(); cnt++) \{
+00128             normals->at(cnt).normalize();
+00129         \}
+00130 
+00131         side->setVertexArray(vertices.get());
+00132         side->addPrimitiveSet(\hyperlink{classbrtr_1_1_bench_a90c4ae616eb8d7bf669af2983ed3cd1d}{getPrimitiveSetforARectangle}(lsteps,wsteps));
+00133         side->setNormalArray(normals.get());
+00134         side->setTexCoordArray(0, texcoords.get());
+00135         side->setNormalBinding(Geometry::BIND\_PER\_VERTEX);
+00136 
+00137         \textcolor{keywordflow}{return} side;
+00138     \}   
+00139 
+\hypertarget{_bench_8cpp_source_l00140}{}\hyperlink{classbrtr_1_1_bench_a28443b856188050680a2c0ab4ad31a93}{00140}     ref\_ptr<Geometry> \hyperlink{classbrtr_1_1_bench_a28443b856188050680a2c0ab4ad31a93}{Bench::createArmrestSidesFrontBack}(\textcolor{keywordtype}{double} radius, \textcolor{keywordtype}{
+      double} width, \textcolor{keywordtype}{int} lsteps, \textcolor{keywordtype}{int} wsteps,\textcolor{keywordtype}{bool} flip)\{
+00141         ref\_ptr<Geometry> side = \textcolor{keyword}{new} Geometry;
+00142         ref\_ptr<Vec3Array> vertices = \textcolor{keyword}{new} Vec3Array();
+00143         ref\_ptr<Vec3Array> normals = \textcolor{keyword}{new} Vec3Array();
+00144         ref\_ptr<DrawElementsUInt> indices = \textcolor{keyword}{new} DrawElementsUInt(GL\_TRIANGLE\_STRIP);
+00145 
+00146         \textcolor{keywordtype}{double} ystep = width / wsteps;
+00147         
+00148         \textcolor{keywordtype}{double} xstepalpha = DegreesToRadians(90.0 / wsteps); \textcolor{comment}{//steps for the radius}
+00149 
+00150         \textcolor{comment}{// current vertex coordinates       }
+00151         \textcolor{keywordtype}{double} y = 0.0;
+00152         \textcolor{comment}{//  current normal coordinates      }
+00153         \textcolor{keywordtype}{double} ny = 0.0;
+00154 
+00155         \textcolor{keywordtype}{double} alpha = DegreesToRadians(180.0);
+00156         \textcolor{keywordflow}{if} (flip)  alpha -= DegreesToRadians(90.0); \textcolor{comment}{// when this should be the other side, the start radius
+       is changed }
+00157         \textcolor{comment}{// set vertices and normals}
+00158         ref\_ptr<Vec2Array> texcoords = \textcolor{keyword}{new} Vec2Array;
+00159         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i <= lsteps; i++) \{
+00160             y = 0.0;
+00161             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j <= wsteps; j++) \{
+00162 
+00163                 \textcolor{keywordflow}{if} (!flip) \{
+00164                     vertices->push\_back(Vec3d(cos(alpha)*radius, y, sin(alpha)*radius));
+00165                     normals->push\_back(Vec3d(-cos(alpha)*radius, ny, -sin(alpha)*radius));
+00166                 \}\textcolor{keywordflow}{else}\{ \textcolor{comment}{// flip the vertices and normales to fit}
+00167                     vertices->push\_back(Vec3d(cos(alpha)*radius, y, -sin(alpha)*radius));
+00168                     normals->push\_back(Vec3d(cos(alpha)*radius, ny, -sin(alpha)*radius));
+00169                 \}
+00170 
+00171 
+00172                 texcoords->push\_back(Vec2(cos(alpha) / 1, y / width)); \textcolor{comment}{//calculate the texture coordinates}
+00173                 y += ystep;
+00174             \}
+00175             alpha += xstepalpha;
+00176 
+00177         \}
+00178     
+00179         \textcolor{comment}{//normalize the normals}
+00180         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} cnt = 0; cnt < normals->size(); cnt++) \{
+00181             normals->at(cnt).normalize();
+00182         \}
+00183         side->setVertexArray(vertices.get());
+00184         side->addPrimitiveSet(\hyperlink{classbrtr_1_1_bench_a90c4ae616eb8d7bf669af2983ed3cd1d}{getPrimitiveSetforARectangle}(lsteps,wsteps));
+00185         side->setNormalArray(normals.get());
+00186         side->setNormalBinding(Geometry::BIND\_PER\_VERTEX);
+00187         side->setTexCoordArray(0, texcoords.get());
+00188         \textcolor{keywordflow}{return} side;
+00189     \}
+\hypertarget{_bench_8cpp_source_l00190}{}\hyperlink{classbrtr_1_1_bench_aefe5a9043a63e13d83c31a42046c6912}{00190}     ref\_ptr<Group> \hyperlink{classbrtr_1_1_bench_aefe5a9043a63e13d83c31a42046c6912}{Bench::createLeg}()\{
+00191 
+00192         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{length} = 0.5;
+00193         \textcolor{keywordtype}{double} width = \hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{length};
+00194         \textcolor{keywordtype}{double} height = 4 * \hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{length};
+00195 
+00196         ref\_ptr<Group> leg = \hyperlink{namespacebrtr_ae7f155c263aec9663a02763ed0bb882b}{createCuboid}(length, width, height);
+00197 
+00198         \textcolor{comment}{//set Textures}
+00199         ref\_ptr<Texture2D> texture = \textcolor{keyword}{new} Texture2D;
+00200         ref\_ptr<Image> image = osgDB::readImageFile(\textcolor{stringliteral}{"../BlenderFiles/Texturen/iron.jpg"});
+00201         texture->setImage(image.get());
+00202         texture->setWrap(Texture::WRAP\_S, Texture::MIRROR);
+00203         texture->setWrap(Texture::WRAP\_T, Texture::MIRROR);
+00204         osg::ref\_ptr<osg::StateSet> legs(leg->getOrCreateStateSet());
+00205 
+00206         legs->setAttribute(\hyperlink{classbrtr_1_1_bench_aafa199aa2218d57b290d99843a1443d4}{createIronMaterial}());
+00207         legs->setTextureAttributeAndModes(0, texture.get());
+00208 
+00209         \textcolor{keywordflow}{return} leg;
+00210     \}
+00211 
+\hypertarget{_bench_8cpp_source_l00212}{}\hyperlink{classbrtr_1_1_bench_a0547e73d10f329b2a9b4453b6319f472}{00212}     ref\_ptr<Group> \hyperlink{classbrtr_1_1_bench_a0547e73d10f329b2a9b4453b6319f472}{Bench::createSeat}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} width)\{
+00213         ref\_ptr<Group> seat = \textcolor{keyword}{new} Group;
+00214 
+00215         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{length} = width; \textcolor{comment}{//ratio of the seat is 1:1}
+00216         \textcolor{keywordtype}{double} height = 0.1; 
+00217 
+00218         ref\_ptr<Group> base = \hyperlink{namespacebrtr_ae7f155c263aec9663a02763ed0bb882b}{createCuboid}(length, width, height);
+00219       
+00220          \textcolor{comment}{//create the texture}
+00221         ref\_ptr<Texture2D> texturewood = \textcolor{keyword}{new} Texture2D;
+00222         ref\_ptr<Image> imagewood = osgDB::readImageFile(\textcolor{stringliteral}{"../BlenderFiles/Texturen/wood.jpg"});       
+00223         texturewood->setImage(imagewood.get());
+00224         texturewood->setWrap(Texture::WRAP\_S, Texture::MIRROR);
+00225         texturewood->setWrap(Texture::WRAP\_T, Texture::MIRROR);
+00226 
+00227 
+00228         
+00229         base->getChild(0)->getOrCreateStateSet()->setAttribute(
+      \hyperlink{classbrtr_1_1_bench_a57d6d3f038d3f0e8d5f8b83895a6670a}{createWoodMaterial}());
+00230         base->getChild(0)->getOrCreateStateSet()->setTextureAttributeAndModes(0, texturewood.get()); \textcolor{comment}{//
+      Front}
+00231 
+00232         base->getChild(1)->getOrCreateStateSet()->setAttribute(
+      \hyperlink{classbrtr_1_1_bench_a57d6d3f038d3f0e8d5f8b83895a6670a}{createWoodMaterial}());                
+00233         base->getChild(1)->getOrCreateStateSet()->setTextureAttributeAndModes(0, texturewood.get()); \textcolor{comment}{//Back}
+00234         
+00235         
+00236         \textcolor{comment}{//rotate the base to get the back of the seat}
+00237         ref\_ptr<MatrixTransform> seatback = \textcolor{keyword}{new} MatrixTransform();
+00238         seatback->setMatrix(Matrix::rotate(PI / 2 * 1.1, 1, 0, 0));
+00239         seatback->addChild(base.get());
+00240 
+00241         \textcolor{comment}{//group the components}
+00242         seat->addChild(base);
+00243         seat->addChild(seatback);
+00244 
+00245         \textcolor{comment}{//change the position}
+00246         ref\_ptr<PositionAttitudeTransform> seatpos = \textcolor{keyword}{new} PositionAttitudeTransform;
+00247         seatpos = \hyperlink{namespacebrtr_a887d7975f37c4334b70e2196735b6678}{wrapInPositionAttitudeTransform}(seat,Vec3d(0, -(width - 
+      \hyperlink{namespacebrtr_a24ba7c5d07ad50afb09990116dd3556d}{getDimensionOfNode}(seat).y()), 0.0));
+00248 
+00249         \textcolor{keywordflow}{return} seatpos;
+00250 
+00251     \}
+\hypertarget{_bench_8cpp_source_l00252}{}\hyperlink{classbrtr_1_1_bench_a9956994e6a20cbbd0f0ce9eb6df25917}{00252}     ref\_ptr<Group> \hyperlink{classbrtr_1_1_bench_a9956994e6a20cbbd0f0ce9eb6df25917}{Bench::createArmrest}(\textcolor{keywordtype}{double} radius, \textcolor{keywordtype}{double} width, \textcolor{keywordtype}{double} length, \textcolor{keywordtype}{
+      double} totalwidth)\{
+00253         ref\_ptr<Group> armrest = \textcolor{keyword}{new} Group;
+00254 
+00255         ref\_ptr<Group> armrest\_arch = \textcolor{keyword}{new} Group;
+00256         \textcolor{comment}{//creates the components for the armrest\_arch}
+00257         ref\_ptr<Geode> front = \textcolor{keyword}{new} Geode;
+00258         front->addDrawable(\hyperlink{classbrtr_1_1_bench_a28443b856188050680a2c0ab4ad31a93}{createArmrestSidesFrontBack}(radius, width, 10, 10, \textcolor{keyword}{
+      false}));
+00259         ref\_ptr<Geode> back = \textcolor{keyword}{new} Geode;
+00260         back->addDrawable(\hyperlink{classbrtr_1_1_bench_a28443b856188050680a2c0ab4ad31a93}{createArmrestSidesFrontBack}(radius + length, width, 10
+      , 10, \textcolor{keyword}{true}));
+00261         ref\_ptr<Geode> leftside = \textcolor{keyword}{new} Geode;
+00262         leftside->addDrawable(\hyperlink{classbrtr_1_1_bench_afac56bea39f6e5e72140d4512dd711d3}{createArmrestSidesLeftRight}(radius, radius + 
+      length, 10, 10, \textcolor{keyword}{true}));
+00263         ref\_ptr<Geode> rigthside = \textcolor{keyword}{new} Geode;
+00264         rigthside->addDrawable(\hyperlink{classbrtr_1_1_bench_afac56bea39f6e5e72140d4512dd711d3}{createArmrestSidesLeftRight}(radius, radius + 
+      length, 10, 10, \textcolor{keyword}{false}));
+00265 
+00266         ref\_ptr<PositionAttitudeTransform> leftsiderotated = \textcolor{keyword}{new} PositionAttitudeTransform;
+00267         leftsiderotated->setAttitude(Quat(DegreesToRadians(180.0), X\_AXIS));
+00268         leftsiderotated->addChild(leftside);
+00269         
+00270         ref\_ptr<PositionAttitudeTransform> rigthsiderotated = \textcolor{keyword}{new} PositionAttitudeTransform;
+00271         rigthsiderotated->setPosition(Vec3d(0, width, 0));
+00272         rigthsiderotated->addChild(rigthside);
+00273 
+00274         
+00275         
+00276         ref\_ptr<Geode> topshape = \textcolor{keyword}{new} Geode;
+00277         topshape->addDrawable(\hyperlink{namespacebrtr_a4e91424e74398a612c38a920df0577ef}{brtr::createRectangleWithTexcoords}(length, 
+      width, 20, 20));
+00278         ref\_ptr<PositionAttitudeTransform> top = \hyperlink{namespacebrtr_a887d7975f37c4334b70e2196735b6678}{wrapInPositionAttitudeTransform}
+      (topshape,Vec3d(-(radius + length), 0, 0));
+00279 
+00280 
+00281         ref\_ptr <MatrixTransform> bottom = \textcolor{keyword}{new} MatrixTransform;
+00282         bottom->setMatrix(Matrix::rotate(PI / 2, 0, 1, 0)*Matrix::translate(0, 0, -radius));
+00283         bottom->addChild(topshape);
+00284 
+00285 
+00286         
+00287 
+00288         armrest\_arch->addChild(front);
+00289         armrest\_arch->addChild(back);
+00290         armrest\_arch->addChild(leftsiderotated);
+00291         armrest\_arch->addChild(rigthsiderotated);
+00292         armrest\_arch->addChild(top);
+00293         armrest\_arch->addChild(bottom);
+00294         
+00295         \textcolor{comment}{//Positioning the armrest\_arch}
+00296         armrest\_arch = \hyperlink{namespacebrtr_a887d7975f37c4334b70e2196735b6678}{wrapInPositionAttitudeTransform}(armrest\_arch, Vec3d(
+      radius + length, 0, radius + length));
+00297         
+00298         \textcolor{keywordtype}{double} height = 0.5;
+00299         ref\_ptr<Group> bar\_up = \hyperlink{namespacebrtr_ae7f155c263aec9663a02763ed0bb882b}{brtr::createCuboid}(length, width, height);
+00300         ref\_ptr<Group> barontop = \hyperlink{namespacebrtr_ae7f155c263aec9663a02763ed0bb882b}{brtr::createCuboid}(width, totalwidth, width / 2);
+00301         
+00302         bar\_up = \hyperlink{namespacebrtr_a887d7975f37c4334b70e2196735b6678}{wrapInPositionAttitudeTransform}(bar\_up, Vec3d(0.0, 0.0, 
+      radius + length));
+00303         barontop = \hyperlink{namespacebrtr_a887d7975f37c4334b70e2196735b6678}{wrapInPositionAttitudeTransform}(barontop, Vec3d(-width / 
+      4, -(totalwidth) / 2 + width / 2, radius + length + height));
+00304 
+00305         ref\_ptr<Group> bars = \textcolor{keyword}{new} Group;
+00306         bars->addChild(barontop);
+00307         bars->addChild(bar\_up);
+00308 
+00309 
+00310 
+00311         armrest->addChild(armrest\_arch);
+00312         armrest->addChild(bars);
+00313 
+00314 
+00315         ref\_ptr<Texture2D> texture = \textcolor{keyword}{new} Texture2D;
+00316         ref\_ptr<Image> image = osgDB::readImageFile(\textcolor{stringliteral}{"../BlenderFiles/Texturen/iron.jpg"});
+00317         texture->setImage(image.get());
+00318         texture->setWrap(Texture::WRAP\_S, Texture::MIRROR);
+00319         texture->setWrap(Texture::WRAP\_T, Texture::MIRROR);
+00320 
+00321         osg::ref\_ptr<osg::StateSet> armrest\_state(armrest->getOrCreateStateSet());
+00322 
+00323         armrest\_state->setAttribute(\hyperlink{classbrtr_1_1_bench_aafa199aa2218d57b290d99843a1443d4}{createIronMaterial}());
+00324         armrest\_state->setTextureAttributeAndModes(0, texture.get());
+00325 
+00326         \textcolor{keywordflow}{return} armrest;
+00327     \}
+00328 
+00329 
+00330 
+\hypertarget{_bench_8cpp_source_l00331}{}\hyperlink{classbrtr_1_1_bench_ae17e8e692f6c6deb7b722b5df58dc04b}{00331}     ref\_ptr<Group> \hyperlink{classbrtr_1_1_bench_ae17e8e692f6c6deb7b722b5df58dc04b}{Bench::createBar}()\{
+00332 
+00333         \textcolor{keywordtype}{double} width = 0.5;
+00334         \textcolor{keywordtype}{double} height = width;
+00335         \textcolor{keywordtype}{double} \hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{length} = (this->\hyperlink{classbrtr_1_1_bench_a81188a60871201d741c288396430964d}{length});
+00336 
+00337 
+00338         ref\_ptr<Group> bar = \hyperlink{namespacebrtr_ae7f155c263aec9663a02763ed0bb882b}{brtr::createCuboid}(length, width, height);
+00339 
+00340 
+00341         \textcolor{comment}{//set Textures}
+00342         ref\_ptr<Texture2D> texture = \textcolor{keyword}{new} Texture2D;
+00343         ref\_ptr<Image> image =
+00344             osgDB::readImageFile(\textcolor{stringliteral}{"../BlenderFiles/Texturen/iron.jpg"});
+00345         texture->setImage(image.get());
+00346         texture->setWrap(Texture::WRAP\_S, Texture::MIRROR);
+00347         texture->setWrap(Texture::WRAP\_T, Texture::MIRROR);
+00348 
+00349         osg::ref\_ptr<osg::StateSet> nodess(bar->getOrCreateStateSet());
+00350 
+00351 
+00352         nodess->setAttribute(\hyperlink{classbrtr_1_1_bench_aafa199aa2218d57b290d99843a1443d4}{createIronMaterial}());
+00353         nodess->setTextureAttributeAndModes(0, texture.get());
+00354 
+00355 
+00356         \textcolor{keywordflow}{return} bar;
+00357     \}
+00358 
+00359 
+\hypertarget{_bench_8cpp_source_l00360}{}\hyperlink{classbrtr_1_1_bench_a2813d4878b8a5ef09219323b2f6c9cf5}{00360}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_bench_a2813d4878b8a5ef09219323b2f6c9cf5}{Bench::initBench}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} plength)\{
+00361         ref\_ptr<Group> leg = \hyperlink{classbrtr_1_1_bench_aefe5a9043a63e13d83c31a42046c6912}{createLeg}();
+00362 
+00363         \textcolor{keywordtype}{double} legdistance = 0.05;
+00364 
+00365         \textcolor{comment}{//create the legs}
+00366         ref\_ptr<PositionAttitudeTransform> leg1 = \textcolor{keyword}{new} PositionAttitudeTransform;
+00367         ref\_ptr<PositionAttitudeTransform> leg2 = \textcolor{keyword}{new} PositionAttitudeTransform;
+00368         leg1->addChild(leg.get());
+00369         leg2->addChild(leg.get());
+00370 
+00371         ref\_ptr<Group> legs = \textcolor{keyword}{new} Group;
+00372         legs->addChild(leg1.get());
+00373         legs->addChild(leg2.get());
+00374 
+00375         \textcolor{comment}{//save the dimension}
+00376         Vec3 legssize = \hyperlink{namespacebrtr_a24ba7c5d07ad50afb09990116dd3556d}{getDimensionOfNode}(legs);
+00377 
+00378 
+00379         \textcolor{comment}{//create the bar}
+00380         ref\_ptr<Group> bar = \hyperlink{classbrtr_1_1_bench_ae17e8e692f6c6deb7b722b5df58dc04b}{createBar}();
+00381         ref\_ptr<PositionAttitudeTransform> bar1 = \textcolor{keyword}{new} PositionAttitudeTransform;
+00382         bar1->addChild(bar.get());
+00383         ref\_ptr<Group> bars = \textcolor{keyword}{new} Group;
+00384         ref\_ptr<PositionAttitudeTransform> armrest1 = \textcolor{keyword}{new} PositionAttitudeTransform;
+00385         
+00386         
+00387         Vec3 barssize = \hyperlink{namespacebrtr_a24ba7c5d07ad50afb09990116dd3556d}{getDimensionOfNode}(bar);
+00388 
+00389 
+00390       
+00391         \textcolor{keywordtype}{int} anzahl\_sitze = (int)(0.5*plength); \textcolor{comment}{// caluclate the number of seats}
+00392         \textcolor{keywordtype}{double} sitzspacebetween = 0.9;
+00393         \textcolor{keywordtype}{double} seatwidth = (barssize.x()*sitzspacebetween) / anzahl\_sitze;
+00394 
+00395 
+00396 
+00397 
+00398         \textcolor{keywordtype}{double} radiusarmrest = 0.2;
+00399 
+00400         ref\_ptr<Group> armrest = \hyperlink{classbrtr_1_1_bench_a9956994e6a20cbbd0f0ce9eb6df25917}{createArmrest}(radiusarmrest, barssize.y() / 2, barssize.z() /
+       4, seatwidth);
+00401 
+00402 
+00403 
+00404         armrest1->addChild(armrest);
+00405         
+00406         armrest1->setPosition(Vec3d(-(radiusarmrest + barssize.z() / 4), (barssize.y() / 4), (barssize.z() 
+      / 2) - (barssize.z() / 8)));
+00407         
+00408 
+00409         ref\_ptr <MatrixTransform> armrest2 = \textcolor{keyword}{new} MatrixTransform;
+00410         armrest2->setMatrix(Matrix::translate(-(radiusarmrest + (barssize.z() / 2) / 2), 0, 0)*
+      Matrix::rotate(PI, 0, 0, 1));
+00411         armrest2->addChild(armrest);
+00412         
+00413         ref\_ptr<PositionAttitudeTransform> armrest22 = \textcolor{keyword}{new} PositionAttitudeTransform;
+00414         armrest22->setPosition(Vec3d(barssize.x(), (barssize.y() / 4) + barssize.y() / 2, (barssize.z() / 2
+      ) - (barssize.z() / 8)));
+00415         armrest22->addChild(armrest2);
+00416 
+00417         bar1->addChild(armrest1);
+00418         bar1->addChild(armrest22);
+00419 
+00420         bars->addChild(bar1.get());
+00421         Vec3 armrestsize = \hyperlink{namespacebrtr_a24ba7c5d07ad50afb09990116dd3556d}{getDimensionOfNode}(armrest);
+00422 
+00423 
+00424 
+00425 
+00426         \textcolor{comment}{//creating the seats}
+00427         ref\_ptr<Group> seat = \hyperlink{classbrtr_1_1_bench_a0547e73d10f329b2a9b4453b6319f472}{createSeat}(seatwidth);
+00428 
+00429         Vec3 seatsize = \hyperlink{namespacebrtr_a24ba7c5d07ad50afb09990116dd3556d}{getDimensionOfNode}(seat);
+00430         \textcolor{keywordtype}{double} middle = (seatsize.y() - seatwidth) + (seatwidth / 2) - barssize.y() / 2;
+00431         \textcolor{comment}{//Position the stuff}
+00432         leg1->setPosition(Vec3d(legdistance*plength, middle, 0.0));
+00433         leg2->setPosition(Vec3d((1 - legdistance)*plength - \hyperlink{namespacebrtr_a24ba7c5d07ad50afb09990116dd3556d}{getDimensionOfNode}(leg).x(), 
+      middle, 0.0));
+00434         bar1->setPosition(Vec3d(0, middle, legssize.z()));
+00435 
+00436         \textcolor{comment}{//duplicate the seats}
+00437         PositionAttitudeTransform *sitze[20]; \textcolor{comment}{//maximum of 20 seats}
+00438         ref\_ptr<Group> sitze\_all = \textcolor{keyword}{new} Group;
+00439         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < anzahl\_sitze; i++)\{
+00440             sitze[i] = \textcolor{keyword}{new} PositionAttitudeTransform;
+00441             \textcolor{keywordtype}{double} posx = (plength / anzahl\_sitze) * i + ((plength / anzahl\_sitze) - (seatsize.x())) / 2; \textcolor{comment}{
+      //calcute the position for each seat}
+00442             sitze[i]->setPosition(Vec3d(posx, 0, legssize.z() + barssize.z()));
+00443             sitze[i]->addChild(seat.get());
+00444             sitze\_all->addChild(sitze[i]);
+00445         \}
+00446 
+00447         \textcolor{comment}{//bundle all components together into one group}
+00448         ref\_ptr<Group> \hyperlink{classbrtr_1_1_bench_aa3da8798872d1c2d595c24a48a5cb427}{bench} = \textcolor{keyword}{new} Group;
+00449         bench->addChild(legs.get());
+00450         bench->addChild(bars.get());
+00451         bench->addChild(sitze\_all.get());
+00452         
+00453         \textcolor{comment}{//position}
+00454         ref\_ptr<PositionAttitudeTransform> benchpos = \textcolor{keyword}{new} PositionAttitudeTransform;
+00455         benchpos = \hyperlink{namespacebrtr_a887d7975f37c4334b70e2196735b6678}{wrapInPositionAttitudeTransform}(bench,Vec3d(armrestsize.x
+      (), 0, 0));
+00456       
+00457         
+00458         this->bench = benchpos;
+00459     \}
+00460 
+00461 
+00462 
+00463 \}
+00464 
+\end{DoxyCode}

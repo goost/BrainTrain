@@ -1,0 +1,125 @@
+\hypertarget{_cel_shading_8cpp_source}{\section{Cel\+Shading.\+cpp}
+\label{_cel_shading_8cpp_source}\index{Shader/\+Cel\+Shading.\+cpp@{Shader/\+Cel\+Shading.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{_cel_shading_8h}{CelShading.h}"}
+00002 
+00003 \textcolor{preprocessor}{#include <osg/Texture2D>}
+00004 \textcolor{preprocessor}{#include <osgDB/ReadFile>}
+00005 \textcolor{preprocessor}{#include <osg/LineWidth>}
+00006 \textcolor{preprocessor}{#include <osg/Material>}
+00007 \textcolor{preprocessor}{#include <osg/Program>}
+00008 \textcolor{preprocessor}{#include <osg/Shader>}
+00009 \textcolor{preprocessor}{#include <osg/PolygonOffset>}
+00010 \textcolor{preprocessor}{#include "osg/TexEnv"}
+00011 \textcolor{preprocessor}{#include "osg/PolygonMode"}
+00012 \textcolor{preprocessor}{#include "osg/CullFace"}
+00013 
+00014 \textcolor{keyword}{namespace }brtr\{
+\hypertarget{_cel_shading_8cpp_source_l00022}{}\hyperlink{classbrtr_1_1_cel_shading_technique}{00022}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_cel_shading_technique}{CelShadingTechnique} : \textcolor{keyword}{public} osgFX::Technique \{
+00023     \textcolor{keyword}{public}:
+\hypertarget{_cel_shading_8cpp_source_l00024}{}\hyperlink{classbrtr_1_1_cel_shading_technique_a4c77c4f488907999068edd4d9b83aa4f}{00024}         \hyperlink{classbrtr_1_1_cel_shading_technique_a4c77c4f488907999068edd4d9b83aa4f}{CelShadingTechnique}(osg::Material* material, osg::LineWidth *lineWidth, \textcolor{keywordtype}{bool} 
+      secondPass, std::string vertSource)
+00025             : Technique(), 
+00026             \hyperlink{classbrtr_1_1_cel_shading_technique_a266daa43a0effb4989755d61446dc14c}{\_material}(material),
+00027             \hyperlink{classbrtr_1_1_cel_shading_technique_a2b943ddfe4db5a92b959217a8321584f}{\_lineWidth}(lineWidth),
+00028             \hyperlink{classbrtr_1_1_cel_shading_technique_a096109e6280cd43bb55762509a3e9f0c}{\_secondPass}(secondPass),
+00029             \hyperlink{classbrtr_1_1_cel_shading_technique_a52a36916162a24d0ddd66d371fa04057}{\_vertSource}(vertSource)\{\}
+00030 
+00031     \textcolor{keyword}{protected}:
+00032 
+\hypertarget{_cel_shading_8cpp_source_l00033}{}\hyperlink{classbrtr_1_1_cel_shading_technique_a7b44016e8ed4bc9c2c129b93de2f1f45}{00033}         \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_cel_shading_technique_a7b44016e8ed4bc9c2c129b93de2f1f45}{define\_passes}() \{
+00034             \textcolor{comment}{// implement pass #1 (solid surfaces)}
+00035                 \{
+00036                     osg::ref\_ptr<osg::Shader> toonFrag = osgDB::readShaderFile(\textcolor{stringliteral}{"../Shader/celShader.frag"});
+00037                     osg::ref\_ptr<osg::Shader> toonVert = osgDB::readShaderFile(\textcolor{stringliteral}{"../Shader/"} +  
+      \hyperlink{classbrtr_1_1_cel_shading_technique_a52a36916162a24d0ddd66d371fa04057}{\_vertSource});
+00038                     osg::ref\_ptr<osg::Program> celShadingProgram = \textcolor{keyword}{new} osg::Program;
+00039                     celShadingProgram->addShader(toonFrag);
+00040                     celShadingProgram->addShader(toonVert);
+00041 
+00042                     osg::ref\_ptr<osg::StateSet> ss = \textcolor{keyword}{new} osg::StateSet;
+00043 
+00044                     ss->addUniform(\textcolor{keyword}{new} osg::Uniform(\textcolor{stringliteral}{"toonTex"}, 1));
+00045                     ss->setAttributeAndModes(celShadingProgram, osg::StateAttribute::OVERRIDE | 
+      osg::StateAttribute::ON);
+00046 
+00047                     ss->addUniform(\textcolor{keyword}{new} osg::Uniform(\textcolor{stringliteral}{"tex"}, \textcolor{keyword}{true}));
+00048                     ss->addUniform(\textcolor{keyword}{new} osg::Uniform(\textcolor{stringliteral}{"zAnimation"}, \textcolor{keyword}{false}));
+00049                     ss->addUniform(\textcolor{keyword}{new} osg::Uniform(\textcolor{stringliteral}{"xAnimation"}, \textcolor{keyword}{false}));
+00050                     ss->addUniform(\textcolor{keyword}{new} osg::Uniform(\textcolor{stringliteral}{"yAnimation"}, \textcolor{keyword}{false}));
+00051                     addPass(ss);
+00052                 \}
+00053 
+00054             \textcolor{comment}{// implement pass #2 (outlines) copy/paste from osgFX::Cartoon }
+00055             \textcolor{keywordflow}{if}(\hyperlink{classbrtr_1_1_cel_shading_technique_a096109e6280cd43bb55762509a3e9f0c}{\_secondPass})\{
+00056                 osg::ref\_ptr<osg::StateSet> ss = \textcolor{keyword}{new} osg::StateSet;
+00057                 osg::ref\_ptr<osg::PolygonMode> polymode = \textcolor{keyword}{new} osg::PolygonMode;
+00058                 polymode->setMode(osg::PolygonMode::FRONT\_AND\_BACK, osg::PolygonMode::LINE);
+00059                 ss->setAttributeAndModes(polymode.get(), osg::StateAttribute::OVERRIDE | 
+      osg::StateAttribute::ON);
+00060 
+00061                 osg::ref\_ptr<osg::CullFace> cf = \textcolor{keyword}{new} osg::CullFace;
+00062                 cf->setMode(osg::CullFace::FRONT);
+00063                 ss->setAttributeAndModes(cf.get(), osg::StateAttribute::OVERRIDE | osg::StateAttribute::ON)
+      ;
+00064 
+00065                 ss->setAttributeAndModes(\hyperlink{classbrtr_1_1_cel_shading_technique_a2b943ddfe4db5a92b959217a8321584f}{\_lineWidth}.get(), osg::StateAttribute::OVERRIDE | 
+      osg::StateAttribute::ON);
+00066 
+00067                 \hyperlink{classbrtr_1_1_cel_shading_technique_a266daa43a0effb4989755d61446dc14c}{\_material}->setColorMode(osg::Material::OFF);
+00068                 \hyperlink{classbrtr_1_1_cel_shading_technique_a266daa43a0effb4989755d61446dc14c}{\_material}->setDiffuse(osg::Material::FRONT\_AND\_BACK, osg::Vec4(0, 0, 0, 1));
+00069                 \hyperlink{classbrtr_1_1_cel_shading_technique_a266daa43a0effb4989755d61446dc14c}{\_material}->setAmbient(osg::Material::FRONT\_AND\_BACK, osg::Vec4(0, 0, 0, 1));
+00070                 \hyperlink{classbrtr_1_1_cel_shading_technique_a266daa43a0effb4989755d61446dc14c}{\_material}->setSpecular(osg::Material::FRONT\_AND\_BACK, osg::Vec4(0, 0, 0, 1));
+00071 
+00072                 \textcolor{comment}{// set by outline colour so no need to set here.}
+00073                 \hyperlink{classbrtr_1_1_cel_shading_technique_a266daa43a0effb4989755d61446dc14c}{\_material}->setEmission(osg::Material::FRONT\_AND\_BACK, osg::Vec4(0, 0, 0, 1));
+00074 
+00075                 ss->setAttributeAndModes(\hyperlink{classbrtr_1_1_cel_shading_technique_a266daa43a0effb4989755d61446dc14c}{\_material}.get(), osg::StateAttribute::OVERRIDE | 
+      osg::StateAttribute::ON);
+00076 
+00077                 ss->setMode(GL\_LIGHTING, osg::StateAttribute::OVERRIDE | osg::StateAttribute::ON);
+00078                 ss->setTextureMode(0, GL\_TEXTURE\_1D, osg::StateAttribute::OVERRIDE | 
+      osg::StateAttribute::OFF);
+00079                 ss->setTextureMode(0, GL\_TEXTURE\_2D, osg::StateAttribute::OVERRIDE | 
+      osg::StateAttribute::OFF);
+00080                 ss->setTextureMode(1, GL\_TEXTURE\_1D, osg::StateAttribute::OVERRIDE | 
+      osg::StateAttribute::OFF);
+00081                 ss->setTextureMode(1, GL\_TEXTURE\_2D, osg::StateAttribute::OVERRIDE | 
+      osg::StateAttribute::OFF);
+00082 
+00083                  addPass(ss.get());
+00084             \}
+00085         \}
+00086 
+00087     \textcolor{keyword}{private}:
+\hypertarget{_cel_shading_8cpp_source_l00088}{}\hyperlink{classbrtr_1_1_cel_shading_technique_a266daa43a0effb4989755d61446dc14c}{00088}         osg::ref\_ptr<osg::Material> \hyperlink{classbrtr_1_1_cel_shading_technique_a266daa43a0effb4989755d61446dc14c}{\_material};
+\hypertarget{_cel_shading_8cpp_source_l00089}{}\hyperlink{classbrtr_1_1_cel_shading_technique_a2b943ddfe4db5a92b959217a8321584f}{00089}         osg::ref\_ptr<osg::LineWidth> \hyperlink{classbrtr_1_1_cel_shading_technique_a2b943ddfe4db5a92b959217a8321584f}{\_lineWidth};
+\hypertarget{_cel_shading_8cpp_source_l00090}{}\hyperlink{classbrtr_1_1_cel_shading_technique_aca9e9164e2ccb2ce264786399713a8a6}{00090}         std::string \hyperlink{classbrtr_1_1_cel_shading_technique_aca9e9164e2ccb2ce264786399713a8a6}{\_toonTex};
+\hypertarget{_cel_shading_8cpp_source_l00091}{}\hyperlink{classbrtr_1_1_cel_shading_technique_a096109e6280cd43bb55762509a3e9f0c}{00091}         \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_cel_shading_technique_a096109e6280cd43bb55762509a3e9f0c}{\_secondPass};
+\hypertarget{_cel_shading_8cpp_source_l00092}{}\hyperlink{classbrtr_1_1_cel_shading_technique_a52a36916162a24d0ddd66d371fa04057}{00092}         std::string \hyperlink{classbrtr_1_1_cel_shading_technique_a52a36916162a24d0ddd66d371fa04057}{\_vertSource};
+00093     \};
+00094 
+00096 
+\hypertarget{_cel_shading_8cpp_source_l00097}{}\hyperlink{classbrtr_1_1_cel_shading_ae497a14c2c379b608643d8f39d156b52}{00097}     \hyperlink{classbrtr_1_1_cel_shading_ae497a14c2c379b608643d8f39d156b52}{CelShading::CelShading}(\textcolor{keywordtype}{bool} secondPass, std::string vertSource)
+00098         : Effect(),
+00099         \_material(new osg::Material),
+00100         \_lineWidth(new osg::LineWidth(3.0f)),
+00101         \_secondPass(secondPass),
+00102         \_vertSource(vertSource)\{\}
+00103 
+\hypertarget{_cel_shading_8cpp_source_l00104}{}\hyperlink{classbrtr_1_1_cel_shading_affb65fcbb6ffe405f60b840c52cdc26c}{00104}     \hyperlink{classbrtr_1_1_cel_shading_ae497a14c2c379b608643d8f39d156b52}{CelShading::CelShading}(\textcolor{keyword}{const} \hyperlink{classbrtr_1_1_cel_shading}{CelShading}& copy, \textcolor{keyword}{const} osg::CopyOp& 
+      copyop \textcolor{comment}{/*= osg::CopyOp::SHALLOW\_COPY*/}): 
+00105         osgFX::Effect(copy, copyop),
+00106         \_material(static\_cast<osg::Material*>(copyop(copy.\_material.get()))),
+00107         \_lineWidth(static\_cast<osg::LineWidth *>(copyop(copy.\_lineWidth.get()))) \{\}
+00108 
+00109 
+\hypertarget{_cel_shading_8cpp_source_l00110}{}\hyperlink{classbrtr_1_1_cel_shading_a28212bb66f29ff8cf1169625b598b93b}{00110}     \textcolor{keywordtype}{bool} \hyperlink{classbrtr_1_1_cel_shading_a28212bb66f29ff8cf1169625b598b93b}{CelShading::define\_techniques}() \{
+00111         addTechnique(\textcolor{keyword}{new} \hyperlink{classbrtr_1_1_cel_shading_technique}{CelShadingTechnique}(\hyperlink{classbrtr_1_1_cel_shading_ae67a870d7a985694fb0d3290f0163f84}{\_material}, 
+      \hyperlink{classbrtr_1_1_cel_shading_ae1e0a4de3ca638da0fe0a3b3aa018f07}{\_lineWidth}, \hyperlink{classbrtr_1_1_cel_shading_a15226eda13f5a3deaee3260414f664bf}{\_secondPass}, \hyperlink{classbrtr_1_1_cel_shading_a6c9ea02f1a90b0ba711394c4ff716081}{\_vertSource}));
+00112         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00113     \}
+00114 \}
+\end{DoxyCode}

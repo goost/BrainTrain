@@ -1,0 +1,44 @@
+\hypertarget{_weapon_h_u_d_8h_source}{\section{Weapon\+H\+U\+D.\+h}
+\label{_weapon_h_u_d_8h_source}\index{header/\+Weapon\+H\+U\+D.\+h@{header/\+Weapon\+H\+U\+D.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osg/Camera>}
+00003 \textcolor{preprocessor}{#include <osg/MatrixTransform>}
+00004 \textcolor{preprocessor}{#include <osg/PositionAttitudeTransform>}
+00005 \textcolor{preprocessor}{#include <osgGA/GUIEventHandler>}
+00006 \textcolor{preprocessor}{#include <osg/Switch>}
+00007 
+00008 \textcolor{keyword}{using namespace }osg;
+00009 \textcolor{keyword}{namespace }brtr \{
+00010   
+\hypertarget{_weapon_h_u_d_8h_source_l00023}{}\hyperlink{classbrtr_1_1_weapon_h_u_d}{00023} \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_weapon_h_u_d}{WeaponHUD} : \textcolor{keyword}{public} Camera \{
+\hypertarget{_weapon_h_u_d_8h_source_l00032}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}{00032}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}{WeaponSwitchHandler} : \textcolor{keyword}{public} osgGA::GUIEventHandler \{
+00033     \textcolor{keyword}{public}:
+00039     \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler}{WeaponSwitchHandler}(Switch* switchNode);
+00046         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} handle(\textcolor{keyword}{const} osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa);
+00047     \textcolor{keyword}{protected}:
+00048 
+\hypertarget{_weapon_h_u_d_8h_source_l00049}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a22b7a9e8884ac0c4a63979d6d441e58f}{00049}         \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a22b7a9e8884ac0c4a63979d6d441e58f}{~WeaponSwitchHandler}() \{\}
+00050     \textcolor{keyword}{private}:
+\hypertarget{_weapon_h_u_d_8h_source_l00051}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_af4b40e431f9cbcaddf843578316bb9c4}{00051}         ref\_ptr<Switch> \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_af4b40e431f9cbcaddf843578316bb9c4}{\_switch};
+\hypertarget{_weapon_h_u_d_8h_source_l00052}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a15b23d25cb1847f558493adc2a97311e}{00052}         \textcolor{keywordtype}{int} \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_a15b23d25cb1847f558493adc2a97311e}{\_curWeapon};
+\hypertarget{_weapon_h_u_d_8h_source_l00053}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_abfa6e6c2904d1e6ed7cd5d029a632ddf}{00053}         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \hyperlink{classbrtr_1_1_weapon_h_u_d_1_1_weapon_switch_handler_abfa6e6c2904d1e6ed7cd5d029a632ddf}{\_frameNumber};
+00054 
+00055     \};
+00056 
+00057 \textcolor{keyword}{public}:
+00058     \hyperlink{classbrtr_1_1_weapon_h_u_d}{WeaponHUD}();
+00059     \hyperlink{classbrtr_1_1_weapon_h_u_d}{WeaponHUD}(\textcolor{keyword}{const} \hyperlink{classbrtr_1_1_weapon_h_u_d}{WeaponHUD}&,\textcolor{keyword}{const} CopyOp& copyop=CopyOp::SHALLOW\_COPY);
+00060     ref\_ptr<WeaponSwitchHandler> getWeaponHandler();
+00064     \textcolor{keywordtype}{void} addPortalGun();
+00065     ~\hyperlink{classbrtr_1_1_weapon_h_u_d}{WeaponHUD}();
+00066 \textcolor{keyword}{protected}:
+00067 \textcolor{keyword}{private}:
+00071     \textcolor{keywordtype}{void} createWeaponHUD();
+\hypertarget{_weapon_h_u_d_8h_source_l00072}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_a32d5e498c15faa87f3bcfa83ca6c5b0e}{00072}     ref\_ptr<Switch> \hyperlink{classbrtr_1_1_weapon_h_u_d_a32d5e498c15faa87f3bcfa83ca6c5b0e}{\_switcher};
+\hypertarget{_weapon_h_u_d_8h_source_l00073}{}\hyperlink{classbrtr_1_1_weapon_h_u_d_a4ebf9d9e600e3a6b9f5d8601c084ee51}{00073}     ref\_ptr<WeaponSwitchHandler> \hyperlink{classbrtr_1_1_weapon_h_u_d_a4ebf9d9e600e3a6b9f5d8601c084ee51}{\_handler};
+00074 \};
+00075 \}
+\end{DoxyCode}

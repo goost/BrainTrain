@@ -1,0 +1,33 @@
+\hypertarget{_train_switcher_callback_8cpp_source}{\section{Train\+Switcher\+Callback.\+cpp}
+\label{_train_switcher_callback_8cpp_source}\index{Callbacks/\+Train\+Switcher\+Callback.\+cpp@{Callbacks/\+Train\+Switcher\+Callback.\+cpp}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "../header/TrainSwitcherCallback.h"}
+00002 
+00003 \textcolor{keyword}{namespace }brtr\{
+\hypertarget{_train_switcher_callback_8cpp_source_l00004}{}\hyperlink{classbrtr_1_1_train_switcher_callback_a54ad53b07976bf34af2a0e6061088f3c}{00004}     \hyperlink{classbrtr_1_1_train_switcher_callback_a54ad53b07976bf34af2a0e6061088f3c}{TrainSwitcherCallback::TrainSwitcherCallback}():
+00005         \_curActiveTrain(0),
+00006         \_deltaTime(0)\{\}
+00007 
+\hypertarget{_train_switcher_callback_8cpp_source_l00008}{}\hyperlink{classbrtr_1_1_train_switcher_callback_a5a8182c650febc07a8443f6a35c32087}{00008}     \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_train_switcher_callback_a5a8182c650febc07a8443f6a35c32087}{TrainSwitcherCallback::operator()}(osg::Node* node, 
+      osg::NodeVisitor* nv) \{
+00009         \textcolor{comment}{//deltatime == 0? So wee need a new timestamp}
+00010         \textcolor{keywordflow}{if} (\hyperlink{classbrtr_1_1_train_switcher_callback_a1d2fbe75d19ca03cba449cdf4277f0eb}{\_deltaTime} == 0) \{
+00011             \hyperlink{classbrtr_1_1_train_switcher_callback_a1d2fbe75d19ca03cba449cdf4277f0eb}{\_deltaTime} = nv->getFrameStamp()->getReferenceTime();
+00012         \}
+00013         \textcolor{comment}{//it is attached to a switch, so the node is a switch}
+00014         osg::Switch* switcher = \textcolor{keyword}{static\_cast<}osg::Switch*\textcolor{keyword}{>}(node);
+00015         \textcolor{keywordflow}{if} (nv->getFrameStamp()->getReferenceTime() - \hyperlink{classbrtr_1_1_train_switcher_callback_a1d2fbe75d19ca03cba449cdf4277f0eb}{\_deltaTime} > 36) \{
+00016             \hyperlink{classbrtr_1_1_train_switcher_callback_ac87e64555ad379814a93220447c49257}{\_curActiveTrain}++;
+00017             \hyperlink{classbrtr_1_1_train_switcher_callback_ac87e64555ad379814a93220447c49257}{\_curActiveTrain} = \hyperlink{classbrtr_1_1_train_switcher_callback_ac87e64555ad379814a93220447c49257}{\_curActiveTrain} % switcher->getNumChildren();
+00018             switcher->setAllChildrenOff();
+00019             switcher->setValue(\hyperlink{classbrtr_1_1_train_switcher_callback_ac87e64555ad379814a93220447c49257}{\_curActiveTrain}, \textcolor{keyword}{true});
+00020             \hyperlink{classbrtr_1_1_train_switcher_callback_a1d2fbe75d19ca03cba449cdf4277f0eb}{\_deltaTime} = 0;
+00021         \}
+00022         traverse(node, nv);
+00023     \}
+00024 
+00025 \}
+00026 
+\end{DoxyCode}

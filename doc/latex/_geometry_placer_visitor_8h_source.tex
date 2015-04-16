@@ -1,0 +1,21 @@
+\hypertarget{_geometry_placer_visitor_8h_source}{\section{Geometry\+Placer\+Visitor.\+h}
+\label{_geometry_placer_visitor_8h_source}\index{header/\+Geometry\+Placer\+Visitor.\+h@{header/\+Geometry\+Placer\+Visitor.\+h}}
+}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#pragma once}
+00002 \textcolor{preprocessor}{#include <osgViewer/Viewer>}
+00003 \textcolor{keyword}{namespace }brtr \{
+\hypertarget{_geometry_placer_visitor_8h_source_l00015}{}\hyperlink{classbrtr_1_1_geometry_placer_visitor}{00015}     \textcolor{keyword}{class }\hyperlink{classbrtr_1_1_geometry_placer_visitor}{GeometryPlacerVisitor} : \textcolor{keyword}{public} osg::NodeVisitor \{
+00016     \textcolor{keyword}{public}:
+00023         \hyperlink{classbrtr_1_1_geometry_placer_visitor_a5e6ca74eba57f86c0916434cb38eb7fc}{GeometryPlacerVisitor}(osg::Geometry* geometryToPlace);
+00024 
+00029         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_geometry_placer_visitor_a26089587464d88953e38926162cb1c6e}{apply}(osg::Geode& geode);
+00030 
+00031         osg::ref\_ptr<osg::Geometry> \hyperlink{classbrtr_1_1_geometry_placer_visitor_ad784364cfe34434dc2183a5ead95db40}{getGeometryToPlace}() \textcolor{keyword}{const};
+00032         \textcolor{keywordtype}{void} \hyperlink{classbrtr_1_1_geometry_placer_visitor_a95e8e5c2df5b9a31949c55c796c90fd5}{setGeometryToPlace}(osg::ref\_ptr<osg::Geometry> val);
+00033     \textcolor{keyword}{private}:
+\hypertarget{_geometry_placer_visitor_8h_source_l00034}{}\hyperlink{classbrtr_1_1_geometry_placer_visitor_a171826d64ddd04161d7525bc60faf045}{00034}         osg::ref\_ptr<osg::Geometry> \hyperlink{classbrtr_1_1_geometry_placer_visitor_a171826d64ddd04161d7525bc60faf045}{\_geometryToPlace};
+00035     \};
+00036 \}
+\end{DoxyCode}
