@@ -294,7 +294,7 @@ int main(void){
         window->useCursor(false);
     }
     else {
-        OSG_ALWAYS << "WARNING: COULD NOT HIDE MOUSE CURSOR" << std::endl << "PICTURE WILL SUCK A BIT" << std::endl << "This just had to go wrong -.-*" << std::endl;
+        OSG_ALWAYS << "WARNING: COULD NOT HIDE MOUSE CURSOR" << std::endl;
     }
 
     while (!viewer.done())
