@@ -7,7 +7,7 @@ Files without an explicit author are the files where everyone of us contributed 
 All models are made with Blender by Sebastian Hüttermann.  
 Toon textures are made by Pia Bsdurrek.
 
-[Walkthourg](https://www.youtube.com/watch?v=Kck9t5S-lnk)
+[Walkthrough](https://www.youtube.com/watch?v=Kck9t5S-lnk)
 
 Textures:
 
