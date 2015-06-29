@@ -8,8 +8,8 @@ All models are made with Blender by Sebastian Hüttermann.
 Toon textures are made by Pia Bsdurrek.
 
 
-[Walkthrough](https://www.youtube.com/watch?v=Kck9t5S-lnk)
-[Doxygen generated project documentation)(http://goost.github.io/BrainTrain/)
+[Walkthrough](https://www.youtube.com/watch?v=Kck9t5S-lnk)  
+[Doxygen generated project documentation](http://goost.github.io/BrainTrain/)
 Textures:
 
 [USSR flag]  
